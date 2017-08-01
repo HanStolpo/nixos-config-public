@@ -1,1 +1,7 @@
-secret
+*.hi
+*.o
+result
+xmonad.errors
+xmonad.state
+xmonad-x*
+secret/

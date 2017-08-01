@@ -1,0 +1,18 @@
+Config  { font = "xft:Roboto Mono for Powerline:size=10:bold:antialias=true"
+        , bgColor = "#171717"
+        , fgColor = "dedacf"
+        , position = TopSize L 90 30
+        , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10 
+                     , Run Network "eth0" ["-L","0","-H","70","--normal","green","--high","red"] 10 
+                     , Run Memory ["-t","Mem: <usedratio>%"] 10 
+                     , Run Swap [] 10 
+                     , Run CoreTemp [] 10 
+                     , Run Date "%a %b %_d %l:%M" "date" 10 
+                     , Run Volume "default" "Master" [] 10
+                     , Run StdinReader 
+                     , Run Battery [] 1
+                     ]
+        , sepChar = "%"
+        , alignSep ="}{"
+        , template = "%StdinReader%}{<fc=grey>%battery%</fc> <fc=grey>%cpu%</fc> <fc=red>%coretemp%</fc>°C<fc=grey> ~ %memory% ~ %swap% ~ %eth0%</fc> ~ <fc=#ee9a00>%date%</fc> ~ Vol: <fc=green>%default:Master%</fc> " 
+        }

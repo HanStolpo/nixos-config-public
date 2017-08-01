@@ -1,0 +1,4 @@
+let g:ghcmod_hlint_options = [ '--ignore=Use <$>' , '--ignore=Use uncurry' , '--ignore=Use second' , '--ignore=Use const' , '--ignore=Use &&&' , '-XNoRoleAnnotations' , '--ignore=Use camelCase' , '--ignore=Avoid lambda' , '--ignore=Reduce duplication', '--ignore=Use import/export shortcut' ]
+let g:hdevtools_options = '-g -isrc -g -i./ -g -Wall -g -O0 -g -j -g -fwarn-incomplete-uni-patterns -g -XNoImplicitPrelude -g -XOverloadedStrings -g -XRecordWildCards -g -XNamedFieldPuns -g -XConstraintKinds -g -XBangPatterns -g -XScopedTypeVariables -g -XDataKinds'
+
+

@@ -1,0 +1,137 @@
+# ----------------------------------------------------------------------
+# file:    ~/.config/termite/config
+# author:  moparx     - http://moparx.com/configs
+# date:    05/08/2013 - 18:12 EDT
+# vim: set ai et fenc=utf-8 ft=conf nu si sts=0 sw=4 ts=8 tw=0 : 
+# ----------------------------------------------------------------------
+
+[options]
+resize_grip = false
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = false
+mouse_autohide = true
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Roboto Mono for Powerline 11
+scrollback_lines = 10000
+search_wrap = true
+
+# transparency
+transparency = 0.0
+pseudo_transparency = false
+
+# cursor
+cursor_blink = system
+cursor_shape = block
+
+# [colors]
+# foreground = #FFFFFF
+# background = #000000
+# cursor = #1F1F1F
+# 
+# color0 = #000000
+# color1 = #AA0000
+# color2 = #00AA00
+# color3 = #AA5500
+# color4 = #0000AA
+# color5 = #AA00AA
+# color6 = #00AAAA
+# color7 = #AAAAAA
+# color8 = #555555
+# color9 = #FF5555
+# color10 = #55FF55
+# color11 = #FFFF55
+# color12 = #5555FF
+# color13 = #FF55FF
+# color14 = #55FFFF
+# color15 = #FFFFFF
+# 
+# [hints]
+# foreground = #55FFFF
+
+
+# # soloraized
+# [colors]
+# 
+# # special
+# foreground      = #93a1a1
+# foreground_bold = #93a1a1
+# cursor          = #93a1a1
+# background      = #002b36
+# 
+# # black
+# color0  = #002b36
+# color8  = #657b83
+# 
+# # red
+# color1  = #dc322f
+# color9  = #dc322f
+# 
+# # green
+# color2  = #859900
+# color10 = #859900
+# 
+# # yellow
+# color3  = #b58900
+# color11 = #b58900
+# 
+# # blue
+# color4  = #268bd2
+# color12 = #268bd2
+# 
+# # magenta
+# color5  = #6c71c4
+# color13 = #6c71c4
+# 
+# # cyan
+# color6  = #2aa198
+# color14 = #2aa198
+# 
+# # white
+# color7  = #93a1a1
+# color15 = #fdf6e3
+
+# wombat
+[colors]
+
+# special
+foreground      = #dedacf
+foreground_bold = #dedacf
+#cursor          = #dedacf
+background      = #171717
+
+# black
+color0  = #000000
+color8  = #313131
+
+# red
+color1  = #ff615a
+color9  = #f58c80
+
+# green
+color2  = #b1e969
+color10 = #ddf88f
+
+# yellow
+color3  = #ebd99c
+color11 = #eee5b2
+
+# blue
+color4  = #5da9f6
+color12 = #a5c7ff
+
+# magenta
+color5  = #e86aff
+color13 = #ddaaff
+
+# cyan
+color6  = #82fff7
+color14 = #b7fff9
+
+# white
+color7  = #dedacf
+color15 = #ffffff
