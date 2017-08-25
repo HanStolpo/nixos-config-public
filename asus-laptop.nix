@@ -13,6 +13,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      # Include custom packages and override
+      ./packages/overrides.nix
       # Include the common configuration
       ./common/power-management
       ./common/databases/postgresql
@@ -148,4 +150,5 @@ in
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
 
+  services.journald.rateLimitBurst = -1;
 }

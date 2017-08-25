@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
      udisks2    # mount removable drives as user in /run/media/username/drivename
      usermount  # automounter that works with udisks2
+     udevil     # user space mounting program
    ];
 
 

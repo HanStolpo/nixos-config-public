@@ -44,6 +44,8 @@ let
      xmonad-utils
      xmonad-windownames
      xmonad-entryhelper
+     taffybar
+     dbus
     ]);
 in with pkgs;
   # Fake build command for the nix packages if you ever want to make it installable by let say Hydra

@@ -1,15 +1,9 @@
 { config, pkgs, ... }:
 
 let
-   # See https://github.com/NixOS/nixpkgs/pull/25983 for work in progress
-   heroku_custom = pkgs.callPackage
-     (pkgs.fetchurl {
-       url = "https://raw.githubusercontent.com/shosti/nixpkgs/e60ed33920aa4309623a4f2bb07811ed837e244d/pkgs/development/tools/heroku/default.nix";
-       sha256 = "1jzakz4psj0lpcqj8mqg78jjwmm3mrym990s69m5kjqacysxkxb6";}
-     ) {};
-    pathToVim = ../../vim;
-    neovimPackages =
-      pkgs.callPackage (pathToVim + /neovimPackages.nix) {};
+   pathToVim = ../../vim;
+   neovimPackages =
+     pkgs.callPackage (pathToVim + /neovimPackages.nix) {};
 in
 {
   environment.systemPackages =
@@ -23,10 +17,12 @@ in
      gnumake # A tool to control the generation of non-source files from sources
      cabal2nix # Convert Cabal files into Nix build instructions
      perl # The standard implementation of the Perl 5 programmming language
-     heroku_custom # Everything you need to get started using Heroku
+     heroku # Everything you need to get started using Heroku
      awscli # Unified tool to manage your AWS services
-     nodePackages.node2nix
-     nodejs-8_x
+     nodePackages.node2nix # generate nix from node packages
+     #nodejs-7_x
+     create-react-native-app # setup react native app projects
+     expo-exp # command line utility for working with expo client app for react native development
 
     # source control for configs etc
      gitAndTools.gitFull # git source control
@@ -45,6 +41,9 @@ in
     packageOverrides = super:
     {
       vimPlugins = super.vimPlugins // (super.callPackage (pathToVim + /plugins.nix) {});
+      heroku = (pkgs.callPackage ../../../packages/heroku-cli {}).heroku-cli;
+      create-react-native-app = (pkgs.callPackage ../../../packages/create-react-native-app {}).create-react-native-app;
+      expo-exp = (pkgs.callPackage ../../../packages/expo-exp {}).exp;
     };
   };
 }

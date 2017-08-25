@@ -11,11 +11,16 @@ import XMonad.Util.Run
 import XMonad.Util.EZConfig
 import System.IO
 
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import System.Taffybar.Hooks.PagerHints (pagerHints)
+
+
 main = do
-    h <- xmobarProc
-    xmonad . setupXmobar h . myBorders . myKeys . myHooks . myLayout . myMisc $
-                -- gnomeConfig
+    xmonad . ewmh . pagerHints . setupTaffyBar .  myBorders . myKeys . myHooks . myLayout . myMisc $
                 desktopConfig
+    -- h <- xmobarProc
+    -- xmonad . setupXmobar h . myBorders . myKeys . myHooks . myLayout . myMisc $
+    --             desktopConfig
 
 {-type SetupCfg_ = ( LayoutClass l Window, Read (l Window)) => XConfig l -> XConfig l-}
 -- type MyLayout = Choose Tall (Choose (Mirror Tall) Full)
@@ -71,10 +76,15 @@ setupXmobar h cfg =
             }
         }
 
+setupTaffyBar  cfg =
+    cfg { manageHook = manageDocks <+> manageHook cfg
+        , layoutHook = avoidStruts $ layoutHook cfg
+        }
 
 startup :: X()
 startup = do
     -- spawn "dropbox start"
     {-spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 10 --height 25"-}
-    spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 10 --height 30"
+    {-spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 10 --height 30"-}
+    spawn "dbus-launch taffybar"
     return ()
