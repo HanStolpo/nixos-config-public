@@ -13,6 +13,8 @@
           5269 # XMPP federation
           9001 # wassembly TPSPOOl redirect port
           53 # DNS
+          19000 # used by expo client app on local network to get code
+          19001 # used by expo client app on local network to get code
     ];
     allowedUDPPorts = [
           # NFS ?

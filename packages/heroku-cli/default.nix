@@ -8,11 +8,11 @@
 # npm fails to install packages when node 8 is used
 # but heroku cli requires node 8. So install dependencies
 # using node 7 but run the heroku script using node 8.
-{pkgs, system, nodejs-7_x, nodejs-8_x}:
+{pkgs, system, nodejs, nodejs-8_x}:
 (import ./heroku-cli.nix {
   inherit pkgs;
   inherit system;
-  nodejs = nodejs-7_x;
+  inherit nodejs;
 }).heroku-cli.overrideAttrs (oldAttrs: rec {
     postInstall = ''
       cp $out/bin/heroku $out/bin/heroku-o

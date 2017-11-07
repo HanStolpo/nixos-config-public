@@ -97,13 +97,14 @@ alias zless=$PAGER
 
 #alias ch='(cd ~/dev/circuithub; nix-shell --run "ch $@";)'
 function ch() {(cd ~/dev/circuithub; as="$@"; nix-shell --arg run-silent true --run "ch $as")}
-function ghci-with() {(cd ~; ps="$@"; nix-shell  --run ghci -p "haskellPackages.ghcWithPackages (self: with self;[$ps])" -p "haskellPackages.hdevtools" -p "haskellPackages.hlint" -p "haskellPackages.hindent";)}
-alias api-nvim="(cd ~/dev/circuithub/api; ./run-nvim;)"
+function ghci-with() {(cd ~; ps="$@"; nix-shell  --run ghci -p "haskell.packages.ghc821.ghcWithPackages (self: with self;[$ps])" -p "haskell.packages.ghc821.hdevtools" -p "haskell.packages.ghc821.hlint" -p "haskell.packages.ghc821.hindent";)}
+function api-shell() {(cd ~/dev/circuithub/api; ps="$@"; nix-shell ./nix/dev-env.nix --argstr compiler ghc802 --run "$ps")}
+alias api-nvim='api-shell nvim -c "\"OpenSession api\"" '
 alias api-hoogle="(cd ~/dev/circuithub/api; ./run-hoogle;)"
-alias api-clean='(cd ~/dev/circuithub/api; nix-shell ./nix/dev-env.nix --run "cabal clean";)'
-alias api-build='(cd ~/dev/circuithub/api; nix-shell ./nix/dev-env.nix --run "cabal build";)'
-alias api-configure='(cd ~/dev/circuithub/api; nix-shell ./nix/dev-env.nix --run "cabal configure";)'
-alias api-repl='(cd ~/dev/circuithub/api; nix-shell ./nix/dev-env.nix --run "env $(xargs < .env) cabal repl --ghc-options=\"-interactive-print=Text.Show.Pretty.pPrint -package pretty-show -package foreign-store -freverse-errors\""  2>&1 | awk -F: '"'"'{p=/modules loaded:/};p{print $1};!p{print};{fflush()}'"'"' | tee log.txt;)'
+alias api-clean='api-shell cabal clean'
+alias api-build='api-shell cabal build'
+alias api-configure='api-shell cabal configure'
+alias api-repl='(cd ~/dev/circuithub/api; nix-shell ./nix/dev-env.nix --argstr compiler ghc802 --run "env $(xargs < .env) cabal repl lib:circuithub-api --ghc-options=\"-interactive-print=Text.Show.Pretty.pPrint -package pretty-show -package foreign-store -package directory -freverse-errors\""  2>&1 | awk -F: '"'"'{p=/modules loaded:/};p{print $1};!p{print};{fflush()}'"'"' | tee log.txt;)'
 alias client-projects-run='(cd ~/dev/circuithub; nix-shell --arg run-silent true --run "ch run-client-projects";)'
 alias client-nvim='(cd ~/dev/circuithub/client; nix-shell ../shell.nix --run "nvim -c \"OpenSession client\"";)'
 alias client-build='(cd ~/dev/circuithub; nix-shell --arg run-silent true --run "cd client; gulp compile";)'

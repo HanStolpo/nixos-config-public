@@ -55,7 +55,7 @@ in
       # file type
       #{ name = "vim-polyglot";}         # highlighting for all filetypes (custom)
       # haskell
-      { name = "ghcmod";} # failing cause vimproc is failing
+      { name = "ghcmod";}
       { name = "Hoogle";}
       #{ name = "neco-ghc";}
       { name = "hlint-refactor-vim";}
@@ -69,6 +69,7 @@ in
       { name = "elm-vim"; }
       { name = "vim-hdevtools"; }
       { name = "haskell-vim"; }
+      { name = "LanguageClient-neovim"; }
 
       { name = "clang_complete"; }
       { name = "vim-clang-format"; }

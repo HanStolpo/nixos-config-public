@@ -9,15 +9,16 @@
   services = {
     printing = {
       enable = true;
-      gutenprint = true;
+      #gutenprint = true; # deprecated
+      drivers = [pkgs.gutenprint pkgs.hplip pkgs.splix];
     };
   };
 
-  # hardware = {
-  #   sane = {
-  #     enable = true;
-  #     extraBackends = [pkgs.sane-backends];
-  #   };
-  # };
+  hardware = {
+    sane = {
+      enable = true;
+      #extraBackends = [pkgs.sane-backends];
+    };
+  };
 
 }

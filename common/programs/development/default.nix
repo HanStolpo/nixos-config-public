@@ -28,6 +28,14 @@ in
      gitAndTools.gitFull # git source control
      gitAndTools.gitRemoteGcrypt # encrypted git remotes
      git-crypt
+
+     stack2nix
+
+     # haskell.compiler.ghc821
+     # haskell.packages.ghc821.cabal-install
+     # haskell.packages.ghc821.hdevtools
+     # haskell.packages.ghc821.hlint
+
   ]);
 
   nixpkgs.config = {

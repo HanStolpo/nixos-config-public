@@ -4,7 +4,7 @@
 
   environment.systemPackages = with pkgs; [
      # browsers
-     firefox
+     firefox-esr
      google-chrome
 
      # chat clients

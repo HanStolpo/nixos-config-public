@@ -20,13 +20,18 @@
      netcat-openbsd # TCP/IP swiss army knife, OpenBSD variant
      mesa # An open source implementation of OpenGL
      #mesa_drivers # An open source implementation of OpenGL
-     glmark2 # OpenGL (ES) 2.0 benchmark
+     # glmark2 # OpenGL (ES) 2.0 benchmark
      glxinfo # info about opengl implementation
      libinput # Handles input devices in Wayland compositors and provides a generic X.Org input drivelibinputr
 
      # spelling
      aspell # Spell checker for many languages
      aspellDicts.en # Aspell dictionary for English
+
+     zoom-us # video chat client
+
+     wineFull # run windows apps
+     winetricks
   ];
 
 }

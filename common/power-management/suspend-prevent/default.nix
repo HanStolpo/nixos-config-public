@@ -79,6 +79,7 @@ rec {
     systemd.services.suspend-prevent = mkIf cfg.enable {
       enable = true;
       description = "Prevent suspend on lid close when on AC";
+      requires = ["default.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${suspend-prevent}/bin/suspend-prevent --forever";
