@@ -16,8 +16,7 @@
 }).heroku-cli.overrideAttrs (oldAttrs: rec {
     postInstall = ''
       cp $out/bin/heroku $out/bin/heroku-o
-      cat $out/bin/heroku-o | head -n 1 > $out/bin/heroku
-      echo 'export PATH=${nodejs-8_x}/bin:$PATH' >> $out/bin/heroku
+      echo '#!${nodejs-8_x}/bin/node' > $out/bin/heroku
       cat $out/bin/heroku-o | tail -n +2 >> $out/bin/heroku
     '';
 })
