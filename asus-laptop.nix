@@ -38,6 +38,7 @@ in
       ./common/services/xserver
       ./common/services/print-scan
       ./common/services/physlock
+      ./common/services/keybase
       ./common/message-brokers/rabbitmq
     ] ++
     (if builtins.pathExists ./secret/networking/wireless/networks
