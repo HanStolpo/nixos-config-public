@@ -140,5 +140,8 @@ function nix-remove-roots() {(
   fi
 )}
 
+# setup direnv
+eval "$(direnv hook zsh)"
+
 # add the ssh-agent
 #eval `ssh-agent -s`
