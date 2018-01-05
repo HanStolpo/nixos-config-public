@@ -30,6 +30,7 @@ in
       #{ name = "YankRing";}             # copy history
       { name = "extradite";}            # extends fugitive for git log commit browse
       { name = "fugitive";}             # git integration
+      { name = "rhubarb.vim";}          # Gbrowse support for fugitive
       #{ name = "vim-autoformat";}       # Auto format using several different formatters
       { name = "vim-localvimrc";}       #
       { name = "vim-leader-guide";}     # show info about key short cuts

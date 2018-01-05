@@ -107,4 +107,14 @@ in {
       dependencies = [];
     };
 
+  "rhubarb.vim" = buildVimPlugin {
+      name = "rhubarb.vim";
+      src = fetchgit {
+        url = "https://github.com/tpope/vim-rhubarb";
+        rev = "6caad2b61afcc1b7c476b0ae3dea9ee5f2b1d14a";
+        sha256 = "1bmc5j9056bgdhyhvylbd93jkp1k9067mv3af6skzh0r77rx1a0g";
+      };
+      dependencies = [];
+    };
+
 }
