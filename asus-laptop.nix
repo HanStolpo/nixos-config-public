@@ -46,6 +46,9 @@ in
     else [])  ++
     (if builtins.pathExists ./secret/nix
     then [./secret/nix]
+    else []) ++
+    (if builtins.pathExists ./secret/vpn/picofactory
+    then [./secret/vpn/picofactory]
     else [])
     ;
 
