@@ -17,6 +17,7 @@
      bashInteractive # GNU Bourne-Again Shell, the de facto standard shell on Linux (for interactive use)
      termite # vi like terminal easy to customize
      xclip # terminal clipboard support
+     python36Packages.powerline # powerline for zsh 
 
     # Utilities
      wget # Tool for retrieving files using HTTP, HTTPS, and FTP
