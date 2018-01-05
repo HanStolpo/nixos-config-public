@@ -145,3 +145,5 @@ eval "$(direnv hook zsh)"
 
 # add the ssh-agent
 #eval `ssh-agent -s`
+
+. /home/handre/.nix-profile/share/zsh/site-contrib/powerline.zsh
