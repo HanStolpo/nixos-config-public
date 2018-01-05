@@ -30,8 +30,10 @@
 
      zoom-us # video chat client
 
-     wineFull # run windows apps
-     winetricks
+
+
+     kpcli # command line interface to keepass
+
   ];
 
 }

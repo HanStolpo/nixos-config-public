@@ -47,6 +47,8 @@
      hwinfo # Hardware detection tool from openSUSE
      sysfsutils # These are a set of utilites built upon sysfs, a new virtual filesystem in Linux kernel versions 2.5+ that exposes a system's device tree.
 
+     socat # allow concatenating sockets together
+
     # source control for configs etc
      gitAndTools.gitFull # git source control
      gitAndTools.gitRemoteGcrypt # encrypted git remotes

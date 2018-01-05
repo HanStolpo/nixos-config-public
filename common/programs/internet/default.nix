@@ -25,6 +25,9 @@ in
      dropbox         # to stop dropbox from auto updating create ~/.dropbox-dist chmod 0 it
      dropbox-cli
 
+     cifs-utils # Tools for managing Linux CIFS client filesystems
+     nfs-utils # This package contains various Linux user-space Network File System (NFS) utilities, including RPC `mount' and `nfs' daemons.
+
   ];
 
   nixpkgs.config = {
