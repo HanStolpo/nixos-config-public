@@ -54,6 +54,9 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  services.teamviewer.enable = true;
+
+
   # Set your time zone.
   time.timeZone = "Africa/Johannesburg";
 
