@@ -36,6 +36,11 @@ in
      # haskell.packages.ghc821.hdevtools
      # haskell.packages.ghc821.hlint
 
+     direnv # automatically setup environment variables when entering a directory
+
+     nixops
+
+     haskellPackages.aeson-pretty # pretty print json text
   ]);
 
   nixpkgs.config = {
