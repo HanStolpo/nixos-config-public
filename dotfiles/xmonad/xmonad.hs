@@ -9,6 +9,10 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
+import XMonad.Layout.Grid
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Spiral
+import XMonad.Layout.Circle
 import System.IO
 
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -52,7 +56,7 @@ myHooks cfg = cfg {startupHook = startup
                   }
 
 -- myLayout :: SetupCfg_
-myLayout cfg = cfg {layoutHook = tiled ||| Mirror tiled ||| Full}
+myLayout cfg = cfg {layoutHook = tiled ||| ThreeColMid 1 (5/100) (1/2) ||| spiral (6/7) ||| Mirror tiled ||| Grid ||| Circle ||| Full}
         where
             -- default tiling algorithm partitions screen into two panes
             tiled = Tall nmaster delta ratio
