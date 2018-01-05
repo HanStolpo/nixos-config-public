@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+
      trayer # A lightweight GTK2-based systray for UNIX desktop
 
      # # haskell packages for XMonad
@@ -37,6 +38,8 @@
      maim # create a screen shot (can be driven by slop)
 
      xorg.xinit # for startx when messing around with extra displays or playing with xmonad
+
+     xorg.xbacklight # control backlight of screen
   ];
 
   nixpkgs.config = {
@@ -72,9 +75,11 @@
         xmonad-utils
       ];
       };
-    # windowManager.default = "xmonad";
+    windowManager.default = "xmonad";
     desktopManager.xterm.enable = false;
     desktopManager.gnome3.enable = false;
+    desktopManager.xfce.enable = true;
+    desktopManager.enlightenment.enable = false;
     desktopManager.default = "none";
     displayManager = {
       slim = {
