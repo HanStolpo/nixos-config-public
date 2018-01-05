@@ -85,12 +85,12 @@ in
   hardware.bluetooth.enable = true;
 
 
-  # Dell 27" monitor is about 600 by 340 mm, 16:9 aspect ratio
-  # dpi approx 162.56 target dpi 1.5 * 96 = 144
-  # target width 677 mm so 676 by 380
-   services.xserver.monitorSection = ''
-      DisplaySize 676 380
-   '';
+  ## Dell 27" monitor is about 600 by 340 mm, 16:9 aspect ratio
+  ## dpi approx 162.56 target dpi 1.5 * 96 = 144
+  ## target width 677 mm so 676 by 380
+   #services.xserver.monitorSection = ''
+      #DisplaySize 676 380
+   #'';
   # Graphics card driver
   #services.xserver.monitorSection = ''
      #DisplaySize 344 194
@@ -98,7 +98,7 @@ in
   hardware.opengl.driSupport32Bit = true;
   services.xserver.libinput.enable = true;
   services.xserver.libinput.naturalScrolling = true;
-  services.xserver.dpi = 200;
+  services.xserver.dpi = 162;
   #hardware.opengl.driSupport32Bit = false;
   services.xserver.exportConfiguration = true;
   #services.xserver.useGlamor = true;
