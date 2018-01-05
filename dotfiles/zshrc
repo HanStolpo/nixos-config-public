@@ -6,6 +6,8 @@ export ZSH=/home/handre/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
+#ZSH_THEME="amuse"
+DEFAULT_USER=handre
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,9 +51,10 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git autojump cabal gnu-utils man shrink-path powerline)
 
 # User configuration
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,7 +100,7 @@ alias zless=$PAGER
 
 #alias ch='(cd ~/dev/circuithub; nix-shell --run "ch $@";)'
 function ch() {(cd ~/dev/circuithub; as="$@"; nix-shell --arg run-silent true --run "ch $as")}
-function ghci-with() {(cd ~; ps="$@"; nix-shell  --run ghci -p "haskell.packages.ghc821.ghcWithPackages (self: with self;[$ps])" -p "haskell.packages.ghc821.hdevtools" -p "haskell.packages.ghc821.hlint" -p "haskell.packages.ghc821.hindent";)}
+function ghci-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskell.packages.ghc7103.ghcWithPackages (self: with self;[$ps])" -p "haskell.packages.ghc802.hdevtools";)}
 function api-shell() {(cd ~/dev/circuithub/api; ps="$@"; nix-shell ./nix/dev-env.nix --argstr compiler ghc802 --run "$ps")}
 alias api-nvim='api-shell nvim -c "\"OpenSession api\"" '
 alias api-hoogle="(cd ~/dev/circuithub/api; ./run-hoogle;)"
@@ -110,7 +113,7 @@ alias client-nvim='(cd ~/dev/circuithub/client; nix-shell ../shell.nix --run "nv
 alias client-build='(cd ~/dev/circuithub; nix-shell --arg run-silent true --run "cd client; gulp compile";)'
 alias bbswitch-off='sudo tee /proc/acpi/bbswitch <<<OFF'
 alias bbswitch-on='sudo tee /proc/acpi/bbswitch <<<ON'
-alias nix-add-circuithub-roots='(cd ~/dev/circuithub; nix-remove-roots; nix-add-roots; cd api; nix-remove-roots; nix-add-roots; nix-add-roots nix/dev-env.nix; nix-add-roots nix/dev-env.nix --argstr compiler ghc802; cd ../receiving-station; nix-remove-roots; nix-add-roots; nix-add-roots dev-env.nix;)'
+alias nix-add-circuithub-roots='(cd ~/dev/circuithub; nix-remove-roots; nix-add-roots shell.nix --arg run-silent true; cd api; nix-remove-roots; nix-add-roots; nix-add-roots nix/dev-env.nix; nix-add-roots nix/dev-env.nix --argstr compiler ghc802; cd ../pallet-loader; nix-remove-roots; nix-add-roots; nix-add-roots dev-env.nix; cd ../projects; nix-remove-roots; nix-add-roots;)'
 
 function nix-add-roots() {(
   if [ ! -d ".gcroots" ]; then
