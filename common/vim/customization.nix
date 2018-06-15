@@ -56,8 +56,6 @@ in
       # file type
       #{ name = "vim-polyglot";}         # highlighting for all filetypes (custom)
       # haskell
-      { name = "ghcmod";}
-      { name = "Hoogle";}
       #{ name = "neco-ghc";}
       { name = "hlint-refactor-vim";}
       # Pure script
@@ -68,12 +66,12 @@ in
 
       { name = "vim-nix"; }
       { name = "elm-vim"; }
-      { name = "vim-hdevtools"; }
+      #{ name = "vim-hdevtools"; }
       { name = "haskell-vim"; }
       { name = "LanguageClient-neovim"; }
 
       { name = "clang_complete"; }
-      { name = "vim-clang-format"; }
+      #{ name = "vim-clang-format"; }
 
       # from our own plugin package set
       { name = "vim-trailing-whitespace"; }
@@ -83,6 +81,8 @@ in
       { name = "vimpager"; }
       { name = "vim-ag";}
       #{ name = "vim-intero";}
+      { name = "vim-reason-plus";}
+      { name = "intero-neovim";}
     ];
   };
 }

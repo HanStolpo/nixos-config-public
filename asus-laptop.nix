@@ -4,9 +4,9 @@
 
 { config, pkgs, ... }:
 let
-   #kernelV = pkgs.linuxPackages;
+   kernelV = pkgs.linuxPackages;
    #kernelV = pkgs.linuxPackages_4_9;
-   kernelV = pkgs.linuxPackages_latest;
+   #kernelV = pkgs.linuxPackages_latest;
 in
 {
 
@@ -52,6 +52,7 @@ in
     else [])
     ;
 
+  nix.buildCores = 0;
   nixpkgs.config.allowUnfree = true;
 
   services.teamviewer.enable = true;
@@ -86,7 +87,6 @@ in
   hardware.bumblebee.enable = true;
   hardware.bumblebee.driver = "nvidia";
   hardware.bumblebee.connectDisplay = true;
-  hardware.opengl.extraPackages = with pkgs; [vaapiIntel];
 
   hardware.bluetooth.enable = true;
 
@@ -101,7 +101,13 @@ in
   #services.xserver.monitorSection = ''
      #DisplaySize 344 194
   #'';
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages = with pkgs; [vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl];
+  hardware.opengl.extraPackages32 = with pkgs; [vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl];
+  hardware.opengl.s3tcSupport = true;
+
   services.xserver.libinput.enable = true;
   services.xserver.libinput.naturalScrolling = true;
   services.xserver.dpi = 162;
@@ -155,7 +161,9 @@ in
 
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  #system.stateVersion = "17.03";
+  system.nixos.stateVersion = "17.03";
+  #system.nixos.stateVersion = "18.09";
 
   services.journald.rateLimitBurst = -1;
 }

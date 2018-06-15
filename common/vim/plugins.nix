@@ -91,8 +91,8 @@ in {
       name = "vim-ale";
       src = fetchgit {
         url = "https://github.com/w0rp/ale";
-        rev = "3ca4c7de96dfc1a76b529ac8fa336bd5fe1d7f6c";
-        sha256 = "0jjfnq5sg28c5ifpsrgzhwd38jg3sl8qak5ia1x4n8rkdrvmd1vj";
+        rev = "164c711b3da5a51a2323a3bd613df251ce455ca5";
+        sha256 = "135xb70cyrawp2bpwv6mnayw5s8ms8798x0mg03i0h68dhv5z8ds";
       };
       dependencies = [];
     };
@@ -102,7 +102,16 @@ in {
       src = fetchgit {
         url = "https://github.com/rhysd/vim-clang-format";
         rev = "95051583232fb9ad27d55e417b6ffc3933c50738";
-        sha256 = "";
+        sha256 = "1057d5mm059bjw6zcpn8w3ps3ziz8nwmirdmxdzm6fmfnrrgmzc7";
+      };
+      dependencies = [];
+    };
+  "vim-reason-plus" = buildVimPlugin {
+      name = "vim-reason-plus";
+      src = fetchgit {
+        url = "https://github.com/reasonml-editor/vim-reason-plus";
+        rev = "91138fa3ff985a89b0c863d1ff389b40ff6c28c9";
+        sha256 = "169nmcwwskr9m1b7f0p8d0c8l2k9yhblb868w2n6vv3wjjamg7sd";
       };
       dependencies = [];
     };
@@ -116,5 +125,17 @@ in {
       };
       dependencies = [];
     };
+
+  "intero-neovim" = buildVimPlugin {
+      name = "intero-neovim";
+      src = fetchgit {
+        url = "https://github.com/parsonsmatt/intero-neovim";
+        rev = "51999e8abfb096960ba0bc002c49be1ef678e8a9";
+        sha256 = "1igc8swgbbkvyykz0ijhjkzcx3d83yl22hwmzn3jn8dsk6s4an8l";
+      };
+      dependencies = [];
+    };
+
+  LanguageClient-neovim = import ./LanguageClient-neovim.nix {inherit pkgs fetchgit;};
 
 }

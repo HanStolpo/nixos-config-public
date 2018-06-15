@@ -11,6 +11,7 @@
     # file system support
      exfat # user space support for exfat file system
      ntfs3g # FUSE-based NTFS driver with full write support
+     hfsprogs # mount mac drives better
 
     # shells / terminals
      zsh # The Z shell
@@ -48,11 +49,16 @@
      hwinfo # Hardware detection tool from openSUSE
      sysfsutils # These are a set of utilites built upon sysfs, a new virtual filesystem in Linux kernel versions 2.5+ that exposes a system's device tree.
 
-     socat # allow concatenating sockets together
+     #socat # allow concatenating sockets together
 
     # source control for configs etc
      gitAndTools.gitFull # git source control
      gitAndTools.gitRemoteGcrypt # encrypted git remotes
+
+     inotify-tools
+
+     zip
+     unrar
 
   ];
 }

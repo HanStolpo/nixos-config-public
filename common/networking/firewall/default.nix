@@ -15,6 +15,7 @@
           53 # DNS
           19000 # used by expo client app on local network to get code
           19001 # used by expo client app on local network to get code
+          1234
     ];
     allowedUDPPorts = [
           # NFS ?
@@ -22,6 +23,7 @@
           #samba
           137 138
           53 # DNS
+          1234
     ];
     allowedTCPPortRanges = [
           # google chat / hanouts http://mikedikson.com/2013/01/google-talk-firewall-ports

@@ -5,16 +5,19 @@
      trayer # A lightweight GTK2-based systray for UNIX desktop
 
      # # haskell packages for XMonad
-     pkgs.haskellPackages.xmobar
-     # pkgs.haskellPackages.xmonad
-     # pkgs.haskellPackages.xmonad-contrib
-     # pkgs.haskellPackages.xmonad-extras
-     # pkgs.haskellPackages.xmonad-utils
-     # #pkgs.haskellPackages.xmonad-wallpaper
-     # pkgs.haskellPackages.xmonad-windownames
-     # pkgs.haskellPackages.xmonad-entryhelper
-     # # pkgs.haskellPackages.xmonad-eval
-     xmonad-with-packages
+     # pkgs.haskellPackages.xmonad-eval
+     (xmonad-with-packages.override {
+       packages= self: with self;
+       [ xmonad
+         xmobar
+         xmonad-contrib
+         xmonad-extras
+         xmonad-utils
+         xmonad-windownames
+         xmonad-entryhelper
+         taffybar
+       ];
+     })
 
      taffybar # desktop information bar intended for use with XMonad and similar window managers
 
@@ -40,6 +43,7 @@
      xorg.xinit # for startx when messing around with extra displays or playing with xmonad
 
      xorg.xbacklight # control backlight of screen
+
   ];
 
   nixpkgs.config = {
@@ -78,7 +82,7 @@
     windowManager.default = "xmonad";
     desktopManager.xterm.enable = false;
     desktopManager.gnome3.enable = false;
-    desktopManager.xfce.enable = true;
+    desktopManager.xfce.enable = false;
     desktopManager.enlightenment.enable = false;
     desktopManager.default = "none";
     displayManager = {

@@ -153,18 +153,18 @@ let g:syntastic_mode_map = {
     \ "active_filetypes": ["elm", "coffee"],
     \ "passive_filetypes": ["haskell"] }
 
-function! Ale_linters_haskell_hdevtools2_GetCommand(buffer) abort
-   return 'hdevtools check -g -Wall '
-    \   .  get(g:, 'hdevtools_options', '')
-    \   . ' -p %s %t'
-endfunction
-
-call ale#linter#Define('haskell', {
-\   'name': 'hdevtools2',
-\   'executable': 'hdevtools',
-\   'command_callback': 'Ale_linters_haskell_hdevtools2_GetCommand',
-\   'callback': 'ale#handlers#HandleGhcFormat',
-\})
+" function! Ale_linters_haskell_hdevtools2_GetCommand(buffer) abort
+"    return 'hdevtools check -g -Wall '
+"     \   .  get(g:, 'hdevtools_options', '')
+"     \   . ' -p %s %t'
+" endfunction
+" 
+" call ale#linter#Define('haskell', {
+" \   'name': 'hdevtools2',
+" \   'executable': 'hdevtools',
+" \   'command_callback': 'Ale_linters_haskell_hdevtools2_GetCommand',
+" \   'callback': 'ale#handlers#HandleGhcFormat',
+" \})
 
 function! Ale_linters_haskell_hlint_Command(buffer) abort
 
@@ -215,3 +215,14 @@ let g:ale_sign_column_always = 1
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_error = 'e'
 let g:ale_sign_warning = 'w'
+
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie', '--lsp', '--vomit', '-d'],
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio']
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

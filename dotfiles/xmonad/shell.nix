@@ -59,10 +59,10 @@ in with pkgs;
           # these are all the build time dependencies so they will all be available in the shell
           buildInputs =
           [ghc            # our compiler GHC
-          ghc-mod         # a tool to syntax check an lint Haskell code usable from emacs vim etc
+          #ghc-mod         # a tool to syntax check an lint Haskell code usable from emacs vim etc
                           # you can e.g. run `nix-shell --run "ghc-mod lint filename.hs" to lint your a file
           hindent         # a tool for auto formatting Haskell code
-          cabal-helper    # a tool used by ghc-mod to find the cabal-install program
+          #cabal-helper    # a tool used by ghc-mod to find the cabal-install program
           cabal-install   # the Haskell "Package" manager only needed for ghc-mod
           hoogle          # the hoogle Haskell documentation search engine
           hlint           # standalone linter for Haskell code

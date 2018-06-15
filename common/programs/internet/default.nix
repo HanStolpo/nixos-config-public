@@ -1,22 +1,14 @@
 { config, pkgs, ... }:
 
-let pkgs-17-0-9 = import (pkgs.fetchgit
-      {
-        url= "https://github.com/nixos/nixpkgs-channels";
-        rev= "7f6f0c49f0e8d24346bd32c3dec20cc60108a005";
-        sha256= "1k6p0ayv5riqm4bnyxpd1aw9l34dk96qk9vngmd08lr7h8v3s285";
-        fetchSubmodules= true;
-      }) {config = {allowUnfree = true;};};
-in
 {
 
   environment.systemPackages = with pkgs; [
      # browsers
-     firefox-esr
+     firefox
      google-chrome
 
      # chat clients
-     pkgs-17-0-9.hipchat
+     hipchat
      #hipchat
      slack
      weechat # A fast, light and extensible chat client

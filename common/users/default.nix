@@ -11,6 +11,7 @@
       "networkmanager" "postgres" "vboxusers"
       #scanner printer groups
       "lp" "scanner"
+      "docker"
     ];
     initialPassword = "handre";
     shell = "${pkgs.zsh}/bin/zsh";

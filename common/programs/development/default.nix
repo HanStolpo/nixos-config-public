@@ -4,6 +4,13 @@ let
    pathToVim = ../../vim;
    neovimPackages =
      pkgs.callPackage (pathToVim + /neovimPackages.nix) {};
+
+   nix-diff = pkgs.haskellPackages.callPackage (import (pkgs.fetchgit {
+       url= "https://github.com/Gabriel439/nix-diff";
+       rev= "e32ffa2c7f38b47a71325a042c1d887fb46cdf7d";
+       sha256= "1k00nx8pannqmpzadkwfrs6bf79yk22ynhd033z5rsyw0m8fcz9k";
+       fetchSubmodules= true;
+   })) {};
 in
 {
   environment.systemPackages =
@@ -21,15 +28,15 @@ in
      awscli # Unified tool to manage your AWS services
      nodePackages.node2nix # generate nix from node packages
      #nodejs-7_x
-     create-react-native-app # setup react native app projects
-     expo-exp # command line utility for working with expo client app for react native development
+     #create-react-native-app # setup react native app projects
+     #expo-exp # command line utility for working with expo client app for react native development
 
     # source control for configs etc
      gitAndTools.gitFull # git source control
      gitAndTools.gitRemoteGcrypt # encrypted git remotes
      git-crypt
-
-     stack2nix
+     #haskellPackages.hnix
+     #stack2nix
 
      # haskell.compiler.ghc821
      # haskell.packages.ghc821.cabal-install
@@ -41,6 +48,15 @@ in
      nixops
 
      haskellPackages.aeson-pretty # pretty print json text
+
+     # nix-diff
+
+     #haskell.packages.ghc822.haskell-ide-engine
+     cabal-install
+     cargo
+     rustc
+     #rust_carnix
+
   ]);
 
   nixpkgs.config = {
@@ -54,9 +70,6 @@ in
     packageOverrides = super:
     {
       vimPlugins = super.vimPlugins // (super.callPackage (pathToVim + /plugins.nix) {});
-      heroku = (pkgs.callPackage ../../../packages/heroku-cli {}).heroku-cli;
-      create-react-native-app = (pkgs.callPackage ../../../packages/create-react-native-app {}).create-react-native-app;
-      expo-exp = (pkgs.callPackage ../../../packages/expo-exp {}).exp;
     };
   };
 }

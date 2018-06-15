@@ -23,6 +23,7 @@ in
     postgresql = {
         enable = true;
         package = pkgs.postgresql95;
+        #dataDir = "/var/lib/postgresql/9.5";
         authentication = pkgs.lib.mkForce
                 ''
                   local   all             all                                     trust
