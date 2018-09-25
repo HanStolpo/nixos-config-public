@@ -110,7 +110,9 @@ in
 
   services.xserver.libinput.enable = true;
   services.xserver.libinput.naturalScrolling = true;
+  #services.xserver.dpi = 180;
   services.xserver.dpi = 162;
+  #services.xserver.dpi = 102;
   #hardware.opengl.driSupport32Bit = false;
   services.xserver.exportConfiguration = true;
   #services.xserver.useGlamor = true;
@@ -166,4 +168,12 @@ in
   #system.nixos.stateVersion = "18.09";
 
   services.journald.rateLimitBurst = -1;
+
+  # mouse-proxy test to succeed
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0666"
+    KERNEL=="event*", MODE="0666"
+  '';
+
+  nix.useSandbox = false;
 }

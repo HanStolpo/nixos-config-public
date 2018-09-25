@@ -4,7 +4,10 @@
     nixops # NixOS cloud provisioning and deployment tool
   ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  networking.firewall.checkReversePath = false;
+
+  virtualisation.docker.enable = false;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.addNetworkInterface = false;
 }

@@ -17,6 +17,7 @@
   hardware = {
     sane = {
       enable = true;
+      netConf = "192.168.178.220";
       #extraBackends = [pkgs.sane-backends];
     };
   };

@@ -91,8 +91,8 @@ in {
       name = "vim-ale";
       src = fetchgit {
         url = "https://github.com/w0rp/ale";
-        rev = "164c711b3da5a51a2323a3bd613df251ce455ca5";
-        sha256 = "135xb70cyrawp2bpwv6mnayw5s8ms8798x0mg03i0h68dhv5z8ds";
+        rev = "43ce8d761035e221b735b73597b482b9f2764b42";
+        sha256 = "0nlh71d85077r7nr5xgbdwl11hk43xclyh8z69iv38a4in0h2ka5";
       };
       dependencies = [];
     };
@@ -138,4 +138,13 @@ in {
 
   LanguageClient-neovim = import ./LanguageClient-neovim.nix {inherit pkgs fetchgit;};
 
+  "base16-vim" = buildVimPlugin {
+      name = "base16-vim";
+      src = fetchgit {
+        url = "https://github.com/chriskempson/base16-vim";
+        rev = "fcce6bce6a2f4b14eea7ea388031c0aa65e4b67d";
+        sha256 = "0wi8k80v2brmxqbkk0lrvl4v2sslkjfwpvflm55b3n0ii8qy39nk";
+      };
+      dependencies = [];
+    };
 }

@@ -7,6 +7,6 @@
      #keybase
   ];
   services.keybase.enable = true;
-  services.kbfs.enable = false;
+  services.kbfs.enable = true;
 
 }

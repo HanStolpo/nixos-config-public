@@ -12,6 +12,7 @@
       #scanner printer groups
       "lp" "scanner"
       "docker"
+      "libvirtd"
     ];
     initialPassword = "handre";
     shell = "${pkgs.zsh}/bin/zsh";

@@ -4,7 +4,7 @@
 {-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE RankNTypes #-}
 
-import System.Taffybar.Hooks.PagerHints (pagerHints)
+import System.Taffybar.Support.PagerHints  (pagerHints)
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -147,7 +147,7 @@ barFull = avoidStruts Simplest
 
 -- cf http://xmonad.org/xmonad-docs/xmonad-contrib/src/XMonad-Config-Droundy.html
 myLayoutHook = showWorkspaceName
-             $ onWorkspace wsFLOAT floatWorkSpace
+             $ onWorkspace wsFloat floatWorkSpace
              $ fullscreenFloat -- fixes floating windows going full screen, while retaining "bounded" fullscreen
              $ fullScreenToggle
              $ fullBarToggle
@@ -565,52 +565,52 @@ myShowWNameTheme = def
 -- Workspaces                                                           {{{
 ---------------------------------------------------------------------------
 
-wsGEN   = "gen"
-wsAPI   = "api"
-wsCLT   = "client"
-wsPRJ   = "proj"
-ws5    = "5"
-wsTEST  = "test"
+wsGen   = "gen"
+wsWork   = "work"
+ws3     = "3"
+ws4     = "4"
+ws5     = "5"
+wsTest  = "test"
 wsIM    = "im"
 ws8   = "8"
 ws9   = "9"
-wsFLOAT = "float"
+wsFloat = "float"
+wsMusic = "music"
+wsRun = "run"
 
 -- myWorkspaces = map show [1..9]
-myWorkspaces = [wsGEN, wsAPI, wsCLT, wsPRJ, ws5, wsTEST, wsIM, ws8, ws9, wsFLOAT]
+myWorkspaces = [wsGen, wsWork, ws3, ws4, ws5, wsTest, wsIM, ws8, ws9, wsFloat]
 
 projects :: [Project]
 projects =
 
-    [ Project   { projectName       = wsGEN
+    [ Project   { projectName       = wsGen
                 , projectDirectory  = "~/"
                 , projectStartHook  = Nothing
                 }
 
-    , Project   { projectName       = wsAPI
-                , projectDirectory  = "~/dev/circuithub/api"
-                , projectStartHook  = Just $ do spawnOn wsAPI "termite api-nvim "
-                                                spawnOn wsAPI "termite api-repl"
+    , Project   { projectName       = wsWork
+                , projectDirectory  = "~/dev/circuithub"
+                , projectStartHook  = Just $ do spawnOn wsWork "termite"
+                                                spawnOn wsWork "termite"
+                                                spawnOn wsWork "termite"
+                                                spawnOn wsWork "firefox"
                 }
 
-    , Project   { projectName       = wsCLT
-                , projectDirectory  = "~/dev/circuithub/client"
-                , projectStartHook  = Just $ do spawnOn wsAPI myTerminal
-                                                spawnOn wsAPI myTerminal
-                                                spawnOn wsAPI myTerminal
+    , Project   { projectName       = ws3
+                , projectDirectory  = "~/dev/circuithub"
+                , projectStartHook  =  Nothing
                 }
-    , Project   { projectName       = wsPRJ
-                , projectDirectory  = "~/dev/circuithub/projects"
-                , projectStartHook  = Just $ do spawnOn wsAPI myTerminal
-                                                spawnOn wsAPI myTerminal
-                                                spawnOn wsAPI myTerminal
+    , Project   { projectName       = ws4
+                , projectDirectory  = "~/dev/circuithub"
+                , projectStartHook  = Nothing
                 }
     , Project   { projectName       = ws5
                 , projectDirectory  = "~/dev/circuithub"
                 , projectStartHook  = Nothing
                 }
 
-    , Project   { projectName       = wsTEST
+    , Project   { projectName       = wsTest
                 , projectDirectory  = "~/"
                 , projectStartHook  = Nothing
                 }
@@ -630,9 +630,19 @@ projects =
                 , projectStartHook  = Nothing
                 }
 
-    , Project   { projectName       = wsFLOAT
+    , Project   { projectName       = wsFloat
                 , projectDirectory  = "~/"
                 , projectStartHook  = Nothing
+                }
+    , Project   { projectName       = wsMusic
+                , projectDirectory  = "~/"
+                , projectStartHook  = Nothing
+                }
+    , Project   { projectName       = wsRun
+                , projectDirectory  = "~/dev/circuithub"
+                , projectStartHook  = Just $ do spawnOn wsRun "termite"
+                                                spawnOn wsRun "termite"
+                                                spawnOn wsRun "termite"
                 }
     ]
 

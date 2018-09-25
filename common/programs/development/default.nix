@@ -18,7 +18,6 @@ in
   (neovimPackages ++
   [
      binutils # Tools for manipulating binaries (linker, assembler, etc.)
-     haskellPackages.aeson-pretty # json pretty printer
      ag # A code-searching tool similar to ack, but faster
      ctags # A tool for fast source code browsing (exuberant ctags)
      gnumake # A tool to control the generation of non-source files from sources
@@ -35,28 +34,45 @@ in
      gitAndTools.gitFull # git source control
      gitAndTools.gitRemoteGcrypt # encrypted git remotes
      git-crypt
-     #haskellPackages.hnix
-     #stack2nix
 
-     # haskell.compiler.ghc821
-     # haskell.packages.ghc821.cabal-install
-     # haskell.packages.ghc821.hdevtools
-     # haskell.packages.ghc821.hlint
 
      direnv # automatically setup environment variables when entering a directory
 
      nixops
 
-     haskellPackages.aeson-pretty # pretty print json text
+     (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
 
      # nix-diff
 
-     #haskell.packages.ghc822.haskell-ide-engine
-     cabal-install
+     #(haskell.lib.justStaticExecutables haskellPackages.intero)
+     (haskell.lib.justStaticExecutables haskellPackages.hoogle)
+     (haskell.lib.justStaticExecutables haskellPackages.hlint)
+     (haskell.lib.justStaticExecutables haskellPackages.hindent)
+     # (haskellPackages.ghcWithHoogle (g: with g;
+     #    [# not these libs are actually part of GHC as the core libraries (https://www.haskell.org/platform/contents.html)
+     #    array base bytestring Cabal containers deepseq directory filepath
+     #    hpc pretty process template-haskell time transformers unix xhtml
+     #    # additional haskell platform libraries
+     #    async attoparsec call-stack fgl fixed GLURaw GLUT half hashable
+     #    haskell-src html HTTP HUnit integer-logarithms mtl network
+     #    network-uri ObjectName OpenGL OpenGLRaw parallel parsec primitive
+     #    QuickCheck random regex-base regex-compat scientific split StateVar
+     #    stm syb text tf-random transformers unordered-containers xhtml zlib
+     #    # add any additional libs here
+     #    aeson linear lens hspec reactive-banana-gi-gtk opencv
+     #    ]))
+     # (haskell.lib.justStaticExecutables haskellPackages.cabal-install)
+
      cargo
      rustc
      #rust_carnix
 
+     jq
+     #stack2nix
+     xdotool
+     stack
+
+     vault
   ]);
 
   nixpkgs.config = {

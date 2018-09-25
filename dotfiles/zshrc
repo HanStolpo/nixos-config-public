@@ -51,7 +51,7 @@ DEFAULT_USER=handre
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump cabal gnu-utils man shrink-path powerline)
+plugins=(git autojump cabal gnu-utils man shrink-path powerline colored-man-pages)
 
 # User configuration
 
@@ -151,3 +151,12 @@ eval "$(direnv hook zsh)"
 #eval `ssh-agent -s`
 
 . /run/current-system/sw/share/zsh/site-contrib/powerline.zsh
+
+# Base16 Shell
+BASE16_SHELL="$HOME/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# less stopped showing unicode charcters all of a sudden :(
+LESSCHARSET=utf-8

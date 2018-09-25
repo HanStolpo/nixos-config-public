@@ -68,7 +68,7 @@ in
       { name = "elm-vim"; }
       #{ name = "vim-hdevtools"; }
       { name = "haskell-vim"; }
-      { name = "LanguageClient-neovim"; }
+      #{ name = "LanguageClient-neovim"; }
 
       { name = "clang_complete"; }
       #{ name = "vim-clang-format"; }
@@ -81,8 +81,10 @@ in
       { name = "vimpager"; }
       { name = "vim-ag";}
       #{ name = "vim-intero";}
-      { name = "vim-reason-plus";}
-      { name = "intero-neovim";}
+      #{ name = "vim-reason-plus";}
+      #{ name = "intero-neovim";}
+
+      { name = "base16-vim";}
     ];
   };
 }

@@ -4,16 +4,18 @@ set spelllang=en_gb
 "Roboto Mono for Powerline
 
 set gfn=Roboto\ Mono\ for\ Powerline:h14
-if has("gui_running")
-  try
-    colorscheme solarized
-  catch
-  endtry
-endif
-try
-  colorscheme termschool
-catch
-endtry
+"if has("gui_running")
+  "try
+    "colorscheme solarized
+  "catch
+  "endtry
+"endif
+"try
+  "colorscheme termschool
+"catch
+"endtry
+
+"set background=dark
 
 set ffs=unix,mac,dos
 " 1 tab == 2 spaces
@@ -102,6 +104,8 @@ au InsertLeave * set nocursorcolumn
 
 
 autocmd BufEnter *.hs set indentkeys=
+autocmd BufEnter *.nix set indentkeys=
+autocmd BufEnter *.elm set indentkeys=
 
 "intero vim
 autocmd FileType haskell setlocal omnifunc=intero#omnifunc
@@ -226,3 +230,11 @@ let g:LanguageClient_serverCommands = {
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+"highlight ALEError ctermbg=196 gui=undercurl guisp=#fb9fb1
+"highlight ALEWarning ctermbg=208 gui=undercurl guisp=#fb9fb1

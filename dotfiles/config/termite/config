@@ -11,7 +11,7 @@ scroll_on_output = false
 scroll_on_keystroke = true
 audible_bell = false
 visible_bell = false
-mouse_autohide = true
+mouse_autohide = false
 allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
@@ -28,110 +28,54 @@ pseudo_transparency = false
 cursor_blink = system
 cursor_shape = block
 
-# [colors]
-# foreground = #FFFFFF
-# background = #000000
-# cursor = #1F1F1F
-# 
-# color0 = #000000
-# color1 = #AA0000
-# color2 = #00AA00
-# color3 = #AA5500
-# color4 = #0000AA
-# color5 = #AA00AA
-# color6 = #00AAAA
-# color7 = #AAAAAA
-# color8 = #555555
-# color9 = #FF5555
-# color10 = #55FF55
-# color11 = #FFFF55
-# color12 = #5555FF
-# color13 = #FF55FF
-# color14 = #55FFFF
-# color15 = #FFFFFF
-# 
-# [hints]
-# foreground = #55FFFF
-
-
-# # soloraized
+# # wombat
 # [colors]
 # 
 # # special
-# foreground      = #93a1a1
-# foreground_bold = #93a1a1
-# cursor          = #93a1a1
-# background      = #002b36
+# foreground      = #dedacf
+# foreground_bold = #dedacf
+# #cursor          = #dedacf
+# background      = #171717
 # 
 # # black
-# color0  = #002b36
-# color8  = #657b83
+# color0  = #000000
+# color8  = #313131
 # 
 # # red
-# color1  = #dc322f
-# color9  = #dc322f
+# color1  = #ff615a
+# color9  = #830303
 # 
 # # green
-# color2  = #859900
-# color10 = #859900
+# color2  = #b1e969
+# color10 = #ddf88f
 # 
 # # yellow
-# color3  = #b58900
-# color11 = #b58900
+# color3  = #ebd99c
+# color11 = #eee5b2
 # 
 # # blue
-# color4  = #268bd2
-# color12 = #268bd2
+# color4  = #5da9f6
+# color12 = #5555ff
 # 
 # # magenta
-# color5  = #6c71c4
-# color13 = #6c71c4
+# color5  = #e86aff
+# color13 = #ddaaff
 # 
 # # cyan
-# color6  = #2aa198
-# color14 = #2aa198
+# color6  = #82fff7
+# color14 = #b7fff9
 # 
 # # white
-# color7  = #93a1a1
-# color15 = #fdf6e3
+# color7  = #dedacf
+# color15 = #ffffff
 
-# wombat
-[colors]
 
-# special
-foreground      = #dedacf
-foreground_bold = #dedacf
-#cursor          = #dedacf
-background      = #171717
+# [colors]
 
-# black
-color0  = #000000
-color8  = #313131
+# #set colors using https://github.com/chriskempson/base16-shell
+# 
+# # make dark red darker for error lines in VIM
+# color196 = #711010
+# # make dark orange darker for warning lines in VIM
+# color208 = #ad4500
 
-# red
-color1  = #ff615a
-color9  = #f58c80
-
-# green
-color2  = #b1e969
-color10 = #ddf88f
-
-# yellow
-color3  = #ebd99c
-color11 = #eee5b2
-
-# blue
-color4  = #5da9f6
-color12 = #a5c7ff
-
-# magenta
-color5  = #e86aff
-color13 = #ddaaff
-
-# cyan
-color6  = #82fff7
-color14 = #b7fff9
-
-# white
-color7  = #dedacf
-color15 = #ffffff

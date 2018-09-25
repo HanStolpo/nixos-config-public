@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     # nix related
      nix # nix package manager
-     nix-repl # An interactive environment for evaluating and building Nix expressions
+     #nix-repl # An interactive environment for evaluating and building Nix expressions
      nix-prefetch-scripts # Collection of all the nix-prefetch-* scripts which may be used to obtain source hashes
      patchelf # A small utility to modify the dynamic linker and RPATH of ELF executables
 
@@ -48,6 +48,7 @@
      lshw # Provide detailed information on the hardware configuration of the machine
      hwinfo # Hardware detection tool from openSUSE
      sysfsutils # These are a set of utilites built upon sysfs, a new virtual filesystem in Linux kernel versions 2.5+ that exposes a system's device tree.
+     tldr # examples of bash commands
 
      #socat # allow concatenating sockets together
 

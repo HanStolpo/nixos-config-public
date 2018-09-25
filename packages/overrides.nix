@@ -3,65 +3,41 @@
 let
 
 
-  haskellOverrides = with pkgs.haskell.lib; packages: compiler: {
+  haskellOverrides = with pkgs.haskell.lib; packages: compiler: if !(packages ? "${compiler}") then {} else{
+
     ${compiler} = packages.${compiler}.override {
-      overrides = self: super:
-      let
-        # below copied from nixpkgs pkgs/development/haskell-modules/make-package-set.nix
-        # Adds a nix file as an input to the haskell derivation it
-        # produces. This is useful for callHackage / callCabal2nix to
-        # prevent the generated default.nix from being garbage collected
-        # (requiring it to be frequently rebuilt), which can be an
-        # annoyance.
-        callPackageKeepDeriver = src: args:
-          overrideCabal (self.callPackage src args) (orig: {
-            preConfigure = ''
-              # Generated from ${src}
-              ${orig.preConfigure or ""}
-            '';
-          });
-      in {
+      overrides = self: super: {
         haskell-ide-engine = import ./haskell-ide-engine {inherit pkgs; haskellCompiler = "ghc802";};
         # we override used by ghc-mod below because it fails its test suite
         ghc-syb-utils = dontCheck super.ghc-syb-utils;
         #
         xmonad-windownames = doJailbreak super.xmonad-windownames;
         #
+        xmonad-extras = doJailbreak super.xmonad-extras;
+        #
         hnix = doJailbreak super.hnix;
         #
-        taffybar = pkgs-18-0-3.haskell.packages.${compiler}.taffybar;
-        #
         opencv =
-        let
-            srcGit =  pkgs.fetchFromGitHub {
-                  owner  = "LumiGuide";
-                  repo   = "haskell-opencv";
-                  rev    = "433abd5dd7d885a04b79e42efb0efcecdb985eed";
-                  sha256 = "0makqxcbmnf02a5xaq6kzfb6lplnchh9dcbknamh32y2iswjdbx3";
-                };
+            let
+                srcGit =  pkgs.fetchFromGitHub { owner  = "LumiGuide"; repo   = "haskell-opencv"; rev    = "433abd5dd7d885a04b79e42efb0efcecdb985eed"; sha256 = "0makqxcbmnf02a5xaq6kzfb6lplnchh9dcbknamh32y2iswjdbx3"; };
                 src = pkgs.runCommand "opencv-src"
-                        {
-                        } ''
-                          mkdir -p $out
-                          cp -r ${srcGit}/opencv/*  $out
-                          rm $out/data $out/doc $out/LICENSE
-                          cp -r ${srcGit}/doc     $out/doc
-                          cp -r ${srcGit}/data    $out/data
-                          cp ${srcGit}/LICENSE   $out/LICENSE
-                        '';
-          in overrideCabal ( ( (self.callCabal2nix "opencv" src {}))) (drv: {
-                libraryPkgconfigDepends = [ pkgs.opencv3 ];
-                shellHook = ''
-                  export hardeningDisable=bindnow
-                '';
-                # TODO: cabal2nix automatically adds:
-                #
-                #   configureFlags = ["--with-gcc=${stdenv.cc}/bin/c++" "--with-ld=${stdenv.cc}/bin/c++"];
-                #
-                # This is not needed anymore and will actually break the build.
-                # So lets remove this from cabal2nix or ask @peti to do it.
-                configureFlags = [];
-          });
+                  {
+                  }
+                  ''
+                    mkdir -p $out
+                    cp -r ${srcGit}/opencv/*  $out
+                    rm $out/data $out/doc $out/LICENSE
+                    cp -r ${srcGit}/doc     $out/doc
+                    cp -r ${srcGit}/data    $out/data
+                    cp ${srcGit}/LICENSE   $out/LICENSE
+                  '';
+            in overrideCabal
+                   (self.callCabal2nix "opencv" src {opencv = pkgs.opencv3;})
+                   (_:{
+                     libraryPkgconfigDepends = [ pkgs.opencv3 ];
+                     # remove flags added by cabal2nix `configureFlags = ["--with-gcc=${stdenv.cc}/bin/c++" "--with-ld=${stdenv.cc}/bin/c++"];`
+                     configureFlags = [];
+                   });
           #
           units-parser = dontCheck super.units-parser;
           units = dontCheck super.units;
@@ -90,7 +66,7 @@ let
             })
             {ghc = self.ghc;}));
 
-            reactive-banana-gi-gtk =
+          reactive-banana-gi-gtk =
             let src = pkgs.fetchFromGitHub {
                   owner  = "mr";
                   repo   = "reactive-banana-gi-gtk";
@@ -109,29 +85,54 @@ let
                 license = stdenv.lib.licenses.bsd3;
               }){});
 
+          hint =
+            let src = pkgs.fetchFromGitHub {
+                  owner  = "mvdan";
+                  repo   = "hint";
+                  rev    = "28bb893f54268637c28cdce772a01d6e487e745a";
+                  sha256 = "0lpgjfv7b4b1r7smynr8gkg2yvxxn9y8z2nahf7kw6mxs1qp9lda";
+                };
+            in self.callCabal2nix "hint" src {};
+          exceptions =
+              self.callPackage (
+                { mkDerivation, base, mtl, QuickCheck, stdenv, stm
+                , template-haskell, test-framework, test-framework-hunit
+                , test-framework-quickcheck2, transformers, transformers-compat
+                }:
+                mkDerivation {
+                  pname = "exceptions";
+                  version = "0.10.0";
+                  sha256 = "1edd912e5ea5cbda37941b06738597d35214dc247d332b1bfffc82adadfa49d7";
+                  libraryHaskellDepends = [
+                    base mtl stm template-haskell transformers transformers-compat
+                  ];
+                  testHaskellDepends = [
+                    base mtl QuickCheck stm template-haskell test-framework
+                    test-framework-hunit test-framework-quickcheck2 transformers
+                    transformers-compat
+                  ];
+                  homepage = "http://github.com/ekmett/exceptions/";
+                  description = "Extensible optionally-pure exceptions";
+                  license = stdenv.lib.licenses.bsd3;
+                }) {};
       } //
+      ( if compiler != "ghc843"
+        then {
+        #
+        #taffybar = pkgs-18-0-3.haskell.packages.${compiler}.taffybar;
+        }
+        else {}
+      )//
       ( if compiler == "ghc842" || compiler == "ghc843"
         then {
+            cabal-install = super.cabal-install.overrideScope (self: super: { Cabal = null; });
+            #cabal-install = super.cabal-install.override(a: {Cabal=null;});
             criterion = super.criterion_1_4_1_0;
             base-compat-batteries = doJailbreak super.base-compat-batteries;
-            base-compat = super.base-compat_0_10_1;
+            #base-compat = super.base-compat_0_10_1;
           }
         else {}
-        ) //
-        (let hpkgs = pkgs-ch.haskell.packages.ghc802; in rec {
-
-              # reactive-banana-gi-gtk = self.callPackage (a: hpkgs.reactive-banana-gi-gtks.override (_:a));
-              # haskell-gi-base        = self.callPackage (a: hpkgs.haskell-gi-base.override (_:a));
-              # gi-gtk                 = self.callPackage (a: hpkgs.gi-gtk.override (_:a));
-              # haskell-gi             = self.callPackage (a: hpkgs.haskell-gi.override (_:a));
-              # gi-cairo               = self.callPackage (a: hpkgs.gi-cairo.override (_:a));
-              # gi-glib                = self.callPackage (a: hpkgs.glib.override (_:a));
-              # gi-gio                 = self.callPackage (a: hpkgs.gi-gio.override (_:a));
-              # gi-gobject             = self.callPackage (a: hpkgs.gi-gobject.override (_:a));
-              # gi-gdkpixbuf           = self.callPackage (a: hpkgs.gi-gdkpixbuf.override (_:a));
-              # gi-pango               = self.callPackage (a: hpkgs.gi-pango.override (_:a));
-              # gi-gdk                 = self.callPackage (a: hpkgs.gi-gdks.override (_:a));
-            })
+        )
         ;
     };
   };
@@ -142,20 +143,12 @@ let
         sha256= "1g22f8r3l03753s67faja1r0dq0w88723kkfagskzg9xy3qs8yw8";
         fetchSubmodules= true;
       }) {config = {allowUnfree = true;};};
-
-    pkgs-ch = import (pkgs.fetchFromGitHub
-        {
-          owner = "NixOS";
-          repo = "nixpkgs-channels";
-          rev = "ade98dc442ea78e9783d5e26954e64ec4a1b2c94";
-          sha256 = "1ymyzrsv86mpmiik9vbs60c1acyigwnvl1sx5sd282gndzwcjiyr";
-        }) {};
 in
 {
   nixpkgs.config = {
     packageOverrides = super: rec {
       inherit pkgs-18-0-3;
-      taffybar = pkgs-18-0-3.taffybar;
+      #taffybar = pkgs-18-0-3.taffybar;
       heroku = (pkgs-18-0-3.callPackage ./heroku-cli {});
       create-react-native-app = (pkgs.callPackage ./create-react-native-app {});
       expo-exp = (pkgs.callPackage ./expo-exp {});
@@ -168,7 +161,7 @@ in
           (haskellOverrides super.haskell.packages "ghc843")
         ;
       };
-      haskellPackages = haskell.packages.ghc822;
+      haskellPackages = if haskell.packages ? ghc843 then haskell.packages.ghc843 else super.haskellPackages;
 
       #ghci = ghc821Packages.ghci;
       #ghc = ghc821Packages.ghc;

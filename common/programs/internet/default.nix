@@ -31,7 +31,7 @@
       enableGoogleTalkPlugin = true;
       enableDjvu = true;
       enableGnomeExtensions = true;
-      enableVLC = true;
+      #enableVLC = true;
     };
     firefox-bin = {
       #enableGnash = true;
