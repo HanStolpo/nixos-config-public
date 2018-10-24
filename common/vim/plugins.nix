@@ -91,8 +91,8 @@ in {
       name = "vim-ale";
       src = fetchgit {
         url = "https://github.com/w0rp/ale";
-        rev = "43ce8d761035e221b735b73597b482b9f2764b42";
-        sha256 = "0nlh71d85077r7nr5xgbdwl11hk43xclyh8z69iv38a4in0h2ka5";
+        rev = "2000436dfd7a25a8e9f66788c94bfb4512adda98";
+        sha256 = "173ha2z9i2ma3iyrgy97a06xkaa7igq58rka4z585rbdza6vw8gk";
       };
       dependencies = [];
     };

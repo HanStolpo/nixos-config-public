@@ -1,29 +1,12 @@
 
 set spelllang=en_gb
-"set gfn=Monaco:h14
-"Roboto Mono for Powerline
 
 set gfn=Roboto\ Mono\ for\ Powerline:h14
-"if has("gui_running")
-  "try
-    "colorscheme solarized
-  "catch
-  "endtry
-"endif
-"try
-  "colorscheme termschool
-"catch
-"endtry
-
-"set background=dark
 
 set ffs=unix,mac,dos
-" 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
 set noautochdir
-"set autochdir
-"autocmd BufEnter * silent! lcd %:p:h
 
 
 au BufEnter *.spec setfiletype coffee 
@@ -44,10 +27,8 @@ set nowrap "Don't perform line wrapping.
 
 set hidden " Don't close buffers, only hide them. Unwritten changes allowed.
 
-" Bind Fufbuffer short cut
+" clear highlighting
 nnoremap <leader>nh :noh<CR>
-nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>ff :FufFile<CR>
 nnoremap <C-s> :w<CR>
 
 " Navigation
@@ -62,6 +43,10 @@ autocmd FileType qf wincmd J
 let g:tagbar_left = 1
 
 "let g:ctrlp_root_markers = ['ch'] "add circuit hub root
+let g:ctrlp_custom_ignore={
+  \'dir': '\v(elm-stuff)|(dist-newstyle)|(dist-repl)|(node_modules)|(\..*)',
+  \'file': '\v.*\.orig$'
+  \}
 " Session related
 if ! exists("g:session_autoload")
   let g:session_autoload = 'no'
@@ -73,8 +58,6 @@ let g:session_persist_colors = 0
 let g:session_lock_enabled = 0
 
 set wildignore+=*.o,*.obj,*.hi,*.dyn_hi,*.dyn_o,.cabal-sandbox/**/
-
-"autocmd BufWritePost *.hs GhcModCheckAsync
 
 function! DeleteHiddenBuffers()
   let tpbl=[]
@@ -89,12 +72,8 @@ function! DeleteHiddenBuffers()
   echo "Closed ".closed." hidden buffers"
 endfunction
 
+"system clipboard is default clipboard
 set cb=unnamedplus
-
-"syntax enable
-"set background=dark
-"colorscheme solarized
-
 set cursorline
 
 au InsertEnter * set nocursorline
@@ -107,68 +86,23 @@ autocmd BufEnter *.hs set indentkeys=
 autocmd BufEnter *.nix set indentkeys=
 autocmd BufEnter *.elm set indentkeys=
 
-"intero vim
-autocmd FileType haskell setlocal omnifunc=intero#omnifunc
-autocmd FileType haskell vnoremap <buffer> <Leader>g :InteroGoto<CR>
-autocmd FileType haskell vnoremap <buffer> <Leader>t :InteroType<CR>
-autocmd FileType haskell vnoremap <buffer> <Leader>u :InteroUses<CR>
-"autocmd FileType haskell nnoremap <buffer> <Leader>m :call intero#ensurebufmodule()<CR>:call VimuxSendText(":m + ".b:intero_module."\n:reload\n")<CR>
-
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
 "localvimrc settings
 let g:localvimrc_persistent = 2
 let g:localvimrc_whitelist=['.*/dev/circuithub/\(client\|projects\|api\)/\.lvimrc']
 
 "elm-vim
-"let g:elm_make_show_warnings = 0
-"let g:elm_syntastic_show_warnings = 0
-"let g:elm_setup_keybindings = 0
-"au FileType elm nmap <leader>m <Plug>(elm-make)
-
-"map <Backspace> λ
-" let maplocalleader = "<Backspace>"
 let g:elm_syntastic_show_warnings = 0
 let g:elm_jump_to_error = 0
 let g:elm_make_output_file = "elm.js"
 let g:elm_make_show_warnings = 1
 let g:elm_browser_command = ""
 let g:elm_detailed_complete = 1
-let g:elm_format_autosave = 1
+"let g:elm_format_autosave = 1
 let g:elm_format_fail_silently = 1
 let g:elm_setup_keybindings = 0 " key bindings don't seem to work
 au BufNewFile,BufRead *.elm set filetype=elm " for some reason this seems to be required by elm filetype - don't know why
-au FileType elm nmap <leader>m <Plug>(elm-make)
-au FileType elm nmap <leader>n <Plug>(elm-error-detail)
-au FileType elm nmap <leader>d <Plug>(elm-show-docs)
 
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_elm_checkers = ["elm_make"]
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["elm", "coffee"],
-    \ "passive_filetypes": ["haskell"] }
-
-" function! Ale_linters_haskell_hdevtools2_GetCommand(buffer) abort
-"    return 'hdevtools check -g -Wall '
-"     \   .  get(g:, 'hdevtools_options', '')
-"     \   . ' -p %s %t'
-" endfunction
-" 
-" call ale#linter#Define('haskell', {
-" \   'name': 'hdevtools2',
-" \   'executable': 'hdevtools',
-" \   'command_callback': 'Ale_linters_haskell_hdevtools2_GetCommand',
-" \   'callback': 'ale#handlers#HandleGhcFormat',
-" \})
 
 function! Ale_linters_haskell_hlint_Command(buffer) abort
 
@@ -208,17 +142,40 @@ call ale#linter#Define('haskell', {
 \   'callback': 'Ale_linters_haskell_hlint_Handle',
 \})
 
+call ale#Set('haskell_cabal_new_ghc_options', '-fno-code -v0')
+
+function! Ale_linters_haskell_cabal_new_ghc_GetCommand(buffer) abort
+    return 'cabal new-exec -- ghc '
+    \   . ale#Var(a:buffer, 'haskell_cabal_new_ghc_options')
+    \   . ' %t'
+endfunction
+
+call ale#linter#Define('haskell', {
+\   'name': 'cabal_new_ghc',
+\   'aliases': ['cabal-new-ghc'],
+\   'output_stream': 'stderr',
+\   'executable': 'cabal',
+\   'command_callback': 'Ale_linters_haskell_cabal_new_ghc_GetCommand',
+\   'callback': 'ale#handlers#haskell#HandleGHCFormat',
+\})
+
 let g:ale_linters =
-  \ {'haskell': ['hlint2','hdevtools2']
-  \ ,'Elm': ['elm-make']
+  \ {'haskell': ['hlint2']
   \ }
+let g:ale_fixers = {
+  \   'elm': ['elm-format'],
+  \   'haskell': ['ch-hs-format'],
+  \}
 let g:ale_sign_column_always = 1
-"set statusline+=%#warningmsg#
-"set statusline+=%{ALEGetStatusLine()}
-"set statusline+=%*
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_error = 'e'
 let g:ale_sign_warning = 'w'
+let g:ale_fix_on_save = 1
+let g:ale_completion_enable = 1
+let g:ale_lint_delay = 2000
+
+nmap <leader>d <Plug>(ale_detail)
+nmap <silent> <M-k> <Plug>(ale_previous_wrap)
+nmap <silent> <M-j> <Plug>(ale_next_wrap)
 
 set hidden
 let g:LanguageClient_serverCommands = {
@@ -227,14 +184,7 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio']
     \ }
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-
-"highlight ALEError ctermbg=196 gui=undercurl guisp=#fb9fb1
-"highlight ALEWarning ctermbg=208 gui=undercurl guisp=#fb9fb1

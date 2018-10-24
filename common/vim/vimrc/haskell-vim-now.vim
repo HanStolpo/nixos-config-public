@@ -44,11 +44,6 @@ set tm=2000
 " Allow the normal use of "," by pressing it twice
 noremap ,, ,
 
-" Use par for prettier line formatting
-set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
-
-" Use stylish haskell instead of par for haskell buffers
-autocmd FileType haskell let &formatprg="stylish-haskell"
 
 " Kill the damned Ex mode.
 nnoremap Q <nop>
@@ -65,9 +60,6 @@ endif
 set nocompatible
 
 " VIM user interface {{{
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
 
 " Turn on the WiLd menu
 set wildmenu
@@ -141,37 +133,6 @@ set mouse=a
 
 " Colors and Fonts {{{
 
-try
-  colorscheme wombat256mod
-catch
-endtry
-
-" Adjust signscolumn to match wombat
-hi! link SignColumn LineNr
-
-" Use pleasant but very visible search hilighting
-hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
-hi! link Visual Search
-
-" Match wombat colors in nerd tree
-hi Directory guifg=#8ac6f2
-
-" Searing red very visible cursor
-hi Cursor guibg=red
-
-" Use same color behind concealed unicode characters
-hi clear Conceal
-
-" Don't blink normal mode cursor
-set guicursor=n-v-c:block-Cursor
-set guicursor+=n-v-c:blinkon0
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-  set guioptions-=T
-  set guioptions-=e
-  set guitablabel=%M\ %t
-endif
 set t_Co=256
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -180,12 +141,6 @@ if !has('nvim')
   " causes problems when reloading the .vimrc configuration
   set encoding=utf8
 endif
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-" Use large font by default in MacVim
-set gfn=Monaco:h19
 
 " Use powerline fonts for airline
 if !exists('g:airline_symbols')
@@ -216,15 +171,11 @@ augroup END
 " Open file prompt with current path
 nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 
-" Show undo tree
-nmap <silent> <leader>u :GundoToggle<CR>
-
 " Fuzzy find files
 nnoremap <silent> <Leader><space> :CtrlP<CR>
 let g:ctrlp_max_files=0
 let g:ctrlp_show_hidden=1
 let g:ctrlp_custom_ignore = { 'dir': '\v[\/](.git|.cabal-sandbox|.stack-work)$' }
-
 " }}}
 
 " Text, tab and indent related {{{
