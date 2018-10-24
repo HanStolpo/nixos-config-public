@@ -40,6 +40,7 @@ in
       ./common/services/physlock
       ./common/services/keybase
       ./common/message-brokers/rabbitmq
+      ./common/shells
     ] ++
     (if builtins.pathExists ./secret/networking/wireless/networks
     then [./secret/networking/wireless/networks]
@@ -164,7 +165,7 @@ in
 
   # The NixOS release to be compatible with for stateful data such as databases.
   #system.stateVersion = "17.03";
-  system.nixos.stateVersion = "17.03";
+  system.stateVersion = "17.03";
   #system.nixos.stateVersion = "18.09";
 
   services.journald.rateLimitBurst = -1;
