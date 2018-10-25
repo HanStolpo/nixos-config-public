@@ -31,7 +31,7 @@ in
     enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
-      highlighters = ["main" "brackets" "pattern" "cursor"];
+      highlighters = ["main" "brackets"];
     };
     interactiveShellInit = ''
       set -o ignoreeof # stop ctrl-d from killing the shell
