@@ -4,16 +4,6 @@ let
   buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
 in {
 
-  #"vim-polyglot" = buildVimPlugin {
-    #name = "vim-polyglot";
-    #src = fetchgit {
-          #url = "https://github.com/sheerun/vim-polyglot";
-          #rev = "1422f7a75ce0b382d601238c5979b04473b9021e";
-          #sha256 = "0jqb75lrf75br9wg95cxcy3aal1bk929881gy4ly1n0r6fv96yz1";
-        #};
-    #dependencies = [];
-  #};
-
   "vim-yankstack" = buildVimPlugin {
     name = "vim-yankstack";
     src = fetchgit {
@@ -23,32 +13,23 @@ in {
     };
   };
 
-  "vim-scratch" = buildVimPlugin {
-    name = "vim-scratch";
-    src = fetchgit {
-      url = "https://github.com/duff/vim-scratch";
-      rev = "96f2e92a187948d20c97ce705a2f863507234f99";
-      sha256 = "02223q6gazr6hb827gc6hq8sbhjk87r232ji60rbjl3qhcim9bdg";
-    };
-  };
+ "vim-scratch" = buildVimPlugin {
+   name = "vim-scratch";
+   src = fetchgit {
+     url = "https://github.com/duff/vim-scratch";
+     rev = "96f2e92a187948d20c97ce705a2f863507234f99";
+     sha256 = "02223q6gazr6hb827gc6hq8sbhjk87r232ji60rbjl3qhcim9bdg";
+   };
+ };
 
-  "vim-session" = buildVimPlugin {
-    name = "vim-session";
-    src = fetchgit {
-      url = "https://github.com/xolox/vim-session";
-      rev = "9e9a6088f0554f6940c19889d0b2a8f39d13f2bb";
-      sha256 = "0r6k3fh0qpg95a02hkks3z4lsjailkd5ddlnn83w7f51jj793v3b";
-    };
-  };
-
-  # "elm-vim" = buildVimPlugin {
-  #   name = "elm-vim";
-  #   src = fetchgit {
-  #     url = "https://github.com/ElmCast/elm-vim";
-  #     rev = "6527c8a9e1d1af31c81e60b6b40bf3316c7fbdf2";
-  #     sha256 = "0aj1cd5dy7z48lf6vzg76r787hgs4z5f11bczvvs1h99qik1rgbc";
-  #   };
-  # };
+ "vim-session" = buildVimPlugin {
+   name = "vim-session";
+   src = fetchgit {
+     url = "https://github.com/xolox/vim-session";
+     rev = "9e9a6088f0554f6940c19889d0b2a8f39d13f2bb";
+     sha256 = "0000000000000000000000000000000000000000000000000000";
+   };
+ };
 
   "vimpager" = buildVimPlugin {
     name = "vimpager";
@@ -120,8 +101,8 @@ in {
       name = "rhubarb.vim";
       src = fetchgit {
         url = "https://github.com/tpope/vim-rhubarb";
-        rev = "6caad2b61afcc1b7c476b0ae3dea9ee5f2b1d14a";
-        sha256 = "1bmc5j9056bgdhyhvylbd93jkp1k9067mv3af6skzh0r77rx1a0g";
+        rev = "e57ed3b6be2c4a49656f1a816919f0af22fae324";
+        sha256 = "0g60prwfjc3mn1vq69ki8qcqcny952zpm3idq9x9l45iddfpihcr";
       };
       dependencies = [];
     };

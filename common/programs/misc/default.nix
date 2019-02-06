@@ -10,7 +10,7 @@
      gimp # The GNU Image Manipulation Program
      adobe-reader # PDF viewer
      pkgs-18-0-3.libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release)
-     obs-studio # Free and open source software for video recording and live streaming
+     #obs-studio # Free and open source software for video recording and live streaming
      inkscape # Vector graphics editor
      nmap # / ncat : A free and open source utility for network discovery and security auditing
      tcpdump # Network sniffer

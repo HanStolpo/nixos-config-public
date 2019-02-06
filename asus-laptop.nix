@@ -10,11 +10,11 @@ let
 in
 {
 
+  # Include custom packages and override
+  nixpkgs.overlays = [(import ./overlays)];
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
-      # Include custom packages and override
-      ./packages/overrides.nix
       # Include the common configuration
       ./common/power-management
       ./common/databases/postgresql
@@ -56,11 +56,13 @@ in
   nix.buildCores = 0;
   nixpkgs.config.allowUnfree = true;
 
-  services.teamviewer.enable = true;
+  services.teamviewer.enable = false;
 
 
   # Set your time zone.
-  time.timeZone = "Africa/Johannesburg";
+  time.timeZone = "Europe/Amsterdam";
+  #time.timeZone = "Europe/London";
+  #time.timeZone = "Africa/Johannesburg";
 
   boot.kernelPackages = kernelV;
   boot.extraModulePackages = [kernelV.bbswitch /*kernelV.exfat-nofuse*/ ];

@@ -43,6 +43,7 @@ autocmd FileType qf wincmd J
 let g:tagbar_left = 1
 
 "let g:ctrlp_root_markers = ['ch'] "add circuit hub root
+let g:ctrlp_working_path_mode = 'wra'
 let g:ctrlp_custom_ignore={
   \'dir': '\v(elm-stuff)|(dist-newstyle)|(dist-repl)|(node_modules)|(\..*)',
   \'file': '\v.*\.orig$'
@@ -160,11 +161,10 @@ call ale#linter#Define('haskell', {
 \})
 
 let g:ale_linters =
-  \ {'haskell': ['hlint2']
+  \ {'haskell': ['hlint2', 'hdevtools']
   \ }
 let g:ale_fixers = {
   \   'elm': ['elm-format'],
-  \   'haskell': ['ch-hs-format'],
   \}
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = 'e'
@@ -188,3 +188,5 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
+let g:ale_set_highlights = 0

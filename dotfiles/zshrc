@@ -35,7 +35,24 @@ function nix-add-roots() {(
   depPfxArgs=$(echo $@ | sed 's,\s\|/\|=\-\|"\|\.,_,g')
   depPfx="$(echo $shellFile | sed 's,/,_,g')-$depPfxArgs"
   nix-instantiate $shellFile --indirect --add-root "$(pwd)/.gcroots/dep-$depPfx.drv"
-  nix-shell $shellFile --indirect --add-root ".gcroots/dep-$depPfx" --run "exit" $@
+  NIX_STORE_CMD=$(which nix-store);
+  NIX_CMD=$(which nix);
+  DEPS_FILE=$(mktemp --tmpdir "gcroots-$depPfx.XXXXXX");
+   nix-shell $shellFile --pure --command \
+   "echo '' > $DEPS_FILE; \
+    for i in \
+     \$(env | sed -r 's#(/nix/store/[^:/]+)#\n\1\n#g' | grep -E '/nix/store/[^:/]+'); \
+     do \
+       if [ -d "\$i" ]; then \
+          echo \$i  >> $DEPS_FILE; \
+       fi; \
+     done; \
+     " \
+   $@
+ BUILD=$(nix-build --no-out-link \
+  -E "let pkgs = import<nixpkgs> {}; in pkgs.runCommand \"$(basename $DEPS_FILE)\" {src=$DEPS_FILE;} \"mkdir \$out; cat \$src | xargs ln -s -f -t \$out/ \"")
+ echo $BUILD
+ nix-store --add-root "$(pwd)/.gcroots/$(basename $DEPS_FILE)-$depPfx" --indirect --realise $BUILD \
 )}
 
 function nix-remove-roots() {(
@@ -43,4 +60,27 @@ function nix-remove-roots() {(
     cd .gcroots
     ls | grep dep | xargs rm -f
   fi
+)}
+
+
+function term-lite() {(
+  # select light theme
+  base16_gruvbox-light-hard
+  # in light background teminals  with bold config looks better
+  sed -i 's/allow_bold.*/allow_bold = true/'  ~/nixos-config-public/dotfiles/config/termite/config
+  # reload the termite syntax
+  # kill -USR1 $PPID
+  # kill -USR1 $PPID
+  killall -USR1 .termite-wrappe
+)}
+
+function term-dark() {(
+  # select dark theme
+  base16_gruvbox-dark-hard
+  # in dark background teminals  with bold config looks better
+  sed -i 's/allow_bold.*/allow_bold = false/'  ~/nixos-config-public/dotfiles/config/termite/config
+  # reload the termite syntax
+  # kill -USR1 $PPID
+  # kill -USR1 $PPID
+  killall -USR1 .termite-wrappe
 )}

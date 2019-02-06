@@ -45,7 +45,7 @@ in
      # nix-diff
 
      #(haskell.lib.justStaticExecutables haskellPackages.intero)
-     (haskell.lib.justStaticExecutables haskellPackages.hoogle)
+     # (haskell.lib.justStaticExecutables haskellPackages.hoogle)
      (haskell.lib.justStaticExecutables haskellPackages.hlint)
      (haskell.lib.justStaticExecutables haskellPackages.hindent)
      # (haskellPackages.ghcWithHoogle (g: with g;

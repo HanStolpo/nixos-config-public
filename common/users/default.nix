@@ -25,4 +25,13 @@
     enable = true;
     wheelNeedsPassword = false;
   };
+  users.extraUsers.guest = {
+    isNormalUser = true;
+    uid = 2000;
+    home = "/home/guest";
+    extraGroups = [
+    ];
+    initialPassword = "guest";
+    shell = "${pkgs.zsh}/bin/zsh";
+  };
 }

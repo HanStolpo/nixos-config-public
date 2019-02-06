@@ -13,18 +13,18 @@ in
     knownPlugins = pkgs.vimPlugins // plugins;
 
     pluginDictionaries = [
-      # from pkgs.vimPlugins
-      #{ name = "youcompleteme"; }       # symbol completion
-      { name = "deoplete-nvim";}
+    #  # from pkgs.vimPlugins
+    #  #{ name = "youcompleteme"; }       # symbol completion
+    #  { name = "deoplete-nvim";}
       { name = "vim-airline"; }         # Status line
-      #{ name = "command-t"; }           # Fuzzy file finder
+    #  #{ name = "command-t"; }           # Fuzzy file finder
       { name = "ctrlp-vim"; }          # Fuzzy file finder
       { name = "vim-easy-align";}       # Align text
       { name = "Tabular";}              # Align text
       { name = "vim-easymotion";}       # smarter motions
       { name = "The_NERD_Commenter";}   # Comment uncomment
       { name = "The_NERD_tree";}        # File tree explorer
-      #{ name = "vim-stylish-haskell";}  # File tree explorer
+    #  #{ name = "vim-stylish-haskell";}  # File tree explorer
       { name = "Gist";}                 # create github gists automatically
       { name = "Tagbar";}               # Side bar to browse current tags
       #{ name = "YankRing";}             # copy history
@@ -77,7 +77,7 @@ in
       { name = "vim-trailing-whitespace"; }
       { name = "vim-yankstack"; }
       { name = "vim-scratch"; }
-      { name = "vim-session"; }
+      #{ name = "vim-session"; }
       { name = "vimpager"; }
       { name = "vim-ag";}
       #{ name = "vim-intero";}
