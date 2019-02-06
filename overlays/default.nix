@@ -8,8 +8,16 @@ let
       overrides = self: super:
         let custom = packagesFromDirectory { directory = ./haskell; } self super;
         in
-        (filterAttrs (n: v: n != "dbus" && n != "taffybar") custom)
-        // {
+        (filterAttrs
+          (n: v:
+            builtins.elem n [
+              "hpack_0_31_1"
+              "yaml_0_11_0_0"
+            ]
+          ) custom
+        )
+        //
+        {
         taffybar = self.callPackage
           (import ./haskell/taffybar.nix)
           {gtk3 = selfPkgs.gnome3.gtk;};
