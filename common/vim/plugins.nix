@@ -128,4 +128,24 @@ in {
       };
       dependencies = [];
     };
+
+  "vim-textobj-haskell" = buildVimPlugin {
+      name = "vim-textobj-haskell";
+      src = fetchgit {
+        url = "https://github.com/gilligan/vim-textobj-haskell";
+        rev = "13966e39249386bab0e79e76f859b6a539db664f";
+        sha256 = "0mbfqqjr0xi5ld2jb6s7l5w4app314bbqvdxxa3sbf3x26pk377s";
+      };
+      dependencies = ["vim-textobj-user"];
+    };
+
+  "vim-textobj-user" = buildVimPlugin {
+      name = "vim-textobj-user";
+      src = fetchgit {
+        url = "https://github.com/kana/vim-textobj-user";
+        rev = "074ce2575543f790290b189860597a3dcac1f79d";
+        sha256 = "15wnqkxjjksgn8a7d3lkbf8d97r4w159bajrcf1adpxw8hhli1vc";
+      };
+      dependencies = [];
+    };
 }

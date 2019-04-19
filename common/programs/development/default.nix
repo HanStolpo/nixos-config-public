@@ -21,7 +21,7 @@ in
      ag # A code-searching tool similar to ack, but faster
      ctags # A tool for fast source code browsing (exuberant ctags)
      gnumake # A tool to control the generation of non-source files from sources
-     cabal2nix # Convert Cabal files into Nix build instructions
+     pkgs-legacy.cabal2nix # Convert Cabal files into Nix build instructions
      perl # The standard implementation of the Perl 5 programmming language
      heroku # Everything you need to get started using Heroku
      awscli # Unified tool to manage your AWS services
@@ -37,6 +37,7 @@ in
 
 
      direnv # automatically setup environment variables when entering a directory
+     lorri # maintain development environments based on shell.nix along with direnv (auto reloading quicker entry and gc management)
 
      nixops
 
@@ -48,6 +49,7 @@ in
      # (haskell.lib.justStaticExecutables haskellPackages.hoogle)
      (haskell.lib.justStaticExecutables haskellPackages.hlint)
      (haskell.lib.justStaticExecutables haskellPackages.hindent)
+     #floskell
      # (haskellPackages.ghcWithHoogle (g: with g;
      #    [# not these libs are actually part of GHC as the core libraries (https://www.haskell.org/platform/contents.html)
      #    array base bytestring Cabal containers deepseq directory filepath
@@ -70,9 +72,17 @@ in
      jq
      #stack2nix
      xdotool
-     stack
+     pkgs-legacy.stack
 
      vault
+
+     sqlitebrowser
+
+     gdb # debugger
+
+     gnome3.glade # gtk layout tool
+
+     jq # query json
   ]);
 
   nixpkgs.config = {

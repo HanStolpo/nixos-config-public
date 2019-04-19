@@ -4,9 +4,10 @@
   environment.systemPackages = with pkgs; [
     # nix related
      nix # nix package manager
-     #nix-repl # An interactive environment for evaluating and building Nix expressions
      nix-prefetch-scripts # Collection of all the nix-prefetch-* scripts which may be used to obtain source hashes
      patchelf # A small utility to modify the dynamic linker and RPATH of ELF executables
+     nix-du # Visualise which gc-roots to delete to free some space in your nix store
+     nix-index # Quickly locate nix packages with specific files
 
     # file system support
      exfat # user space support for exfat file system
@@ -61,6 +62,8 @@
 
      zip
      unrar
+
+     tree # print directory trees
 
   ];
 }

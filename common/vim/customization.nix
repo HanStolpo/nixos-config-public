@@ -85,6 +85,11 @@ in
       #{ name = "intero-neovim";}
 
       { name = "base16-vim";}
+
+      { name = "vim-textobj-haskell";}
+
+      { name = "vim-textobj-user";}
+
     ];
   };
 }

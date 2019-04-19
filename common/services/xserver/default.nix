@@ -6,7 +6,7 @@
 
      # # haskell packages for XMonad
      # pkgs.haskellPackages.xmonad-eval
-     (xmonad-with-packages.override {
+     (pkgs-legacy.xmonad-with-packages.override {
        packages= self: with self;
        [ xmonad
          xmobar
@@ -19,7 +19,7 @@
        ];
      })
 
-     taffybar # desktop information bar intended for use with XMonad and similar window managers
+     pkgs-legacy.taffybar # desktop information bar intended for use with XMonad and similar window managers
 
      dmenu # A generic, highly customizable, and efficient menu for the X Window System
      xclip # Tool to access the X clipboard from a console application
@@ -46,19 +46,6 @@
 
   ];
 
-  nixpkgs.config = {
-
-    packageOverrides = super:
-    {
-      haskellPackages = super.haskellPackages // super.haskellPackages.override {
-        overrides = self: super: {
-          # jailbreak window names to get past its old version bounds
-          xmonad-windownames = pkgs.haskell.lib.doJailbreak super.xmonad-windownames;
-        };
-      };
-    };
-  };
-
   # desktop env
   services.xserver = {
     xkbOptions = "ctrl:nocaps";
@@ -67,6 +54,7 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
+      haskellPackages = pkgs.pkgs-legacy.haskell.packages.ghc863;
       extraPackages = haskellpackages: with haskellpackages; [
         taffybar
         dbus

@@ -21,6 +21,7 @@
         127.0.0.1 api.circuithub.test
         127.0.0.1 reactor.circuithub.test
         127.0.0.1 rob-o-vm.picofactory
+        192.168.56.107 hanstolpo.local
       '';
   };
   #enableIPv6 = false;

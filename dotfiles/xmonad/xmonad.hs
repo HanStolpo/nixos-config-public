@@ -192,7 +192,7 @@ myLayoutHook = showWorkspaceName
 
     threeCol =
         common "3 col" $
-        ThreeColMid 1 (1/10) (1/2)
+        ThreeColMid 1 (1/100) (1/2)
 
     tall =
         common "Tall" $
@@ -208,7 +208,7 @@ myLayoutHook = showWorkspaceName
       -- default proportion of screen occupied by master pane
     ratio = 2 / 3
       -- percent of screen to increment when resizing
-    delta = 5 / 100
+    delta = 1 / 100
 
 
 

@@ -4,7 +4,7 @@ let
   nvim = pkgs.neovim.override {
     # don't alias neovim to vim, yet.
     vimAlias = true;
-    withPython = false;
+    withPython = true;
     withPython3 = true;
     configure = (import ./customization.nix { pkgs = pkgs; });
   };

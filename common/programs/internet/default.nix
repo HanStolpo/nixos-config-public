@@ -3,6 +3,8 @@
 {
 
   environment.systemPackages = with pkgs; [
+     wireguard
+
      # browsers
      firefox
      google-chrome

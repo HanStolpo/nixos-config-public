@@ -1,6 +1,8 @@
 
 let
-  pkgs = import <nixpkgs> { };
+  pkgs = (import <nixpkgs> {
+     overlays = [(import ../../overlays)];
+  }).pkgs-legacy;
   # setup a GHC with the packages you want
   # they will be built with documentation and a local hoogle
   # search engine too for searching documentation
@@ -23,7 +25,7 @@ let
      xmonad-contrib
      xmonad-extras
      xmonad-utils
-     xmonad-windownames
+     #xmonad-windownames
      xmonad-entryhelper
      taffybar
      dbus

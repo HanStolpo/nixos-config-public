@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 let
+  chShellInit = ''
+    export CH_SHELL_DEV=true
+    export CH_SHELL_WRAP_ELM_FORMAT=true
+  '';
   base16Shell = pkgs.fetchFromGitHub {
       owner = "chriskempson";
       repo = "base16-shell";
@@ -34,6 +38,8 @@ in
       highlighters = ["main" "brackets"];
     };
     interactiveShellInit = ''
+      ${chShellInit}
+
       set -o ignoreeof # stop ctrl-d from killing the shell
       export EDITOR='nvim'
       # when entering from nix-shell bash add the PATHS to tools in _PATH
@@ -100,6 +106,8 @@ in
       fi
     '';
     interactiveShellInit = ''
+      ${chShellInit}
+
       # setup direnv
       eval "$(${pkgs.direnv}/bin/direnv hook bash)"
 

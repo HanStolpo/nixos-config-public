@@ -4,7 +4,7 @@
   environment.systemPackages =
   with pkgs;
   [
-     ffmpeg # A complete, cross-platform solution to record, convert and stream audio and video
+     ffmpeg-full # A complete, cross-platform solution to record, convert and stream audio and video
      mpv # A media player that supports many video formats (MPlayer and mplayer2 fork)
      vlc # Cross-platform media player and streaming server
      gimp # The GNU Image Manipulation Program
@@ -38,7 +38,13 @@
      gv # postscript viewer
      giv # image viewer
 
+     easyrsa
 
+     flameshot # easy screenshot tool
+
+     xdotool # x desktop automation
+
+     mkpasswd # generate password hashes
   ];
 
 }
