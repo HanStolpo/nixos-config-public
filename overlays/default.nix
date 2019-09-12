@@ -11,7 +11,20 @@ let
           with superPkgs.lib.attrsets;
           with superPkgs.haskell.lib;
           self: super: {
+
             wstunnel = justStaticExecutables (doJailbreak (self.callPackage ./haskell/wstunnel.nix {}));
+
+            extra                 = self.callPackage (import ./haskell/extra.nix             ){};
+            ghcide                = self.callPackage (import ./haskell/ghcide.nix            ){};
+            haskell-lsp-types     = self.callPackage (import ./haskell/haskell-lsp-types.nix ){};
+            haskell-lsp           = self.callPackage (import ./haskell/haskell-lsp.nix       ){};
+            hie-bios              = self.callPackage (import ./haskell/hie-bios.nix          ){};
+            lsp-test              = self.callPackage (import ./haskell/lsp-test.nix          ){};
+            rope-utf16-splay      = self.callPackage (import ./haskell/rope-utf16-splay.nix  ){};
+            unix-compat           = self.callPackage (import ./haskell/unix-compat.nix       ){};
+            yaml                  = self.callPackage (import ./haskell/yaml.nix              ){};
+            unordered-containers  = self.callPackage (import ./haskell/unordered-containers.nix){};
+
           };}
     ) super.haskell.packages;
   };
@@ -88,6 +101,6 @@ rec {
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
-  haskellPackages = haskell.packages.ghc844;
+  haskellPackages = haskell.packages.ghc865;
   floskell = super.haskell.lib.justStaticExecutables (import ./floskell.nix {pkgs = self;}).floskell;
 }

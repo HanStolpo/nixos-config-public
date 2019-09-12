@@ -40,16 +40,6 @@ in {
     };
   };
 
-  "vim-trailing-whitespace" = buildVimPlugin {
-      name = "vim-trailing-whitespace";
-      src = fetchgit {
-        url = "https://github.com/bronson/vim-trailing-whitespace";
-        rev = "d4ad27de051848e544e360482bdf076b154de0c1";
-        sha256 = "1xrx9c8d4qwf38jc44a9szw195m8rfri9bsdcj701p9s9ral0l31";
-      };
-      dependencies = [];
-    };
-
   "vim-ag" = buildVimPlugin {
       name = "vim-ag";
       src = fetchgit {
@@ -65,15 +55,6 @@ in {
         url = "https://github.com/myfreeweb/intero.nvim";
         rev = "2ab44a0dd4d34bc7c210b8b7db8b01a28827a28f";
         sha256 = "1rycsppq5m06bqnd4zi9k969iapddf7yq1dnaphpzf1zj710pbzx";
-      };
-      dependencies = [];
-    };
-  "vim-ale" = buildVimPlugin {
-      name = "vim-ale";
-      src = fetchgit {
-        url = "https://github.com/w0rp/ale";
-        rev = "2000436dfd7a25a8e9f66788c94bfb4512adda98";
-        sha256 = "173ha2z9i2ma3iyrgy97a06xkaa7igq58rka4z585rbdza6vw8gk";
       };
       dependencies = [];
     };
@@ -97,16 +78,6 @@ in {
       dependencies = [];
     };
 
-  "rhubarb.vim" = buildVimPlugin {
-      name = "rhubarb.vim";
-      src = fetchgit {
-        url = "https://github.com/tpope/vim-rhubarb";
-        rev = "e57ed3b6be2c4a49656f1a816919f0af22fae324";
-        sha256 = "0g60prwfjc3mn1vq69ki8qcqcny952zpm3idq9x9l45iddfpihcr";
-      };
-      dependencies = [];
-    };
-
   "intero-neovim" = buildVimPlugin {
       name = "intero-neovim";
       src = fetchgit {
@@ -117,7 +88,7 @@ in {
       dependencies = [];
     };
 
-  LanguageClient-neovim = import ./LanguageClient-neovim.nix {inherit pkgs fetchgit;};
+  #LanguageClient-neovim = import ./LanguageClient-neovim.nix {inherit pkgs fetchgit;};
 
   "base16-vim" = buildVimPlugin {
       name = "base16-vim";
@@ -147,5 +118,11 @@ in {
         sha256 = "15wnqkxjjksgn8a7d3lkbf8d97r4w159bajrcf1adpxw8hhli1vc";
       };
       dependencies = [];
+    };
+
+  "vim-ale-ghcide" = buildVimPlugin {
+      name = "vim-ale-ghcide";
+      src = ./vim-ale-ghcide;
+      dependencies = ["ale"];
     };
 }

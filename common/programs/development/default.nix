@@ -83,6 +83,8 @@ in
      gnome3.glade # gtk layout tool
 
      jq # query json
+     haskellPackages.ghcide
+     haskellPackages.hie-bios
   ]);
 
   nixpkgs.config = {
