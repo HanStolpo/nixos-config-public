@@ -71,8 +71,6 @@ in
 
       { name = "Improved-AnsiEsc";}
 
-      { name = "LanguageClient-neovim";}
-
     ];
   };
 }

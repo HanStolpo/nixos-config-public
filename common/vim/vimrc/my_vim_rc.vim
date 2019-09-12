@@ -105,65 +105,8 @@ let g:elm_setup_keybindings = 0 " key bindings don't seem to work
 au BufNewFile,BufRead *.elm set filetype=elm " for some reason this seems to be required by elm filetype - don't know why
 
 
-" function! Ale_linters_haskell_hlint_Command(buffer) abort
-" 
-"     let l:opts = ''
-"   if exists("g:ghcmod_hlint_options")
-"     let l:opts = '"' . join(g:ghcmod_hlint_options, '" "') . '"'
-"   endif
-"    return 'hlint '
-"     \   .  l:opts
-"     \   . ' --color=never --json -'
-" endfunction
-" 
-" function! Ale_linters_haskell_hlint_Handle(buffer, lines) abort
-"     let l:errors = json_decode(join(a:lines, ''))
-" 
-"     let l:output = []
-" 
-"     for l:error in l:errors
-"         " vcol is Needed to indicate that the column is a character.
-"         call add(l:output, {
-"         \   'bufnr': a:buffer,
-"         \   'lnum': l:error.startLine + 0,
-"         \   'vcol': 0,
-"         \   'col': l:error.startColumn + 0,
-"         \   'text': l:error.severity . ': ' . l:error.hint . '. Found: ' . l:error.from . ' Why not: ' . l:error.to,
-"         \   'type': l:error.severity ==# 'Error' ? 'E' : 'W',
-"         \})
-"     endfor
-" 
-"     return l:output
-" endfunction
-" 
-" call ale#linter#Define('haskell', {
-" \   'name': 'hlint2',
-" \   'executable': 'hlint',
-" \   'command_callback': 'Ale_linters_haskell_hlint_Command',
-" \   'callback': 'Ale_linters_haskell_hlint_Handle',
-" \})
-" 
-" call ale#Set('haskell_cabal_new_ghc_options', '-fno-code -v0')
-" 
-" function! Ale_linters_haskell_cabal_new_ghc_GetCommand(buffer) abort
-"     return 'cabal new-exec -- ghc '
-"     \   . ale#Var(a:buffer, 'haskell_cabal_new_ghc_options')
-"     \   . ' %t'
-" endfunction
-" 
-" call ale#linter#Define('haskell', {
-" \   'name': 'cabal_new_ghc',
-" \   'aliases': ['cabal-new-ghc'],
-" \   'output_stream': 'stderr',
-" \   'executable': 'cabal',
-" \   'command_callback': 'Ale_linters_haskell_cabal_new_ghc_GetCommand',
-" \   'callback': 'ale#handlers#haskell#HandleGHCFormat',
-" \})
 let g:ale_linters_ignore = {'haskell': ['cabal_ghc', 'ghc', 'ghc_mod', 'hdevtools', 'hie', 'stack_build', 'stack_ghc']}
 
-" let g:ale_linters =
-"   \ {'haskell': ['hlint2']
-"   \ }
 let g:ale_fixers = {
   \   'elm': ['elm-format'],
   \}
@@ -179,11 +122,6 @@ nmap <silent> <M-k> <Plug>(ale_previous_wrap)
 nmap <silent> <M-j> <Plug>(ale_next_wrap)
 
 set hidden
-" let g:LanguageClient_serverCommands = {
-"     \ 'haskell': ['hie', '--lsp', '--vomit', '-d'],
-"     \ 'reason': ['ocaml-language-server', '--stdio'],
-"     \ 'ocaml': ['ocaml-language-server', '--stdio']
-"     \ }
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256

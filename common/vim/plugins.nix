@@ -88,8 +88,6 @@ in {
       dependencies = [];
     };
 
-  #LanguageClient-neovim = import ./LanguageClient-neovim.nix {inherit pkgs fetchgit;};
-
   "base16-vim" = buildVimPlugin {
       name = "base16-vim";
       src = fetchgit {
