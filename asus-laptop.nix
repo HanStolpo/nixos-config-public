@@ -51,9 +51,9 @@ in
     (if builtins.pathExists ./secret/vpn/hanstolpo.me-wg
     then [./secret/vpn/hanstolpo.me-wg]
     else []) ++
-    #(if builtins.pathExists ./secret/vpn/picofactory
-    #then [./secret/vpn/picofactory]
-    #else [])  # ++
+    # (if builtins.pathExists ./secret/vpn/picofactory
+    # then [./secret/vpn/picofactory]
+    # else []) ++
     (if builtins.pathExists ./secret/vpn/picofactory-wg
     then [./secret/vpn/picofactory-wg]
     else [])
