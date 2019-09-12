@@ -59,7 +59,7 @@ in
     else [])
     ;
 
-  nix.buildCores = 0;
+  nix.buildCores = 6;
   nixpkgs.config.allowUnfree = true;
 
   services.teamviewer.enable = false;
