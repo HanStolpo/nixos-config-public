@@ -29,18 +29,6 @@ let
     ) super.haskell.packages;
   };
 
-    pkgs-19-0-3 =  import (super.fetchzip {
-        url= "https://github.com/NixOS/nixpkgs-channels/archive/b978a94c8f9167fb86372ce1044a23f8df2edea0.tar.gz";
-        sha256= "0p6n5f1m45mhms9nbpr08gh4as8vys6ii65mcs227dbq3nn126x1";
-        name = "pkgs-19-0-3";
-      }) {config = {allowUnfree = true;};};
-
-    pkgs-unstable =  import (super.fetchzip {
-        url= "https://github.com/NixOS/nixpkgs-channels/archive/ac95de0d2ea8d1fd8f5bb972459d1c62fcf2a74f.tar.gz";
-        sha256= "0zi2b18vksb30q63kjrbm2nxd0bi8vpy2bpj48alajlv5q4mql1x";
-        name = "pkgs-unstable";
-      }) {config = {allowUnfree = true;};};
-
     pkgs-legacy = import (super.fetchzip {
         url= "https://github.com/NixOS/nixpkgs-channels/archive/2d6f84c1090ae39c58dcec8f35a3ca62a43ad38c.tar.gz";
         sha256= "0l8b51lwxlqc3h6gy59mbz8bsvgc0q6b3gf7p3ib1icvpmwqm773";
@@ -99,8 +87,6 @@ let
 in
 rec {
   inherit pkgs-legacy;
-  inherit pkgs-19-0-3;
-  inherit pkgs-unstable;
   inherit lorri;
   direnv = lorri-nixpkgs.direnv;
   create-react-native-app = (self.callPackage ./create-react-native-app {});
