@@ -40,6 +40,8 @@ in
     interactiveShellInit = ''
       ${chShellInit}
 
+      (cd $HOME; rm .autojump; ln -s ${pkgs.autojump} .autojump)
+
       set -o ignoreeof # stop ctrl-d from killing the shell
       export EDITOR='nvim'
       # when entering from nix-shell bash add the PATHS to tools in _PATH
@@ -62,7 +64,6 @@ in
       export LESSCHARSET=utf-8
     '';
     promptInit = ''
-      # . ${pkgs.python36Packages.powerline}/share/zsh/site-contrib/powerline.zsh
 
       function powerline_precmd() {
           PS1="$(${pkgs.powerline-go}/bin/powerline-go -error $? \
@@ -89,7 +90,7 @@ in
       theme = "robbyrussell";
       plugins = [
         "git" "autojump" "cabal" "gnu-utils"
-        "man" "shrink-path" "powerline" "colored-man-pages"];
+        "man" "shrink-path" "colored-man-pages"];
     };
   };
   programs.bash = {

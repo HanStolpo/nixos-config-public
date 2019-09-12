@@ -45,6 +45,8 @@
      xdotool # x desktop automation
 
      mkpasswd # generate password hashes
+
+     autojump # used in ohmyzsh to quickly jump between directories
   ];
 
 }
