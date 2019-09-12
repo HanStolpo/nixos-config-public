@@ -29,13 +29,19 @@ let
     ) super.haskell.packages;
   };
 
-    pkgs-18-0-3 =  import (super.fetchzip {
-        url= "https://github.com/NixOS/nixpkgs-channels/archive/5d19e3e78fb89f01e7fb48acc341687e54d6888f.tar.gz";
-        sha256= "0vdmbhn5clwny155m21ygjglq3qyi7qki0sbzrb4a1p7sv1yfgp6";
-        name = "pkgs-18-0-3";
+    pkgs-19-0-3 =  import (super.fetchzip {
+        url= "https://github.com/NixOS/nixpkgs-channels/archive/b978a94c8f9167fb86372ce1044a23f8df2edea0.tar.gz";
+        sha256= "0p6n5f1m45mhms9nbpr08gh4as8vys6ii65mcs227dbq3nn126x1";
+        name = "pkgs-19-0-3";
       }) {config = {allowUnfree = true;};};
 
-  pkgs-legacy = import (super.fetchzip {
+    pkgs-unstable =  import (super.fetchzip {
+        url= "https://github.com/NixOS/nixpkgs-channels/archive/ac95de0d2ea8d1fd8f5bb972459d1c62fcf2a74f.tar.gz";
+        sha256= "0zi2b18vksb30q63kjrbm2nxd0bi8vpy2bpj48alajlv5q4mql1x";
+        name = "pkgs-unstable";
+      }) {config = {allowUnfree = true;};};
+
+    pkgs-legacy = import (super.fetchzip {
         url= "https://github.com/NixOS/nixpkgs-channels/archive/2d6f84c1090ae39c58dcec8f35a3ca62a43ad38c.tar.gz";
         sha256= "0l8b51lwxlqc3h6gy59mbz8bsvgc0q6b3gf7p3ib1icvpmwqm773";
         name = "pkgs-legacy";
@@ -93,14 +99,23 @@ let
 in
 rec {
   inherit pkgs-legacy;
-  inherit pkgs-18-0-3;
+  inherit pkgs-19-0-3;
+  inherit pkgs-unstable;
   inherit lorri;
   direnv = lorri-nixpkgs.direnv;
-  heroku = (self.pkgs-18-0-3.callPackage ./heroku-cli {});
   create-react-native-app = (self.callPackage ./create-react-native-app {});
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
   haskellPackages = haskell.packages.ghc865;
   floskell = super.haskell.lib.justStaticExecutables (import ./floskell.nix {pkgs = self;}).floskell;
+  mykicad = super.kicad.overrideAttrs (oldAttrs: rec {
+    name = "mikicad";
+    src = super.fetchFromGitHub {
+      owner = "KICad";
+      repo = "kicad-source-mirror";
+      rev = "d132cf37e0e08a83b16820f6e04757b7d3753548";
+      sha256 = "1rj78y9ix89jbql12l25rm0pjwjswmyxkvr4461y1sf26ydla823";
+    };
+  });
 }
