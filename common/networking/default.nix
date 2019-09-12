@@ -22,6 +22,8 @@
         127.0.0.1 reactor.circuithub.test
         127.0.0.1 rob-o-vm.picofactory
         192.168.56.107 hanstolpo.local
+        10.2.0.2 hydra.circuithub.com
+        10.2.0.2 deploy.circuithub.com
       '';
   };
   #enableIPv6 = false;
