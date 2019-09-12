@@ -14,7 +14,7 @@ in
   environment.systemPackages =
   with pkgs;
   [
-     pgcli_custom
+     pgcli
      postgresql
   ];
 
