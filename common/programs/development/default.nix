@@ -83,8 +83,15 @@ in
      gnome3.glade # gtk layout tool
 
      jq # query json
+
+     firefox-devedition-bin
+
+     graphviz # draw graphs for networks of nodes
      haskellPackages.ghcide
      haskellPackages.hie-bios
+
+     yarn2nix
+     elm2nix
   ]);
 
   nixpkgs.config = {
