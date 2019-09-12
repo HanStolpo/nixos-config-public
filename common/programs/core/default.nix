@@ -65,5 +65,9 @@
 
      tree # print directory trees
 
+     gnome3.nautilus # the gnome file manager
+
+     testdisk # rescue the disk or undelete files
+
   ];
 }
