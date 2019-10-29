@@ -49,7 +49,7 @@ in
      # (haskell.lib.justStaticExecutables haskellPackages.hoogle)
      (haskell.lib.justStaticExecutables haskellPackages.hlint)
      (haskell.lib.justStaticExecutables haskellPackages.hindent)
-     #floskell
+     ormolu
      # (haskellPackages.ghcWithHoogle (g: with g;
      #    [# not these libs are actually part of GHC as the core libraries (https://www.haskell.org/platform/contents.html)
      #    array base bytestring Cabal containers deepseq directory filepath

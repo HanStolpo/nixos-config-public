@@ -24,7 +24,7 @@ let
             unix-compat           = self.callPackage (import ./haskell/unix-compat.nix       ){};
             yaml                  = self.callPackage (import ./haskell/yaml.nix              ){};
             unordered-containers  = self.callPackage (import ./haskell/unordered-containers.nix){};
-
+            ormolu  = self.callPackage (import ./haskell/ormolu.nix){};
           };}
     ) super.haskell.packages;
   };
@@ -104,4 +104,5 @@ rec {
       sha256 = "1rj78y9ix89jbql12l25rm0pjwjswmyxkvr4461y1sf26ydla823";
     };
   });
+  ormolu = haskellPackages.ormolu;
 }
