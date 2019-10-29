@@ -1,13 +1,18 @@
 { mkDerivation, aeson, aeson-pretty, ansi-terminal, async, base
 , bytestring, conduit, conduit-parse, containers, data-default
-, Diff, directory, filepath, haskell-lsp, hspec, lens, mtl
-, parser-combinators, process, rope-utf16-splay, stdenv, text
+, Diff, directory, fetchgit, filepath, haskell-lsp, hspec, lens
+, mtl, parser-combinators, process, rope-utf16-splay, stdenv, text
 , transformers, unix, unordered-containers
 }:
 mkDerivation {
   pname = "lsp-test";
-  version = "0.7.0.0";
-  sha256 = "a5b740ff4b75dcfab9f8ff057def1852525973ff17c27cb3e33643b55e4aa2d2";
+  version = "0.8.0.0";
+  src = fetchgit {
+    url = "https://github.com/bubba/lsp-test";
+    sha256 = "0nadsjkfwdqg0q7ypy7w5kv97hgr1ycwh9ii3azcf7vq7nnmjnw6";
+    rev = "c80fbbc91756f4fea141f434f251d7ff7c0e4596";
+    fetchSubmodules = true;
+  };
   libraryHaskellDepends = [
     aeson aeson-pretty ansi-terminal async base bytestring conduit
     conduit-parse containers data-default Diff directory filepath

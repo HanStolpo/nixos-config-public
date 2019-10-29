@@ -1,5 +1,5 @@
 { mkDerivation, aeson, async, attoparsec, base, bytestring
-, containers, data-default, directory, filepath, hashable
+, containers, data-default, directory, fetchgit, filepath, hashable
 , haskell-lsp-types, hslogger, hspec, hspec-discover, lens, mtl
 , network-uri, QuickCheck, quickcheck-instances, rope-utf16-splay
 , sorted-list, stdenv, stm, temporary, text, time
@@ -7,8 +7,13 @@
 }:
 mkDerivation {
   pname = "haskell-lsp";
-  version = "0.16.0.0";
-  sha256 = "25c9bb48642e5bbfbc5747e0368cbed723ee53914792cbe74a0fb0b1aca304e8";
+  version = "0.17.0.0";
+  src = fetchgit {
+    url = "https://github.com/alanz/haskell-lsp";
+    sha256 = "1nc8zq0l68my2lly98m56ix028y9vwx2fwfi7bpbl1z0wp0jfwxy";
+    rev = "d624794067181f9311581942eb6fc69ebfc0cf65";
+    fetchSubmodules = true;
+  };
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [

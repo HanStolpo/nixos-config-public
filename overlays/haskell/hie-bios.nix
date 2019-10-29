@@ -5,8 +5,8 @@
 }:
 mkDerivation {
   pname = "hie-bios";
-  version = "0.1.1";
-  sha256 = "57d020df2f4b930e617ffd77421c47b885c83ec81d22707cc1afe02502c43985";
+  version = "0.2.0";
+  sha256 = "d5fe70c1dee54bdbf06f84f692fd49e5e12f9926bd88c7ce71c4f909786e206b";
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
