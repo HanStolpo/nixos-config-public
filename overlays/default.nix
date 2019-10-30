@@ -105,4 +105,7 @@ rec {
     };
   });
   ormolu = haskellPackages.ormolu;
+
+  slack = self.callPackage ./slack {gdk-pixbuf = self.gdk_pixbuf;};
+
 }
