@@ -90,7 +90,7 @@ in
      haskellPackages.ghcide
      haskellPackages.hie-bios
 
-     yarn2nix
+     #yarn2nix
      elm2nix
   ]);
 

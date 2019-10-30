@@ -36,7 +36,7 @@
 
      ghostscript # 
      gv # postscript viewer
-     giv # image viewer
+     #giv # image viewer
 
      easyrsa
 

@@ -4,7 +4,7 @@
     dnsutils # gives nslookup and dig (and dns server enabled through services.bind.enable)
     autossh # keep ssh tunnels open
     arp-scan
-    ssvnc
+    #ssvnc
   ];
   networking = {
     # networkmanager = {
