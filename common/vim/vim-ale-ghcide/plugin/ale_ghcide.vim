@@ -20,7 +20,7 @@ endfunction
 call ale#linter#Define('haskell', {
 \   'name': 'ghcide',
 \   'lsp': 'stdio',
-\   'command_callback': {b -> 'ghcide --cwd ' . s:GetProjectRoot(b) .' --lsp'},
+\   'command': {b -> 'ghcide --cwd ' . s:GetProjectRoot(b) .' --lsp'},
 \   'executable': 'ghcide',
-\   'project_root_callback': {b -> s:GetProjectRoot(b)},
+\   'project_root': {b -> s:GetProjectRoot(b)},
 \})
