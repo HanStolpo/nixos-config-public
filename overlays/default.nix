@@ -94,7 +94,6 @@ rec {
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
   haskellPackages = haskell.packages.ghc865;
-  floskell = super.haskell.lib.justStaticExecutables (import ./floskell.nix {pkgs = self;}).floskell;
   mykicad = super.kicad.overrideAttrs (oldAttrs: rec {
     name = "mikicad";
     src = super.fetchFromGitHub {
