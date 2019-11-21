@@ -7,10 +7,16 @@
     uid = 1000;
     home = "/home/handre";
     extraGroups = [
-      "user" "wheel" "audio" "video"
-      "networkmanager" "postgres" "vboxusers"
+      "user"
+      "wheel"
+      "audio"
+      "video"
+      "networkmanager"
+      "postgres"
+      "vboxusers"
       #scanner printer groups
-      "lp" "scanner"
+      "lp"
+      "scanner"
       "docker"
       "libvirtd"
     ];
@@ -18,7 +24,7 @@
     shell = "${pkgs.zsh}/bin/zsh";
   };
   users.defaultUserShell = "${pkgs.zsh}/bin/zsh";
-  environment.shells = ["${pkgs.zsh}/bin/zsh"];
+  environment.shells = [ "${pkgs.zsh}/bin/zsh" ];
   programs.zsh.enable = true;
 
   security.sudo = {
@@ -29,8 +35,7 @@
     isNormalUser = true;
     uid = 2000;
     home = "/home/guest";
-    extraGroups = [
-    ];
+    extraGroups = [];
     initialPassword = "guest";
     shell = "${pkgs.zsh}/bin/zsh";
   };

@@ -1,4 +1,10 @@
-{ mkDerivation, async, base, criterion, deepseq, stdenv, stm
+{ mkDerivation
+, async
+, base
+, criterion
+, deepseq
+, stdenv
+, stm
 , unliftio-core
 }:
 mkDerivation {

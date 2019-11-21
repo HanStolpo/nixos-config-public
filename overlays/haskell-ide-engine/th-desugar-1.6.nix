@@ -1,5 +1,15 @@
-{ mkDerivation, base, containers, hspec, HUnit, mtl, stdenv, syb
-, template-haskell, th-expand-syns, th-lift, th-orphans
+{ mkDerivation
+, base
+, containers
+, hspec
+, HUnit
+, mtl
+, stdenv
+, syb
+, template-haskell
+, th-expand-syns
+, th-lift
+, th-orphans
 }:
 mkDerivation {
   pname = "th-desugar";
@@ -8,12 +18,26 @@ mkDerivation {
   revision = "2";
   editedCabalFile = "0rimjzkqky6sq4yba7vqra7hj29903f9xsn2g8rc23abrm35vds3";
   libraryHaskellDepends = [
-    base containers mtl syb template-haskell th-expand-syns th-lift
+    base
+    containers
+    mtl
+    syb
+    template-haskell
+    th-expand-syns
+    th-lift
     th-orphans
   ];
   testHaskellDepends = [
-    base containers hspec HUnit mtl syb template-haskell th-expand-syns
-    th-lift th-orphans
+    base
+    containers
+    hspec
+    HUnit
+    mtl
+    syb
+    template-haskell
+    th-expand-syns
+    th-lift
+    th-orphans
   ];
   homepage = "https://github.com/goldfirere/th-desugar";
   description = "Functions to desugar Template Haskell";

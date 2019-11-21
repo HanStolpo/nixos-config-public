@@ -1,7 +1,22 @@
-{ mkDerivation, async, base, base64-bytestring, binary, bytestring
-, classy-prelude, cmdargs, connection, fetchgit, hslogger, mtl
-, network, network-conduit-tls, stdenv, streaming-commons, text
-, unordered-containers, websockets
+{ mkDerivation
+, async
+, base
+, base64-bytestring
+, binary
+, bytestring
+, classy-prelude
+, cmdargs
+, connection
+, fetchgit
+, hslogger
+, mtl
+, network
+, network-conduit-tls
+, stdenv
+, streaming-commons
+, text
+, unordered-containers
+, websockets
 }:
 mkDerivation {
   pname = "wstunnel";
@@ -15,12 +30,30 @@ mkDerivation {
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
-    async base base64-bytestring binary bytestring classy-prelude
-    cmdargs connection hslogger mtl network network-conduit-tls
-    streaming-commons text unordered-containers websockets
+    async
+    base
+    base64-bytestring
+    binary
+    bytestring
+    classy-prelude
+    cmdargs
+    connection
+    hslogger
+    mtl
+    network
+    network-conduit-tls
+    streaming-commons
+    text
+    unordered-containers
+    websockets
   ];
   executableHaskellDepends = [
-    base bytestring classy-prelude cmdargs hslogger text
+    base
+    bytestring
+    classy-prelude
+    cmdargs
+    hslogger
+    text
   ];
   testHaskellDepends = [ base text ];
   homepage = "https://github.com/githubuser/wstunnel#readme";

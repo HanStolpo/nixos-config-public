@@ -1,6 +1,21 @@
-{ mkDerivation, array, base, bytestring, Cabal, containers, deepseq
-, directory, filepath, ghc, ghc-boot, ghc-paths, haddock-library
-, hspec, QuickCheck, stdenv, transformers, xhtml
+{ mkDerivation
+, array
+, base
+, bytestring
+, Cabal
+, containers
+, deepseq
+, directory
+, filepath
+, ghc
+, ghc-boot
+, ghc-paths
+, haddock-library
+, hspec
+, QuickCheck
+, stdenv
+, transformers
+, xhtml
 }:
 mkDerivation {
   pname = "haddock-api";
@@ -10,8 +25,20 @@ mkDerivation {
   editedCabalFile = "0saa5ksmvxyvwi2nrzh7m4ha1kwh31pkpa79yrppvw7sm39klpyw";
   enableSeparateDataOutput = true;
   libraryHaskellDepends = [
-    array base bytestring Cabal containers deepseq directory filepath
-    ghc ghc-boot ghc-paths haddock-library transformers xhtml
+    array
+    base
+    bytestring
+    Cabal
+    containers
+    deepseq
+    directory
+    filepath
+    ghc
+    ghc-boot
+    ghc-paths
+    haddock-library
+    transformers
+    xhtml
   ];
   testHaskellDepends = [ base containers ghc hspec QuickCheck ];
   homepage = "http://www.haskell.org/haddock/";

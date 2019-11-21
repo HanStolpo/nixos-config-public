@@ -13,7 +13,7 @@
     #   insertNameservers = ["8.8.8.8" "8.8.8.4"];
     # };
     #nameservers = ["192.168.100.1" "8.8.8.8" "8.8.8.4" "192.168.1.1"];
-    nameservers = ["127.0.0.1" "8.8.8.8" "192.168.100.1"];
+    nameservers = [ "127.0.0.1" "8.8.8.8" "192.168.100.1" ];
     extraHosts =
       ''
         127.0.0.1 circuithub.test
@@ -30,7 +30,7 @@
   #dnsSingleRequest = true;
   services.dnsmasq = {
     enable = true;
-    servers = ["8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1"];
+    servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1" ];
     extraConfig = ''
       server=/picofactory/192.168.100.1
     '';

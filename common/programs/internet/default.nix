@@ -3,24 +3,24 @@
 {
 
   environment.systemPackages = with pkgs; [
-     wireguard
+    wireguard
 
-     # browsers
-     firefox
-     google-chrome
+    # browsers
+    firefox
+    google-chrome
 
-     # chat clients
-     hipchat
-     #hipchat
-     slack
-     weechat # A fast, light and extensible chat client
+    # chat clients
+    hipchat
+    #hipchat
+    slack
+    weechat # A fast, light and extensible chat client
 
-     # online storage
-     dropbox         # to stop dropbox from auto updating create ~/.dropbox-dist chmod 0 it
-     dropbox-cli
+    # online storage
+    dropbox # to stop dropbox from auto updating create ~/.dropbox-dist chmod 0 it
+    dropbox-cli
 
-     cifs-utils # Tools for managing Linux CIFS client filesystems
-     nfs-utils # This package contains various Linux user-space Network File System (NFS) utilities, including RPC `mount' and `nfs' daemons.
+    cifs-utils # Tools for managing Linux CIFS client filesystems
+    nfs-utils # This package contains various Linux user-space Network File System (NFS) utilities, including RPC `mount' and `nfs' daemons.
 
   ];
 
@@ -67,9 +67,8 @@
     # };
 
     packageOverrides = super:
-    {
-      google-chrome = super.google-chrome.override {channel = "stable";};
-    };
+      {
+        google-chrome = super.google-chrome.override { channel = "stable"; };
+      };
   };
 }
-

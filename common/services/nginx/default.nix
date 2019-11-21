@@ -3,7 +3,7 @@
   services.nginx = {
     enable = true;
     httpConfig =
-    ''
+      ''
         ## Start client.lanlocal.blah ##
         server {
           listen       80;
@@ -60,6 +60,6 @@
             proxy_set_header X-Forwarded-Proto $scheme;
           }
         }
-    '';
+      '';
   };
 }

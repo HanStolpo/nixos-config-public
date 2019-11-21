@@ -1,7 +1,24 @@
-{ mkDerivation, base, bytestring, containers, dlist, exceptions
-, fetchgit, filepath, ghc, ghc-boot-th, ghc-paths, gitrev, hspec
-, hspec-discover, mtl, optparse-applicative, path, path-io, stdenv
-, syb, text
+{ mkDerivation
+, base
+, bytestring
+, containers
+, dlist
+, exceptions
+, fetchgit
+, filepath
+, ghc
+, ghc-boot-th
+, ghc-paths
+, gitrev
+, hspec
+, hspec-discover
+, mtl
+, optparse-applicative
+, path
+, path-io
+, stdenv
+, syb
+, text
 }:
 mkDerivation {
   pname = "ormolu";
@@ -16,14 +33,33 @@ mkDerivation {
   isExecutable = true;
   enableSeparateDataOutput = true;
   libraryHaskellDepends = [
-    base bytestring containers dlist exceptions ghc ghc-boot-th
-    ghc-paths mtl syb text
+    base
+    bytestring
+    containers
+    dlist
+    exceptions
+    ghc
+    ghc-boot-th
+    ghc-paths
+    mtl
+    syb
+    text
   ];
   executableHaskellDepends = [
-    base ghc gitrev optparse-applicative text
+    base
+    ghc
+    gitrev
+    optparse-applicative
+    text
   ];
   testHaskellDepends = [
-    base containers filepath hspec path path-io text
+    base
+    containers
+    filepath
+    hspec
+    path
+    path-io
+    text
   ];
   testToolDepends = [ hspec-discover ];
   homepage = "https://github.com/tweag/ormolu";

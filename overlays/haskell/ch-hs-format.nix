@@ -1,5 +1,11 @@
-{ mkDerivation, base, containers, fetchgit, ghc, ghc-exactprint
-, optparse-applicative, stdenv
+{ mkDerivation
+, base
+, containers
+, fetchgit
+, ghc
+, ghc-exactprint
+, optparse-applicative
+, stdenv
 }:
 mkDerivation {
   pname = "ch-hs-format";
@@ -13,7 +19,11 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    base containers ghc ghc-exactprint optparse-applicative
+    base
+    containers
+    ghc
+    ghc-exactprint
+    optparse-applicative
   ];
   license = "unknown";
   hydraPlatforms = stdenv.lib.platforms.none;

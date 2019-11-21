@@ -1,16 +1,16 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages =
-  with pkgs;
-  [
-    simple-scan # Simple scanning utility
-  ];
+    with pkgs;
+    [
+      simple-scan # Simple scanning utility
+    ];
 
   services = {
     printing = {
       enable = true;
       #gutenprint = true; # deprecated
-      drivers = [pkgs.gutenprint pkgs.hplip pkgs.splix];
+      drivers = [ pkgs.gutenprint pkgs.hplip pkgs.splix ];
     };
   };
 

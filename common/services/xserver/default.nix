@@ -2,47 +2,50 @@
 {
   environment.systemPackages = with pkgs; [
 
-     trayer # A lightweight GTK2-based systray for UNIX desktop
+    trayer # A lightweight GTK2-based systray for UNIX desktop
 
-     # # haskell packages for XMonad
-     # pkgs.haskellPackages.xmonad-eval
-     (pkgs-legacy.xmonad-with-packages.override {
-       packages= self: with self;
-       [ xmonad
-         xmobar
-         xmonad-contrib
-         xmonad-extras
-         xmonad-utils
-         xmonad-windownames
-         xmonad-entryhelper
-         taffybar
-       ];
-     })
+    # # haskell packages for XMonad
+    # pkgs.haskellPackages.xmonad-eval
+    (
+      pkgs-legacy.xmonad-with-packages.override {
+        packages = self: with self;
+          [
+            xmonad
+            xmobar
+            xmonad-contrib
+            xmonad-extras
+            xmonad-utils
+            xmonad-windownames
+            xmonad-entryhelper
+            taffybar
+          ];
+      }
+    )
 
-     pkgs-legacy.taffybar # desktop information bar intended for use with XMonad and similar window managers
+    pkgs-legacy.taffybar # desktop information bar intended for use with XMonad and similar window managers
 
-     dmenu # A generic, highly customizable, and efficient menu for the X Window System
-     xclip # Tool to access the X clipboard from a console application
+    dmenu # A generic, highly customizable, and efficient menu for the X Window System
+    xclip # Tool to access the X clipboard from a console application
 
-     # Themes
-     slimThemes.lunar
+    # Themes
+    slimThemes.lunar
 
-     libnotify # A library that sends desktop notifications to a notification daemon
-     xdg-user-dirs # A tool to help manage well known user directories like the desktop folder and the music folder
-     xdg_utils # A set of command line tools that assist applications with a variety of desktop integration tasks
-     xlibs.xcursorthemes
-     xlibs.xev
-     xlibs.xprop
+    libnotify # A library that sends desktop notifications to a notification daemon
+    xdg-user-dirs # A tool to help manage well known user directories like the desktop folder and the music folder
+    xdg_utils # A set of command line tools that assist applications with a variety of desktop integration tasks
+    xlibs.xcursorthemes
+    xlibs.xev
+    xlibs.xprop
 
-     notify-osd # Daemon that displays passive pop-up notifications
+    notify-osd # Daemon that displays passive pop-up notifications
 
-     # screen capture
-     slop # select a screen area
-     maim # create a screen shot (can be driven by slop)
+    # screen capture
+    slop # select a screen area
+    maim # create a screen shot (can be driven by slop)
 
-     xorg.xinit # for startx when messing around with extra displays or playing with xmonad
+    xorg.xinit # for startx when messing around with extra displays or playing with xmonad
 
-     xorg.xbacklight # control backlight of screen
+    xorg.xbacklight # control backlight of screen
 
   ];
 
@@ -66,7 +69,7 @@
         xmonad-extras
         xmonad-utils
       ];
-      };
+    };
     windowManager.default = "xmonad";
     desktopManager.xterm.enable = false;
     desktopManager.gnome3.enable = false;
@@ -84,4 +87,3 @@
   services.dbus.enable = true;
   programs.ssh.startAgent = true;
 }
-

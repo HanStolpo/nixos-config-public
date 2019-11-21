@@ -1,7 +1,24 @@
-{ mkDerivation, base, bytestring, Cabal, cabal-install, containers
-, directory, exceptions, fetchgit, filepath, ghc-prim, mtl, process
-, semigroupoids, stdenv, template-haskell, temporary, transformers
-, unix, unix-compat, utf8-string
+{ mkDerivation
+, base
+, bytestring
+, Cabal
+, cabal-install
+, containers
+, directory
+, exceptions
+, fetchgit
+, filepath
+, ghc-prim
+, mtl
+, process
+, semigroupoids
+, stdenv
+, template-haskell
+, temporary
+, transformers
+, unix
+, unix-compat
+, utf8-string
 }:
 mkDerivation {
   pname = "cabal-helper";
@@ -15,17 +32,51 @@ mkDerivation {
   isExecutable = true;
   setupHaskellDepends = [ base Cabal directory filepath ];
   libraryHaskellDepends = [
-    base Cabal directory filepath ghc-prim mtl process semigroupoids
-    transformers unix unix-compat
+    base
+    Cabal
+    directory
+    filepath
+    ghc-prim
+    mtl
+    process
+    semigroupoids
+    transformers
+    unix
+    unix-compat
   ];
   executableHaskellDepends = [
-    base bytestring Cabal containers directory exceptions filepath
-    ghc-prim mtl process template-haskell temporary transformers unix
-    unix-compat utf8-string
+    base
+    bytestring
+    Cabal
+    containers
+    directory
+    exceptions
+    filepath
+    ghc-prim
+    mtl
+    process
+    template-haskell
+    temporary
+    transformers
+    unix
+    unix-compat
+    utf8-string
   ];
   testHaskellDepends = [
-    base bytestring Cabal directory exceptions filepath ghc-prim mtl
-    process template-haskell temporary transformers unix unix-compat
+    base
+    bytestring
+    Cabal
+    directory
+    exceptions
+    filepath
+    ghc-prim
+    mtl
+    process
+    template-haskell
+    temporary
+    transformers
+    unix
+    unix-compat
     utf8-string
   ];
   testToolDepends = [ cabal-install ];

@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-     pavucontrol
-     pasystray
-     pulseaudioFull
+    pavucontrol
+    pasystray
+    pulseaudioFull
   ];
 
   hardware = {

@@ -17,15 +17,14 @@
     #   channel_max = 128
     # '';
     rabbitmq.config = ''
-    [
-      {rabbit, [
-          {tcp_listeners, [{"127.0.0.1", 5672},
-                           {"::1",       5672}]},
-          {channel_max, 0}
-        ]
-      }
-    ].
+      [
+        {rabbit, [
+            {tcp_listeners, [{"127.0.0.1", 5672},
+                             {"::1",       5672}]},
+            {channel_max, 0}
+          ]
+        }
+      ].
     '';
   };
 }
-

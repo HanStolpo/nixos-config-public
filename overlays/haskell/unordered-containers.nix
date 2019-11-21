@@ -1,7 +1,21 @@
-{ mkDerivation, base, bytestring, ChasingBottoms, containers
-, criterion, deepseq, deepseq-generics, hashable, hashmap, HUnit
-, mtl, QuickCheck, random, stdenv, test-framework
-, test-framework-hunit, test-framework-quickcheck2
+{ mkDerivation
+, base
+, bytestring
+, ChasingBottoms
+, containers
+, criterion
+, deepseq
+, deepseq-generics
+, hashable
+, hashmap
+, HUnit
+, mtl
+, QuickCheck
+, random
+, stdenv
+, test-framework
+, test-framework-hunit
+, test-framework-quickcheck2
 }:
 mkDerivation {
   pname = "unordered-containers";
@@ -11,12 +25,27 @@ mkDerivation {
   editedCabalFile = "01727lm2spbqfn0rl89zv9zhpsmnls0kmizyckqf5nc3j9d0k6sy";
   libraryHaskellDepends = [ base deepseq hashable ];
   testHaskellDepends = [
-    base ChasingBottoms containers hashable HUnit QuickCheck
-    test-framework test-framework-hunit test-framework-quickcheck2
+    base
+    ChasingBottoms
+    containers
+    hashable
+    HUnit
+    QuickCheck
+    test-framework
+    test-framework-hunit
+    test-framework-quickcheck2
   ];
   benchmarkHaskellDepends = [
-    base bytestring containers criterion deepseq deepseq-generics
-    hashable hashmap mtl random
+    base
+    bytestring
+    containers
+    criterion
+    deepseq
+    deepseq-generics
+    hashable
+    hashmap
+    mtl
+    random
   ];
   homepage = "https://github.com/tibbe/unordered-containers";
   description = "Efficient hashing-based container types";

@@ -1,10 +1,44 @@
-{ mkDerivation, aeson, base, binary, bytestring, cmdargs, conduit
-, conduit-extra, connection, containers, deepseq, directory, extra
-, filepath, haskell-src-exts, http-conduit, http-types, js-flot
-, js-jquery, mmap, network, network-uri, old-locale, process
-, process-extras, QuickCheck, resourcet, stdenv, tar
-, template-haskell, text, time, transformers, uniplate, utf8-string
-, vector, wai, wai-logger, warp, warp-tls, zlib
+{ mkDerivation
+, aeson
+, base
+, binary
+, bytestring
+, cmdargs
+, conduit
+, conduit-extra
+, connection
+, containers
+, deepseq
+, directory
+, extra
+, filepath
+, haskell-src-exts
+, http-conduit
+, http-types
+, js-flot
+, js-jquery
+, mmap
+, network
+, network-uri
+, old-locale
+, process
+, process-extras
+, QuickCheck
+, resourcet
+, stdenv
+, tar
+, template-haskell
+, text
+, time
+, transformers
+, uniplate
+, utf8-string
+, vector
+, wai
+, wai-logger
+, warp
+, warp-tls
+, zlib
 }:
 mkDerivation {
   pname = "hoogle";
@@ -14,12 +48,45 @@ mkDerivation {
   isExecutable = true;
   enableSeparateDataOutput = true;
   libraryHaskellDepends = [
-    aeson base binary bytestring cmdargs conduit conduit-extra
-    connection containers deepseq directory extra filepath
-    haskell-src-exts http-conduit http-types js-flot js-jquery mmap
-    network network-uri old-locale process process-extras QuickCheck
-    resourcet tar template-haskell text time transformers uniplate
-    utf8-string vector wai wai-logger warp warp-tls zlib
+    aeson
+    base
+    binary
+    bytestring
+    cmdargs
+    conduit
+    conduit-extra
+    connection
+    containers
+    deepseq
+    directory
+    extra
+    filepath
+    haskell-src-exts
+    http-conduit
+    http-types
+    js-flot
+    js-jquery
+    mmap
+    network
+    network-uri
+    old-locale
+    process
+    process-extras
+    QuickCheck
+    resourcet
+    tar
+    template-haskell
+    text
+    time
+    transformers
+    uniplate
+    utf8-string
+    vector
+    wai
+    wai-logger
+    warp
+    warp-tls
+    zlib
   ];
   executableHaskellDepends = [ base ];
   testTarget = "--test-option=--no-net";

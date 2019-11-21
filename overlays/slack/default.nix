@@ -1,7 +1,34 @@
-{ theme ? null, stdenv, fetchurl, dpkg, makeWrapper , alsaLib, atk, cairo,
-cups, curl, dbus, expat, fontconfig, freetype, glib , gnome2, gtk3, gdk-pixbuf,
-libappindicator-gtk3, libnotify, libxcb, nspr, nss, pango , systemd, xorg,
-at-spi2-atk, at-spi2-core, libuuid, nodePackages, libpulseaudio
+{ theme ? null
+, stdenv
+, fetchurl
+, dpkg
+, makeWrapper
+, alsaLib
+, atk
+, cairo
+, cups
+, curl
+, dbus
+, expat
+, fontconfig
+, freetype
+, glib
+, gnome2
+, gtk3
+, gdk-pixbuf
+, libappindicator-gtk3
+, libnotify
+, libxcb
+, nspr
+, nss
+, pango
+, systemd
+, xorg
+, at-spi2-atk
+, at-spi2-core
+, libuuid
+, nodePackages
+, libpulseaudio
 }:
 
 let
@@ -58,14 +85,15 @@ let
     else
       throw "Slack is not supported on ${stdenv.hostPlatform.system}";
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   pname = "slack";
   inherit version;
 
   inherit src;
 
   buildInputs = [
-    gtk3  # needed for GSETTINGS_SCHEMAS_PATH
+    gtk3 # needed for GSETTINGS_SCHEMAS_PATH
   ];
 
   nativeBuildInputs = [ dpkg makeWrapper nodePackages.asar ];

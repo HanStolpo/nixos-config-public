@@ -1,6 +1,16 @@
-{ mkDerivation, aeson, base, bytestring, fetchgit, ghc
-, optparse-applicative, pretty, pretty-show, process, stdenv
-, unordered-containers, vector
+{ mkDerivation
+, aeson
+, base
+, bytestring
+, fetchgit
+, ghc
+, optparse-applicative
+, pretty
+, pretty-show
+, process
+, stdenv
+, unordered-containers
+, vector
 }:
 mkDerivation {
   pname = "ghc-dump-tree";
@@ -13,12 +23,27 @@ mkDerivation {
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
-    aeson base bytestring ghc pretty pretty-show process
-    unordered-containers vector
+    aeson
+    base
+    bytestring
+    ghc
+    pretty
+    pretty-show
+    process
+    unordered-containers
+    vector
   ];
   executableHaskellDepends = [
-    aeson base bytestring ghc optparse-applicative pretty pretty-show
-    process unordered-containers vector
+    aeson
+    base
+    bytestring
+    ghc
+    optparse-applicative
+    pretty
+    pretty-show
+    process
+    unordered-containers
+    vector
   ];
   homepage = "https://github.com/edsko/ghc-dump-tree";
   description = "Dump GHC's parsed, renamed, and type checked ASTs";

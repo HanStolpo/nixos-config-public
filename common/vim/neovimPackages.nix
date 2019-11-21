@@ -9,7 +9,8 @@ let
     configure = (import ./customization.nix { pkgs = pkgs; });
   };
 
-in [
+in
+[
   nvim
   pkgs.python35Full
   pkgs.python35

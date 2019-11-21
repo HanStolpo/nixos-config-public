@@ -5,12 +5,12 @@ let
     export CH_SHELL_WRAP_ELM_FORMAT=true
   '';
   base16Shell = pkgs.fetchFromGitHub {
-      owner = "chriskempson";
-      repo = "base16-shell";
-      rev = "cd19a7bc5c57e5dccc95f1493a2a0ff3b15f4499";
-      sha256 = "01rc78c0fng3p2lray5hz23n8irgcvmq7s5d7mwl9pb8ajclhfw2";
-      };
-  base16ShellInit =''
+    owner = "chriskempson";
+    repo = "base16-shell";
+    rev = "cd19a7bc5c57e5dccc95f1493a2a0ff3b15f4499";
+    sha256 = "01rc78c0fng3p2lray5hz23n8irgcvmq7s5d7mwl9pb8ajclhfw2";
+  };
+  base16ShellInit = ''
     # Base16 Shell
     BASE16_SHELL="${base16Shell}/"
     [ -n "$PS1" ] && \
@@ -35,7 +35,7 @@ in
     enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
-      highlighters = ["main" "brackets"];
+      highlighters = [ "main" "brackets" ];
     };
     interactiveShellInit = ''
       ${chShellInit}
@@ -89,8 +89,14 @@ in
       enable = true;
       theme = "robbyrussell";
       plugins = [
-        "git" "autojump" "cabal" "gnu-utils"
-        "man" "shrink-path" "colored-man-pages"];
+        "git"
+        "autojump"
+        "cabal"
+        "gnu-utils"
+        "man"
+        "shrink-path"
+        "colored-man-pages"
+      ];
     };
   };
   programs.bash = {
