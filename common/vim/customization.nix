@@ -71,6 +71,7 @@ in
 
       { name = "Improved-AnsiEsc";}
 
+      { name = "vim-autoformat";}
     ];
   };
 }

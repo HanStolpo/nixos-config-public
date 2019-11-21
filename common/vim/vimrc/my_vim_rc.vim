@@ -129,3 +129,10 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 let g:ale_set_highlights = 0
+
+" auto formatting via vim-autoformat
+let g:formatdef_nixpkgs_fmt = '"nixpkgs-fmt"'
+let g:formatters_nix = ['nixpkgs_fmt']
+
+au BufEnter *.nix set formatprg=nixpkgs-fmt
+au BufWritePre *.nix :Autoformat
