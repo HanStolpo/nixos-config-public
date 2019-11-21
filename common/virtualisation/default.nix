@@ -9,5 +9,5 @@
 
   virtualisation.docker.enable = false;
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.addNetworkInterface = false;
+  virtualisation.virtualbox.host.addNetworkInterface = true;
 }
