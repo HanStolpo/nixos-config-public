@@ -116,6 +116,9 @@ let g:ale_sign_warning = 'w'
 let g:ale_fix_on_save = 1
 let g:ale_completion_enable = 1
 let g:ale_lint_delay = 2000
+let g:ale_echo_msg_format='%linter%:%s'"
+let g:ale_set_highlights = 0
+let g:ale_linters = {'haskell': ['hlint', 'ghcide']}
 
 nmap <leader>d <Plug>(ale_detail)
 nmap <silent> <M-k> <Plug>(ale_previous_wrap)
@@ -128,7 +131,6 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-let g:ale_set_highlights = 0
 
 " auto formatting via vim-autoformat
 let g:formatdef_nixpkgs_fmt = '"nixpkgs-fmt"'
