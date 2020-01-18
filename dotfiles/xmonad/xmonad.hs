@@ -265,7 +265,7 @@ myKeys conf = let
 
 
     -- try sending one message, fallback if unreceived, then refresh
-    tryMsgR x y = sequence_ [tryMessage_ x y, refresh]
+    tryMsgR x y = sequence_ [tryMessageWithNoRefreshToCurrent x y, refresh]
 
 
     toggleFloat w = windows (\s -> if M.member w (W.floating s)

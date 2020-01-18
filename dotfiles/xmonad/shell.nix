@@ -3,7 +3,7 @@ let
     import <nixpkgs> {
       overlays = [ (import ../../overlays) ];
     }
-  ).pkgs-legacy;
+  );
   # setup a GHC with the packages you want
   # they will be built with documentation and a local hoogle
   # search engine too for searching documentation
@@ -98,6 +98,7 @@ in
           cabal-install # the Haskell "Package" manager only needed for ghc-mod
           hoogle # the hoogle Haskell documentation search engine
           hlint # standalone linter for Haskell code
+          pkgs.haskellPackages.ghcid
         ];
       }
     )

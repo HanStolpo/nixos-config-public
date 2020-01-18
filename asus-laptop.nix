@@ -147,6 +147,10 @@ in
     kernelV.bbswitch
     microcodeIntel
     blueman
+    arc-theme
+    gtk-engine-murrine
+    gtk_engines
+    hicolor-icon-theme
   ];
 
   # hybrid sleep on power off button
