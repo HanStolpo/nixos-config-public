@@ -71,9 +71,9 @@ let
                         hpack_0_31_1 = self.callPackage ./haskell/hpack_0_31_1.nix {
                           yaml = self.yaml_0_11_0_0;
                         };
-                        taffybar = self.callPackage
-                          (import ./haskell/taffybar.nix)
-                          { gtk3 = selfPkgs.gnome3.gtk; };
+                        #taffybar = self.callPackage
+                        #(import ./haskell/taffybar.nix)
+                        #{ gtk3 = selfPkgs.gnome3.gtk; };
                         broadcast-chan = self.callPackage (import ./haskell/broadcast-chan.nix) {};
                         xmonad-windownames = doJailbreak super.xmonad-windownames;
                         xmonad-extras = doJailbreak super.xmonad-extras;

@@ -7,7 +7,7 @@
     # # haskell packages for XMonad
     # pkgs.haskellPackages.xmonad-eval
     (
-      pkgs-legacy.xmonad-with-packages.override {
+      xmonad-with-packages.override {
         packages = self: with self;
           [
             xmonad
@@ -15,14 +15,15 @@
             xmonad-contrib
             xmonad-extras
             xmonad-utils
-            xmonad-windownames
+            #xmonad-windownames
             xmonad-entryhelper
             taffybar
           ];
       }
     )
 
-    pkgs-legacy.taffybar # desktop information bar intended for use with XMonad and similar window managers
+
+    taffybar # desktop information bar intended for use with XMonad and similar window managers
 
     dmenu # A generic, highly customizable, and efficient menu for the X Window System
     xclip # Tool to access the X clipboard from a console application
@@ -51,17 +52,18 @@
 
   # desktop env
   services.xserver = {
+    useGlamor = true;
     xkbOptions = "ctrl:nocaps";
     enable = true;
     layout = "us";
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      haskellPackages = pkgs.pkgs-legacy.haskell.packages.ghc863;
+      #haskellPackages = pkgs.pkgs-legacy.haskell.packages.ghc863;
       extraPackages = haskellpackages: with haskellpackages; [
         taffybar
         dbus
-        xmonad-windownames
+        #xmonad-windownames
         xmonad-entryhelper
         xmobar
         xmonad
