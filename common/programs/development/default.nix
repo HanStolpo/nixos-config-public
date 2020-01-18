@@ -95,6 +95,8 @@ in
         graphviz # draw graphs for networks of nodes
         haskellPackages.ghcide
         haskellPackages.hie-bios
+        haskellPackages.ch-hs-imports
+        haskellPackages.ch-hs-format
 
         #yarn2nix
         elm2nix

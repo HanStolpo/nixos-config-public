@@ -22,6 +22,7 @@ let
                 haskell-lsp = self.callPackage (import ./haskell/haskell-lsp.nix) {};
                 hie-bios = self.callPackage (import ./haskell/hie-bios.nix) {};
                 lsp-test = self.callPackage (import ./haskell/lsp-test.nix) {};
+                regex-tdfa = self.callPackage (import ./haskell/regex-tdfa.nix) {};
                 rope-utf16-splay = self.callPackage (import ./haskell/rope-utf16-splay.nix) {};
                 unix-compat = self.callPackage (import ./haskell/unix-compat.nix) {};
                 yaml = self.callPackage (import ./haskell/yaml.nix) {};

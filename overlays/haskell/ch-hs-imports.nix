@@ -24,8 +24,8 @@ mkDerivation {
   version = "0.1.0.0";
   src = fetchgit {
     url = "https://github.com/circuithub/ch-hs-imports";
-    sha256 = "06240cpqbbbq1z677qphdjz2r01dazxzw8c8xicwzbl5h4v0xxyd";
-    rev = "4c48e06047d0acc2ea0bd4e6afdc7e6701b1d8f4";
+    sha256 = "0bfzck2fhfv65cdnphjihbp54y8xaklwcc2dl47h7xpvwq61p1m9";
+    rev = "7d11ee89b0731f43a2d3248b8e339f8b55a3e2d2";
     fetchSubmodules = true;
   };
   isLibrary = false;

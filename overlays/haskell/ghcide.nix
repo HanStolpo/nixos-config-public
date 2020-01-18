@@ -10,10 +10,14 @@
 , directory
 , extra
 , filepath
+, fuzzy
 , ghc
 , ghc-boot
 , ghc-boot-th
 , ghc-paths
+, ghc-typelits-knownnat
+, gitrev
+, haddock-library
 , hashable
 , haskell-lsp
 , haskell-lsp-types
@@ -27,6 +31,7 @@
 , parser-combinators
 , prettyprinter
 , prettyprinter-ansi-terminal
+, regex-tdfa
 , rope-utf16-splay
 , safe-exceptions
 , shake
@@ -46,8 +51,8 @@
 }:
 mkDerivation {
   pname = "ghcide";
-  version = "0.0.4";
-  sha256 = "f956032db42350a4b9112cf41675e7d3c320a3ca9d0d17f83b40a58fb5d52aa6";
+  version = "0.0.6";
+  sha256 = "4b6ae8f0fc4bb3e1743fa83e7571ab5e76b028ca61aea83efa9f10023ee9e0ee";
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
@@ -62,9 +67,11 @@ mkDerivation {
     directory
     extra
     filepath
+    fuzzy
     ghc
     ghc-boot
     ghc-boot-th
+    haddock-library
     hashable
     haskell-lsp
     haskell-lsp-types
@@ -73,6 +80,7 @@ mkDerivation {
     network-uri
     prettyprinter
     prettyprinter-ansi-terminal
+    regex-tdfa
     rope-utf16-splay
     safe-exceptions
     shake
@@ -95,6 +103,7 @@ mkDerivation {
     filepath
     ghc
     ghc-paths
+    gitrev
     haskell-lsp
     hie-bios
     hslogger
@@ -103,12 +112,15 @@ mkDerivation {
     text
   ];
   testHaskellDepends = [
+    aeson
     base
+    bytestring
     containers
     directory
     extra
     filepath
     ghc
+    ghc-typelits-knownnat
     haskell-lsp-types
     lens
     lsp-test
