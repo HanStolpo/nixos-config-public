@@ -91,15 +91,13 @@ let
 
   fetch-lorri-src = super.fetchgit {
     url = "https://github.com/target/lorri";
-    sha256 = "0djmmk24mq7936wmp6hpcg5w3g5q90dxd91z0v3n4n82xjr8y54m";
-    rev = "fdfeae9ce4d783db59e5c0f020a606cbfd4b0556";
+    sha256 = "0rkga944jl6i0051vbsddfqbvzy12168cbg4ly2ng1rk0x97dbr8";
+    rev = "7b84837b9988d121dd72178e81afd440288106c5";
     fetchSubmodules = false;
   };
   lorri-nixpkgs =
     import
-      (builtins.toPath "${fetch-lorri-src}/nix/nixpkgs.nix") {
-      enableMozillaOverlay = false;
-    };
+      (builtins.toPath "${fetch-lorri-src}/nix/nixpkgs.nix");
   lorri =
     self.callPackage
       (builtins.toPath "${fetch-lorri-src}/default.nix") {
@@ -110,7 +108,7 @@ in
 rec {
   inherit pkgs-legacy;
   inherit lorri;
-  direnv = lorri-nixpkgs.direnv;
+  #direnv = lorri-nixpkgs.direnv;
   realvnc-viewer = self.callPackage ./realvnc-viewer {};
   create-react-native-app = (self.callPackage ./create-react-native-app {});
   expo-exp = (self.callPackage ./expo-exp {});
