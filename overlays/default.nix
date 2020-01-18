@@ -111,6 +111,7 @@ rec {
   inherit pkgs-legacy;
   inherit lorri;
   direnv = lorri-nixpkgs.direnv;
+  realvnc-viewer = self.callPackage ./realvnc-viewer {};
   create-react-native-app = (self.callPackage ./create-react-native-app {});
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
