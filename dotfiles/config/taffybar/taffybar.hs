@@ -1,22 +1,28 @@
 import System.Taffybar
+import System.Taffybar.SimpleConfig
 
-import System.Taffybar.Systray
-import System.Taffybar.TaffyPager
-import System.Taffybar.SimpleClock
-import System.Taffybar.FreedesktopNotifications
-import System.Taffybar.Weather
-import System.Taffybar.MPRIS
-import System.Taffybar.Battery
-import System.Taffybar.Text.CPUMonitor
+--import System.Taffybar.Systray
+--import System.Taffybar.TaffyPager
+import System.Taffybar.Widget.SimpleClock
+import System.Taffybar.Widget.FreedesktopNotifications
+--import System.Taffybar.Weather
+--import System.Taffybar.MPRIS
+import System.Taffybar.Widget.SNITray
+import System.Taffybar.Widget.Battery
+import System.Taffybar.Widget.Text.CPUMonitor
 
-import System.Taffybar.Widgets.PollingBar
-import System.Taffybar.Widgets.PollingGraph
-import System.Taffybar.Widgets.PollingLabel
+import System.Taffybar.Widget.Generic.PollingBar
+import System.Taffybar.Widget.Generic.PollingGraph
+import System.Taffybar.Widget.Generic.PollingLabel
 
-import System.Information.Memory
-import System.Information.CPU2
+import System.Taffybar.Information.Memory
+import System.Taffybar.Information.CPU2
 
 import Text.Printf (printf)
+
+import System.Taffybar.Widget.Workspaces
+import System.Taffybar.Widget.Layout
+import System.Taffybar.Widget.Battery
 
 memCallback = do
   mi <- parseMeminfo
@@ -39,14 +45,16 @@ main = do
               _  -> (0.6, 0, 0)
                                     )
   let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
-      pager = taffyPagerNew defaultPagerConfig
+      workspaces = workspacesNew defaultWorkspacesConfig
       note = notifyAreaNew defaultNotificationConfig
       mem = pollingBarNew greenWhiteRedBar 1 memCallback
       cpu = pollingBarNew greenWhiteRedBar 0.5 cpuCallback
-      cpuText = textCpuMonitorNew "CPU $total$" 1
-      {-cpuText = pollingLabelNew "<span>CPU 00</span>" 1 cpuCallbackText-}
-      tray = systrayNew
-      battery = textBatteryNew "bat:$percentage$% $time$" 10
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager, note ]
-                                        , endWidgets = [ tray, clock, mem, cpu, cpuText, battery ]
-}
+      tray = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt -- sniTrayNew
+      battery = textBatteryNew "bat:$percentage$% $time$"
+      layout = layoutNew defaultLayoutConfig
+      simpleConfig =
+        defaultSimpleTaffyConfig
+          { startWidgets = [ workspaces, note, layout  ]
+          , endWidgets = [ tray, clock, mem, cpu, battery]
+          }
+  simpleTaffybar simpleConfig
