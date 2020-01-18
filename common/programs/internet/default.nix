@@ -10,8 +10,6 @@
     google-chrome
 
     # chat clients
-    hipchat
-    #hipchat
     slack
     weechat # A fast, light and extensible chat client
 
