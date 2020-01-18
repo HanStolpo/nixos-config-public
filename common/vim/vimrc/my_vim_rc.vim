@@ -133,8 +133,11 @@ endif
 
 
 " auto formatting via vim-autoformat
+" disable auto formatting with `:let g:no_autoformat = 1`
+" renable auto formatting with `:unlet g:no_autoformat`
 let g:formatdef_nixpkgs_fmt = '"nixpkgs-fmt"'
 let g:formatters_nix = ['nixpkgs_fmt']
 
 au BufEnter *.nix set formatprg=nixpkgs-fmt
-au BufWritePre *.nix :Autoformat
+au BufWritePre *.nix if ! exists('g:no_autoformat') | :Autoformat
+
