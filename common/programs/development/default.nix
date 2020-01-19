@@ -25,7 +25,7 @@ in
         ag # A code-searching tool similar to ack, but faster
         ctags # A tool for fast source code browsing (exuberant ctags)
         gnumake # A tool to control the generation of non-source files from sources
-        pkgs-legacy.cabal2nix # Convert Cabal files into Nix build instructions
+        cabal2nix # Convert Cabal files into Nix build instructions
         perl # The standard implementation of the Perl 5 programmming language
         heroku # Everything you need to get started using Heroku
         awscli # Unified tool to manage your AWS services
@@ -46,8 +46,6 @@ in
         nixops
 
         (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
-        (haskell.lib.justStaticExecutables haskellPackages.ch-hs-imports)
-        ghci-bios
 
         # nix-diff
 
@@ -55,7 +53,7 @@ in
         # (haskell.lib.justStaticExecutables haskellPackages.hoogle)
         (haskell.lib.justStaticExecutables haskellPackages.hlint)
         (haskell.lib.justStaticExecutables haskellPackages.hindent)
-        ormolu
+        # ormolu
         # (haskellPackages.ghcWithHoogle (g: with g;
         #    [# not these libs are actually part of GHC as the core libraries (https://www.haskell.org/platform/contents.html)
         #    array base bytestring Cabal containers deepseq directory filepath
@@ -78,7 +76,7 @@ in
         jq
         #stack2nix
         xdotool
-        pkgs-legacy.stack
+        stack
 
         vault
 
@@ -93,10 +91,11 @@ in
         firefox-devedition-bin
 
         graphviz # draw graphs for networks of nodes
-        haskellPackages.ghcide
-        haskellPackages.hie-bios
-        haskellPackages.ch-hs-imports
-        haskellPackages.ch-hs-format
+        (haskell.lib.justStaticExecutables haskellPackages.ghcide)
+        (haskell.lib.justStaticExecutables haskellPackages.hie-bios)
+        (haskell.lib.justStaticExecutables haskellPackages.ch-hs-imports)
+        (haskell.lib.justStaticExecutables haskellPackages.ch-hs-format)
+        ghci-bios
 
         #yarn2nix
         elm2nix

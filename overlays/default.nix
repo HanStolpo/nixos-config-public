@@ -17,76 +17,25 @@ let
                 wstunnel = justStaticExecutables (doJailbreak (self.callPackage ./haskell/wstunnel.nix {}));
 
                 extra = self.callPackage (import ./haskell/extra.nix) {};
-                ghcide = self.callPackage (import ./haskell/ghcide.nix) {};
+                ghcide = (self.callPackage (import ./haskell/ghcide.nix) {});
                 haskell-lsp-types = self.callPackage (import ./haskell/haskell-lsp-types.nix) {};
                 haskell-lsp = self.callPackage (import ./haskell/haskell-lsp.nix) {};
                 hie-bios = self.callPackage (import ./haskell/hie-bios.nix) {};
                 lsp-test = self.callPackage (import ./haskell/lsp-test.nix) {};
-                regex-tdfa = self.callPackage (import ./haskell/regex-tdfa.nix) {};
-                rope-utf16-splay = self.callPackage (import ./haskell/rope-utf16-splay.nix) {};
-                unix-compat = self.callPackage (import ./haskell/unix-compat.nix) {};
-                yaml = self.callPackage (import ./haskell/yaml.nix) {};
-                unordered-containers = self.callPackage (import ./haskell/unordered-containers.nix) {};
+                regex-tdfa = (self.callPackage (import ./haskell/regex-tdfa.nix) {});
+                regex-base = (self.callPackage (import ./haskell/regex-base.nix) {});
+                regex-posix = doJailbreak (self.callPackage (import ./haskell/regex-posix.nix) {});
+                test-framework = doJailbreak (super.test-framework);
                 ormolu = self.callPackage (import ./haskell/ormolu.nix) {};
                 ch-hs-format = self.callPackage (import ./haskell/ch-hs-format.nix) {};
-
-
-                streaming-process =
-                  doJailbreak (
-                    self.callPackage
-                      /home/handre/dev/ch-hs-imports/nix/overlays/haskell/streaming-process.nix {}
-                  );
                 ch-hs-imports =
-                  self.callPackage (import ./haskell/ch-hs-imports.nix) {};
+                  doJailbreak (
+                    self.callPackage (import ./haskell/ch-hs-imports.nix) {}
+                  );
 
               };
           }
     ) super.haskell.packages;
-  };
-
-  pkgs-legacy = import (
-    super.fetchzip {
-      url = "https://github.com/NixOS/nixpkgs-channels/archive/2d6f84c1090ae39c58dcec8f35a3ca62a43ad38c.tar.gz";
-      sha256 = "0l8b51lwxlqc3h6gy59mbz8bsvgc0q6b3gf7p3ib1icvpmwqm773";
-      name = "pkgs-legacy";
-    }
-  ) {
-    config = { allowUnfree = true; };
-    overlays = [
-      (
-        self: super: rec {
-          haskell = super.haskell // {
-            packages = builtins.mapAttrs (
-              name: value:
-                let
-                  selfPkgs = self;
-                  superPkgs = super;
-                in
-                  value.override {
-                    overrides =
-                      with superPkgs.lib.attrsets;
-                      with superPkgs.haskell.lib;
-                      self: super: {
-                        monad-dijkstra = self.callPackage ./haskell/monad-dijkstra.nix {};
-                        yaml_0_11_0_0 = self.callPackage ./haskell/yaml_0_11_0_0.nix {};
-                        hpack_0_31_1 = self.callPackage ./haskell/hpack_0_31_1.nix {
-                          yaml = self.yaml_0_11_0_0;
-                        };
-                        #taffybar = self.callPackage
-                        #(import ./haskell/taffybar.nix)
-                        #{ gtk3 = selfPkgs.gnome3.gtk; };
-                        broadcast-chan = self.callPackage (import ./haskell/broadcast-chan.nix) {};
-                        xmonad-windownames = doJailbreak super.xmonad-windownames;
-                        xmonad-extras = doJailbreak super.xmonad-extras;
-                        Diff = dontCheck super.Diff;
-                      };
-                  }
-            ) super.haskell.packages;
-          };
-          haskellPackages = haskell.packages.ghc863;
-        }
-      )
-    ];
   };
 
 
@@ -107,7 +56,7 @@ let
     };
 in
 rec {
-  inherit pkgs-legacy;
+  #inherit pkgs-legacy;
   inherit lorri;
   #direnv = lorri-nixpkgs.direnv;
   realvnc-viewer = self.callPackage ./realvnc-viewer {};
@@ -115,7 +64,7 @@ rec {
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
-  haskellPackages = haskell.packages.ghc865;
+  #haskellPackages = haskell.packages.ghc881;
   mykicad = super.kicad.overrideAttrs (
     oldAttrs: rec {
       name = "mikicad";
@@ -127,7 +76,7 @@ rec {
       };
     }
   );
-  ormolu = haskellPackages.ormolu;
+  #ormolu = haskellPackages.ormolu;
 
   slack = self.callPackage ./slack { gdk-pixbuf = self.gdk_pixbuf; };
 
