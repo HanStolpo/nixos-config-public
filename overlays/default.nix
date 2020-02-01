@@ -25,6 +25,7 @@ let
                 regex-tdfa = (self.callPackage (import ./haskell/regex-tdfa.nix) {});
                 regex-base = (self.callPackage (import ./haskell/regex-base.nix) {});
                 regex-posix = doJailbreak (self.callPackage (import ./haskell/regex-posix.nix) {});
+                regex-pcre-builtin = doJailbreak (self.callPackage (import ./haskell/regex-pcre-builtin.nix) {});
                 test-framework = doJailbreak (super.test-framework);
                 ormolu = self.callPackage (import ./haskell/ormolu.nix) {};
                 ch-hs-format = self.callPackage (import ./haskell/ch-hs-format.nix) {};
@@ -32,6 +33,20 @@ let
                   doJailbreak (
                     self.callPackage (import ./haskell/ch-hs-imports.nix) {}
                   );
+
+                haddock-library = self.callPackage (import ./haskell/haddock-library.nix) {};
+                optparse-applicative = self.callPackage (import ./haskell/optparse-applicative.nix) {};
+                base-compat = self.callPackage (import ./haskell/base-compat.nix) {};
+                time-compat = self.callPackage (import ./haskell/time-compat.nix) {};
+                quickcheck-instances = self.callPackage (import ./haskell/quickcheck-instances.nix) {};
+                aeson = self.callPackage (import ./haskell/aeson.nix) {};
+                gi-gtk-hs = self.callPackage (import ./haskell/gi-gtk-hs.nix) {};
+                attoparsec-iso8601 = self.callPackage (import ./haskell/attoparsec-iso8601.nix) {};
+                Diff = self.callPackage (import ./haskell/Diff.nix) {};
+                aeson-compat = self.callPackage (import ./haskell/aeson-compat.nix) {};
+                aeson-pretty = self.callPackage (import ./haskell/aeson-pretty.nix) {};
+
+
 
               };
           }

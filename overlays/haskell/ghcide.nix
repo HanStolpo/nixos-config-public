@@ -9,6 +9,7 @@
 , deepseq
 , directory
 , extra
+, fetchgit
 , filepath
 , fuzzy
 , ghc
@@ -31,6 +32,8 @@
 , parser-combinators
 , prettyprinter
 , prettyprinter-ansi-terminal
+, QuickCheck
+, quickcheck-instances
 , regex-tdfa
 , rope-utf16-splay
 , safe-exceptions
@@ -42,6 +45,7 @@
 , tasty
 , tasty-expected-failure
 , tasty-hunit
+, tasty-quickcheck
 , text
 , time
 , transformers
@@ -52,7 +56,12 @@
 mkDerivation {
   pname = "ghcide";
   version = "0.0.6";
-  sha256 = "4b6ae8f0fc4bb3e1743fa83e7571ab5e76b028ca61aea83efa9f10023ee9e0ee";
+  src = fetchgit {
+    url = "git://github.com/digital-asset/ghcide";
+    sha256 = "0vwydqb3b76ksw54van21vla2k81x1sy4mkz6jx9z0p62kr8xqcg";
+    rev = "913aa5f9fa3508dcbe423aea3e0d0effe1b57d1b";
+    fetchSubmodules = true;
+  };
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
@@ -121,13 +130,19 @@ mkDerivation {
     filepath
     ghc
     ghc-typelits-knownnat
+    haddock-library
+    haskell-lsp
     haskell-lsp-types
     lens
     lsp-test
     parser-combinators
+    QuickCheck
+    quickcheck-instances
+    rope-utf16-splay
     tasty
     tasty-expected-failure
     tasty-hunit
+    tasty-quickcheck
     text
   ];
   doCheck = false;
