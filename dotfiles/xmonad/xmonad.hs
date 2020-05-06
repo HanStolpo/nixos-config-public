@@ -4,7 +4,7 @@
 {-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE RankNTypes #-}
 
-import System.Taffybar.Support.PagerHints  (pagerHints)
+--import System.Taffybar.Support.PagerHints  (pagerHints)
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -62,16 +62,15 @@ import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.PerWorkspace
 import XMonad.Actions.SpawnOn
+import XMonad.Config.Gnome (gnomeConfig)
 
 main :: IO ()
 main =
   xmonad .
   dynamicProjects projects .
   withNavigation2DConfig myNav2DConf .
-  {-floatPlacements .-}
-  myManageHooks .
+  -- myManageHooks .
   myLayout .
-  pagerHints .
   myBorders .
   myKeys' .
   myHooks .
@@ -116,7 +115,9 @@ myLayout cfg = cfg{layoutHook = myLayoutHook}
 
 startup :: X()
 startup = do
-  spawn "dbus-launch taffybar"
+  -- --spawn "dbus-launch taffybar"
+  -- spawn "status-notifier-watcher"
+  -- spawn "taffybar"
   return ()
 
 ------------------------------------------------------------------------}}}

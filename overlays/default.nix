@@ -16,37 +16,11 @@ let
 
                 wstunnel = justStaticExecutables (doJailbreak (self.callPackage ./haskell/wstunnel.nix {}));
 
-                extra = self.callPackage (import ./haskell/extra.nix) {};
-                ghcide = (self.callPackage (import ./haskell/ghcide.nix) {});
-                haskell-lsp-types = self.callPackage (import ./haskell/haskell-lsp-types.nix) {};
-                haskell-lsp = self.callPackage (import ./haskell/haskell-lsp.nix) {};
                 hie-bios = self.callPackage (import ./haskell/hie-bios.nix) {};
-                lsp-test = self.callPackage (import ./haskell/lsp-test.nix) {};
-                regex-tdfa = (self.callPackage (import ./haskell/regex-tdfa.nix) {});
-                regex-base = (self.callPackage (import ./haskell/regex-base.nix) {});
-                regex-posix = doJailbreak (self.callPackage (import ./haskell/regex-posix.nix) {});
-                regex-pcre-builtin = doJailbreak (self.callPackage (import ./haskell/regex-pcre-builtin.nix) {});
-                test-framework = doJailbreak (super.test-framework);
-                ormolu = self.callPackage (import ./haskell/ormolu.nix) {};
-                ch-hs-format = self.callPackage (import ./haskell/ch-hs-format.nix) {};
                 ch-hs-imports =
                   doJailbreak (
                     self.callPackage (import ./haskell/ch-hs-imports.nix) {}
                   );
-
-                haddock-library = self.callPackage (import ./haskell/haddock-library.nix) {};
-                optparse-applicative = self.callPackage (import ./haskell/optparse-applicative.nix) {};
-                base-compat = self.callPackage (import ./haskell/base-compat.nix) {};
-                time-compat = self.callPackage (import ./haskell/time-compat.nix) {};
-                quickcheck-instances = self.callPackage (import ./haskell/quickcheck-instances.nix) {};
-                aeson = self.callPackage (import ./haskell/aeson.nix) {};
-                gi-gtk-hs = self.callPackage (import ./haskell/gi-gtk-hs.nix) {};
-                attoparsec-iso8601 = self.callPackage (import ./haskell/attoparsec-iso8601.nix) {};
-                Diff = self.callPackage (import ./haskell/Diff.nix) {};
-                aeson-compat = self.callPackage (import ./haskell/aeson-compat.nix) {};
-                aeson-pretty = self.callPackage (import ./haskell/aeson-pretty.nix) {};
-
-
 
               };
           }
@@ -71,15 +45,30 @@ let
     };
 in
 rec {
-  #inherit pkgs-legacy;
+
   inherit lorri;
-  #direnv = lorri-nixpkgs.direnv;
+
+
+  #prettier = self.yarn2nix-moretea.mkYarnPackage rec{
+  #name = "prettier";
+  #src = super.fetchFromGitHub {
+  #owner = "prettier";
+  #repo = "prettier";
+  #rev = "a858a315e926c21bd1ebfcde70a08419c9472a8c";
+  #sha256 = "1rwxdxadj541cvgahmyppqchqz9pmhhc1rqxg62m7hk1gvvvly5d";
+  #};
+  #packageJSON = "${src}/package.json";
+  #yarnLock = "${src}/yarn.lock";
+  ## NOTE: this is optional and generated dynamically if omitted
+  ##yarnNix = ./yarn.nix;
+  #};
+
   realvnc-viewer = self.callPackage ./realvnc-viewer {};
   create-react-native-app = (self.callPackage ./create-react-native-app {});
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
-  #haskellPackages = haskell.packages.ghc881;
+
   mykicad = super.kicad.overrideAttrs (
     oldAttrs: rec {
       name = "mikicad";
@@ -91,7 +80,6 @@ rec {
       };
     }
   );
-  #ormolu = haskellPackages.ormolu;
 
   slack = self.callPackage ./slack { gdk-pixbuf = self.gdk_pixbuf; };
 

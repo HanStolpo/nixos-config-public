@@ -2,16 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+# override local nix.conf options using `--option`
+# e.g. to set the subituters `--option substituters https://cache.nixos.org`
+#      to disable subtitution `--option substitute false`
+# see https://nixos.org/nix/manual/#name-11
+
+# clear local binary cache issues by doing
+# > Shane:  clever from #nixos told me to try doing rm  ~/.cache/nix/binary-cache-v6.sqlite* as root
+
 { config, pkgs, ... }:
 let
   kernelV = pkgs.linuxPackages;
   #kernelV = pkgs.linuxPackages_4_9;
   #kernelV = pkgs.linuxPackages_latest;
+
 in
 {
 
   # Include custom packages and override
-  nixpkgs.overlays = [ (import ./overlays) ];
+  nixpkgs.overlays = [
+    (import ./overlays)
+  ];
   imports =
     [
       # Include the results of the hardware scan.
@@ -25,6 +36,7 @@ in
       ./common/network-time
       ./common/security/pki
       ./common/programs/core
+      ./common/lorri
       ./common/programs/development
       ./common/programs/internet
       ./common/programs/misc
@@ -64,6 +76,8 @@ in
     )
   ;
 
+  environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
   nix.buildCores = 6;
   nixpkgs.config.allowUnfree = true;
 
@@ -74,6 +88,7 @@ in
   time.timeZone = "Europe/Amsterdam";
   #time.timeZone = "Europe/London";
   #time.timeZone = "Africa/Johannesburg";
+  #time.timeZone = "America/Los_Angeles";
 
   boot.kernelPackages = kernelV;
   boot.extraModulePackages = [ kernelV.bbswitch /*kernelV.exfat-nofuse*/ ];
@@ -125,9 +140,10 @@ in
 
   services.xserver.libinput.enable = true;
   services.xserver.libinput.naturalScrolling = true;
+  services.xserver.libinput.disableWhileTyping = true;
   #services.xserver.dpi = 180;
   services.xserver.dpi = 162;
-  #services.xserver.dpi = 102;
+  #services.xserver.dpi = 122;
   #hardware.opengl.driSupport32Bit = false;
   services.xserver.exportConfiguration = true;
   #services.xserver.useGlamor = true;
@@ -151,6 +167,8 @@ in
     gtk-engine-murrine
     gtk_engines
     hicolor-icon-theme
+    gnome3.adwaita-icon-theme
+    breeze-icons
   ];
 
   # hybrid sleep on power off button
@@ -174,12 +192,14 @@ in
   #Select internationalisation properties.
   i18n = {
     #consoleFont = "Lat2-Terminus16";
-    consoleFont = "latarcyrheb-sun32";
     defaultLocale = "en_ZA.UTF-8";
-    consolePackages = [ pkgs.terminus_font ];
-    consoleUseXkbConfig = true;
   };
 
+  console = {
+    useXkbConfig = true;
+    packages = [ pkgs.terminus_font ];
+    font = "latarcyrheb-sun32";
+  };
 
   # The NixOS release to be compatible with for stateful data such as databases.
   #system.stateVersion = "17.03";
@@ -195,4 +215,8 @@ in
   '';
 
   nix.useSandbox = false;
+
+  fonts.fontconfig.dpi = 162;
+  fonts.fontconfig.antialias = true;
+  fonts.fontconfig.hinting.enable = true;
 }

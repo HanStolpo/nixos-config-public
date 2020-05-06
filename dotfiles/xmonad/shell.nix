@@ -75,10 +75,15 @@ let
         xmonad-contrib
         xmonad-extras
         xmonad-utils
-        #xmonad-windownames
         xmonad-entryhelper
-        taffybar
         dbus
+
+        hie-bios
+        ghcide
+        ghcid # the hoogle Haskell documentation search engine
+        hlint # standalone linter for Haskell code
+        ch-hs-imports
+        ormolu
       ]
     );
 in
@@ -96,9 +101,6 @@ in
           ghcWithHoogle # our compiler GHC
           hindent # a tool for auto formatting Haskell code
           cabal-install # the Haskell "Package" manager only needed for ghc-mod
-          hoogle # the hoogle Haskell documentation search engine
-          hlint # standalone linter for Haskell code
-          pkgs.haskellPackages.ghcid
         ];
       }
     )

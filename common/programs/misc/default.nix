@@ -47,6 +47,8 @@
       mkpasswd # generate password hashes
 
       autojump # used in ohmyzsh to quickly jump between directories
+
+      shutter # take screen shots annotate images
     ];
 
 }

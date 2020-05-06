@@ -17,19 +17,19 @@
             xmonad-utils
             #xmonad-windownames
             xmonad-entryhelper
-            taffybar
+            #taffybar
           ];
       }
     )
 
 
-    taffybar # desktop information bar intended for use with XMonad and similar window managers
+    #taffybar # desktop information bar intended for use with XMonad and similar window managers
 
     dmenu # A generic, highly customizable, and efficient menu for the X Window System
     xclip # Tool to access the X clipboard from a console application
 
     # Themes
-    slimThemes.lunar
+    #slimThemes.lunar
 
     libnotify # A library that sends desktop notifications to a notification daemon
     xdg-user-dirs # A tool to help manage well known user directories like the desktop folder and the music folder
@@ -48,6 +48,42 @@
 
     xorg.xbacklight # control backlight of screen
 
+    (haskell.lib.justStaticExecutables haskellPackages.status-notifier-item)
+
+    # https://github.com/NixOS/nixpkgs-channels/blob/nixos-20.03/pkgs/build-support/make-desktopitem/default.nix
+    # https://wiki.haskell.org/Xmonad/Using_xmonad_in_MATE
+    # [Desktop Entry]
+    # Type=Application
+    # Name=XMonad
+    # Exec=/usr/bin/xmonad
+    # NoDisplay=true
+    # X-GNOME-WMName=XMonad
+    # X-GNOME-Autostart-Phase=WindowManager
+    # X-GNOME-Provides=windowmanager
+    # X-GNOME-Autostart-Notify=true
+    (
+      let
+        xmonadSession =
+          builtins.elemAt
+            (
+              pkgs.lib.filter (s: s.name == "xmonad")
+                config.services.xserver.displayManager.session
+            ) 0;
+      in
+        makeDesktopItem
+          {
+            desktopName = "XMonad";
+            name = "XMonad";
+            exec = xmonadSession.start;
+            extraEntries = ''
+              NoDisplay=true
+              X-GNOME-WMName=XMonad
+              X-GNOME-Autostart-Phase=WindowManager
+              X-GNOME-Provides=windowmanager
+              X-GNOME-Autostart-Notify=true
+            '';
+          }
+    )
   ];
 
   # desktop env
@@ -61,7 +97,7 @@
       enableContribAndExtras = true;
       #haskellPackages = pkgs.pkgs-legacy.haskell.packages.ghc863;
       extraPackages = haskellpackages: with haskellpackages; [
-        taffybar
+        #taffybar
         dbus
         #xmonad-windownames
         xmonad-entryhelper
@@ -72,20 +108,37 @@
         xmonad-utils
       ];
     };
-    windowManager.default = "xmonad";
+    displayManager.defaultSession = "lxqt+xmonad";
     desktopManager.xterm.enable = false;
     desktopManager.gnome3.enable = false;
+    desktopManager.cde.enable = false;
     desktopManager.xfce.enable = false;
-    desktopManager.enlightenment.enable = false;
-    desktopManager.default = "none";
+    desktopManager.lxqt.enable = true;
+
     displayManager = {
-      slim = {
+      #sessionCommands = ''
+      #${(pkgs.haskell.lib.justStaticExecutables pkgs.haskellPackages.status-notifier-item)}/bin/status-notifier-watcher
+      #'';
+
+      sessionPackages = [];
+      sessionCommands = ''
+        dconf write /org/mate/session/required-components/windowmanager xmonad
+        gsettings set org.mate.session.required-components.windowmanager xmonad
+      '';
+
+      lightdm = {
         enable = true;
-        defaultUser = "handre";
+        #autoLogin = {
+        #enable = true;
+        #timeout = 0;
+        #user = "handre";
+        #};
+        #greeter.enable = false;
       };
     };
   };
 
   services.dbus.enable = true;
   programs.ssh.startAgent = true;
+
 }

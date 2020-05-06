@@ -17,6 +17,8 @@ let
   ) {};
 in
 {
+  # services.user.lorri.enable = true;
+
   environment.systemPackages =
     with pkgs;
     (
@@ -45,29 +47,8 @@ in
 
         nixops
 
-        (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
 
         # nix-diff
-
-        #(haskell.lib.justStaticExecutables haskellPackages.intero)
-        # (haskell.lib.justStaticExecutables haskellPackages.hoogle)
-        (haskell.lib.justStaticExecutables haskellPackages.hlint)
-        (haskell.lib.justStaticExecutables haskellPackages.hindent)
-        # ormolu
-        # (haskellPackages.ghcWithHoogle (g: with g;
-        #    [# not these libs are actually part of GHC as the core libraries (https://www.haskell.org/platform/contents.html)
-        #    array base bytestring Cabal containers deepseq directory filepath
-        #    hpc pretty process template-haskell time transformers unix xhtml
-        #    # additional haskell platform libraries
-        #    async attoparsec call-stack fgl fixed GLURaw GLUT half hashable
-        #    haskell-src html HTTP HUnit integer-logarithms mtl network
-        #    network-uri ObjectName OpenGL OpenGLRaw parallel parsec primitive
-        #    QuickCheck random regex-base regex-compat scientific split StateVar
-        #    stm syb text tf-random transformers unordered-containers xhtml zlib
-        #    # add any additional libs here
-        #    aeson linear lens hspec reactive-banana-gi-gtk opencv
-        #    ]))
-        # (haskell.lib.justStaticExecutables haskellPackages.cabal-install)
 
         cargo
         rustc
@@ -76,7 +57,7 @@ in
         jq
         #stack2nix
         xdotool
-        stack
+        #stack
 
         vault
 
@@ -91,14 +72,19 @@ in
         firefox-devedition-bin
 
         graphviz # draw graphs for networks of nodes
+
+        (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
+        (haskell.lib.justStaticExecutables haskellPackages.ormolu)
         (haskell.lib.justStaticExecutables haskellPackages.ghcide)
         (haskell.lib.justStaticExecutables haskellPackages.hie-bios)
         (haskell.lib.justStaticExecutables haskellPackages.ch-hs-imports)
-        (haskell.lib.justStaticExecutables haskellPackages.ch-hs-format)
+        (haskell.lib.justStaticExecutables haskellPackages.hlint)
+        (haskell.lib.justStaticExecutables haskellPackages.hindent)
+
         ghci-bios
 
-        #yarn2nix
         elm2nix
+        #prettier
 
         nixpkgs-fmt
       ]

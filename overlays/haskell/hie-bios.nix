@@ -1,4 +1,5 @@
 { mkDerivation
+, aeson
 , base
 , base16-bytestring
 , bytestring
@@ -28,11 +29,14 @@
 }:
 mkDerivation {
   pname = "hie-bios";
-  version = "0.3.2";
-  sha256 = "39eec9049e0ce46b9185a653a7d6d2de17bc860470054668c78a06f8e4ce0998";
+  version = "0.4.0";
+  sha256 = "81881340e208e39b3f065898cc2eff5f12300cf9a50c17ce4883566da4e448dd";
+  revision = "1";
+  editedCabalFile = "12m0hy4lirnr02h0nh2a85cfm8jv7jgqh24fdn29jkc28gpspm72";
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
+    aeson
     base
     base16-bytestring
     bytestring
@@ -61,10 +65,14 @@ mkDerivation {
   testHaskellDepends = [
     base
     directory
+    extra
     filepath
     ghc
     tasty
     tasty-hunit
+    text
+    unordered-containers
+    yaml
   ];
   doCheck = false;
   homepage = "https://github.com/mpickering/hie-bios";

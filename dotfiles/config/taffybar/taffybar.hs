@@ -49,12 +49,13 @@ main = do
       note = notifyAreaNew defaultNotificationConfig
       mem = pollingBarNew greenWhiteRedBar 1 memCallback
       cpu = pollingBarNew greenWhiteRedBar 0.5 cpuCallback
-      tray = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt -- sniTrayNew
+      tray = sniTrayNew -- sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt -- sniTrayNew
       battery = textBatteryNew "bat:$percentage$% $time$"
       layout = layoutNew defaultLayoutConfig
       simpleConfig =
         defaultSimpleTaffyConfig
           { startWidgets = [ workspaces, note, layout  ]
           , endWidgets = [ tray, clock, mem, cpu, battery]
+          , barHeight = 51
           }
   simpleTaffybar simpleConfig

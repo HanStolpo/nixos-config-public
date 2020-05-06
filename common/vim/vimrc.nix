@@ -9,10 +9,10 @@ in
   ${haskell-vim-now}
 
   ${my_vim_rc}
-
-  " auto formatting via vim-autoformat
-  let g:formatdef_ch_hs_format = '"${haskellPackages.ch-hs-format}/bin/ch-hs-format"'
-  let g:formatters_haskell = ['ch_hs_format']
-
-  " au BufEnter *.hs set formatprg="${haskellPackages.ch-hs-format}/bin/ch-hs-format"
 ''
+
+#  " auto formatting via vim-autoformat
+#  let g:formatdef_ch_hs_format = '"${haskellPackages.ch-hs-format}/bin/ch-hs-format"'
+#  let g:formatters_haskell = ['ch_hs_format']
+#
+#  " au BufEnter *.hs set formatprg="${haskellPackages.ch-hs-format}/bin/ch-hs-format"

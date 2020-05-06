@@ -105,7 +105,10 @@ let g:elm_setup_keybindings = 0 " key bindings don't seem to work
 au BufNewFile,BufRead *.elm set filetype=elm " for some reason this seems to be required by elm filetype - don't know why
 
 
-let g:ale_linters_ignore = {'haskell': ['cabal_ghc', 'ghc', 'ghc_mod', 'hdevtools', 'hie', 'stack_build', 'stack_ghc']}
+let g:ale_linters_ignore = {
+      \'haskell': ['cabal_ghc', 'ghc', 'ghc_mod', 'hdevtools', 'hie', 'stack_build', 'stack_ghc'],
+      \'elm' : ['elm_ls']
+      \}
 
 let g:ale_fixers = {
   \   'elm': ['elm-format'],

@@ -8,7 +8,7 @@
   ];
 
   services = {
-    suspend-prevent.enable = true;
+    suspend-prevent.enable = false;
     upower.enable = true;
     acpid.enable = false;
   };

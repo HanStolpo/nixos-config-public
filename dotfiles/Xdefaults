@@ -8,7 +8,7 @@
 
 !Xft.dpi: 180
 Xft.dpi: 162
-!Xft.dpi: 102
+!Xft.dpi: 122
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -125,3 +125,5 @@ urxvt*color12:    #b6defb
 urxvt*color13:    #fba1fb
 urxvt*color14:    #d7d9fc
 urxvt*color15:    #e2e2e2
+
+Xcursor.theme: capitaine-cursors
