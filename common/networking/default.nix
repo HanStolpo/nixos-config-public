@@ -24,7 +24,9 @@
         192.168.56.107 hanstolpo.local
         10.2.0.2 hydra.circuithub.com
         10.2.0.2 deploy.circuithub.com
-        192.168.56.110 mqtt-server
+        192.168.56.112 mqtt-server
+        192.168.56.112 influxdb-server
+        10.2.0.7 ucamco.circuithub
       '';
 
     enableIPv6 = true;

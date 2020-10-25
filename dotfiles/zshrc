@@ -1,5 +1,3 @@
-#alias ch='(cd ~/dev/circuithub; nix-shell --run "ch $@";)'
-function ch() {(cd ~/dev/circuithub; as="$@"; nix-shell --arg run-silent true --run "ch $as")}
 function ghci-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskellPackages.ghcWithPackages (self: with self;[$ps])";)}
 function ghci-802-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskell.packages.ghc802.ghcWithPackages (self: with self;[$ps])";)}
 function ghci-822-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskell.packages.ghc822.ghcWithPackages (self: with self;[$ps])";)}

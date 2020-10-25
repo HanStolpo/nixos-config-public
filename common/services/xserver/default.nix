@@ -3,24 +3,28 @@
   environment.systemPackages = with pkgs; [
 
     trayer # A lightweight GTK2-based systray for UNIX desktop
+    stalonetray # Stalonetray is a stand-alone freedesktop.org and KDE system tray (notification area) for X Window System/X11 
+    (haskell.lib.justStaticExecutables haskellPackages.xmobar)
+    unclutter-xfixes
+    capitaine-cursors
 
-    # # haskell packages for XMonad
-    # pkgs.haskellPackages.xmonad-eval
-    (
-      xmonad-with-packages.override {
-        packages = self: with self;
-          [
-            xmonad
-            xmobar
-            xmonad-contrib
-            xmonad-extras
-            xmonad-utils
-            #xmonad-windownames
-            xmonad-entryhelper
-            #taffybar
-          ];
-      }
-    )
+    # # # haskell packages for XMonad
+    # # pkgs.haskellPackages.xmonad-eval
+    # (
+    #   xmonad-with-packages.override {
+    #     packages = self: with self;
+    #       [
+    #         xmonad
+    #         xmobar
+    #         xmonad-contrib
+    #         xmonad-extras
+    #         xmonad-utils
+    #         #xmonad-windownames
+    #         xmonad-entryhelper
+    #         #taffybar
+    #       ];
+    #   }
+    # )
 
 
     #taffybar # desktop information bar intended for use with XMonad and similar window managers
@@ -48,7 +52,7 @@
 
     xorg.xbacklight # control backlight of screen
 
-    (haskell.lib.justStaticExecutables haskellPackages.status-notifier-item)
+    #(haskell.lib.justStaticExecutables haskellPackages.status-notifier-item)
 
     # https://github.com/NixOS/nixpkgs-channels/blob/nixos-20.03/pkgs/build-support/make-desktopitem/default.nix
     # https://wiki.haskell.org/Xmonad/Using_xmonad_in_MATE
@@ -61,30 +65,34 @@
     # X-GNOME-Autostart-Phase=WindowManager
     # X-GNOME-Provides=windowmanager
     # X-GNOME-Autostart-Notify=true
-    (
-      let
-        xmonadSession =
-          builtins.elemAt
-            (
-              pkgs.lib.filter (s: s.name == "xmonad")
-                config.services.xserver.displayManager.session
-            ) 0;
-      in
-        makeDesktopItem
-          {
-            desktopName = "XMonad";
-            name = "XMonad";
-            exec = xmonadSession.start;
-            extraEntries = ''
-              NoDisplay=true
-              X-GNOME-WMName=XMonad
-              X-GNOME-Autostart-Phase=WindowManager
-              X-GNOME-Provides=windowmanager
-              X-GNOME-Autostart-Notify=true
-            '';
-          }
-    )
+    # (
+    #   let
+    #     xmonadSession =
+    #       builtins.elemAt
+    #         (
+    #           pkgs.lib.filter (s: s.name == "xmonad")
+    #             config.services.xserver.displayManager.session
+    #         ) 0;
+    #   in
+    #     makeDesktopItem
+    #       {
+    #         desktopName = "XMonad";
+    #         name = "XMonad";
+    #         exec = xmonadSession.start;
+    #         extraEntries = ''
+    #           NoDisplay=true
+    #           X-GNOME-WMName=XMonad
+    #           X-GNOME-Autostart-Phase=WindowManager
+    #           X-GNOME-Provides=windowmanager
+    #           X-GNOME-Autostart-Notify=true
+    #         '';
+    #       }
+    # )
   ];
+
+  services.unclutter-xfixes = {
+    enable = true;
+  };
 
   # desktop env
   services.xserver = {
@@ -95,11 +103,8 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      #haskellPackages = pkgs.pkgs-legacy.haskell.packages.ghc863;
       extraPackages = haskellpackages: with haskellpackages; [
-        #taffybar
         dbus
-        #xmonad-windownames
         xmonad-entryhelper
         xmobar
         xmonad
@@ -108,32 +113,16 @@
         xmonad-utils
       ];
     };
-    displayManager.defaultSession = "lxqt+xmonad";
-    desktopManager.xterm.enable = false;
-    desktopManager.gnome3.enable = false;
-    desktopManager.cde.enable = false;
-    desktopManager.xfce.enable = false;
-    desktopManager.lxqt.enable = true;
+    displayManager.defaultSession = "none+xmonad";
 
     displayManager = {
-      #sessionCommands = ''
-      #${(pkgs.haskell.lib.justStaticExecutables pkgs.haskellPackages.status-notifier-item)}/bin/status-notifier-watcher
-      #'';
-
-      sessionPackages = [];
-      sessionCommands = ''
-        dconf write /org/mate/session/required-components/windowmanager xmonad
-        gsettings set org.mate.session.required-components.windowmanager xmonad
-      '';
 
       lightdm = {
         enable = true;
-        #autoLogin = {
-        #enable = true;
-        #timeout = 0;
-        #user = "handre";
-        #};
-        #greeter.enable = false;
+        greeters.mini = {
+          enable = true;
+          user = "handre";
+        };
       };
     };
   };

@@ -144,3 +144,24 @@ let g:formatters_nix = ['nixpkgs_fmt']
 au BufEnter *.nix set formatprg=nixpkgs-fmt
 au BufWritePre *.nix if ! exists('g:no_autoformat') | :Autoformat
 
+au BufNewFile,BufRead *.hs map <buffer> <leader>hh :Hoogle 
+au BufNewFile,BufRead *.hs map <buffer> <leader>hH :Hoogle<CR>
+au BufNewFile,BufRead *.hs map <buffer> <leader>hc :HoogleClose<CR>
+au BufNewFile,BufRead *.hs map <buffer> <leader>hl :HoogleLine<CR>
+
+au BufNewFile,BufRead *.* map <buffer> <leader>ad :ALEGoToDefinition<CR>
+au BufNewFile,BufRead *.* map <buffer> <leader>ah :ALEHover<CR>
+au BufNewFile,BufRead *.* map <buffer> <leader>af :ALEFix<CR>
+au BufNewFile,BufRead *.* map <buffer> <leader>ar :ALEFindReferences<CR>
+
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+call deoplete#custom#option('smart_case', v:true)
+
+set completeopt-=preview

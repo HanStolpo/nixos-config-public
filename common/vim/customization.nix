@@ -67,11 +67,32 @@ in
 
       { name = "vim-textobj-user"; }
 
-      { name = "vim-jade"; }
+      { name = "vim-pug"; }
 
       { name = "Improved-AnsiEsc"; }
 
       { name = "vim-autoformat"; }
+
+      { name = "vim-hoogle"; }
+
+      { name = "deoplete-nvim"; }
+
+      { name = "deoplete-zsh"; }
+
+      { name = "deoplete-dictionary"; }
+
+      #{ name = "coc-nvim"; }
+      #{ name = "coc-json"; }
+      #{ name = "coc-tsserver"; }
+      #{ name = "coc-css"; }
+      #{ name = "coc-yank"; }
+      #{ name = "coc-prettier"; }
+      #{ name = "coc-git"; }
+      #{ name = "coc-rls"; }
+      #{ name = "coc-python"; }
+      #{ name = "coc-neco"; }
+      #{ name = "coc-yaml"; }
+      #{ name = "coc-html"; }
     ];
   };
 }

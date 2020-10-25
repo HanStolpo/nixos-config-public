@@ -19,6 +19,7 @@
       1234
       6566
       8612 # sane printing
+      8082 # api-aws.circuithub.com
     ];
     allowedUDPPorts = [
       # NFS ?

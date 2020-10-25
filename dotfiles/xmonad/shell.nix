@@ -78,12 +78,12 @@ let
         xmonad-entryhelper
         dbus
 
-        hie-bios
-        ghcide
-        ghcid # the hoogle Haskell documentation search engine
-        hlint # standalone linter for Haskell code
-        ch-hs-imports
-        ormolu
+        # hie-bios
+        # ghcide
+        ghcid
+        # hlint # standalone linter for Haskell code
+        # ch-hs-imports
+        # ormolu
       ]
     );
 in
@@ -99,7 +99,8 @@ in
         # these are all the build time dependencies so they will all be available in the shell
         buildInputs = [
           ghcWithHoogle # our compiler GHC
-          hindent # a tool for auto formatting Haskell code
+          haskellPackages.ghcid
+          #hindent # a tool for auto formatting Haskell code
           cabal-install # the Haskell "Package" manager only needed for ghc-mod
         ];
       }

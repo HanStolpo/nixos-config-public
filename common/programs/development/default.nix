@@ -75,15 +75,16 @@ in
 
         (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
         (haskell.lib.justStaticExecutables haskellPackages.ormolu)
-        (haskell.lib.justStaticExecutables haskellPackages.ghcide)
+        (haskell.lib.justStaticExecutables haskellPackages.floskell)
+        (haskell.lib.justStaticExecutables haskellPackages.haskell-language-server)
         (haskell.lib.justStaticExecutables haskellPackages.hie-bios)
         (haskell.lib.justStaticExecutables haskellPackages.ch-hs-imports)
         (haskell.lib.justStaticExecutables haskellPackages.hlint)
-        (haskell.lib.justStaticExecutables haskellPackages.hindent)
+        #(haskell.lib.justStaticExecutables haskellPackages.hindent)
 
         ghci-bios
 
-        elm2nix
+        #elm2nix
         #prettier
 
         nixpkgs-fmt

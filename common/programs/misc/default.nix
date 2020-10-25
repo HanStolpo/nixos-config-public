@@ -10,6 +10,7 @@
       gimp # The GNU Image Manipulation Program
       adobe-reader # PDF viewer
       libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release)
+      projectlibre # Project-Management Software similar to MS-Project
       obs-studio # Free and open source software for video recording and live streaming
       inkscape # Vector graphics editor
       nmap # / ncat : A free and open source utility for network discovery and security auditing

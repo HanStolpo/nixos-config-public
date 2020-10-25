@@ -3,6 +3,8 @@
 {
 
   environment.systemPackages = with pkgs; [
+
+    remmina # remote desktop client
     wireguard
 
     # browsers
@@ -11,6 +13,7 @@
 
     # chat clients
     slack
+    discord
     weechat # A fast, light and extensible chat client
 
     # online storage
@@ -23,47 +26,6 @@
   ];
 
   nixpkgs.config = {
-    firefox = {
-      enableGnash = true;
-      #enableAdobeFlash = true;
-      icedtea = true;
-      #jre = true;
-      enableGoogleTalkPlugin = true;
-      enableDjvu = true;
-      enableGnomeExtensions = true;
-      #enableVLC = true;
-    };
-    firefox-bin = {
-      #enableGnash = true;
-      enableAdobeFlash = true;
-      #icedtea = true;
-      jre = true;
-      enableGoogleTalkPlugin = true;
-      enableDjvu = true;
-      enableGnomeExtensions = true;
-      enableVLC = true;
-    };
-    firefox-esr = {
-      #enableGnash = true;
-      enableAdobeFlash = true;
-      #icedtea = true;
-      jre = true;
-      enableGoogleTalkPlugin = true;
-      enableDjvu = true;
-      enableGnomeExtensions = true;
-      enableVLC = true;
-    };
-    # chromium = {
-    #   enablePepperFlash = true;
-    #   enablePepperPDF = true;
-    #   enableNaCl = true;
-    #   gnomeSupport = true;
-    #   gnomeKeyringSupport = true;
-    #   pulseSupport = true;
-    #   hiDPISupport = true;
-    #   enableWideVine = true; # for encrypted media eg netflix
-    # };
-
     packageOverrides = super:
       {
         google-chrome = super.google-chrome.override { channel = "stable"; };

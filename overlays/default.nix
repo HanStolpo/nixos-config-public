@@ -1,5 +1,6 @@
 self: super:
 let
+  inherit (super.lib) composeExtensions;
 
   haskell = super.haskell // {
     packages = builtins.mapAttrs (
@@ -7,22 +8,19 @@ let
         let
           selfPkgs = self;
           superPkgs = super;
+          configurations =
+            with superPkgs.lib.attrsets;
+            with superPkgs.haskell.lib;
+            self: super: rec {
+              wstunnel = justStaticExecutables (doJailbreak super.wstunnel);
+              ch-hs-imports = justStaticExecutables (doJailbreak super.ch-hs-imports);
+            };
         in
           value.override {
             overrides =
-              with superPkgs.lib.attrsets;
-              with superPkgs.haskell.lib;
-              self: super: {
-
-                wstunnel = justStaticExecutables (doJailbreak (self.callPackage ./haskell/wstunnel.nix {}));
-
-                hie-bios = self.callPackage (import ./haskell/hie-bios.nix) {};
-                ch-hs-imports =
-                  doJailbreak (
-                    self.callPackage (import ./haskell/ch-hs-imports.nix) {}
-                  );
-
-              };
+              composeExtensions
+                (superPkgs.haskell.lib.packagesFromDirectory { directory = ./haskell; })
+                configurations;
           }
     ) super.haskell.packages;
   };
@@ -30,8 +28,8 @@ let
 
   fetch-lorri-src = super.fetchgit {
     url = "https://github.com/target/lorri";
-    sha256 = "0rkga944jl6i0051vbsddfqbvzy12168cbg4ly2ng1rk0x97dbr8";
-    rev = "7b84837b9988d121dd72178e81afd440288106c5";
+    sha256 = "0iw5sv3fs9npli4kviwxzx60qnh7r40shrjpy43plbhlbgdz4q09";
+    rev = "3d5eb131a73d72963cb3ee0eee7ac0eca5321254";
     fetchSubmodules = false;
   };
   lorri-nixpkgs =
@@ -68,6 +66,7 @@ rec {
   expo-exp = (self.callPackage ./expo-exp {});
   stack2nix = self.haskell.lib.doJailbreak super.stack2nix;
   inherit haskell;
+  haskellPackages = self.haskell.packages.ghc883;
 
   mykicad = super.kicad.overrideAttrs (
     oldAttrs: rec {
@@ -82,5 +81,24 @@ rec {
   );
 
   slack = self.callPackage ./slack { gdk-pixbuf = self.gdk_pixbuf; };
+
+  # pulseaudioFull = super.pulseaudioFull.overrideAttrs (
+  #   drv:
+  #     {
+  #       patches = [
+  #         # support HFP bluetooth headset like my phillips
+  #         # https://wiki.archlinux.org/index.php/Bluetooth_headset#HFP_not_working_with_PulseAudio
+  #         # https://freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Bluetooth/#hsphfp
+  #         # https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/94
+  #         (
+  #           super.fetchurl
+  #             {
+  #               url = https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/94.patch;
+  #               sha256 = "13b916dkk4ywmjx8kyywszdvdirjv5slh2kms897bjqzy4sa9i8g";
+  #             }
+  #         )
+  #       ];
+  #     }
+  # );
 
 } // ((import ./ghci-bios) self super)

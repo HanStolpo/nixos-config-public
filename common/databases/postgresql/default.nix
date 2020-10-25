@@ -34,11 +34,6 @@ in
           host    all             all             127.0.0.1/32            trust
           host    all             all             ::1/128                 trust
         '';
-      extraConfig =
-        ''
-          log_min_duration_statement = 0
-          track_activity_query_size=96384
-        '';
     };
 
   };

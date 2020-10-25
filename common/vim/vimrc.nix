@@ -1,4 +1,4 @@
-{ stdenv, writeText, haskellPackages }:
+{ stdenv, writeText, haskellPackages, nodejs, python3 }:
 
 let
   haskell-vim-now = builtins.readFile ./vimrc/haskell-vim-now.vim;
@@ -6,6 +6,9 @@ let
 in
 
 ''
+  call setenv("PATH", getenv("PATH") . ":${nodejs}/bin:${python3}/bin")
+  let g:deoplete#enable_at_startup = 1
+
   ${haskell-vim-now}
 
   ${my_vim_rc}

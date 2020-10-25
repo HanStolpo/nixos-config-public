@@ -1,4 +1,5 @@
 let g:ghcmod_hlint_options = [ '-h hlint.yml' ]
+let g:ale_haskell_hlint_options = '-h hlint.yml'
 "au BufWritePre *.hs :Autoformat
 
 

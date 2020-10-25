@@ -10,7 +10,7 @@
 # clear local binary cache issues by doing
 # > Shane:  clever from #nixos told me to try doing rm  ~/.cache/nix/binary-cache-v6.sqlite* as root
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   kernelV = pkgs.linuxPackages;
   #kernelV = pkgs.linuxPackages_4_9;
@@ -76,10 +76,46 @@ in
     )
   ;
 
+  fileSystems =
+    builtins.mapAttrs
+      (
+        k: _: {
+          mountPoint = "/mnt/network/${k}";
+          device = "//10.2.0.7/${k}";
+          fsType = "cifs";
+          noCheck = true;
+          neededForBoot = false;
+          options = [
+            "noauto"
+            "rw"
+            "user"
+            "users"
+            "credentials=/home/handre/dev/ch-stuff/ucam-credentials"
+            "setuids"
+            #"uid=1000"
+            #"gid=100"
+          ];
+        }
+      )
+      {
+        "I8export" = {};
+        "I8hotfolder" = {};
+        "ch-i8-uploaded" = {};
+        "ch-temp" = {};
+      };
+  security.wrappers = {
+    mnt-cifs = {
+      source = "${pkgs.cifs-utils.out}/bin/mount.cifs";
+    };
+  };
+
   environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
   nix.buildCores = 6;
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "adobe-reader-9.5.5-1"
+  ];
 
   services.teamviewer.enable = false;
 
@@ -136,17 +172,16 @@ in
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
   hardware.opengl.extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
-  hardware.opengl.s3tcSupport = true;
 
   services.xserver.libinput.enable = true;
-  services.xserver.libinput.naturalScrolling = true;
+  services.xserver.libinput.naturalScrolling = false;
   services.xserver.libinput.disableWhileTyping = true;
   #services.xserver.dpi = 180;
   services.xserver.dpi = 162;
-  #services.xserver.dpi = 122;
+  ##services.xserver.dpi = 122;
   #hardware.opengl.driSupport32Bit = false;
   services.xserver.exportConfiguration = true;
-  #services.xserver.useGlamor = true;
+  services.xserver.useGlamor = true;
   #services.xserver.deviceSection =
   #'' Option       "TearFree" "true"
   #'';
@@ -169,15 +204,21 @@ in
     hicolor-icon-theme
     gnome3.adwaita-icon-theme
     breeze-icons
+    wally-cli
+    brave
+    xloadimage
+    v4l-utils
+    guvcview
   ];
+
 
   # hybrid sleep on power off button
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
+    HandleLidSwitchDocked=ignore
+    HandleLidSwitchExternalPower=ignore
   '';
 
-  # Show the manual on virtual console 8 :
-  services.nixosManual.showManual = true;
 
   swapDevices = [
     { label = "swap"; }
@@ -214,9 +255,60 @@ in
     KERNEL=="event*", MODE="0666"
   '';
 
-  nix.useSandbox = false;
+  nix.useSandbox = "relaxed";
 
   fonts.fontconfig.dpi = 162;
   fonts.fontconfig.antialias = true;
   fonts.fontconfig.hinting.enable = true;
+
+  services.udev.packages = [
+
+    (
+      pkgs.writeTextFile {
+        name = "wally-udev";
+        text = ''
+          # Teensy rules for the Ergodox EZ
+          ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", ENV{ID_MM_DEVICE_IGNORE}="1"
+          ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789A]?", ENV{MTP_NO_PROBE}="1"
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789ABCD]?", MODE:="0666"
+          KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
+
+          # STM32 rules for the Moonlander and Planck EZ
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", \
+          MODE:="0666", \
+          SYMLINK+="stm32_dfu"
+        '';
+        executable = false;
+        destination = "/etc/udev/rules.d/50-wally.rules";
+      }
+    )
+    (
+      pkgs.writeTextFile {
+        name = "oryx-udev";
+        text = ''
+          # Rule for the Moonlander
+          SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+          # Rule for the Ergodox EZ
+          SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="1307", GROUP="plugdev"
+          # Rule for the Planck EZ
+          SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="6060", GROUP="plugdev"
+        '';
+        executable = false;
+        destination = "/etc/udev/rules.d/50-oryx.rules";
+      }
+    )
+    (
+      pkgs.writeTextFile {
+        name = "disable-internal-webcam";
+        # disable builtin web cam
+        # https://askubuntu.com/questions/1187354/ubuntu-18-04-how-to-disable-built-in-webcam-only-i-e-leave-any-other-attache
+        text = ''
+          ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="57f6", RUN="${pkgs.bash}/bin/bash -c 'echo 0 >/sys/\$devpath/authorized'"
+        '';
+        executable = false;
+        destination = "/etc/udev/rules.d/40-disable-internal-web-cam.rules";
+      }
+    )
+
+  ];
 }

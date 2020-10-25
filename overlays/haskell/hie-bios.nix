@@ -14,9 +14,11 @@
 , filepath
 , ghc
 , hslogger
+, hspec-expectations
 , process
 , stdenv
 , tasty
+, tasty-expected-failure
 , tasty-hunit
 , temporary
 , text
@@ -29,10 +31,10 @@
 }:
 mkDerivation {
   pname = "hie-bios";
-  version = "0.4.0";
-  sha256 = "81881340e208e39b3f065898cc2eff5f12300cf9a50c17ce4883566da4e448dd";
-  revision = "1";
-  editedCabalFile = "12m0hy4lirnr02h0nh2a85cfm8jv7jgqh24fdn29jkc28gpspm72";
+  version = "0.7.1";
+  sha256 = "88565149e354d7e91aaf3251124e574822a4758e11246f9adde0e8b51ac9f301";
+  revision = "3";
+  editedCabalFile = "104cp386qbk6k72s2ld1cl0fny3f53x98zy3w10mlhqyaipqrf17";
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
@@ -68,8 +70,11 @@ mkDerivation {
     extra
     filepath
     ghc
+    hspec-expectations
     tasty
+    tasty-expected-failure
     tasty-hunit
+    temporary
     text
     unordered-containers
     yaml

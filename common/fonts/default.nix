@@ -18,6 +18,8 @@
       ubuntu_font_family # Ubuntu fonts
       unifont # some international languages
       powerline-fonts
+      nerdfonts
+      font-awesome
     ];
     fontconfig = {
       defaultFonts = {

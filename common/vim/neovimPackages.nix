@@ -12,7 +12,5 @@ let
 in
 [
   nvim
-  pkgs.python35Full
-  pkgs.python35
   pkgs.ctags
 ]
