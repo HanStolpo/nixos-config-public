@@ -202,12 +202,15 @@ in
     gtk_engines
     hicolor-icon-theme
     gnome3.adwaita-icon-theme
+    gnome3.gnome-boxes
+    spice
+    win-spice
     breeze-icons
     wally-cli
-    brave
     xloadimage
     v4l-utils
     guvcview
+    proot
   ];
 
 
