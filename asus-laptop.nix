@@ -36,7 +36,6 @@ in
       ./common/network-time
       ./common/security/pki
       ./common/programs/core
-      ./common/lorri
       ./common/programs/development
       ./common/programs/internet
       ./common/programs/misc
