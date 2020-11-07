@@ -56,22 +56,22 @@ in
     ] ++ (
       if builtins.pathExists ./secret/networking/wireless/networks
       then [ ./secret/networking/wireless/networks ]
-      else []
+      else [ ]
     ) ++ (
       if builtins.pathExists ./secret/nix
       then [ ./secret/nix ]
-      else []
+      else [ ]
     ) ++ (
       if builtins.pathExists ./secret/vpn/hanstolpo.me-wg
       then [ ./secret/vpn/hanstolpo.me-wg ]
-      else []
+      else [ ]
     ) ++ # (if builtins.pathExists ./secret/vpn/picofactory
     # then [./secret/vpn/picofactory]
     # else []) ++
     (
       if builtins.pathExists ./secret/vpn/picofactory-wg
       then [ ./secret/vpn/picofactory-wg ]
-      else []
+      else [ ]
     )
   ;
 
