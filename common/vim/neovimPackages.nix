@@ -1,5 +1,4 @@
 { pkgs, lib, ... }:
-
 let
   nvim = pkgs.neovim.override {
     # don't alias neovim to vim, yet.
@@ -13,4 +12,14 @@ in
 [
   nvim
   pkgs.ctags
+  (pkgs.runCommand
+    "jailed-haskell-language-server"
+    { buildInputs = [ pkgs.makeWrapper ]; }
+    ''
+      mkdir -p $out/bin
+      cp ${./jailed-haskell-language-server.sh} $out/bin/jailed-haskell-language-server
+      wrapProgram $out/bin/jailed-haskell-language-server \
+        --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.proot ]}
+    ''
+  )
 ]

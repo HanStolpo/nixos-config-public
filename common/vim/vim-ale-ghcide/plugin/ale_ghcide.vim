@@ -1,7 +1,25 @@
 
 function! s:GetProjectRoot(buffer) abort
-    " Search for the stack file first
+    " Search for the hie.yaml first
     let l:project_file = ale#path#FindNearestFile(a:buffer, 'hie.yaml')
+
+    " If it's empty, search for the cable.project
+    if empty(l:project_file)
+        " Search all of the paths except for the root filesystem path.
+      let l:project_file = ale#path#FindNearestFile(a:buffer, 'cabal.project')
+    endif
+
+    " If it's empty, search for the stack.yaml
+    if empty(l:project_file)
+        " Search all of the paths except for the root filesystem path.
+      let l:project_file = ale#path#FindNearestFile(a:buffer, 'stack.yaml')
+    endif
+
+    " If it's empty, search for the cabal file
+    if empty(l:project_file)
+        " Search all of the paths except for the root filesystem path.
+      let l:project_file = ale#path#FindNearestFile(a:buffer, '*.cabal')
+    endif
 
     " If it's empty, search for the git directory
     if empty(l:project_file)
@@ -20,7 +38,7 @@ endfunction
 call ale#linter#Define('haskell', {
 \   'name': 'ghcide',
 \   'lsp': 'stdio',
-\   'command': {b -> 'haskell-language-server --cwd ' . s:GetProjectRoot(b) .' --lsp'},
+\   'command': {b -> 'jailed-haskell-language-server ' . s:GetProjectRoot(b) . ' --cwd ' . s:GetProjectRoot(b) . ' --lsp'},
 \   'executable': 'haskell-language-server',
 \   'project_root': {b -> s:GetProjectRoot(b)},
 \})
