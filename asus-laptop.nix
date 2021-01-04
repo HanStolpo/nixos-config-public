@@ -227,7 +227,45 @@ in
     v4l-utils
     guvcview
     proot
+    evince # gnome pdf viewer
+    qemu_kvm
+    libvirt
+    virt-manager
+    jitsi-meet-electron
+    signal-desktop
   ];
+
+  networking.firewall.interfaces.virbr0.allowedTCPPorts = [ 139 445 ];
+  networking.firewall.interfaces.virbr0.allowedUDPPorts = [ 137 138 ];
+  services.samba = {
+    enable = true;
+    configText = ''
+      [global]
+      map to guest = Bad User
+      guest ok = true
+      guest only = true
+      interfaces = virbr0
+      [vagrant]
+      path = /home/handre/temp
+      force user = root
+
+      read only = false
+      create mask = 0644
+      directory mask = 0755
+      hosts allow = 192.168.122.193
+    '';
+    #nsswins = true;
+    #enableNmbd = true;
+    #shares = {
+    #vagrant = {
+    #path = "/home/handre/temp";
+    #"read only" = false;
+    #browsable = "yes";
+    #"guest ok" = "yes";
+    #};
+    #};
+    #securityType = "share";
+  };
 
 
   # hybrid sleep on power off button
