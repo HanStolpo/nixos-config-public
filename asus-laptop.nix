@@ -97,11 +97,27 @@ in
         }
       )
       {
-        "I8export" = {};
-        "I8hotfolder" = {};
-        "ch-i8-uploaded" = {};
-        "ch-temp" = {};
+        "I8export" = { };
+        "I8hotfolder" = { };
+        "ch-i8-uploaded" = { };
+        "ch-temp" = { };
+      } //
+    {
+      windows = {
+        mountPoint = "/mnt/windows";
+        device = "/dev/disk/by-uuid/DCEA6B53EA6B28CA";
+        fsType = "ntfs";
+        noCheck = true;
+        neededForBoot = false;
+        options = [
+          "auto"
+          "defaults"
+          "uid=1000"
+          "gid=100"
+          "umask=022"
+        ];
       };
+    };
   security.wrappers = {
     mnt-cifs = {
       source = "${pkgs.cifs-utils.out}/bin/mount.cifs";
