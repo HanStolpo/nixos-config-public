@@ -1,8 +1,8 @@
 transparent false
-geometry 9x1
+geometry 9x1+0
 icon_gravity NE
 window_layer top
-window_strut left
+window_strut bottom
 window_type toolbar
 sticky true
 icon_size 26

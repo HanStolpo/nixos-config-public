@@ -1,0 +1,126 @@
+diff --git a/nix/keys.nix b/nix/keys.nix
+index 2f5a83df..3e2211a4 100644
+--- a/nix/keys.nix
++++ b/nix/keys.nix
+@@ -15,14 +15,38 @@ let
+         <filename><replaceable>destDir</replaceable>/<replaceable>password</replaceable></filename>
+         will be <literal>foobar</literal>.
+ 
+-        NOTE: Either <literal>text</literal> or <literal>keyFile</literal> have
+-        to be set.
++        NOTE: Either <literal>text</literal>, <literal>keyCommand</literal> or
++        <literal>keyFile</literal> have to be set.
++      '';
++    };
++
++    options.keyCommand = mkOption {
++      default = null;
++      example = [ "pass" "show" "secrettoken" ];
++      type = types.nullOr (types.listOf types.str);
++      description = ''
++        When non-null, output of this command run on local machine will be
++        deployed to the specified key on the target machine.  If the key name
++        is
++        <replaceable>password</replaceable> and <literal>echo secrettoken</literal>
++        is set here, the contents of the file
++        <filename><replaceable>destDir</replaceable>/<replaceable>password</replaceable></filename>
++        deployed will equal the output of the command <literal>echo secrettoken</literal>.
++
++        This option is especially useful when you don't want to store the secrets
++        inside of your NixOps deployment but rather in a well-guarded place such as an
++        encrypted file. Consider using nixpkgs.password-store as storage for
++        such sensitive secrets.
++
++        NOTE: Either <literal>text</literal>, <literal>keyCommand</literal> or
++        <literal>keyFile</literal> have to be set.
+       '';
+     };
+ 
+     options.keyFile = mkOption {
+       default = null;
+       type = types.nullOr types.path;
++      apply = value: if value == null then null else toString value;
+       description = ''
+         When non-null, contents of the specified file will be deployed to the
+         specified key on the target machine.  If the key name is
+@@ -35,8 +59,8 @@ let
+         are no limits on that content: null bytes, invalid Unicode,
+         <literal>/dev/random</literal> output -- anything goes.
+ 
+-        NOTE: Either <literal>text</literal> or <literal>keyFile</literal> have
+-        to be set.
++        NOTE: Either <literal>text</literal>, <literal>keyCommand</literal> or
++        <literal>keyFile</literal> have to be set.
+       '';
+     };
+ 
+@@ -176,11 +200,12 @@ in
+       "things to break."
+     )];
+ 
+-    assertions = flip mapAttrsToList config.deployment.keys (key: opts: {
+-      assertion = (opts.text == null && opts.keyFile != null) ||
+-                  (opts.text != null && opts.keyFile == null);
+-      message = "Deployment key '${key}' must have either a 'text' or a 'keyFile' specified.";
+-    });
++    assertions = (flip mapAttrsToList config.deployment.keys (key: opts: {
++      assertion = (opts.text == null && opts.keyFile != null && opts.keyCommand == null) ||
++                  (opts.text != null && opts.keyFile == null && opts.keyCommand == null) ||
++                  (opts.text == null && opts.keyFile == null && opts.keyCommand != null);
++      message = "Deployment key '${key}' must have either a 'text', 'keyCommand' or a 'keyFile' specified.";
++    }));
+ 
+     system.activationScripts.nixops-keys =
+       let
+diff --git a/nixops/backends/__init__.py b/nixops/backends/__init__.py
+index cbfd4734..4486f02c 100644
+--- a/nixops/backends/__init__.py
++++ b/nixops/backends/__init__.py
+@@ -2,6 +2,7 @@
+ 
+ import os
+ import re
++import sys
+ import subprocess
+ 
+ import nixops.util
+@@ -23,14 +24,19 @@ class MachineDefinition(nixops.resources.ResourceDefinition):
+         def _extract_key_options(x):
+             opts = {}
+             for (key, xmlType) in (('text',        'string'),
++                                   ('keyCommand',  'list/string'),
+                                    ('keyFile',     'path'),
++                                   ('keyFile',     'string'),
+                                    ('destDir',     'string'),
+                                    ('user',        'string'),
+                                    ('group',       'string'),
+                                    ('permissions', 'string')):
+-                elem = x.find("attrs/attr[@name='{0}']/{1}".format(key, xmlType))
+-                if elem is not None:
+-                    opts[key] = elem.get("value")
++                elems = x.findall("attrs/attr[@name='{0}']/{1}".format(key, xmlType))
++                if len(elems) > 0:
++                    if len(elems) > 1:
++                        opts[key] = [elem.get("value") for elem in elems]
++                    else:
++                        opts[key] = elems[0].get("value")
+             return opts
+ 
+         self.keys = {k.get("name"): _extract_key_options(k) for k in
+@@ -230,8 +236,15 @@ class MachineState(nixops.resources.ResourceState):
+                     f.write(opts['text'])
+             elif 'keyFile' in opts:
+                 self._logged_exec(["cp", opts['keyFile'], tmp])
++            elif 'keyCommand' in opts:
++                try:
++                    with open(tmp, "w+") as f:
++                        subprocess.check_call(opts['keyCommand'], stdout=f)
++                except subprocess.CalledProcessError:
++                    self.warn("Running command to generate key '{0}' failed:".format(k))
++                    raise
+             else:
+-                raise Exception("Neither 'text' or 'keyFile' options were set for key '{0}'.".format(k))
++                raise Exception("Neither 'text', 'keyFile' nor 'keyCommand' options were set for key '{0}'.".format(k))
+ 
+             outfile = destDir + "/" + k
+             # We scp to a temporary file and then mv because scp is not atomic.

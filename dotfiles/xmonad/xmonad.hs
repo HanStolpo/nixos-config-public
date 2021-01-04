@@ -713,6 +713,7 @@ wsMusic = "music"
 
 wsRun = "run"
 
+
 -- myWorkspaces = map show [1..9]
 myWorkspaces = [wsGen, wsWork, ws3, ws4, ws5, wsTest, wsIM, ws8, ws9, wsFloat]
 
@@ -727,9 +728,9 @@ projects =
       { projectName = wsWork,
         projectDirectory = "~/dev/circuithub",
         projectStartHook = Just $ do
-          spawnOn wsWork "termite"
-          spawnOn wsWork "termite"
-          spawnOn wsWork "termite"
+          spawnOn wsWork myTerminal
+          spawnOn wsWork myTerminal
+          spawnOn wsWork myTerminal
           spawnOn wsWork "firefox"
       },
     Project
@@ -781,9 +782,9 @@ projects =
       { projectName = wsRun,
         projectDirectory = "~/dev/circuithub",
         projectStartHook = Just $ do
-          spawnOn wsRun "termite"
-          spawnOn wsRun "termite"
-          spawnOn wsRun "termite"
+          spawnOn wsRun myTerminal
+          spawnOn wsRun myTerminal
+          spawnOn wsRun myTerminal
       }
   ]
 
@@ -792,6 +793,6 @@ projects =
 ---------------------------------------------------------------------------
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
-myTerminal = "termite"
+myTerminal = "alacritty"
 
 myLauncher = "dmenu_run"

@@ -1,0 +1,172 @@
+{
+  "nodes": {
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1609363605,
+        "narHash": "sha256-A3zRekWXukzczICARlw2vSfhMAeotM0NJSRkcTkLpj0=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "7b07eefbf6524fbbe4c2cfac857e227e00bee081",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "hlissner-dotfiles": {
+      "inputs": {
+        "emacs-overlay": "emacs-overlay",
+        "home-manager": "home-manager",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-unstable": "nixpkgs-unstable"
+      },
+      "locked": {
+        "lastModified": 1609461251,
+        "narHash": "sha256-PI177OxgQA754H//nEzQ+Z1bzN9q3JMjBdNy38WtyYo=",
+        "owner": "hlissner",
+        "repo": "dotfiles",
+        "rev": "25f0d8044a0e90fecf3da126fb2c3643c6d3dc32",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hlissner",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1608506894,
+        "narHash": "sha256-G2TNqzJunVXcC2sQEvtLOUs5QpI6f2y4Ben//HLQkh8=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "2b1892e646f2e48591c53b3293622720e1a3bdca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixops": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1611010400,
+        "narHash": "sha256-11LzBpdszXQuhxrnGHOneVo/G5ikT5pWdkc3q5VM1L0=",
+        "owner": "NixOS",
+        "repo": "nixops",
+        "rev": "1239ff7fb94bd647ea54d18e7c7da4b81e63f422",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixops",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1608918390,
+        "narHash": "sha256-Ztx7egQQyF4RtWFKaZiytvZF1Yzk4R2GZ7c5r1/JjPw=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "c242378e63b0ec334e964ac0c0fbbdd2b3e89ebf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1609725427,
+        "narHash": "sha256-Yn97AVjFvQunGmwK3nnr7LihzMnp72jyaYNRRaJvAZ4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c5c6009fb436efe5732e07cd0e5692f495321752",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1609369662,
+        "narHash": "sha256-Nwk8WE4LEF+RxzVAYaitugYONyXYT7Grx9ndRHG+qFM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ff97a25fc6da512edf8fb32cf27f001e0d7382c0",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "master",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs-unstable_2": {
+      "locked": {
+        "lastModified": 1609580981,
+        "narHash": "sha256-esnPRxHdqKTdOJyEol3zOJ7/atfvNyKFW1IN+ejzhfI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "56bb1b0f7a33e5d487dc2bf2e846794f4dcb4d01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "hlissner-dotfiles": "hlissner-dotfiles",
+        "nixops": "nixops",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable_2"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1594123299,
+        "narHash": "sha256-zxjtMmOV93pIVG242RpEXu14w/13XYDo3ygMoRIJg4c=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "590d6d1badea1956a31480a0cba1d8d029cf45d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
