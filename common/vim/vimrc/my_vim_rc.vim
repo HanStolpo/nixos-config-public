@@ -45,7 +45,7 @@ let g:tagbar_left = 1
 "let g:ctrlp_root_markers = ['ch'] "add circuit hub root
 let g:ctrlp_working_path_mode = 'wra'
 let g:ctrlp_custom_ignore={
-  \'dir': '\v(elm-stuff)|(dist-newstyle)|(dist-repl)|(node_modules)|(\..*)',
+  \'dir': '\v(elm-stuff)|(dist-newstyle)|(dist-repl)|(dist-ide)|(node_modules)|(\..*)',
   \'file': '\v.*\.orig$'
   \}
 " Session related
