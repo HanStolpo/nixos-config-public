@@ -40,6 +40,7 @@
     sshfsFuse # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
     unzip # An extraction utility for archives compressed in .zip format
     gnupg # Modern (2.1) release of the GNU Privacy Guard, a GPL OpenPGP implementation
+    pinentry # pinentry program to be used by gnupg by default
     utillinux # for dmesg, kill,...
     htop # An interactive process viewer for Linux
     traceroute # Tracks the route taken by packets over an IP network
