@@ -15,14 +15,28 @@ let
   kernelV = pkgs.linuxPackages;
   #kernelV = pkgs.linuxPackages_4_9;
   #kernelV = pkgs.linuxPackages_latest;
-
+  unstable = import
+    (fetchTarball {
+      url = https://github.com/NixOS/nixpkgs/archive/56bb1b0f7a33e5d487dc2bf2e846794f4dcb4d01.tar.gz;
+      sha256 = "1wl5yglgj3ajbf2j4dzgsxmgz7iqydfs514w73fs9a6x253wzjbs";
+    })
+    { overlays = [ (import ./overlays) ]; };
 in
 {
 
   # Include custom packages and override
   nixpkgs.overlays = [
     (import ./overlays)
+    (self: super: { nix = unstable.nixFlakes; nix-du = unstable.nix-du; })
   ];
+
+  nix = {
+    useSandbox = "relaxed";
+    package = unstable.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
   imports =
     [
       # Include the results of the hardware scan.
@@ -310,8 +324,6 @@ in
     KERNEL=="uinput", MODE="0666"
     KERNEL=="event*", MODE="0666"
   '';
-
-  nix.useSandbox = "relaxed";
 
   fonts.fontconfig.dpi = 162;
   fonts.fontconfig.antialias = true;
