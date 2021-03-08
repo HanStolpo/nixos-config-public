@@ -111,9 +111,9 @@
   hardware.enableRedistributableFirmware = true; # for wifi driver
   hardware.cpu.intel.updateMicrocode = true;
 
-  hardware.bumblebee.enable = true;
-  hardware.bumblebee.driver = "nvidia";
-  hardware.bumblebee.connectDisplay = true;
+  # hardware.bumblebee.enable = true;
+  # hardware.bumblebee.driver = "nvidia";
+  # hardware.bumblebee.connectDisplay = true;
 
   hardware.bluetooth.enable = true;
 
