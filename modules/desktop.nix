@@ -56,8 +56,8 @@ in
       dropbox-cli
 
       #EDA
-      kicad # Free Software EDA Suite
-      eagle # Eagle EDA tool
+      #kicad # Free Software EDA Suite
+      #eagle # Eagle EDA tool
       gerbv # A Gerber (RS-274X) viewer
 
       gnome3.glade # gtk layout tool
