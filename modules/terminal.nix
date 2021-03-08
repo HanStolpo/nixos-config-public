@@ -84,6 +84,7 @@ in
       gdb # debugger
       # json
       jq
+      yaml2json
       (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
       # haskell
       (haskell.lib.justStaticExecutables haskellPackages.haskell-language-server)
