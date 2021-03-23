@@ -6,3 +6,4 @@ xmonad.state
 xmonad-x*
 secret/
 dotfiles/xmonad/prompt-history
+overlays/default.nix
