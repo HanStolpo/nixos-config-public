@@ -31,6 +31,6 @@ in
 rec {
 
   inherit haskell;
-  haskellPackages = final.haskell.packages.ghc883;
+  haskellPackages = final.haskell.packages.ghc8104;
 
 }
