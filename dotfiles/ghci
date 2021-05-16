@@ -1,2 +1,12 @@
 :set prompt "\ESC[1;34m%s\n\ESC[0;34m\STXλ\ESC[m\STX "
 :set editor vim
+:set -Wno-unused-packages
+:seti -XOverloadedStrings
+:seti -XDataKinds
+:seti -XFlexibleInstances
+:seti -XFlexibleContexts
+:seti -XDuplicateRecordFields
+:seti -XScopedTypeVariables
+:set -v0
+:set -j
+:set -Wno-unused-packages
