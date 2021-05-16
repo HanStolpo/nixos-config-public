@@ -106,6 +106,8 @@ in
       ripgrep # rg - A utility that combines the usability of The Silver Searcher with the raw speed of grep
 
       pgcli
+
+      cachix # Command line client for Nix binary cache hosting https://cachix.org
     ];
 
     security.pki = {
