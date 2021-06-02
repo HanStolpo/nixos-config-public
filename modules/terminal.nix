@@ -79,7 +79,6 @@ in
       heroku # Everything you need to get started using Heroku
       awscli # Unified tool to manage your AWS services
       nodePackages.node2nix # generate nix from node packages
-      # lorri # maintain development environments based on shell.nix along with direnv (auto reloading quicker entry and gc management)
       direnv # automatically setup environment variables when entering a directory
       gdb # debugger
       # json

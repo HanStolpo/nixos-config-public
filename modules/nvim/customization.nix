@@ -1,11 +1,10 @@
 { pkgs }:
-
 let
   # this is the vimrc.nix from above
-  vimrc = pkgs.callPackage ./vimrc.nix {};
+  vimrc = pkgs.callPackage ./vimrc.nix { };
 
   # and the plugins.nix from above
-  plugins = pkgs.callPackage ./plugins.nix {};
+  plugins = pkgs.callPackage ./plugins.nix { };
 in
 {
   customRC = vimrc;
@@ -63,9 +62,9 @@ in
 
       { name = "base16-vim"; }
 
-      { name = "vim-textobj-haskell"; }
+      #{ name = "vim-textobj-haskell"; }
 
-      { name = "vim-textobj-user"; }
+      #{ name = "vim-textobj-user"; }
 
       { name = "vim-pug"; }
 

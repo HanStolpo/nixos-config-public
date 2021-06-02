@@ -55,7 +55,6 @@ in
       termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
       direnv # automatically setup environment variables when entering a directory
-      lorri-custom
       nix-direnv
     ];
 

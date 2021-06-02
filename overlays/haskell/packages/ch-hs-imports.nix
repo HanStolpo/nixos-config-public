@@ -49,5 +49,5 @@ mkDerivation {
     text
     transformers
   ];
-  license = stdenv.lib.licenses.mit;
+  license = pkgs.lib.licenses.mit;
 }

@@ -135,8 +135,8 @@
   hardware.opengl.extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
 
   services.xserver.libinput.enable = true;
-  services.xserver.libinput.naturalScrolling = false;
-  services.xserver.libinput.disableWhileTyping = true;
+  services.xserver.libinput.touchpad.naturalScrolling = false;
+  services.xserver.libinput.touchpad.disableWhileTyping = true;
   #services.xserver.dpi = 180;
   services.xserver.dpi = 162;
   ##services.xserver.dpi = 122;
@@ -164,7 +164,7 @@
     gnome3.adwaita-icon-theme
     gnome3.gnome-boxes
     spice
-    win-spice
+    #win-spice
     breeze-icons
     wally-cli
     xloadimage
@@ -309,53 +309,6 @@
         destination = "/etc/udev/rules.d/50-oryx.rules";
       }
     )
-    # (
-    #   pkgs.writeTextFile {
-    #     name = "disable-internal-webcam";
-    #     # disable builtin web cam
-    #     # https://askubuntu.com/questions/1187354/ubuntu-18-04-how-to-disable-built-in-webcam-only-i-e-leave-any-other-attache
-    #     text = ''
-    #       ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="57f6", RUN="${pkgs.bash}/bin/bash -c 'echo 0 >/sys/\$devpath/authorized'"
-    #     '';
-    #     executable = false;
-    #     destination = "/etc/udev/rules.d/40-disable-internal-web-cam.rules";
-    #   }
-    # )
 
   ];
-
-  # containers = {
-  #   circuithub = {
-  #     pkgs = import pkgs.path {
-  #       localSystem = { system = "x86_64-linux"; };
-  #       overlays = [
-  #         (final: prev: { inherit (pkgs) lorri; })
-  #       ];
-  #       config = {
-  #         allowUnfree = true;
-  #       };
-  #     };
-  #     config =
-  #       {
-  #         imports =
-  #           [
-  #             (../../modules/users.nix)
-  #             (../../modules/terminal.nix)
-  #             (../../modules/shell.nix)
-  #             (../../modules/nvim)
-  #           ];
-  #         hanstolpo.shell.enable = true;
-  #         hanstolpo.terminal.enable = true;
-  #         hanstolpo.users = {
-  #           enable = true;
-  #           useInitialPWD = true;
-  #           SSHLogin = true;
-  #         };
-  #       };
-  #     bindMounts = {
-  #       "/home/handre" = { hostPath = "/home/handre"; isReadOnly = false; };
-  #     };
-  #     enableTun = true;
-  #   };
-  # };
 }

@@ -58,5 +58,5 @@ mkDerivation {
   testHaskellDepends = [ base text ];
   homepage = "https://github.com/githubuser/wstunnel#readme";
   description = "Initial project template from stack";
-  license = stdenv.lib.licenses.bsd3;
+  license = pkgs.lib.licenses.bsd3;
 }
