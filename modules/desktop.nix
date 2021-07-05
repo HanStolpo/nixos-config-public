@@ -85,6 +85,8 @@ in
 
       sqlitebrowser
 
+      rhythmbox # music player
+
     ];
 
     nixpkgs.config = {
