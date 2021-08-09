@@ -87,6 +87,8 @@ in
 
       rhythmbox # music player
 
+      sweethome3d.application # floor plan interior design application
+
     ];
 
     nixpkgs.config = {
