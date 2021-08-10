@@ -80,6 +80,8 @@ in
 
       { name = "deoplete-dictionary"; }
 
+      { name = "vim-LanguageTool"; }
+
       #{ name = "coc-nvim"; }
       #{ name = "coc-json"; }
       #{ name = "coc-tsserver"; }

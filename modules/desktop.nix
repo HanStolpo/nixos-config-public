@@ -89,6 +89,8 @@ in
 
       sweethome3d.application # floor plan interior design application
 
+      languagetool
+
     ];
 
     nixpkgs.config = {
