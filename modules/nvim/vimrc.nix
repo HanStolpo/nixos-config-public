@@ -13,7 +13,7 @@ in
 
   ${my_vim_rc}
 
-  let g:languagetool_cmd='${languagetool}/bin/languagetool'
+  let g:languagetool_cmd='${languagetool}/bin/languagetool-commandline'
 ''
 
 #  " auto formatting via vim-autoformat
