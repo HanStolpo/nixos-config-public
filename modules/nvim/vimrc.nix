@@ -1,4 +1,4 @@
-{ stdenv, writeText, haskellPackages, nodejs, python3 }:
+{ stdenv, writeText, haskellPackages, nodejs, python3, languagetool }:
 
 let
   haskell-vim-now = builtins.readFile ./vimrc/haskell-vim-now.vim;
@@ -12,6 +12,8 @@ in
   ${haskell-vim-now}
 
   ${my_vim_rc}
+
+  let g:languagetool_cmd='${languagetool}/bin/languagetool'
 ''
 
 #  " auto formatting via vim-autoformat
