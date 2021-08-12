@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let kernel = pkgs.linuxPackages_hardened;
+in
+
+{
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
   #time.timeZone = "Europe/London";
@@ -13,6 +17,7 @@
     dev-services.enable = true;
   };
 
+  boot.kernelPackages = kernel;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
   boot.kernelModules = [ "kvm-intel" "bbswitch" ];
 
@@ -88,7 +93,7 @@
 
   nix.buildCores = 6;
 
-  boot.extraModulePackages = [ pkgs.linuxPackages.bbswitch ];
+  boot.extraModulePackages = [ kernel.bbswitch ];
   boot.extraModprobeConfig =
     ''
       options bbswitch load_state=0
@@ -154,7 +159,7 @@
 
   environment.systemPackages = with pkgs; [
     wpa_supplicant_gui
-    pkgs.linuxPackages.bbswitch
+    kernel.bbswitch
     microcodeIntel
     blueman
     arc-theme
