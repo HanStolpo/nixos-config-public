@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }:
-let kernel = pkgs.linuxPackages_latest_hardened;
+let kernel = pkgs.linuxPackages_latest;
 in
 
 {
