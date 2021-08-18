@@ -192,7 +192,7 @@ in
   hardware = {
     pulseaudio = {
       enable = true;
-      systemWide = true;
+      systemWide = false;
       package = pkgs.pulseaudioFull;
     };
   };
