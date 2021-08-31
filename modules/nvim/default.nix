@@ -13,16 +13,6 @@ in
     [
       nvim
       pkgs.ctags
-      (pkgs.runCommand
-        "jailed-haskell-language-server"
-        { buildInputs = [ pkgs.makeWrapper ]; }
-        ''
-          mkdir -p $out/bin
-          cp ${./jailed-haskell-language-server.sh} $out/bin/jailed-haskell-language-server
-          wrapProgram $out/bin/jailed-haskell-language-server \
-            --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.proot ]}
-        ''
-      )
       pkgs.nixpkgs-fmt
     ];
 }

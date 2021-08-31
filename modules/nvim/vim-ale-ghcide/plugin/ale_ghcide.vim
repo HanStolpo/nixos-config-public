@@ -38,7 +38,7 @@ endfunction
 call ale#linter#Define('haskell', {
 \   'name': 'ghcide',
 \   'lsp': 'stdio',
-\   'command': {b -> 'jailed-haskell-language-server ' . s:GetProjectRoot(b) . ' --cwd ' . s:GetProjectRoot(b) . ' --lsp'},
+\   'command': {b -> 'haskell-language-server --cwd ' . s:GetProjectRoot(b) . ' --lsp'},
 \   'executable': 'haskell-language-server',
 \   'project_root': {b -> s:GetProjectRoot(b)},
 \})
