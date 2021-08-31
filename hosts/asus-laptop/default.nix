@@ -184,18 +184,24 @@ in
     signal-desktop
 
     pavucontrol
-    pasystray
-    pulseaudioFull
+    #pasystray
+    #pulseaudioFull
   ];
 
   security.rtkit.enable = true;
-  hardware = {
-    pulseaudio = {
-      enable = true;
-      systemWide = false;
-      package = pkgs.pulseaudioFull;
-    };
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
   };
+
+  # hardware = {
+  #   pulseaudio = {
+  #     enable = true;
+  #     systemWide = false;
+  #     package = pkgs.pulseaudioFull;
+  #   };
+  # };
 
 
   # hybrid sleep on power off button
