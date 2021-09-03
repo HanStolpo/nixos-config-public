@@ -107,6 +107,8 @@ in
       pgcli
 
       cachix # Command line client for Nix binary cache hosting https://cachix.org
+
+      pass # Stores, retrieves, generates, and synchronizes passwords securely
     ];
 
     security.pki = {
