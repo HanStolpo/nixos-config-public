@@ -91,6 +91,7 @@ in
 
       languagetool
 
+      fontforge-gtk
     ];
 
     nixpkgs.config = {
