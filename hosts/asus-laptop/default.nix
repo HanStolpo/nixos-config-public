@@ -229,6 +229,7 @@ in
     nameservers = [ "127.0.0.1" "8.8.8.8" "192.168.100.1" ];
     extraHosts =
       ''
+        10.2.0.99 remote-dev-1
         127.0.0.1 circuithub.test
         127.0.0.1 projects.circuithub.test
         127.0.0.1 api.circuithub.test
