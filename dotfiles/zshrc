@@ -4,81 +4,13 @@ function ghci-822-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --ru
 function ghci-842-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskell.packages.ghc842.ghcWithPackages (self: with self;[$ps])";)}
 function ghci-843-with() {(cd ~; ps="$@"; nix-shell --fallback --keep-going --run ghci -p "haskell.packages.ghc843.ghcWithPackages (self: with self;[$ps])";)}
 function api-shell() {(cd ~/dev/circuithub/api; ps="$@"; nix-shell dev-env.nix --run "$ps")}
-alias api-nvim='api-shell nvim -c "\"OpenSession api\"" '
-alias api-hoogle="(cd ~/dev/circuithub/api; ./run-hoogle;)"
-function api-repl() {(cd ~/dev/circuithub/api; nix-shell ../shell.nix --run "env $(xargs < .env) cabal new-repl lib:circuithub-api --ghc-options=\"-package foreign-store -package directory -freverse-errors\"")}
-alias client-projects-run='(cd ~/dev/circuithub; nix-shell --arg run-silent true --run "ch run-client-projects";)'
-alias client-nvim='(cd ~/dev/circuithub/client; nix-shell ../shell.nix --run "nvim -c \"OpenSession client\"";)'
-alias client-build='(cd ~/dev/circuithub; nix-shell --arg run-silent true --run "cd client; gulp compile";)'
-alias bbswitch-off='sudo tee /proc/acpi/bbswitch <<<OFF'
-alias bbswitch-on='sudo tee /proc/acpi/bbswitch <<<ON'
-alias nix-add-circuithub-roots='(cd ~/dev/circuithub; nix-remove-roots; nix-add-roots shell.nix --arg run-silent true; cd api; nix-remove-roots; nix-add-roots dev-env.nix; nix-add-roots run-hoogle.nix; cd ../pallet-loader; nix-remove-roots; nix-add-roots; nix-add-roots dev-env.nix; cd ../projects; nix-remove-roots; nix-add-roots;cd ../client; nix-remove-roots; nix-add-roots;)'
-function doc-live() {(~/dev/circuithub/client/doc/doc-live.sh $@)}
-
-function nix-add-roots() {(
-  if [ ! -d ".gcroots" ]; then
-    mkdir .gcroots
-  fi
-  shellFile=$1
-  if [ -z "$shellFile" ]; then
-
-    if [ -f "shell.nix" ]; then
-      shellFile="shell.nix"
-    else
-      shellFile="."
-    fi
-  else
-    shift 1
-  fi
-  depPfxArgs=$(echo $@ | sed 's,\s\|/\|=\-\|"\|\.,_,g')
-  depPfx="$(echo $shellFile | sed 's,/,_,g')-$depPfxArgs"
-  nix-instantiate $shellFile --indirect --add-root "$(pwd)/.gcroots/dep-$depPfx.drv"
-  NIX_STORE_CMD=$(which nix-store);
-  NIX_CMD=$(which nix);
-  DEPS_FILE=$(mktemp --tmpdir "gcroots-$depPfx.XXXXXX");
-   nix-shell $shellFile --pure --command \
-   "echo '' > $DEPS_FILE; \
-    for i in \
-     \$(env | sed -r 's#(/nix/store/[^:/]+)#\n\1\n#g' | grep -E '/nix/store/[^:/]+'); \
-     do \
-       if [ -d "\$i" ]; then \
-          echo \$i  >> $DEPS_FILE; \
-       fi; \
-     done; \
-     " \
-   $@
- BUILD=$(nix-build --no-out-link \
-  -E "let pkgs = import<nixpkgs> {}; in pkgs.runCommand \"$(basename $DEPS_FILE)\" {src=$DEPS_FILE;} \"mkdir \$out; cat \$src | xargs ln -s -f -t \$out/ \"")
- echo $BUILD
- nix-store --add-root "$(pwd)/.gcroots/$(basename $DEPS_FILE)-$depPfx" --indirect --realise $BUILD \
-)}
-
-function nix-remove-roots() {(
-  if [  -d ".gcroots" ]; then
-    cd .gcroots
-    ls | grep dep | xargs rm -f
-  fi
-)}
-
 
 function term-lite() {(
   # select light theme
   base16_gruvbox-light-hard
-  # in light background teminals  with bold config looks better
-  sed -i 's/allow_bold.*/allow_bold = true/'  ~/nixos-config-public/dotfiles/config/termite/config
-  # reload the termite syntax
-  # kill -USR1 $PPID
-  # kill -USR1 $PPID
-  killall -USR1 .termite-wrappe
 )}
 
 function term-dark() {(
   # select dark theme
   base16_gruvbox-dark-hard
-  # in dark background teminals  with bold config looks better
-  sed -i 's/allow_bold.*/allow_bold = false/'  ~/nixos-config-public/dotfiles/config/termite/config
-  # reload the termite syntax
-  # kill -USR1 $PPID
-  # kill -USR1 $PPID
-  killall -USR1 .termite-wrappe
 )}
