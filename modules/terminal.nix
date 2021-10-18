@@ -109,6 +109,9 @@ in
       cachix # Command line client for Nix binary cache hosting https://cachix.org
 
       pass # Stores, retrieves, generates, and synchronizes passwords securely
+
+      tmux # multiplex shells
+      mosh # ssh alternative for intermittent connections
     ];
 
     security.pki = {
