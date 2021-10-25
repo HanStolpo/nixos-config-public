@@ -1,0 +1,14 @@
+hie.yaml
+hie-old.yaml
+.vim/
+dist-newstyle/
+dist-ide/
+cabal.project.local.ide
+dist-repl/
+.ghci
+.ghci-imports
+ch-stuff
+Outputs/
+.direnv/
+ch-eda-kicad.yaml
+import/
