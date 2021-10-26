@@ -92,7 +92,10 @@ in
       languagetool
 
       fontforge-gtk
+
+      pinentry-qt # qt based pinentry program to be used with gpg
     ];
+
 
     nixpkgs.config = {
       packageOverrides = super:
