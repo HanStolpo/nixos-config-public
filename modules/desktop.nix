@@ -40,6 +40,7 @@ in
       realvnc-viewer
       xclip # terminal clipboard support
       gnome3.nautilus # the gnome file manager
+      viewnior # light weight image viewer
 
       # browsers
       firefox
