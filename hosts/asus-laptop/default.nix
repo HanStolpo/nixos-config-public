@@ -86,6 +86,8 @@ in
   security.wrappers = {
     mnt-cifs = {
       source = "${pkgs.cifs-utils.out}/bin/mount.cifs";
+      owner = "nobody";
+      group = "nogroup";
     };
   };
 
@@ -102,9 +104,11 @@ in
   # Some kernel param options come from https://wiki.archlinux.org/index.php/ASUS_Zenbook_Pro_UX501
   boot.kernelParams =
     [
-      "acpi_osi=! acpi_osi=\"Windows 2009\"" # to get bbswitch not hang on startup
-      # "acpi_osi= acpi_backlight=native" # this would be to get the backlight keys to work apparently but does not work with the bumblebee fix above
-      "i915.enable_execlists=0" # prevent random locks apparently
+      # to get bbswitch not hang on startup
+      "acpi_osi=!"
+      "acpi_osi=\"Windows 2009\""
+      # prevent random locks apparently
+      "i915.enable_execlists=0"
     ];
 
   boot.loader.generationsDir.copyKernels = true;
@@ -280,7 +284,6 @@ in
 
 
 
-  fonts.fontconfig.dpi = 162;
   fonts.fontconfig.antialias = true;
   fonts.fontconfig.hinting.enable = true;
 
