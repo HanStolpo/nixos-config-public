@@ -45,7 +45,7 @@ in
     (
       k: _: {
         mountPoint = "/mnt/network/${k}";
-        device = "//10.2.0.7/${k}";
+        device = "//100.103.116.73/${k}";
         fsType = "cifs";
         noCheck = true;
         neededForBoot = false;
@@ -56,8 +56,8 @@ in
           "users"
           "credentials=/home/handre/dev/ch-stuff/ucam-credentials"
           "setuids"
-          #"uid=1000"
-          #"gid=100"
+          "uid=1000"
+          "gid=100"
         ];
       }
     )
