@@ -251,9 +251,10 @@ in
 
   services.dnsmasq = {
     enable = true;
-    servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1" ];
+    servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1" "100.100.100.100" ];
     extraConfig = ''
       server=/picofactory/192.168.100.1
+      server=/circuithub.com.beta.tailscale.net/100.100.100.100
     '';
   };
 
