@@ -172,7 +172,7 @@ augroup END
 nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 
 " Fuzzy find files
-nnoremap <silent> <Leader><space> :CtrlP<CR>
+nnoremap <silent> <Leader><space> :Telescope find_files<CR>
 let g:ctrlp_max_files=0
 let g:ctrlp_show_hidden=1
 let g:ctrlp_custom_ignore = { 'dir': '\v[\/](.git|.cabal-sandbox|.stack-work)$' }
@@ -281,7 +281,7 @@ nnoremap <leader>bo <c-w>o
 noremap <leader>bd :Bd<cr>
 
 " fuzzy find buffers
-noremap <leader>b<space> :CtrlPBuffer<cr>
+noremap <leader>b<space> :Telescope buffers<cr>
 
 " Neovim terminal configurations
 if has('nvim')
