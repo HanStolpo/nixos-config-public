@@ -793,6 +793,6 @@ projects =
 ---------------------------------------------------------------------------
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
-myTerminal = "alacritty"
+myTerminal = "kitty"
 
 myLauncher = "dmenu_run"

@@ -41,6 +41,10 @@ in
       };
       defaultZsh = mkOption {
         type = types.bool;
+        default = false;
+      };
+      defaultFish = mkOption {
+        type = types.bool;
         default = true;
       };
     };
@@ -50,12 +54,16 @@ in
     environment.systemPackages = with pkgs; [
 
       zsh # The Z shell
+      fish
+      babelfish
       bashInteractive # GNU Bourne-Again Shell, the de facto standard shell on Linux (for interactive use)
       powerline-go # custom shell prompt shared by bash and zsh
       termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
+      kitty
       direnv # automatically setup environment variables when entering a directory
       nix-direnv
+      starship
     ];
 
     # nix direnv config https://github.com/nix-community/nix-direnv
@@ -68,10 +76,11 @@ in
       "/share/nix-direnv"
     ];
 
-    users = mkIf cfg.defaultZsh {
-      defaultUserShell = "${pkgs.zsh}/bin/zsh";
-    };
-    environment.shells = [ "${pkgs.zsh}/bin/zsh" ];
+    users = mkMerge
+      [ (mkIf cfg.defaultZsh { defaultUserShell = "${pkgs.zsh}/bin/zsh"; })
+        (mkIf cfg.defaultFish { defaultUserShell = "${pkgs.fish}/bin/fish"; })
+      ];
+    environment.shells = [ "${pkgs.fish}/bin/fish" "${pkgs.zsh}/bin/zsh" ];
 
     programs.zsh = {
       enable = true;
@@ -162,6 +171,36 @@ in
         eval "$(${pkgs.direnv}/bin/direnv hook bash)"
 
         ${base16ShellInit}
+      '';
+    };
+
+    programs.fish = {
+      enable = true;
+
+      useBabelfish = true;
+
+      promptInit = ''
+        set -x -g STARSHIP_CONFIG "${./shell/starship.toml}"
+        ${pkgs.starship}/bin/starship init fish | source
+      '';
+
+      interactiveShellInit = ''
+
+        set -x -g EDITOR 'nvim'
+
+        function fish_user_key_bindings
+            # Execute this once per mode that emacs bindings should be used in
+            fish_default_key_bindings -M insert
+
+            # Then execute the vi-bindings so they take precedence when there's a conflict.
+            # Without --no-erase fish_vi_key_bindings will default to
+            # resetting all bindings.
+            # The argument specifies the initial mode (insert, "default" or visual).
+            fish_vi_key_bindings --no-erase insert
+        end
+
+        # setup direnv
+        eval "$(${pkgs.direnv}/bin/direnv hook fish)"
       '';
     };
   };

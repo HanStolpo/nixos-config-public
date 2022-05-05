@@ -49,7 +49,7 @@ in
                 "libvirtd"
                 "plugdev"
               ];
-              shell = "${pkgs.zsh}/bin/zsh";
+              #shell = "${pkgs.zsh}/bin/fish";
             };
 
           security.sudo = {

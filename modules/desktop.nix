@@ -18,8 +18,8 @@ in
 
     environment.systemPackages = with pkgs; [
       # terminals
-      termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
+      kitty # terminal editor which is OpenGL accelerated
 
       xdotool # x desktop automation
       flameshot # easy screenshot tool

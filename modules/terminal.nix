@@ -112,6 +112,8 @@ in
 
       tmux # multiplex shells
       mosh # ssh alternative for intermittent connections
+
+      fzf
     ];
 
     security.pki = {
