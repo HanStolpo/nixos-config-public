@@ -86,8 +86,8 @@ in
       lockOn.hibernate = false;
       lockOn.suspend = true;
     };
-    services.keybase.enable = true;
-    services.kbfs.enable = true;
+
+
     virtualisation.libvirtd.enable = true;
 
     networking.firewall = {
