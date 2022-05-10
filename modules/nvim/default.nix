@@ -40,7 +40,7 @@
           { name = "plenary-nvim"; }
           { name = "nerdcommenter"; }
           { name = "lualine-nvim"; }
-          { name = "indent-blankline-nvim-lua"; }
+          #{ name = "indent-blankline-nvim-lua"; }
           { name = "barbar-nvim"; }
           { name = "nvim-base16"; }
           { name = "nvim-web-devicons"; }
