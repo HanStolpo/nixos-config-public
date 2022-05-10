@@ -34,10 +34,7 @@
           { name = "nvim-treesitter"; }
           { name = "telescope-nvim"; }
           { name = "nvim-tree-lua"; }
-          { name = "nvim-cmp"; }
-          { name = "cmp-nvim-lsp"; }
           { name = "nvim-snippy"; }
-          { name = "cmp-snippy"; }
           { name = "hop-nvim"; }
           { name = "diffview-nvim"; }
           { name = "plenary-nvim"; }
@@ -48,6 +45,7 @@
           { name = "nvim-base16"; }
           { name = "nvim-web-devicons"; }
           { name = "auto-session"; }
+          { name = "mini-nvim"; }
 
           { name = "Tabular"; } # Align text
           { name = "extradite"; } # extends fugitive for git log commit browse

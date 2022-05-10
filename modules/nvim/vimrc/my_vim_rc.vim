@@ -145,63 +145,55 @@ require('auto-session').setup {
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
--- Setup nvim-cmp.
-vim.opt.completeopt='menu,menuone,noselect'
+require("mini.completion").setup {
+  -- Delay (debounce type, in ms) between certain Neovim event and action.
+  -- This can be used to (virtually) disable certain automatic actions by
+  -- setting very high delay time (like 10^7).
+  delay = { completion = 100, info = 100, signature = 50 },
 
-local cmp = require'cmp'
-
-cmp.setup {
-  mapping = {
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<C-e>'] = cmp.mapping({
-    i = cmp.mapping.abort(),
-    c = cmp.mapping.close(),
-    }),
-  ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  -- Maximum dimensions of floating windows for certain actions. Action
+  -- entry should be a table with 'height' and 'width' fields.
+  window_dimensions = {
+    info = { height = 25, width = 80 },
+    signature = { height = 25, width = 80 },
   },
-snippet = {
-  expand = function(args)
-  require 'snippy'.expand_snippet(args.body)
-end
-},
-  sources = cmp.config.sources({
-  { name = 'nvim_lsp' },
-  { name = 'snippy' },
-  }, {
-  { name = 'buffer' },
-  })
+
+  -- Way of how module does LSP completion
+  lsp_completion = {
+    -- `source_func` should be one of 'completefunc' or 'omnifunc'.
+    source_func = 'completefunc',
+
+    -- `auto_setup` should be boolean indicating if LSP completion is set up
+    -- on every `BufEnter` event.
+    auto_setup = true,
+
+    -- `process_items` should be a function which takes LSP
+    -- 'textDocument/completion' response items and word to complete. Its
+    -- output should be a table of the same nature as input items. The most
+    -- common use-cases are custom filtering and sorting. You can use
+    -- default `process_items` as `MiniCompletion.default_process_items()`.
+    -- process_items = --<function: filters out snippets; sorts by LSP specs>,
+  },
+
+  -- Fallback action. It will always be run in Insert mode. To use Neovim's
+  -- built-in completion (see `:h ins-completion`), supply its mapping as
+  -- string. Example: to use 'whole lines' completion, supply '<C-x><C-l>'.
+  -- fallback_action = --<function: like `<C-n>` completion>,
+
+  -- Module mappings. Use `''` (empty string) to disable one. Some of them
+  -- might conflict with system mappings.
+  mappings = {
+    force_twostep = '<C-Space>', -- Force two-step completion
+    force_fallback = '<A-Space>', -- Force fallback completion
+  },
+
+  -- Whether to set Vim's settings for better experience (modifies
+  -- `shortmess` and `completeopt`)
+  set_vim_settings = true,
 }
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-  { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-  { name = 'buffer' },
-  })
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-    }
-  })
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-  { name = 'path' }
-  }, {
-  { name = 'cmdline' }
-  })
-})
-
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 
 -- Mappings.
