@@ -54,6 +54,8 @@
           { name = "vim-localvimrc"; } #
           { name = "vim-leader-guide"; } # show info about key short cuts
 
+          { name = "coffee-script"; } # show info about key short cuts
+
           # color schemes
           #{ name = "vim-colorschemes"; }
 
