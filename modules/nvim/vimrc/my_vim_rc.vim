@@ -289,25 +289,29 @@ return t1
 end
 
 local servers = {
+  cmake = {
+  },
+  clangd = {
+  },
   hls = {
     cmd = { "haskell-language-server", "--lsp" },
     -- root_dir = require('lspconfig.util').root_pattern('cabal.project'),
-    },
-elmls = {
-  settings = {
-  elmLS = {
-    trace = {
-      server = true
-      },
-  elmPath = "elm",
-elmReviewPath = "elm-review",
-        elmReviewDiagnostics = "warning",
-      elmFormatPath = "elm-format",
-    elmTestPath = "elm-test",
-    }
   },
-},
-  }
+  elmls = {
+    settings = {
+      elmLS = {
+        trace = {
+          server = true
+          },
+      elmPath = "elm",
+      elmReviewPath = "elm-review",
+              elmReviewDiagnostics = "warning",
+            elmFormatPath = "elm-format",
+          elmTestPath = "elm-test",
+        }
+    },
+  },
+}
 
 for lsp, cfg in pairs(servers) do
   require('lspconfig')[lsp].setup ( assign(cfg) {
