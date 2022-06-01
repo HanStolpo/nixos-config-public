@@ -7,7 +7,8 @@
 !---------------------------------
 
 !Xft.dpi: 180
-Xft.dpi: 162
+!Xft.dpi: 162
+Xft.dpi: 144
 !Xft.dpi: 122
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
