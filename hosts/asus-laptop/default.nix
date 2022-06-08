@@ -3,6 +3,8 @@ let kernel = pkgs.linuxPackages_latest;
 in
 
 {
+  services.physlock.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
   #time.timeZone = "Europe/London";
