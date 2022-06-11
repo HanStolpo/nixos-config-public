@@ -30,7 +30,7 @@ in
       # Utilities
       wget # Tool for retrieving files using HTTP, HTTPS, and FTP
       sudo # A command to run commands as root
-      manpages # / man-pages : Linux development manual pages
+      man-pages # / man-pages : Linux development manual pages
       iptables # A program to configure the Linux IP packet filtering ruleset
       zlib # Lossless data-compression library
       psmisc # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
@@ -71,7 +71,7 @@ in
 
       # development
       binutils # Tools for manipulating binaries (linker, assembler, etc.)
-      ag # A code-searching tool similar to ack, but faster
+      silver-searcher # A code-searching tool similar to ack, but faster
       ctags # A tool for fast source code browsing (exuberant ctags)
       gnumake # A tool to control the generation of non-source files from sources
       cabal2nix # Convert Cabal files into Nix build instructions
@@ -86,7 +86,7 @@ in
       yaml2json
       (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
       # haskell
-      (haskell.lib.justStaticExecutables haskellPackages.haskell-language-server)
+      # (haskell.lib.justStaticExecutables haskellPackages.haskell-language-server)
       (haskell.lib.justStaticExecutables haskellPackages.hie-bios)
       # rust
       cargo

@@ -61,10 +61,10 @@ in
       #eagle # Eagle EDA tool
       gerbv # A Gerber (RS-274X) viewer
 
-      gnome3.glade # gtk layout tool
+      glade # gtk layout tool
 
       # fonts
-      xlibs.mkfontdir
+      xorg.mkfontdir
       xfontsel
       xlsfonts
       powerline-fonts
@@ -78,9 +78,9 @@ in
       libnotify # A library that sends desktop notifications to a notification daemon
       xdg-user-dirs # A tool to help manage well known user directories like the desktop folder and the music folder
       xdg_utils # A set of command line tools that assist applications with a variety of desktop integration tasks
-      xlibs.xcursorthemes
-      xlibs.xev
-      xlibs.xprop
+      xorg.xcursorthemes
+      xorg.xev
+      xorg.xprop
 
       notify-osd # Daemon that displays passive pop-up notifications
 
@@ -135,7 +135,7 @@ in
         enableContribAndExtras = true;
         extraPackages = haskellpackages: with haskellpackages; [
           dbus
-          xmonad-entryhelper
+          # xmonad-entryhelper
           xmobar
           xmonad
           xmonad-contrib

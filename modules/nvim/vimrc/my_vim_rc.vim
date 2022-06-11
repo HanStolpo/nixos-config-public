@@ -73,7 +73,7 @@ require('lint').linters_by_ft = {
   haskell = {'hlint',}
 }
 EOF
-au BufWritePost,InsertLeave,TextChanged,BufNewFile,BufRead *.hs lua require('lint').try_lint()
+"au BufWritePost,BufRead *.hs lua require('lint').try_lint()
 
 
 lua << EOF
@@ -89,7 +89,7 @@ require'nvim-treesitter.configs'.setup {
   -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
   -- the name of the parser)
   -- list of language that will be disabled
-  disable = { },
+  disable = { "vim", "nix" },
 
   -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
   -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

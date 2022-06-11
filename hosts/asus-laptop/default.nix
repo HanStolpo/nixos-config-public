@@ -5,6 +5,10 @@ in
 {
   services.physlock.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "python2.7-pyjwt-1.7.1"
+  ];
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
   #time.timeZone = "Europe/London";
@@ -21,7 +25,7 @@ in
 
   boot.kernelPackages = kernel;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.kernelModules = [ "kvm-intel" "bbswitch" ];
+  boot.kernelModules = [ "kvm-intel" ];
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/307695aa-384f-4216-8df2-08e79e8cb0a5";
 
@@ -97,11 +101,7 @@ in
 
   nix.buildCores = 6;
 
-  boot.extraModulePackages = [ kernel.bbswitch ];
-  boot.extraModprobeConfig =
-    ''
-      options bbswitch load_state=0
-    '';
+  boot.extraModulePackages = [ ];
 
   # Some kernel param options come from https://wiki.archlinux.org/index.php/ASUS_Zenbook_Pro_UX501
   boot.kernelParams =
@@ -166,7 +166,6 @@ in
 
   environment.systemPackages = with pkgs; [
     wpa_supplicant_gui
-    kernel.bbswitch
     microcodeIntel
     blueman
     arc-theme

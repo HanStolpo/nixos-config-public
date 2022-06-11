@@ -16,7 +16,7 @@ in
     networking.firewall.interfaces.virbr0.allowedTCPPorts = [ 139 445 ];
     networking.firewall.interfaces.virbr0.allowedUDPPorts = [ 137 138 ];
     services = {
-      redis.enable = true;
+      redis.servers.ch.enable = true;
 
       rabbitmq.enable = true;
       # rabbitmq.config = ''

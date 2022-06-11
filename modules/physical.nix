@@ -28,7 +28,7 @@ in
       lshw # Provide detailed information on the hardware configuration of the machine
       hwinfo # Hardware detection tool from openSUSE
       sysfsutils # These are a set of utilites built upon sysfs, a new virtual filesystem in Linux kernel versions 2.5+ that exposes a system's device tree.
-      sshfsFuse # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
+      sshfs-fuse # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
       linuxPackages.cpupower # Tool to examine and tune power saving features
       lm_sensors # Tools for reading hardware sensors
       hddtemp # Tool for displaying hard disk temperature
@@ -40,7 +40,7 @@ in
       cifs-utils # Tools for managing Linux CIFS client filesystems
       nfs-utils # This package contains various Linux user-space Network File System (NFS) utilities, including RPC `mount' and `nfs' daemons.
 
-      mesa_noglu # An open source implementation of OpenGL
+      mesa # An open source implementation of OpenGL
       mesa_drivers # An open source implementation of OpenGL
       # glmark2 # OpenGL (ES) 2.0 benchmark
       glxinfo # info about opengl implementation
