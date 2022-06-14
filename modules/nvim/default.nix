@@ -1,32 +1,15 @@
 { pkgs, lib, ... }:
-# let
-#   nvim = pkgs.pkgs-unstable.neovim.override {
-#     # don't alias neovim to vim, yet.
-#     vimAlias = true;
-#     withPython3 = true;
-#     configure = (import ./customization.nix { pkgs = pkgs.pkgs-unstable; });
-#   };
-#
-# in
-# {
-#   environment.systemPackages =
-#     [
-#       nvim
-#       pkgs.ctags
-#       pkgs.nixpkgs-fmt
-#     ];
-# }
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.pkgs-unstable.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     vimAlias = true;
     viAlias = true;
     withPython3 = true;
     configure = {
       customRC = pkgs.callPackage ./vimrc.nix { };
       vam = {
-        knownPlugins = pkgs.pkgs-unstable.vimPlugins // pkgs.callPackage ./plugins.nix { };
+        knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
 
         pluginDictionaries = [
 
