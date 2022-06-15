@@ -67,6 +67,14 @@ au BufNewFile,BufRead *.hs map <buffer> <leader>hH :Hoogle<CR>
 au BufNewFile,BufRead *.hs map <buffer> <leader>hc :HoogleClose<CR>
 au BufNewFile,BufRead *.hs map <buffer> <leader>hl :HoogleLine<CR>
 
+" nvim-lint
+lua << EOF
+require('lint').linters_by_ft = {
+  haskell = {'hlint',}
+}
+EOF
+au BufWritePost,InsertLeave,TextChanged,BufNewFile,BufRead *.hs lua require('lint').try_lint()
+
 
 lua << EOF
 

@@ -31,6 +31,7 @@
         pluginDictionaries = [
 
           { name = "nvim-lspconfig"; }
+          { name = "nvim-lint"; }
           { name = "nvim-treesitter"; }
           { name = "telescope-nvim"; }
           { name = "nvim-tree-lua"; }
