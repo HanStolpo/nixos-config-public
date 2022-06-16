@@ -100,7 +100,8 @@ in
   services.xserver.libinput.enable = true;
   services.xserver.libinput.touchpad.naturalScrolling = false;
   services.xserver.libinput.touchpad.disableWhileTyping = true;
-  services.xserver.dpi = 144; # 15" FHD
+  services.xserver.dpi = 102; # 15" FHD
+  # services.xserver.dpi = 144; # 15" FHD
   services.xserver.exportConfiguration = true;
   services.xserver.useGlamor = true;
 
