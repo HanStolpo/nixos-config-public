@@ -1,7 +1,7 @@
 Config
   { font = "xft:Iosevka Nerd Font:size=12:bold:antialias=true"
   , additionalFonts = ["xft:Font Awesome 5 Free Solid:size=12"]
-  , allDesktops = False
+  , allDesktops = True
   , bgColor = "#282a36"
   , fgColor = "#f8f8f2"
   , position = Top
