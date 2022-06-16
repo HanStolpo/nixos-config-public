@@ -77,7 +77,6 @@ in
           map to guest = Bad User
           guest ok = true
           guest only = true
-          interfaces = virbr0
           [vagrant]
           path = /home/handre/temp
           force user = root
