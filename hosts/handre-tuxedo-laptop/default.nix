@@ -4,6 +4,11 @@ in
 
 {
 
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  hanstolpo.users.enable = true;
+  hanstolpo.users.SSHLogin = true;
+
   services.physlock.enable = false;
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -19,7 +24,7 @@ in
   hanstolpo = {
     shell.enable = true;
     terminal.enable = true;
-    users.enable = true;
+    #users.enable = true;
     desktop.enable = true;
     physical.enable = true;
     dev-services.enable = false;
