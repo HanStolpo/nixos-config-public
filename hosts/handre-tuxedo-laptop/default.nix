@@ -22,7 +22,7 @@ in
     users.enable = true;
     desktop.enable = true;
     physical.enable = true;
-    dev-services.enable = true;
+    dev-services.enable = false;
   };
 
   nix.maxJobs = lib.mkDefault 8;
@@ -60,7 +60,7 @@ in
   ];
 
   boot.kernelPackages = kernel;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmnc" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [  ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [];
@@ -70,25 +70,21 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
+      fsType = "ext4";
+    };
+
   boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/920eb5ec-e62f-415c-aefd-26a9cc7f3762";
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/C7A9-3E53";
+      fsType = "vfat";
+    };
+
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }];
-
-
-  fileSystems = {
-    "/" =
-      {
-        device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
-        fsType = "ext4";
-      };
-    "/boot" =
-      {
-        device = "/dev/disk/by-uuid/C7A9-3E53";
-        fsType = "vfat";
-      };
-
-  };
+    [ { device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }
+    ];
 
   networking.useDHCP = true;
 
