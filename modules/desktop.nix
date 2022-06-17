@@ -114,7 +114,7 @@ in
         unifont # some international languages
         powerline-fonts
         nerdfonts
-        font-awesome
+        font-awesome_5
       ];
       fontconfig = {
         defaultFonts = {

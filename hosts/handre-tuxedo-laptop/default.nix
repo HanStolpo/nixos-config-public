@@ -68,8 +68,8 @@ in
   boot.kernelPackages = kernel;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [  ];
-  boot.kernelModules = [ "kvm-amd" "lm92" ];
-  boot.extraModulePackages = [];
+  boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" ];
+  boot.extraModulePackages = with kernel; [zenpower];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.generationsDir.copyKernels = true;

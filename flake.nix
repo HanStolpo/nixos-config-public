@@ -20,6 +20,10 @@
       inherit (hlissner-dotfiles.lib) mapModules mapModulesRec';
     in
     {
+      inherit nixpkgs;
+
+      inherit nixpkgs-unstable;
+
       overlays = {
         pkgs-unstable =
           final: prev: {
