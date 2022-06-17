@@ -5,7 +5,7 @@ xrdb ~/.Xresources
 
 # System tray
 killall stalonetray
-stalonetray &
+stalonetray --window-type dock --window-strut auto --window-layer top &
 
 killall notify-osd
 notify-osd &
