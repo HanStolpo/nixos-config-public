@@ -21,7 +21,6 @@ in
       alacritty # vi like terminal emulator which is OpenGL accelerated
       kitty # terminal editor which is OpenGL accelerated
 
-      xdotool # x desktop automation
       flameshot # easy screenshot tool
       shutter # take screen shots annotate images
       gv # postscript viewer
@@ -38,7 +37,6 @@ in
       ffmpeg-full # A complete, cross-platform solution to record, convert and stream audio and video
       remmina # remote desktop client
       realvnc-viewer
-      xclip # terminal clipboard support
       gnome3.nautilus # the gnome file manager
       viewnior # light weight image viewer
 
@@ -63,27 +61,6 @@ in
 
       glade # gtk layout tool
 
-      # fonts
-      xorg.mkfontdir
-      xfontsel
-      xlsfonts
-      powerline-fonts
-
-      trayer # A lightweight GTK2-based systray for UNIX desktop
-      stalonetray # Stalonetray is a stand-alone freedesktop.org and KDE system tray (notification area) for X Window System/X11 
-      (haskell.lib.justStaticExecutables haskellPackages.xmobar)
-      unclutter-xfixes
-      capitaine-cursors
-      dmenu # A generic, highly customizable, and efficient menu for the X Window System
-      libnotify # A library that sends desktop notifications to a notification daemon
-      xdg-user-dirs # A tool to help manage well known user directories like the desktop folder and the music folder
-      xdg_utils # A set of command line tools that assist applications with a variety of desktop integration tasks
-      xorg.xcursorthemes
-      xorg.xev
-      xorg.xprop
-
-      notify-osd # Daemon that displays passive pop-up notifications
-
       sqlitebrowser
 
       rhythmbox # music player
@@ -104,59 +81,87 @@ in
           google-chrome = super.google-chrome.override { channel = "stable"; };
         };
     };
+
+    # derived from here https://github.com/danielbarter/nixos-config/blob/36e173ac251a3380a026c0ccb90c3612a627b761/configuration.nix#L268
     fonts = {
       fontDir.enable = true;
+
       enableGhostscriptFonts = true;
+
       fonts = with pkgs; [
-        corefonts # Micrsoft free fonts
-        inconsolata # monospaced
+        corefonts          # Micrsoft free fonts
+        inconsolata        # monospaced
         ubuntu_font_family # Ubuntu fonts
-        unifont # some international languages
+        unifont            # some international languages
         powerline-fonts
         nerdfonts
         font-awesome_5
+
+        source-code-pro
+        source-sans-pro
+        source-serif-pro
+        noto-fonts-emoji
       ];
+
+      enableDefaultFonts = true;
+
       fontconfig = {
+        enable = true;
+
+        # copied from https://github.com/danielbarter/nixos-config/blob/36e173ac251a3380a026c0ccb90c3612a627b761/configuration.nix#L281
+        #
+        # some applications, notably alacritty, choose fonts according to
+        # fontconfigs internal ordering of fonts rather than specific font
+        # tags. To get the correct fonts to be rendered, we need to disable some
+        # fallback fonts which nixos includes by default and fontconfig prefers
+        # over user specified ones. To see this internal list, run fc-match -s
+
+        localConf = let
+          # function to generate patterns for fontconfig font banning
+          fontBanPattern = s: ''
+          <pattern>
+            <patelt name="family">
+              <string>${s}</string>
+            </patelt>
+          </pattern>
+          '';
+
+          fontsToBan = [
+            "Noto Emoji"
+            "DejaVu Sans"
+            "FreeSans"
+            "FreeMono"
+            "FreeSerif"
+            "DejaVu Math TeX Gyre"
+            "DejaVu Sans Mono"
+            "DejaVu Serif"
+            "Liberation Mono"
+            "Liberation Serif"
+            "Liberation Sans"
+            "DejaVu Serif"
+            "DejaVu Serif"
+            "Liberation Serif"
+            "DejaVu Serif"
+          ]; in
+          ''
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <selectfont>
+              <rejectfont>
+                ${lib.strings.concatStringsSep "\n" (map fontBanPattern fontsToBan)}
+              </rejectfont>
+            </selectfont>
+          </fontconfig>
+        '';
+
         defaultFonts = {
           monospace = [ "Roboto Mono for Powerline" ];
+          sansSerif = [ "Source Sans Pro" ];
+          serif     = [ "Source Serif Pro" ];
+          emoji     = [ "Noto Color Emoji" ];
         };
       };
     };
-    services.unclutter-xfixes = {
-      enable = true;
-    };
-    services.xserver = {
-      useGlamor = true;
-      xkbOptions = "ctrl:nocaps";
-      enable = true;
-      layout = "us";
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        extraPackages = haskellpackages: with haskellpackages; [
-          dbus
-          # xmonad-entryhelper
-          xmobar
-          xmonad
-          xmonad-contrib
-          xmonad-extras
-          xmonad-utils
-        ];
-      };
-      displayManager.defaultSession = "none+xmonad";
-
-      displayManager = {
-
-        lightdm = {
-          enable = true;
-          greeters.mini = {
-            enable = true;
-            user = "handre";
-          };
-        };
-      };
-    };
-
-    services.dbus.enable = true;
   };
 }
