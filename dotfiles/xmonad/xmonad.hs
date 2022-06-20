@@ -304,7 +304,7 @@ myLayoutHook =
     -- number of windows in the master pane
     nmaster = 1
     -- default proportion of screen occupied by master pane
-    ratio = 2 / 3
+    ratio = 1 / 2
     -- percent of screen to increment when resizing
     delta = 1 / 100
 
@@ -793,6 +793,6 @@ projects =
 ---------------------------------------------------------------------------
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
-myTerminal = "kitty"
+myTerminal = "alacritty"
 
 myLauncher = "dmenu_run"
