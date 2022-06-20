@@ -47,7 +47,7 @@ in
 
       # chat clients
       slack
-      discord
+      pkgs-unstable.discord
       weechat # A fast, light and extensible chat client
 
       # online storage

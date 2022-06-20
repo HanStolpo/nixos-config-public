@@ -19,7 +19,7 @@
     let
       inherit (hlissner-dotfiles.lib) mapModules mapModulesRec';
     in
-    {
+    rec {
       inherit nixpkgs;
 
       inherit nixpkgs-unstable;
@@ -27,9 +27,11 @@
       overlays = {
         pkgs-unstable =
           final: prev: {
-            pkgs-unstable = nixpkgs-unstable.legacyPackages."${final.system}";
-            #nixops = nixops.defaultPackage."${final.system}";
-          };
+           pkgs-unstable = import nixpkgs-unstable {
+             system = final.system;
+             config.allowUnfree = true;
+         };
+        };
       } // mapModules ./overlays import;
 
       nixosModules = mapModules ./modules import;
