@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
-let kernel = pkgs.linuxPackages_latest;
+let kernel = pkgs.pkgs-unstable.linuxPackages_latest;
     enableSSH = false;
     dpi = 122;
 in
