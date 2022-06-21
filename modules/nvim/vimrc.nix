@@ -6,7 +6,7 @@ let
 in
 
 ''
-  call setenv("PATH", getenv("PATH") . ":${nodejs}/bin:${python3}/bin:${fd}/bin:/${languagetool}/bin:${ripgrep-all}/bin")
+  call setenv("PATH", "${nodejs}/bin:${python3}/bin:${fd}/bin:/${languagetool}/bin:${ripgrep-all}/bin:" . getenv("PATH") )
 
   ${haskell-vim-now}
 
