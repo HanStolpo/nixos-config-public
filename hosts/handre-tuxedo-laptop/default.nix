@@ -21,11 +21,11 @@ in
             SSHLogin = enableSSH;
         };
 
-        xmonad.enable = true;
+        xmonad.enable = false;
 
 
         sway = {
-          enable = false;
+          enable = true;
           pathToSwayConfigFile = "/home/handre/nixos-config-public/dotfiles/config/sway/config";
           pathToWayDisplaysConfigFile = "/home/handre/nixos-config-public/dotfiles/config/way-displays/cfg.yaml";
           pathToWaybarConfigFile = "/home/handre/nixos-config-public/dotfiles/config/waybar/config";
@@ -242,6 +242,13 @@ in
       # The NixOS release to be compatible with for stateful data such as databases.
       system.stateVersion = "22.05";
     }
+
+    (lib.mkIf config.hanstolpo.sway.enable {
+        # https://wiki.archlinux.org/title/firefox#Wayland
+        programs.fish.loginShellInit = ''
+          set -x -g MOZ_ENABLE_WAYLAND 1
+        '';
+    })
 
     (lib.mkIf config.hanstolpo.xmonad.enable {
       #services.xserver.dpi = dpi;
