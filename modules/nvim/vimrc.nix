@@ -1,4 +1,4 @@
-{ stdenv, writeText, haskellPackages, nodejs, python3, fd, languagetool }:
+{ stdenv, writeText, haskellPackages, nodejs, python3, fd, ripgrep-all, languagetool }:
 
 let
   haskell-vim-now = builtins.readFile ./vimrc/haskell-vim-now.vim;
@@ -6,7 +6,7 @@ let
 in
 
 ''
-  call setenv("PATH", getenv("PATH") . ":${nodejs}/bin:${python3}/bin:${fd}/bin:/${languagetool}/bin")
+  call setenv("PATH", getenv("PATH") . ":${nodejs}/bin:${python3}/bin:${fd}/bin:/${languagetool}/bin:${ripgrep-all}/bin")
 
   ${haskell-vim-now}
 
