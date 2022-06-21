@@ -293,6 +293,16 @@ in
           };
         };
       };
+      services.autorandr.hooks.predetect = {
+        "wait" = ''
+          ${pkgs.coreutils}/bin/sleep 20s
+        '';
+      };
+      services.autorandr.hooks.preswitch = {
+        "wait" = ''
+          ${pkgs.coreutils}/bin/sleep 10s
+        '';
+      };
       services.autorandr.hooks.postswitch = {
         "change-dpi" = ''
           case "$AUTORANDR_CURRENT_PROFILE" in
