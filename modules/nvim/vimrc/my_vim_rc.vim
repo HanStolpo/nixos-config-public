@@ -108,7 +108,13 @@ require('telescope').setup{
 defaults = {
   dynamic_preview_title = true,
   layout_strategy = "flex",
-  path_display = { smart = {} }
+  path_display = { smart = {} },
+  mappings = {
+    i = {
+      ["<C-Down>"] = require('telescope.actions').cycle_history_next,
+      ["<C-Up>"] = require('telescope.actions').cycle_history_prev,
+    },
+  },
   }
 }
 
