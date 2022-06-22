@@ -51,8 +51,8 @@ in
       weechat # A fast, light and extensible chat client
 
       # online storage
-      dropbox # to stop dropbox from auto updating create ~/.dropbox-dist chmod 0 it
-      dropbox-cli
+      pkgs-unstable.dropbox # to stop dropbox from auto updating create ~/.dropbox-dist chmod 0 it
+      pkgs-unstable.dropbox-cli
 
       #EDA
       #kicad # Free Software EDA Suite
