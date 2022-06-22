@@ -86,6 +86,10 @@ in
         mako                       # notification system developed by swaywm maintainer
         pkgs-unstable.way-displays # autorandr like management of display outputs connected to wayland compositor
         waybar                     #
+        zathura # document viewer
+        cinnamon.nemo    # file manager
+        nomacs # image viewer
+        mpv # video player
     ];
 
 
@@ -109,6 +113,30 @@ in
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+    };
+
+    environment.variables = {
+        # https://wiki.archlinux.org/title/firefox#Wayland
+        "MOZ_ENABLE_WAYLAND" = "1";
+        # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
+        # If you are using Wayland you can choose to use the Ozone Wayland support
+        # in Chrome and several Electron apps by setting the environment variable
+        # NIXOS_OZONE_WL=1 (for example via environment.sessionVariables.NIXOS_OZONE_WL = "1").
+        # This is not enabled by default because Ozone Wayland is still under heavy development
+        # and behavior is not always flawless. Furthermore, not all Electron apps use the latest
+        # Electron versions. #
+        "NIXOS_OZONE_WL" = "1";
+        # these are from here https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
+        "XDG_SESSION_TYPE"            = "wayland";
+        "XDG_SESSION_DESKTOP"         = "sway";
+        "XDG_CURRENT_DESKTOP"         = "sway";
+        "CLUTTER_BACKEND"             = "wayland";
+        "QT_QPA_PLATFORM"             = "wayland-egl";
+        "ECORE_EVAS_ENGINE"           = "wayland-egl";
+        "ELM_ENGINE"                  = "wayland_egl";
+        "SDL_VIDEODRIVER"             = "wayland";
+        "_JAVA_AWT_WM_NONREPARENTING" = "1";
+        "NO_AT_BRIDGE"                = "1";
     };
 
     environment.etc = {

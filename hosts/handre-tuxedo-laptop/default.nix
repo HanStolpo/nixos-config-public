@@ -243,13 +243,6 @@ in
       system.stateVersion = "22.05";
     }
 
-    (lib.mkIf config.hanstolpo.sway.enable {
-        # https://wiki.archlinux.org/title/firefox#Wayland
-        programs.fish.loginShellInit = ''
-          set -x -g MOZ_ENABLE_WAYLAND 1
-        '';
-    })
-
     (lib.mkIf config.hanstolpo.xmonad.enable {
       #services.xserver.dpi = dpi;
       services.xserver.exportConfiguration = true;
