@@ -92,6 +92,7 @@ in
         mpv # video player
     ];
 
+    programs.light.enable = true;
 
 
     # xdg-desktop-portal works by exposing a series of D-Bus interfaces
