@@ -86,6 +86,7 @@ in
       boot.initrd.kernelModules = [  ];
       boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard"];
       boot.extraModulePackages = with kernel; [zenpower tuxedo-keyboard];
+      hardware.tuxedo-keyboard.enable = true;
 
       # Use the systemd-boot EFI boot loader.
       boot.loader.generationsDir.copyKernels = true;
