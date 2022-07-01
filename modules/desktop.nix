@@ -74,6 +74,8 @@ in
       fontforge-gtk
 
       pinentry-qt # qt based pinentry program to be used with gpg
+
+      gnvim # minimal gui front end for nvim
     ];
 
 
