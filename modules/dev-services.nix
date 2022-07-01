@@ -84,7 +84,7 @@ in
           read only = false
           create mask = 0644
           directory mask = 0755
-          hosts allow = 10.0.2.15
+          hosts allow = 192.168.122.1
         '';
       };
     };
