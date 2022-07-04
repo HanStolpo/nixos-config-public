@@ -12,12 +12,18 @@
       url = github:NixOS/nixops;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    flake-utils.url = "github:numtide/flake-utils";
+    
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, nixops, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, nixops, flake-utils, kmonad, ... }:
     let
       inherit (hlissner-dotfiles.lib) mapModules mapModulesRec';
+      inherit (flake-utils.lib) eachSystem allSystems;
     in
     rec {
       inherit nixpkgs;
@@ -41,14 +47,15 @@
           system = "x86_64-linux";
           modules =
             builtins.attrValues self.nixosModules ++
-            [
+            [ kmonad.nixosModules.default
+
               ({ pkgs, ... }: {
                 # Let 'nixos-version --json' know about the Git revision of this flake.
                 system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
 
                 nixpkgs = {
                   config.allowUnfree = true;
-                  overlays = builtins.attrValues self.overlays;
+                  overlays = builtins.attrValues self.overlays ++ [kmonad.overlays.default];
                 };
 
                 nix = {

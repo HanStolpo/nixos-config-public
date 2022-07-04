@@ -56,6 +56,7 @@ in
       environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
       environment.systemPackages = with pkgs; [
+        kmonad
         wpa_supplicant_gui
         blueman
         arc-theme
@@ -84,7 +85,7 @@ in
       boot.kernelPackages = kernel;
       boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       boot.initrd.kernelModules = [  ];
-      boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard"];
+      boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard" "uinput"];
       boot.extraModulePackages = with kernel; [zenpower tuxedo-keyboard];
       hardware.tuxedo-keyboard.enable = true;
 
@@ -239,6 +240,60 @@ in
         )
 
       ];
+
+      services.kmonad ={
+        enable = true;
+         
+        extraArgs = ["--log-level" "debug"];
+
+        keyboards.laptop-keyboard = {
+          device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+          
+          defcfg = {
+            enable = true;
+            compose.key = null;
+            fallthrough = true;
+            allowCommands = false;
+          };
+          
+          config = ''
+
+          (defsrc
+            esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+            grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+            tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+            caps a    s    d    f    g    h    j    k    l    ;    '    ret
+            lsft z    x    c    v    b    n    m    ,    .    /    rsft
+            lctl lmet lalt           spc            ralt rmet rctl
+          )
+          
+          (defalias
+            inSym (layer-toggle symbols)      ;; perform next key press in symbol layer
+            sym (tap-next-release ; @inSym)  ;; semi colon on tap, hold for symbol layer
+          )
+
+          (deflayer qwerty
+            _    _    _    _    _    _    _    _    _    _    _    _    _
+            _    _    _    _    _    _    _    _    _    _    _    _    _    _
+            _    _    _    _    _    _    _    _    _    _    _    _    _    _
+            _    _    _    _    _    _    _    _    _    _  @sym   _    _
+            _    _    _    _    _    _    _    _    _    _    _    _
+            _    _    _              _              _    _    _ 
+          )
+
+          (deflayer symbols
+            esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+            grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+            tab  !    @    {    }    |    y    u    i    o    p    [    ]    \
+            caps #    $   \(   \)    `    h    j    k    l    ;    '    ret
+            lsft %    ^    [    ]    ~    n    m    ,    .    /    rsft
+            lctl lmet lalt           spc            ralt rmet rctl
+          )
+
+          '';
+        };
+      };
+
 
       # The NixOS release to be compatible with for stateful data such as databases.
       system.stateVersion = "22.05";

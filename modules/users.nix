@@ -48,6 +48,8 @@ in
                 "docker"
                 "libvirtd"
                 "plugdev"
+                "input"
+                "uinput"
               ];
               #shell = "${pkgs.zsh}/bin/fish";
             };
