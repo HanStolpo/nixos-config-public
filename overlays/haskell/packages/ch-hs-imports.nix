@@ -1,53 +1,23 @@
-{ mkDerivation
-, abstract-par
-, base
-, containers
-, deepseq
-, directory
-, dlist
-, fetchgit
-, filepath
-, megaparsec
-, monad-par
-, monad-par-extras
-, monoidal-containers
-, mtl
-, nonempty-containers
-, optparse-applicative
-, process
-, stdenv
-, text
-, transformers
+{ mkDerivation, abstract-par, base, containers, deepseq, directory
+, dlist, fetchgit, filepath, lib, megaparsec, monad-par
+, monad-par-extras, monoidal-containers, mtl, nonempty-containers
+, optparse-applicative, process, text, transformers
 }:
 mkDerivation {
   pname = "ch-hs-imports";
   version = "0.1.0.0";
   src = fetchgit {
     url = "https://github.com/circuithub/ch-hs-imports";
-    sha256 = "0bfzck2fhfv65cdnphjihbp54y8xaklwcc2dl47h7xpvwq61p1m9";
-    rev = "7d11ee89b0731f43a2d3248b8e339f8b55a3e2d2";
+    sha256 = "1a68w5g95h7ry1w4jwdpjz3ky8i9nqmqm6gq73rqc9jp550lsibs";
+    rev = "417d404a7e8e4e6e5544cb497c7787efe1a85c36";
     fetchSubmodules = true;
   };
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    abstract-par
-    base
-    containers
-    deepseq
-    directory
-    dlist
-    filepath
-    megaparsec
-    monad-par
-    monad-par-extras
-    monoidal-containers
-    mtl
-    nonempty-containers
-    optparse-applicative
-    process
-    text
-    transformers
+    abstract-par base containers deepseq directory dlist filepath
+    megaparsec monad-par monad-par-extras monoidal-containers mtl
+    nonempty-containers optparse-applicative process text transformers
   ];
-  license = pkgs.lib.licenses.mit;
+  license = lib.licenses.mit;
 }
