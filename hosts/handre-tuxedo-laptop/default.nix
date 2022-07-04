@@ -87,6 +87,10 @@ in
       boot.initrd.kernelModules = [  ];
       boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard" "uinput"];
       boot.extraModulePackages = with kernel; [zenpower tuxedo-keyboard];
+      boot.kernelParams = [
+      # https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
+      "i8042.reset" "i8042.nomux" "i8042.nopnp" "i8042.noloop"
+      ];
       hardware.tuxedo-keyboard.enable = true;
 
       # Use the systemd-boot EFI boot loader.
