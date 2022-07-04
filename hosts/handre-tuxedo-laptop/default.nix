@@ -248,7 +248,7 @@ in
       services.kmonad ={
         enable = true;
          
-        extraArgs = ["--log-level" "debug"];
+        # extraArgs = ["--log-level" "debug"];
 
         keyboards.laptop-keyboard = {
           device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
