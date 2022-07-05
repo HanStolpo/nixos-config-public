@@ -273,10 +273,10 @@ in
           
           (defalias
             inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
-            syl (tap-next-release a @inSymL)  ;; semi colon on tap, hold for symbol layer
+            syl (tap-next-release ; @inSymL)  ;; semi colon on tap, hold for symbol layer
 
             inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
-            syr (tap-next-release ; @inSymR)  ;; semi colon on tap, hold for symbol layer
+            syr (tap-next-release a @inSymR)  ;; semi colon on tap, hold for symbol layer
           )
 
           (deflayer qwerty
