@@ -272,26 +272,38 @@ in
           )
           
           (defalias
-            inSym (layer-toggle symbols)      ;; perform next key press in symbol layer
-            sym (tap-next-release ; @inSym)  ;; semi colon on tap, hold for symbol layer
+            inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
+            syl (tap-next-release a @inSymL)  ;; semi colon on tap, hold for symbol layer
+
+            inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
+            syr (tap-next-release ; @inSymR)  ;; semi colon on tap, hold for symbol layer
           )
 
           (deflayer qwerty
             _    _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _    _    _    _    _    _    _    _    _    _    _    _
-            _    _    _    _    _    _    _    _    _    _  @sym   _    _
+            _  @syr   _    _    _    _    _    _    _    _  @syl   _    _
             _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _              _              _    _    _ 
           )
 
-          (deflayer symbols
-            esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-            grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-            tab  !    @    {    }    |    y    u    i    o    p    [    ]    \
-            caps #    $   \(   \)    `    h    j    k    l    ;    '    ret
-            lsft %    ^    [    ]    ~    n    m    ,    .    /    rsft
-            lctl lmet lalt           spc            ralt rmet rctl
+          (deflayer symbols_l
+            _    _    _    _    _    _    _    _    _    _    _    _    _
+            _    _    2    3    4    5    _    _    _    _    _    _    _    _
+            _    !    @    {    }    |    _    _    _    _    _    _    _    _
+            _    #    $   \(   \)    `    _    _    _    _    _    _    _
+            _    %    ^    [    ]    ~    _    _    _    _    _    _
+            _    _    _             esc             _    _    _
+          )
+
+          (deflayer symbols_r
+            _    _    _    _    _    _   _    _    _    _    _    _    _
+            _    _    _    _    _    _   _    _    _    _    _    _    _    _
+            _    _    _    _    _    _   _    _    _    _    _    _    _    _
+            _    _    _    _    _    _ left   up down rght   _    _    _
+            _    _    _    _    _    _   _    _    _    _    _    _
+            _    _    _             esc            _    _    _
           )
 
           '';
