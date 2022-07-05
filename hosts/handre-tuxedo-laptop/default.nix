@@ -268,7 +268,7 @@ in
             tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
             caps a    s    d    f    g    h    j    k    l    ;    '    ret
             lsft z    x    c    v    b    n    m    ,    .    /    rsft
-            lctl lmet lalt           spc            ralt menu rctl
+            lctl lmet lalt           spc            ralt cmp rctl
           )
           
           (defalias
