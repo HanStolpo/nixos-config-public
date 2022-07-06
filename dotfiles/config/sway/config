@@ -59,6 +59,8 @@ client.urgent             $red       $red         $base3   $green   $red
 
 
 seat * hide_cursor 1000
+mouse_warping container
+focus_follows_mouse yes
 
 input type:pointer {
 }
