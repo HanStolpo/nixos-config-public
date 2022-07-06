@@ -273,17 +273,27 @@ in
           
           (defalias
             inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
-            syl (tap-next-release ; @inSymL)  ;; semi colon on tap, hold for symbol layer
+            syl (tap-hold-next-release 500 ; @inSymL)  ;; semi colon on tap, hold for symbol layer
 
             inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
-            syr (tap-next-release a @inSymR)  ;; semi colon on tap, hold for symbol layer
+            syr (tap-hold-next-release 500 a @inSymR)  ;; semi colon on tap, hold for symbol layer
+
+            fctl (tap-hold-next-release 500 f lctl)  ;; f on tap ctrl on hold
+
+            jctl (tap-hold-next-release 500 j rctl)  ;; j on tap ctrl on hold
+
+            dsft (tap-hold-next-release 500 d lsft)  ;; d on tap shift on hold
+
+            ksft (tap-hold-next-release 500 k rsft)  ;; k on tap shift on hold
+            
+            uscr (around sft -) ;; underscore
           )
 
           (deflayer qwerty
             _    _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _    _    _    _    _    _    _    _    _    _    _    _
-          bspc @syr   _    _    _    _    _    _    _    _  @syl   _    _
+          bspc @syr   _  @dsft @fctl _    _  @jctl @ksft _  @syl   _    _
             _    _    _    _    _    _    _    _    _    _    _    _
             _    _    _              _             ret  lmet  _
           )
@@ -300,7 +310,7 @@ in
           (deflayer symbols_r
             _    _    _    _    _    _   _    _    _    _    _    _    _
             _    _    _    _    _    _   _    _    _    _    _    _    _    _
-            _    _    _    _    _    _   _    _    _    _    _    _    _    _
+            _    _    _    _    _    _   =    -   @uscr +    _    _    _    _
             _    _    _    _    _    _ left  down  up  rght   _    _    _
             _    _    _    _    _    _   _    _    _    _    _    _
             _    _    _             esc            _    _    _
