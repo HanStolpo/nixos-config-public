@@ -58,7 +58,7 @@ client.unfocused          $base02    $base02      $base1   $base02  $base02
 client.urgent             $red       $red         $base3   $green   $red
 
 
-seat * hide_cursor 1000
+seat * hide_cursor when-typing enable
 mouse_warping container
 focus_follows_mouse yes
 
