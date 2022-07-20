@@ -336,8 +336,8 @@ in
                 (deflayer symbols_r
                   _    _    _    _    _    _   _    _    _    _    _    _    _
                   _    _    _    _    _    _   _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _   =    -   @uscr +    _    _    _    _
-                  _    _    _    _    _    _ left  down  up  rght   _    _    _
+                  _    _    _    _    _    _   _    =    -   @uscr +    _    _    _
+                  _    _    _    _    _    _ left  down  up  rght  _    _    _
                   _    _    _    _    _    _   _    _    _    _    _    _
                   _    _    _             esc            _    _    _
                 )
