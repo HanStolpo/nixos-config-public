@@ -98,17 +98,44 @@ in
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
-      fileSystems."/" =
-        { device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
-          fsType = "ext4";
-        };
+      fileSystems = {
+        "/" =
+          { device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
+            fsType = "ext4";
+          };
+        "/boot" =
+          { device = "/dev/disk/by-uuid/C7A9-3E53";
+            fsType = "vfat";
+          };
+      } //
+      builtins.mapAttrs
+        (
+          k: _: {
+            mountPoint = "/mnt/network/${k}";
+            device = "//ucamco-server/${k}";
+            fsType = "cifs";
+            noCheck = true;
+            neededForBoot = false;
+            options = [
+              "noauto"
+              "rw"
+              "user"
+              "users"
+              "credentials=/home/handre/dev/ch-stuff/ucam-credentials-2"
+              "setuids"
+              "uid=1000"
+              "gid=100"
+            ];
+          }
+        )
+        {
+          "I8export" = { };
+          "I8hotfolder" = { };
+          "ch-i8-uploaded" = { };
+          "ch-temp" = { };
+        } ;
 
       boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/920eb5ec-e62f-415c-aefd-26a9cc7f3762";
-
-      fileSystems."/boot" =
-        { device = "/dev/disk/by-uuid/C7A9-3E53";
-          fsType = "vfat";
-        };
 
       swapDevices =
         [ { device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }
