@@ -79,6 +79,7 @@ in
         jitsi-meet-electron
         signal-desktop
         pavucontrol
+        zoom
       ];
 
 
