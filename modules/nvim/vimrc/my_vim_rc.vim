@@ -73,7 +73,7 @@ require('lint').linters_by_ft = {
   haskell = {'hlint',}
 }
 EOF
-"au BufWritePost,BufRead *.hs lua require('lint').try_lint()
+au BufWritePost,BufRead *.hs lua require('lint').try_lint()
 
 
 lua << EOF
