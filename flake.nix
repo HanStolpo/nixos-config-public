@@ -64,6 +64,7 @@
                   package = pkgs.nixFlakes;
                   extraOptions = ''
                     experimental-features = nix-command flakes
+                    allow-import-from-derivation = true
                   '';
                 };
               })
