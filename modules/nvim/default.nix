@@ -57,6 +57,8 @@
 
           { name = "coffee-script"; } # show info about key short cuts
 
+          { name = "ack-vim" ;} # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
+
           # color schemes
           #{ name = "vim-colorschemes"; }
 

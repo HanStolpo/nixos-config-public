@@ -345,3 +345,11 @@ EOF
 "tree sitter for fold
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+
+
+" instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
