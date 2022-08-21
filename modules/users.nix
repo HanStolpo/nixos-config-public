@@ -50,6 +50,7 @@ in
                 "plugdev"
                 "input"
                 "uinput"
+                "docker"
               ];
               #shell = "${pkgs.zsh}/bin/fish";
             };

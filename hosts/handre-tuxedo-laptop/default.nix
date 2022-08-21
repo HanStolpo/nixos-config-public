@@ -38,6 +38,8 @@ in
         dev-services.enable = true;
       };
 
+      virtualisation.docker.enable = true;
+
 
       nixpkgs.config.permittedInsecurePackages = [
         "python2.7-pyjwt-1.7.1"
