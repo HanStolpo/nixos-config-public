@@ -376,7 +376,7 @@ in
             enable = true;
             crtc = 0;
             mode = "3840x2160";
-            position = "1920x0";
+            position = "0x0";
             primary = true;
             rate = "60.00";
             dpi = dpi;
@@ -401,7 +401,7 @@ in
           eDP = {
               crtc = 1;
               mode = "1920x1080";
-              position = "0x0";
+              position = "3840x0";
               rate = "60.03";
               dpi = 102;
           };
