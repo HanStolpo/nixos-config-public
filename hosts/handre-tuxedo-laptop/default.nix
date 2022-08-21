@@ -21,11 +21,11 @@ in
             SSHLogin = enableSSH;
         };
 
-        xmonad.enable = false;
+        xmonad.enable = true;
 
 
         sway = {
-          enable = true;
+          enable = false;
           pathToSwayConfigFile = "/home/handre/nixos-config-public/dotfiles/config/sway/config";
           pathToWayDisplaysConfigFile = "/home/handre/nixos-config-public/dotfiles/config/way-displays/cfg.yaml";
           pathToWaybarConfigFile = "/home/handre/nixos-config-public/dotfiles/config/waybar/config";
