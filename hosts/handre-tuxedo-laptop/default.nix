@@ -21,11 +21,11 @@ in
             SSHLogin = enableSSH;
         };
 
-        xmonad.enable = false;
+        xmonad.enable = true;
 
 
         sway = {
-          enable = true;
+          enable = false;
           pathToSwayConfigFile = "/home/handre/nixos-config-public/dotfiles/config/sway/config";
           pathToWayDisplaysConfigFile = "/home/handre/nixos-config-public/dotfiles/config/way-displays/cfg.yaml";
           pathToWaybarConfigFile = "/home/handre/nixos-config-public/dotfiles/config/waybar/config";
@@ -403,7 +403,7 @@ in
           eDP = {
               crtc = 1;
               mode = "1920x1080";
-              position = "3840x0";
+              position = "0x0";
               rate = "60.03";
               dpi = 102;
           };
