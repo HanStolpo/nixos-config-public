@@ -2,6 +2,7 @@
 let kernel = pkgs.pkgs-unstable.linuxPackages_latest;
     enableSSH = false;
     dpi = 122;
+    latopDpi = 96;
 in
 {
   imports = [
@@ -360,7 +361,6 @@ in
     }
 
     (lib.mkIf config.hanstolpo.xmonad.enable {
-      #services.xserver.dpi = dpi;
       services.xserver.exportConfiguration = true;
       services.xserver.useGlamor = true;
 
@@ -405,7 +405,7 @@ in
               mode = "1920x1080";
               position = "0x0";
               rate = "60.03";
-              dpi = 102;
+              dpi = latopDpi;
           };
         };
       };
@@ -423,13 +423,13 @@ in
         "change-dpi" = ''
           case "$AUTORANDR_CURRENT_PROFILE" in
             default)
-              DPI=${builtins.toString dpi}
+              DPI=${builtins.toString laptopDpi}
               ;;
             home_desk)
               DPI=${builtins.toString dpi}
               ;;
             laptop)
-              DPI=${builtins.toString (dpi - 20)}
+              DPI=${builtins.toString latopDpi}
               ;;
             *)
               echo "Unknown profle: $AUTORANDR_CURRENT_PROFILE"
