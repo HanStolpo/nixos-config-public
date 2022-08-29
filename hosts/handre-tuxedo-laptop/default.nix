@@ -2,7 +2,7 @@
 let kernel = pkgs.pkgs-unstable.linuxPackages_latest;
     enableSSH = false;
     dpi = 122;
-    latopDpi = 96;
+    laptopDpi = 96;
 in
 {
   imports = [
@@ -405,7 +405,7 @@ in
               mode = "1920x1080";
               position = "0x0";
               rate = "60.03";
-              dpi = latopDpi;
+              dpi = laptopDpi;
           };
         };
       };
@@ -429,7 +429,7 @@ in
               DPI=${builtins.toString dpi}
               ;;
             laptop)
-              DPI=${builtins.toString latopDpi}
+              DPI=${builtins.toString laptopDpi}
               ;;
             *)
               echo "Unknown profle: $AUTORANDR_CURRENT_PROFILE"
