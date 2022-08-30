@@ -22,7 +22,7 @@ in
             SSHLogin = enableSSH;
         };
 
-        xmonad.enable = true;
+        xmonad.enable = false;
 
 
         sway = {
