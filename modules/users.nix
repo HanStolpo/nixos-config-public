@@ -47,6 +47,8 @@ in
                 "scanner"
                 "docker"
                 "libvirtd"
+                "qemu-libvirtd"
+                "kvm"
                 "plugdev"
                 "input"
                 "uinput"
