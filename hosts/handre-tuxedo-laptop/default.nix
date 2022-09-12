@@ -182,17 +182,6 @@ in
         };
         nameservers = [ "127.0.0.1" "8.8.8.8" "192.168.100.1" ];
         hosts = {
-          "10.2.99.3" = [
-            "qa-1-remote-dev-1"
-            "api.qa-1.remote-dev-1.circuithub.com"
-            "qa-1.remote-dev-1.circuithub.com"
-            "api.qa-1.remote-dev-1.circuithub.co"
-            "qa-1.remote-dev-1.circuithub.co"
-          ];
-          "10.2.99.2" = [ "handre-remote-dev-1" ];
-          "10.2.0.99" = [ "remote-dev-1" ];
-          "10.2.0.2" = [ "hydra.circuithub.com" "deploy.circuithub.com" ];
-          "10.2.0.7" = [ "ucamco.circuithub" ];
           "192.168.1.1" = [ "router.asus.com" ];
         };
 
