@@ -357,9 +357,7 @@ in
                 )
 
                 (defalias
-                  inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
-
-                  inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
+                  inSym (layer-toggle symbols)   ;; perform next key press in symbol layer
 
                   uscr (around sft -) ;; underscore
                 )
@@ -370,24 +368,15 @@ in
                   _    _    _    _    _    _    _    _    _    _    _    _    _    _
                 bspc   _    _    _    _    _    _    _    _    _    _    _    _
                   _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    @inSymL              _             @inSymR  ralt  _
+                  _    _  @inSym                _          @inSym  ralt  _
                 )
 
-                (deflayer symbols_l
-                  _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    2    3    4    5    _    _    _    _    _    _    _    _
-                  _    !    @    {    }    |    _    _    _    _    _    _    _    _
-                  _    #    $   \(   \)    `    _    _    _    _    _    _    _
-                  _    %    ^    [    ]    ~    _    _    _    _    _    _
-                  _    _    _             esc             _    _    _
-                )
-
-                (deflayer symbols_r
+                (deflayer symbols
                   _    _    _    _    _    _   _    _    _    _    _    _    _
-                  _    _    _    _    _    _   _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _   _    =    -   @uscr +    _    _    _
-                  _    _    _    _    _    _ left  down  up  rght  _    _    _
-                  _    _    _    _    _    _   _    _    _    _    _    _
+                  _    _    2    3    4    5   _    _    _    _    _    _    _    _
+                  _    !    @    {    }    |   _    =    -   @uscr +    _    _    _
+                  _    #    $   \(   \)    ` left  down  up  rght  _    _    _
+                  _    %    ^    [    ]    ~   _    _    _    _    _    _
                   _    _    _             esc            _    _    _
                 )
 
