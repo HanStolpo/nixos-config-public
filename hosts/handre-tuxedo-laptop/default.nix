@@ -337,11 +337,70 @@ in
 
                 '';
               };
+              commonKeyboard2 = {
+                defcfg = {
+                  enable = true;
+                  compose.key = null;
+                  fallthrough = true;
+                  allowCommands = false;
+                };
+
+                config = ''
+
+                (defsrc
+                  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+                  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+                  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+                  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+                  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+                  lctl lmet lalt           spc            ralt cmp rctl
+                )
+
+                (defalias
+                  inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
+
+                  inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
+
+                  uscr (around sft -) ;; underscore
+                )
+
+                (deflayer qwerty
+                  _    _    _    _    _    _    _    _    _    _    _    _    _
+                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+                bspc   _    _    _    _    _    _    _    _    _    _    _    _
+                  _    _    _    _    _    _    _    _    _    _    _    _
+                  _    _    @inSymL              _             @inSymR  ralt  _
+                )
+
+                (deflayer symbols_l
+                  _    _    _    _    _    _    _    _    _    _    _    _    _
+                  _    _    2    3    4    5    _    _    _    _    _    _    _    _
+                  _    !    @    {    }    |    _    _    _    _    _    _    _    _
+                  _    #    $   \(   \)    `    _    _    _    _    _    _    _
+                  _    %    ^    [    ]    ~    _    _    _    _    _    _
+                  _    _    _             esc             _    _    _
+                )
+
+                (deflayer symbols_r
+                  _    _    _    _    _    _   _    _    _    _    _    _    _
+                  _    _    _    _    _    _   _    _    _    _    _    _    _    _
+                  _    _    _    _    _    _   _    =    -   @uscr +    _    _    _
+                  _    _    _    _    _    _ left  down  up  rght  _    _    _
+                  _    _    _    _    _    _   _    _    _    _    _    _
+                  _    _    _             esc            _    _    _
+                )
+
+                '';
+              };
+
           in { laptop-keyboard = {
-                device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";}//commonKeyboard;
-               zsa_keyboard = {
-                  device = "/dev/input/by-id/usb-ZSA_Technology_Labs_Moonlander_Mark_I-event-kbd";
-               } // commonKeyboard;
+                device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";}//commonKeyboard2;
+               ms-ergonomic-keyboard = {
+                device = "/dev/input/by-path/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";}//commonKeyboard2;
+               # zsa_keyboard = {
+               #    device = "/dev/input/by-id/usb-ZSA_Technology_Labs_Moonlander_Mark_I-event-kbd";
+               # } // commonKeyboard;
           };
       };
 
