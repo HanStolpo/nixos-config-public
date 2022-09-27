@@ -397,7 +397,7 @@ in
           in { laptop-keyboard = {
                 device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";}//commonKeyboard2;
                ms-ergonomic-keyboard = {
-                device = "/dev/input/by-path/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";}//commonKeyboard2;
+                device = "/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";}//commonKeyboard2;
                # zsa_keyboard = {
                #    device = "/dev/input/by-id/usb-ZSA_Technology_Labs_Moonlander_Mark_I-event-kbd";
                # } // commonKeyboard;
