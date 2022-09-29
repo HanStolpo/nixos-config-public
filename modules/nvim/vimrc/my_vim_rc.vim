@@ -328,6 +328,8 @@ local servers = {
         }
     },
   },
+  rust_analyzer = {
+  },
 }
 
 for lsp, cfg in pairs(servers) do
