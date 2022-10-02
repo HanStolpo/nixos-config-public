@@ -59,6 +59,8 @@
 
           { name = "ack-vim" ;} # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
 
+          { name = "vim-grammarous"; }
+
           # color schemes
           #{ name = "vim-colorschemes"; }
 

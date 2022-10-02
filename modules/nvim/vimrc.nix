@@ -12,5 +12,5 @@ in
 
   ${my_vim_rc}
 
-  let g:languagetool_cmd='${languagetool}/bin/languagetool-commandline'
+  let g:grammarous#languagetool_cmd = '${languagetool}/bin/languagetool-commandline'
 ''
