@@ -180,7 +180,7 @@ in
           # networkd seems to give some errors and useNetworkd has this warning 'Whether we should use networkd as the network configuration backend or the legacy script based system. Note that this option is experimental, enable at your own risk.'
           # useNetworkd = true;
         };
-        nameservers = [ "127.0.0.1" "8.8.8.8" "192.168.100.1" ];
+        nameservers = [ "127.0.0.1" "8.8.8.8" ];
         hosts = {
           "192.168.1.1" = [ "router.asus.com" ];
         };
@@ -190,9 +190,10 @@ in
 
       services.dnsmasq = {
         enable = true;
-        servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1" "100.100.100.100" ];
+        servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "10.20.0.1" "10.21.0.1" "100.100.100.100" ];
         extraConfig = ''
-          server=/picofactory/192.168.100.1
+          server=/picofactory-new/10.20.0.1
+          server=/petersfield/10.21.0.1
           server=/circuithub.com.beta.tailscale.net/100.100.100.100
         '';
       };
