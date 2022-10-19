@@ -83,6 +83,7 @@ in
         signal-desktop
         pavucontrol
         zoom
+        xournalpp # note taking software with PDF annotation support
       ];
 
 
