@@ -86,6 +86,8 @@ in
         xournalpp # note taking software with PDF annotation support
         teams
         wdisplays
+        wf-recorder
+        slurp
       ];
 
 
