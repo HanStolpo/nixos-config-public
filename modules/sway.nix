@@ -92,6 +92,10 @@ in
         mpv # video player
     ];
 
+    services.pipewire.wireplumber.enable = false;
+
+    services.pipewire.media-session.enable = true;
+
     programs.light.enable = true;
 
 
