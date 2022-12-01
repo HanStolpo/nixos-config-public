@@ -246,6 +246,7 @@ in
       "10.2.0.2" = [ "hydra.circuithub.com" "deploy.circuithub.com" ];
       "10.2.0.7" = [ "ucamco.circuithub" ];
       "192.168.1.1" = [ "router.asus.com" ];
+      "3.223.189.209" = ["ec2-3-223-189-209.compute-1.amazonaws.com"];
     };
 
     enableIPv6 = true;
