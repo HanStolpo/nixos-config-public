@@ -10,9 +10,9 @@ in
   ];
 
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  #time.timeZone = "Europe/Amsterdam";
   #time.timeZone = "Europe/London";
-  #time.timeZone = "Africa/Johannesburg";
+  time.timeZone = "Africa/Johannesburg";
   #time.timeZone = "America/Los_Angeles";
   hanstolpo = {
     shell.enable = true;
