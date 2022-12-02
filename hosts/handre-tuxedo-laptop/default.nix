@@ -188,6 +188,7 @@ in
         nameservers = [ "127.0.0.1" "8.8.8.8" ];
         hosts = {
           "192.168.1.1" = [ "router.asus.com" ];
+          "3.223.189.209" = ["ec2-3-223-189-209.compute-1.amazonaws.com"];
         };
 
         enableIPv6 = true;
