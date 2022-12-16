@@ -322,10 +322,11 @@ local servers = {
           },
       elmPath = "elm",
       elmReviewPath = "elm-review",
-              elmReviewDiagnostics = "warning",
-            elmFormatPath = "elm-format",
-          elmTestPath = "elm-test",
-        }
+      elmReviewDiagnostics = "off",
+      elmFormatPath = "elm-format",
+      elmTestPath = "elm-test",
+      disableElmLSDiagnostics = false,
+     }
     },
   },
   rust_analyzer = {
