@@ -120,7 +120,7 @@ in
       };
       # gtk portal needed to make gtk apps happy
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      gtkUsePortal = true;
+      # gtkUsePortal = true; # this is apparently deprecated now
     };
 
     # enable sway window manager
