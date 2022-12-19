@@ -69,10 +69,10 @@ au BufNewFile,BufRead *.hs map <buffer> <leader>hl :HoogleLine<CR>
 
 " nvim-lint
 lua << EOF
-require('lint').linters_by_ft = {
-  haskell = {'hlint',}
-}
-EOF
+-- require('lint').linters_by_ft = {
+--   haskell = {'hlint',}
+-- }
+-- EOF
 au BufWritePost,BufRead *.hs lua require('lint').try_lint()
 
 
