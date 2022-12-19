@@ -172,7 +172,6 @@ in
       services.logind.extraConfig = ''
         HandlePowerKey=hibernate
         HandleLidSwitchDocked=ignore
-        HandleLidSwitchExternalPower=ignore
         HandleLidSwitch=suspend-then-hibernate
         LidSwitchIgnoreInhibited=yes
         PowerKeyIgnoreInhibited=yes
