@@ -23,61 +23,46 @@
           ( filter (lib.strings.hasPrefix "tree-sitter-") (attrNames pkgs.tree-sitter-grammars) )
       );
 
-    configure = {
+    configure = 
+      let  knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
+      in {
       customRC = pkgs.callPackage ./vimrc.nix { };
-      vam = {
-        knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
+      packages.myVimPackage = with knownPlugins; {
+        # loaded on launch
+        start = [
+          nvim-lspconfig
+          nvim-lint
+          nvim-treesitter
+          telescope-nvim
+          nvim-tree-lua
+          nvim-snippy
+          hop-nvim
+          diffview-nvim
+          plenary-nvim
+          nerdcommenter
+          lualine-nvim
+          barbar-nvim
+          nvim-base16
+          nvim-web-devicons
+          auto-session
+          mini-nvim
 
-        pluginDictionaries = [
+          Tabular # Align text
+          extradite # extends fugitive for git log commit browse
+          fugitive # git integration
+          vim-rhubarb # Gbrowse support for fugitive
+          vim-localvimrc #
+          vim-leader-guide # show info about key short cuts
 
-          { name = "nvim-lspconfig"; }
-          { name = "nvim-lint"; }
-          { name = "nvim-treesitter"; }
-          { name = "telescope-nvim"; }
-          { name = "nvim-tree-lua"; }
-          { name = "nvim-snippy"; }
-          { name = "hop-nvim"; }
-          { name = "diffview-nvim"; }
-          { name = "plenary-nvim"; }
-          { name = "nerdcommenter"; }
-          { name = "lualine-nvim"; }
-          #{ name = "indent-blankline-nvim-lua"; }
-          { name = "barbar-nvim"; }
-          { name = "nvim-base16"; }
-          { name = "nvim-web-devicons"; }
-          { name = "auto-session"; }
-          { name = "mini-nvim"; }
+          coffee-script # show info about key short cuts
 
-          { name = "Tabular"; } # Align text
-          { name = "extradite"; } # extends fugitive for git log commit browse
-          { name = "fugitive"; } # git integration
-          { name = "vim-rhubarb"; } # Gbrowse support for fugitive
-          { name = "vim-localvimrc"; } #
-          { name = "vim-leader-guide"; } # show info about key short cuts
+          ack-vim # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
 
-          { name = "coffee-script"; } # show info about key short cuts
+          vim-grammarous
 
-          { name = "ack-vim" ;} # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
-
-          { name = "vim-grammarous"; }
-
-          # color schemes
-          #{ name = "vim-colorschemes"; }
-
-
-
-          #{ name = "coffee-script"; }
-
-
-          #{ name = "vim-nix"; }
-          #{ name = "elm-vim"; }
-          #{ name = "haskell-vim"; }
-
-
-          #{ name = "vim-autoformat"; }
-
-
-        ];
+          ];
+        # manually loadable by calling `:packadd $plugin-name`
+        opt = [ ];
       };
     };
 
