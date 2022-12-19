@@ -67,6 +67,22 @@
                   extraOptions = ''
                     experimental-features = nix-command flakes
                     allow-import-from-derivation = true
+
+                    # some defaults as suggested here: https://jackson.dev/post/nix-reasonable-defaults/
+                    # Almost always set
+                    connect-timeout = 5
+                    log-lines = 25
+                    min-free = 128000000
+                    max-free = 1000000000
+
+                    # Set if understood
+                    experimental-features = nix-command flakes
+                    fallback = true
+                    warn-dirty = false
+                    auto-optimise-store = true
+
+                    # Set for developers
+                    keep-outputs = true
                   '';
                 };
               })
