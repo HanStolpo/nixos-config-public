@@ -173,6 +173,15 @@ in
         HandlePowerKey=hibernate
         HandleLidSwitchDocked=ignore
         HandleLidSwitchExternalPower=ignore
+        HandleLidSwitch=suspend-then-hibernate
+        LidSwitchIgnoreInhibited=yes
+        PowerKeyIgnoreInhibited=yes
+        SuspendKeyIgnoreInhibited=yes
+        HibernateKeyIgnoreInhibited=yes
+
+      '';
+      systemd.sleep.extraConfig = ''
+        HibernateDelaySec=1h
       '';
 
 
