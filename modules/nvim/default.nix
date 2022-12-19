@@ -23,48 +23,48 @@
           ( filter (lib.strings.hasPrefix "tree-sitter-") (attrNames pkgs.tree-sitter-grammars) )
       );
 
-    # configure = 
-    #   let  knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
-    #   in {
-    #   customRC = pkgs.callPackage ./vimrc.nix { };
-    #   packages.myVimPackage = with knownPlugins; {
-    #     # loaded on launch
-    #     start = [
-    #       nvim-lspconfig
-    #       nvim-lint
-    #       nvim-treesitter
-    #       telescope-nvim
-    #       nvim-tree-lua
-    #       nvim-snippy
-    #       hop-nvim
-    #       diffview-nvim
-    #       plenary-nvim
-    #       nerdcommenter
-    #       lualine-nvim
-    #       barbar-nvim
-    #       nvim-base16
-    #       nvim-web-devicons
-    #       auto-session
-    #       mini-nvim
+    configure = 
+      let  knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
+      in {
+      customRC = pkgs.callPackage ./vimrc.nix { };
+      packages.myVimPackage = with knownPlugins; {
+        # loaded on launch
+        start = [
+          nvim-lspconfig
+          nvim-lint
+          nvim-treesitter
+          telescope-nvim
+          nvim-tree-lua
+          nvim-snippy
+          hop-nvim
+          diffview-nvim
+          plenary-nvim
+          nerdcommenter
+          lualine-nvim
+          barbar-nvim
+          nvim-base16
+          nvim-web-devicons
+          auto-session
+          mini-nvim
 
-    #       Tabular # Align text
-    #       extradite # extends fugitive for git log commit browse
-    #       fugitive # git integration
-    #       vim-rhubarb # Gbrowse support for fugitive
-    #       vim-localvimrc #
-    #       vim-leader-guide # show info about key short cuts
+          Tabular # Align text
+          extradite # extends fugitive for git log commit browse
+          fugitive # git integration
+          vim-rhubarb # Gbrowse support for fugitive
+          vim-localvimrc #
+          vim-leader-guide # show info about key short cuts
 
-    #       coffee-script # show info about key short cuts
+          coffee-script # show info about key short cuts
 
-    #       ack-vim # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
+          ack-vim # instead of silver searcher `ag` which is deprecate. https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
 
-    #       vim-grammarous
+          vim-grammarous
 
-    #       ];
-    #     # manually loadable by calling `:packadd $plugin-name`
-    #     opt = [ ];
-    #   };
-    # };
+        ];
+         # manually loadable by calling `:packadd $plugin-name`
+         opt = [ ];
+       };
+     };
 
   };
 }
