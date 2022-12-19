@@ -180,6 +180,7 @@ in
         HibernateKeyIgnoreInhibited=yes
 
       '';
+      # some info about sleep conf here https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
       systemd.sleep.extraConfig = ''
         HibernateDelaySec=1h
       '';
