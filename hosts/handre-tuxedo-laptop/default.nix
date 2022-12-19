@@ -53,8 +53,8 @@ in
       #time.timeZone = "America/Los_Angeles";
 
 
-      nix.maxJobs = lib.mkDefault 12;
-      nix.buildCores = 12;
+      nix.settings.max-jobs = lib.mkDefault 12;
+      nix.settings.cores = 12;
 
       environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
