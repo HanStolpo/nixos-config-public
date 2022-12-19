@@ -60,7 +60,9 @@
 
                 nix = {
                   registry.nixpkgs.flake = nixpkgs;
-                  useSandbox = "relaxed";
+                  settings = {
+                      sandbox = "relaxed";
+                  };
                   package = pkgs.nixFlakes;
                   extraOptions = ''
                     experimental-features = nix-command flakes
