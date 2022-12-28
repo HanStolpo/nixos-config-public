@@ -257,7 +257,7 @@ exec swayidle -w \
                timeout 300 'swaylock -f -c 000055' \
                timeout 600 'swaymsg "output * dpms off"' \
                before-sleep 'swaylock -f -c 000055' \
-               after-resume 'swaymsg reload && swaymsg "output * dpms on" && swaymsg "output * disable" && sleep 0.5 && swaymsg "output * enable"'
+               after-resume 'swaymsg reload && swaymsg "output * dpms on"'
 # set gtk settings
 exec configure-gtk
 
