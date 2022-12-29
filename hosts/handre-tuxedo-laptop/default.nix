@@ -172,16 +172,22 @@ in
       services.logind.extraConfig = ''
         HandlePowerKey=hibernate
         HandleLidSwitchDocked=ignore
-        HandleLidSwitch=suspend-then-hibernate
+        HandleLidSwitch=suspend
         LidSwitchIgnoreInhibited=yes
         PowerKeyIgnoreInhibited=yes
         SuspendKeyIgnoreInhibited=yes
         HibernateKeyIgnoreInhibited=yes
 
       '';
-      # some info about sleep conf here https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
+      # some info about sleep conf here 
+      # https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
+      # https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html
       systemd.sleep.extraConfig = ''
         HibernateDelaySec=1h
+        SuspendMode=
+        SuspendState=mem
+        HibernateMode=platform
+        HibernateState=
       '';
 
 
