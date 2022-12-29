@@ -120,7 +120,6 @@ in
       };
       # gtk portal needed to make gtk apps happy
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      # gtkUsePortal = true; # this is apparently deprecated now
     };
 
     # enable sway window manager
@@ -130,6 +129,12 @@ in
     };
 
     environment.variables = {
+        # what the deprecated option xdg.portal.gtkUsePortal did
+        # Sets environment variable GTK_USE_PORTAL to 1. This is
+        # needed for packages ran outside Flatpak to respect and
+        # use XDG Desktop Portals. For example, you'd need to set
+        # this for non-flatpak Firefox to use native filechoosers.
+        "GTK_USE_PORTAL" = 1;
         # https://wiki.archlinux.org/title/firefox#Wayland
         "MOZ_ENABLE_WAYLAND" = "1";
         # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
