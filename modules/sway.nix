@@ -134,7 +134,7 @@ in
         # needed for packages ran outside Flatpak to respect and
         # use XDG Desktop Portals. For example, you'd need to set
         # this for non-flatpak Firefox to use native filechoosers.
-        "GTK_USE_PORTAL" = 1;
+        "GTK_USE_PORTAL" = "1";
         # https://wiki.archlinux.org/title/firefox#Wayland
         "MOZ_ENABLE_WAYLAND" = "1";
         # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
