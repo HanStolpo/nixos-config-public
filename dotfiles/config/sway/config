@@ -245,7 +245,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # manage outputs automatically using way-displays
-# seems to be broken at the moment # exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
+exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
 
 # Import the WAYLAND_DISPLAY env var from sway into the systemd user session.
 exec dbus-sway-environment
