@@ -26,9 +26,6 @@
       inherit (flake-utils.lib) eachSystem allSystems;
     in
     rec {
-      inherit nixpkgs;
-
-      inherit nixpkgs-unstable;
 
       overlays = {
         pkgs-unstable =
@@ -39,6 +36,16 @@
          };
         };
       } // mapModules ./overlays import;
+
+
+
+      packages.x86_64-linux = {
+        inherit (import nixpkgs {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                  overlays = builtins.attrValues self.overlays;
+                }) d2 realvnc-viewer;
+      };
 
       nixosModules = mapModules ./modules import;
 

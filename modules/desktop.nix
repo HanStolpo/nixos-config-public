@@ -77,6 +77,8 @@ in
       pinentry-qt # qt based pinentry program to be used with gpg
 
       gnvim # minimal gui front end for nvim
+
+      d2 # text based diagram drawing program
     ];
 
 
