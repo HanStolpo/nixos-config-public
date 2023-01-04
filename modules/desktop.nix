@@ -79,6 +79,7 @@ in
       gnvim # minimal gui front end for nvim
 
       d2 # text based diagram drawing program
+      tala # layout engine for D2
     ];
 
 
