@@ -44,7 +44,7 @@
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                   overlays = builtins.attrValues self.overlays;
-                }) d2 realvnc-viewer;
+                }) d2 realvnc-viewer tree-sitter tree-sitter-grammars;
       };
 
       nixosModules = mapModules ./modules import;

@@ -1,0 +1,11 @@
+{
+  "url": "https://github.com/pleshevskiy/tree-sitter-d2",
+  "rev": "ca740521144a539d14c7692798e8883f3bd81d92",
+  "date": "2022-12-21T10:31:53+00:00",
+  "path": "/nix/store/hjzifap8gsf4ssjl8ys5ccp33dgzh53n-tree-sitter-d2",
+  "sha256": "0k9rxnmvsnk50q8wxdahm5z17502cclvk9g2q25m48ah7q1khrvw",
+  "fetchLFS": false,
+  "fetchSubmodules": false,
+  "deepClone": false,
+  "leaveDotGit": false
+}
