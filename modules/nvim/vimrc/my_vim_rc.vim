@@ -96,7 +96,6 @@ parser_config.d2 = {
 
 -- tree sitter setup
 local parserInstallDir = vim.fn.stdpath("state") .. "/treesitter/parsers"
-print parserInstallDir
 vim.opt.runtimepath:append(parserInstallDir)
 require'nvim-treesitter.configs'.setup {
   -- A directory to install the parsers into.
@@ -115,7 +114,7 @@ require'nvim-treesitter.configs'.setup {
   -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
   -- the name of the parser)
   -- list of language that will be disabled
-  disable = {"bash"},
+  disable = {},
 
 
   -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
