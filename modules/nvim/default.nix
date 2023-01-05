@@ -12,6 +12,10 @@ in
     runtime = with builtins;
       listToAttrs (
         concatMap (tsName:
+          if tsName == "tree-sitter-nix"
+            then
+              []
+          else
           let l = lib.strings.removePrefix "tree-sitter-" tsName;
               grammar = neovimPkgs.tree-sitter-grammars."${tsName}";
           # Only directories under 'etc' are added to the runtime path this is probably a mistake but oh well
