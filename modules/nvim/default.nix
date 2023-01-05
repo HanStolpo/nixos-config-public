@@ -12,7 +12,7 @@ in
     runtime = with builtins;
       listToAttrs (
         concatMap (tsName:
-          if tsName == "tree-sitter-nix"
+          if tsName == "tree-sitter-nix" || tsName == "tree-sitter-bash"
             then
               []
           else
