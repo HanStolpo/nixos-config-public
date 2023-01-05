@@ -80,6 +80,7 @@ in
 
       d2 # text based diagram drawing program
       tala # layout engine for D2
+      mdsync # render and live reload markdown
     ];
 
 
