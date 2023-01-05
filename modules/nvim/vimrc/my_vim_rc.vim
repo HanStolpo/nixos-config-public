@@ -95,7 +95,15 @@ parser_config.d2 = {
 };
 
 -- tree sitter setup
+local parserInstallDir = vim.fn.stdpath("state") .. "/treesitter/parsers"
+vim.opt.runtimepath:append(parserInstallDir)
 require'nvim-treesitter.configs'.setup {
+  -- A directory to install the parsers into.
+  -- If this is excluded or nil parsers are installed
+  -- to either the package dir, or the "site" dir.
+  -- If a custom path is used (not nil) it must be added to the runtimepath.
+  parser_install_dir = parserInstallDir,
+
   auto_install = false;
 
   highlight = {
