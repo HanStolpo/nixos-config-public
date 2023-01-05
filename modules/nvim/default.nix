@@ -1,8 +1,10 @@
 { pkgs, lib, ... }:
+let neovimPkgs = pkgs.pkgs-unstable;
+in
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-unwrapped;
+    package = neovimPkgs.neovim-unwrapped;
     vimAlias = true;
     viAlias = true;
     withPython3 = true;
@@ -11,7 +13,7 @@
       listToAttrs (
         concatMap (tsName:
           let l = lib.strings.removePrefix "tree-sitter-" tsName;
-              grammar = pkgs.tree-sitter-grammars."${tsName}";
+              grammar = neovimPkgs.tree-sitter-grammars."${tsName}";
           # Only directories under 'etc' are added to the runtime path this is probably a mistake but oh well
           # https://github.com/NixOS/nixpkgs/blob/e0a42267f73ea52adc061a64650fddc59906fc99/nixos/modules/programs/neovim.nix#L161
           in [{ name = "etc/parser/${l}.so";
@@ -27,13 +29,13 @@
               }
              ]
           )
-          ( filter (lib.strings.hasPrefix "tree-sitter-") (attrNames pkgs.tree-sitter-grammars) )
+          ( filter (lib.strings.hasPrefix "tree-sitter-") (attrNames neovimPkgs.tree-sitter-grammars) )
       );
 
     configure = 
-      let  knownPlugins = pkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
+      let  knownPlugins = neovimPkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
       in {
-      customRC = pkgs.callPackage ./vimrc.nix { };
+      customRC = pkgs.callPackage ./vimrc.nix { inherit (neovimPkgs) tree-sitter; };
       packages.myVimPackage = with knownPlugins; {
         # loaded on launch
         start = [
