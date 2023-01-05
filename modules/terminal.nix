@@ -23,7 +23,6 @@ in
       patchelf # A small utility to modify the dynamic linker and RPATH of ELF executables
       nix-du # Visualise which gc-roots to delete to free some space in your nix store
       nix-index # Quickly locate nix packages with specific files
-      nixops
       # nixpkgs-fmt # formatter for nix files
 
 

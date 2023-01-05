@@ -8,19 +8,15 @@
       url = github:hlissner/dotfiles;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixops = {
-      url = github:NixOS/nixops;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-utils.url = "github:numtide/flake-utils";
-    
+   
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, nixops, flake-utils, kmonad, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, flake-utils, kmonad, ... }:
     let
       inherit (hlissner-dotfiles.lib) mapModules mapModulesRec';
       inherit (flake-utils.lib) eachSystem allSystems;
