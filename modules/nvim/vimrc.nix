@@ -8,8 +8,6 @@ in
 ''
   call setenv("PATH", "${nodejs}/bin:${python3}/bin:${fd}/bin:/${languagetool}/bin:${ripgrep}/bin:${tree-sitter}/bin:${clang}/bin:" . getenv("PATH") )
 
-  ${haskell-vim-now}
-
   ${my_vim_rc}
 
   let g:grammarous#languagetool_cmd = '${languagetool}/bin/languagetool-commandline'

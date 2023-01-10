@@ -1,3 +1,107 @@
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+if ! exists("mapleader")
+  let mapleader = ","
+endif
+
+if ! exists("g:mapleader")
+  let g:mapleader = ","
+endif
+
+if ! exists("maplocalleader")
+  let maplocalleader = "<BS>"
+endif
+
+if ! exists("g:maplocalleader")
+  let g:maplocalleader = "<BS>"
+endif
+
+" Leader key timeout
+set tm=2000
+
+" Allow the normal use of "," by pressing it twice
+noremap ,, ,
+
+" Open file prompt with current path
+nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+
+" Fuzzy find files
+nnoremap <silent> <Leader><space> :Telescope find_files<CR>
+" fuzzy find buffers
+noremap <leader>b<space> :Telescope buffers<cr>
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
+
+
+" Moving around, tabs, windows and buffers
+
+" Treat long lines as break lines (useful when moving around in them)
+nnoremap j gj
+nnoremap k gk
+
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-j> <c-w>j
+noremap <c-l> <c-w>l
+
+" Return to last edit position when opening files (You want this!)
+augroup last_edit
+  autocmd!
+  autocmd BufReadPost *
+       \ if line("'\"") > 0 && line("'\"") <= line("$") |
+       \   exe "normal! g`\"" |
+       \ endif
+augroup END
+" Remember info about open buffers on close
+set viminfo^=%
+
+" Open window splits in various places
+nmap <leader>sh :leftabove  vnew<CR>
+nmap <leader>sl :rightbelow vnew<CR>
+nmap <leader>sk :leftabove  new<CR>
+nmap <leader>sj :rightbelow new<CR>
+
+" Neovim terminal configurations
+if has('nvim')
+  " Use <Esc> to escape terminal insert mode
+  tnoremap <Esc> <C-\><C-n>
+  " Make terminal split moving behave like normal neovim
+  tnoremap <c-h> <C-\><C-n><C-w>h
+  tnoremap <c-j> <C-\><C-n><C-w>j
+  tnoremap <c-k> <C-\><C-n><C-w>k
+  tnoremap <c-l> <C-\><C-n><C-w>l
+endif
+
+
+" Delete trailing white space on save
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+augroup whitespace
+  autocmd!
+  autocmd BufWrite *.hs :call DeleteTrailingWS()
+augroup END
+
+
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" start with folding disabled zi to toggle folding
+set nofoldenable
 
 set spelllang=en_gb
 
@@ -114,7 +218,7 @@ require'nvim-treesitter.configs'.setup {
   -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
   -- the name of the parser)
   -- list of language that will be disabled
-  disable = {},
+  disable = {"markdown"},
 
 
   -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
