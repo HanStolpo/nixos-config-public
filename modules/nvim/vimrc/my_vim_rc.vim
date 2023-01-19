@@ -172,6 +172,8 @@ au BufNewFile,BufRead *.hs map <buffer> <leader>hc :HoogleClose<CR>
 au BufNewFile,BufRead *.hs map <buffer> <leader>hl :HoogleLine<CR>
 
 
+lua << EOF
+
 vim.filetype.add({
   extension = {
     d2 = "d2",
