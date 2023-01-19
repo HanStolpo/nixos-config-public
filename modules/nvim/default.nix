@@ -44,7 +44,6 @@ in
         # loaded on launch
         start = [
           nvim-lspconfig
-          nvim-lint
           nvim-treesitter
           telescope-nvim
           nvim-tree-lua
