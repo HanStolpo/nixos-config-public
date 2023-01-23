@@ -113,6 +113,8 @@ in
       mosh # ssh alternative for intermittent connections
 
       fzf
+
+      stgit # stacked git
     ];
 
     security.pki = {
