@@ -115,6 +115,9 @@ in
       fzf
 
       stgit # stacked git
+
+      git-branchless # newer stacked git
+
     ];
 
     security.pki = {
