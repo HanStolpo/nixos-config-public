@@ -118,6 +118,8 @@ in
 
       git-branchless # newer stacked git
 
+      gh # github cli tool
+
     ];
 
     security.pki = {
