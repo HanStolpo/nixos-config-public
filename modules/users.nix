@@ -59,7 +59,7 @@ in
 
           security.sudo = {
             enable = true;
-            wheelNeedsPassword = false;
+            wheelNeedsPassword = true;
           };
         }
         (mkIf cfg.useInitialPWD {
