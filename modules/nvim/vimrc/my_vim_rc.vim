@@ -441,12 +441,6 @@ local servers = {
         trace = {
           server = true
           },
-      elmPath = "elm",
-      elmReviewPath = "elm-review",
-      elmReviewDiagnostics = "off",
-      elmFormatPath = "elm-format",
-      elmTestPath = "elm-test",
-      disableElmLSDiagnostics = false,
      }
     },
   },
