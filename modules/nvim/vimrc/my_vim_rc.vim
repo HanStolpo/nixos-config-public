@@ -43,6 +43,12 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 
+" Show trailing whitespace
+set list
+" But only interesting whitespace
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
 
 " Moving around, tabs, windows and buffers
 
@@ -130,6 +136,26 @@ set relativenumber "View the distance to the next line (useful with d commands).
 set nowrap "Don't perform line wrapping.
 
 set hidden " Don't close buffers, only hide them. Unwritten changes allowed.
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" For regular expressions turn magic on
+set magic
+
+" Turn backup off, since most stuff is in Git anyway...
+set nobackup
+set nowb
+set noswapfile
 
 " clear highlighting
 nnoremap <leader>nh :noh<CR>
