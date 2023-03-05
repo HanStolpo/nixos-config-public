@@ -121,6 +121,8 @@ in
       gh # github cli tool
 
       kubectl # Kubernetes CLI
+      awscli2 # AWS CLI
+      aws-iam-authenticator # AWS IAM credentials for Kubernetes authentication
 
     ];
 
