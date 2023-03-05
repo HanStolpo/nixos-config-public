@@ -120,6 +120,8 @@ in
 
       gh # github cli tool
 
+      kubectl # Kubernetes CLI
+
     ];
 
     security.pki = {
