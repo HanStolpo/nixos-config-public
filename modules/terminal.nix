@@ -76,7 +76,6 @@ in
       cabal2nix # Convert Cabal files into Nix build instructions
       perl # The standard implementation of the Perl 5 programmming language
       heroku # Everything you need to get started using Heroku
-      awscli # Unified tool to manage your AWS services
       nodePackages.node2nix # generate nix from node packages
       direnv # automatically setup environment variables when entering a directory
       gdb # debugger
