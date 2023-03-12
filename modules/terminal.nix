@@ -122,7 +122,7 @@ in
       kubectl # Kubernetes CLI
       awscli2 # AWS CLI
       aws-iam-authenticator # AWS IAM credentials for Kubernetes authentication
-
+      google-cloud-sdk # gcloud cli
     ];
 
     security.pki = {
