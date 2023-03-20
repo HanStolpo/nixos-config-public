@@ -123,6 +123,7 @@ in
       awscli2 # AWS CLI
       aws-iam-authenticator # AWS IAM credentials for Kubernetes authentication
       google-cloud-sdk # gcloud cli
+      sops # Mozilla secret OPerationS
     ];
 
     security.pki = {
