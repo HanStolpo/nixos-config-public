@@ -60,7 +60,6 @@ in
       powerline-go # custom shell prompt shared by bash and zsh
       termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
-      kitty
       direnv # automatically setup environment variables when entering a directory
       nix-direnv
       starship

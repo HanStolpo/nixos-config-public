@@ -19,7 +19,6 @@ in
     environment.systemPackages = with pkgs; [
       # terminals
       alacritty # vi like terminal emulator which is OpenGL accelerated
-      kitty # terminal editor which is OpenGL accelerated
 
       flameshot # easy screenshot tool
       shutter # take screen shots annotate images

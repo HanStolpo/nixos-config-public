@@ -84,7 +84,7 @@ in
         wl-clipboard               # wl-copy and wl-paste for copy/paste from stdin / stdout
         bemenu                     # wayland clone of dmenu
         mako                       # notification system developed by swaywm maintainer
-        pkgs-unstable.way-displays # autorandr like management of display outputs connected to wayland compositor
+        way-displays # autorandr like management of display outputs connected to wayland compositor
         waybar                     #
         zathura # document viewer
         cinnamon.nemo    # file manager
@@ -126,6 +126,7 @@ in
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      wrapperFeatures.base = true;
     };
 
     environment.variables = {
