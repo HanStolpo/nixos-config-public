@@ -182,11 +182,12 @@ in
       # some info about sleep conf here 
       # https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
       # https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html
+      # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#System_does_not_power_off_when_hibernating
       systemd.sleep.extraConfig = ''
         HibernateDelaySec=1h
         SuspendMode=
         SuspendState=mem
-        HibernateMode=platform
+        HibernateMode=shutdown
         HibernateState=
       '';
 
@@ -249,6 +250,18 @@ in
       };
 
       services.udev.packages = [
+        (
+          # disable wake on LAN which takes laptop out of sleep immediately
+          # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Instantaneous_wakeups_from_suspend
+          pkgs.writeTextFile {
+            name = "avoid-i2c-wakeup";
+            text = ''
+              KERNEL=="i2c-ELAN0415:00", SUBSYSTEM=="i2c", ATTR{power/wakeup}="disabled"
+            '';
+            executable = false;
+            destination = "/etc/udev/rules.d/99-avoid-i2c-wakeup.rules";
+          }
+        )
 
         (
           pkgs.writeTextFile {
