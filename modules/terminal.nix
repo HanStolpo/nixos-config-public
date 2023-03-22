@@ -124,6 +124,8 @@ in
       aws-iam-authenticator # AWS IAM credentials for Kubernetes authentication
       google-cloud-sdk # gcloud cli
       sops # Mozilla secret OPerationS
+      kubernetes-helm
+      fluxcd
     ];
 
     security.pki = {
