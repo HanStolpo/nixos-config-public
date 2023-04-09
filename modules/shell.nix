@@ -55,6 +55,9 @@ in
 
       zsh # The Z shell
       fish
+      fzf # fuzzy finder used by fish plugin patrickf1/fzf.fish
+      fd # used by fish plugin patrickf1/fzf.fish when doing directory search (faster, colorized alternative to find)
+      bat # used by fish plugin patrickf1/fzf.fish when doing directory search (smarter cat with syntac highlighting)
       babelfish
       bashInteractive # GNU Bourne-Again Shell, the de facto standard shell on Linux (for interactive use)
       powerline-go # custom shell prompt shared by bash and zsh
