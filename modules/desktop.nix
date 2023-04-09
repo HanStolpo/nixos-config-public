@@ -42,11 +42,11 @@ in
 
       # browsers
       firefox
-      google-chrome
+      pkgs-unstable.google-chrome
       firefox-devedition-bin
 
       # chat clients
-      slack
+      pkgs-unstable.slack
       pkgs-unstable.discord
       weechat # A fast, light and extensible chat client
 
