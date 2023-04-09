@@ -72,6 +72,8 @@ in
 
           vim-grammarous
 
+          octo-nvim # do pull requests from inside neovim https://github.com/pwntester/octo.nvim
+
         ];
          # manually loadable by calling `:packadd $plugin-name`
          opt = [ ];
