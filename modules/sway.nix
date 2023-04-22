@@ -166,7 +166,7 @@ in
     };
 
     services.greetd = {
-        enable = true;
+        enable = false;
         settings = {
           default_session = {
             command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
