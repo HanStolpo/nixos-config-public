@@ -487,6 +487,7 @@ end
 
 -- do github pull requests from inside neovim https://github.com/pwntester/octo.nvim
 require"octo".setup({
+  use_local_fs = true;
   default_remote = {"upstream", "origin"}; -- order to try remotes
   ssh_aliases = {},                        -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`
   reaction_viewer_hint_icon = "";         -- marker for user reactions
