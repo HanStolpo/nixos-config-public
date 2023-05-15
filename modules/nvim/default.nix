@@ -1,5 +1,5 @@
 { pkgs, lib, ... }:
-let neovimPkgs = pkgs; #pkgs.pkgs-unstable;
+let neovimPkgs = pkgs.pkgs-unstable;
 in
 {
   programs.neovim = {
