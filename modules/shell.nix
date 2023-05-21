@@ -188,6 +188,11 @@ in
 
       interactiveShellInit = ''
 
+        # use gpg-agent for adding ssh keys
+        # https://opensource.com/article/19/4/gpg-subkeys-ssh
+        set -x -g SSH_AUTH_SOCK "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)"
+        gpgconf --launch gpg-agent
+
         set -x -g EDITOR 'nvim'
 
         function fish_user_key_bindings
