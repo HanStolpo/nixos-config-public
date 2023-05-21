@@ -141,11 +141,11 @@ in
         # "Certification Authority of WoSign G2"
       ];
     };
-    programs.ssh.startAgent = true;
+    programs.ssh.startAgent = false;
 
-    programs.gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-    };
+    # programs.gnupg.agent = {
+    #   enable = true;
+    #   pinentryFlavor = "curses";
+    # };
   };
 }
