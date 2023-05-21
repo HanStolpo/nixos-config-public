@@ -66,7 +66,6 @@
                   settings = {
                       sandbox = "relaxed";
                   };
-                  package = pkgs.pkgs-unstable.nixFlakes;
                   extraOptions = ''
                     experimental-features = nix-command flakes
                     allow-import-from-derivation = true

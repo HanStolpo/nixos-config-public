@@ -18,12 +18,12 @@ in
 
     environment.systemPackages = with pkgs; [
       # nix related
-      pkgs-unstable.nixFlakes # nix package manager
-      pkgs-unstable.nix-prefetch-scripts # Collection of all the nix-prefetch-* scripts which may be used to obtain source hashes
-      pkgs-unstable.patchelf # A small utility to modify the dynamic linker and RPATH of ELF executables
-      pkgs-unstable.nix-du # Visualise which gc-roots to delete to free some space in your nix store
-      pkgs-unstable.nix-index # Quickly locate nix packages with specific files
-      pkgs-unstable.nixpkgs-fmt # formatter for nix files
+      nix # nix package manager
+      nix-prefetch-scripts # Collection of all the nix-prefetch-* scripts which may be used to obtain source hashes
+      patchelf # A small utility to modify the dynamic linker and RPATH of ELF executables
+      nix-du # Visualise which gc-roots to delete to free some space in your nix store
+      nix-index # Quickly locate nix packages with specific files
+      nixpkgs-fmt # formatter for nix files
 
 
       # Utilities

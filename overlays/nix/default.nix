@@ -1,8 +1,6 @@
 final: prev: {
   #nix = prev.nixFlakes;
   # inherit (final.pkgs-unstable) nix-du;
-  nix = final.pkgs-unstable.nixFlakes;
-  inherit (final.pkgs-unstable) nix-du nixFlakes;
-  # # inherit (final.pkgs-unstable)
-  # #   nix nixFlakes nix-du nix-prefetch-scripts patchelf nix-index nixops nixpkgs-fmt;
+  nix = final.pkgs-unstable.nixVersions.nix_2_14;
+  inherit (final.pkgs-unstable) nix-du nix-prefetch-scripts nix-index nixpkgs-fmt;
 }
