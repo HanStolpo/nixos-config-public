@@ -174,12 +174,26 @@ in
 
         ${base16ShellInit}
       '';
+
+      shellInit = ''
+        # use gpg-agent for adding ssh keys
+        # https://opensource.com/article/19/4/gpg-subkeys-ssh
+        export SSH_AUTH_SOCK="$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)"
+        gpgconf --launch gpg-agent
+      '';
     };
 
     programs.fish = {
       enable = true;
 
       useBabelfish = true;
+
+      shellInit = ''
+        # use gpg-agent for adding ssh keys
+        # https://opensource.com/article/19/4/gpg-subkeys-ssh
+        set -x -g SSH_AUTH_SOCK "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)"
+        gpgconf --launch gpg-agent
+      '';
 
       promptInit = ''
         set -x -g STARSHIP_CONFIG "${./shell/starship.toml}"
