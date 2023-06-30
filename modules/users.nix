@@ -53,6 +53,7 @@ in
                 "input"
                 "uinput"
                 "docker"
+                "pipewire"
               ];
               #shell = "${pkgs.zsh}/bin/fish";
             };
