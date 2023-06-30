@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
-let kernel = pkgs.linuxPackages_latest;
+let kernel = pkgs.linuxPackages;
     enableSSH = false;
     dpi = 122;
     laptopDpi = 96;
@@ -213,12 +213,11 @@ in
 
       services.dnsmasq = {
         enable = true;
-        servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "10.20.0.1" "10.21.0.1" "100.100.100.100" ];
-        extraConfig = ''
-          server=/picofactory-new/10.20.0.1
-          server=/petersfield/10.21.0.1
-          server=/circuithub.com.beta.tailscale.net/100.100.100.100
-        '';
+        settings.server =
+          [ "8.8.8.8"
+            "8.8.8.4"
+            "192.168.1.1"
+          ];
       };
 
       #Select internationalisation properties.
