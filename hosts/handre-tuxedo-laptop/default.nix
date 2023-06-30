@@ -243,6 +243,8 @@ in
       fonts.fontconfig.antialias = true;
       fonts.fontconfig.hinting.enable = true;
 
+      sound.enable = true;
+
       services.pipewire = {
         enable = true;
         systemWide = true;
