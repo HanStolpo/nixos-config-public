@@ -143,9 +143,12 @@ in
     };
     programs.ssh.startAgent = false;
 
-    # programs.gnupg.agent = {
-    #   enable = true;
-    #   pinentryFlavor = "curses";
-    # };
+    programs.gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "qt";
+      enableSSHSupport = true;
+      enableExtraSocket = true;
+      enableBrowserSocket = true;
+    };
   };
 }
