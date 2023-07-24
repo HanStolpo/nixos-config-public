@@ -67,11 +67,12 @@ input type:pointer {
 
 input type:touchpad {
     tap enabled
-    accel_profile adaptive
+    #accel_profile adaptive
+    accel_profile flat
     # set mouse sensitivity (between -1 and 1)
-    pointer_accel 0.25 
+    pointer_accel 0.25
     natural_scroll disable
-    dwt enable
+    #dwt enable
 }
 
 
