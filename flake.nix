@@ -67,7 +67,7 @@
                       sandbox = "relaxed";
                   };
                   extraOptions = ''
-                    experimental-features = nix-command flakes
+                    experimental-features = nix-command flakes recursive-nix
                     allow-import-from-derivation = true
 
                     # some defaults as suggested here: https://jackson.dev/post/nix-reasonable-defaults/
@@ -85,6 +85,7 @@
 
                     # Set for developers
                     keep-outputs = true
+
                   '';
                 };
               })
