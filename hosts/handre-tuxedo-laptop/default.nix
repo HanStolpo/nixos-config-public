@@ -14,6 +14,8 @@ in
     {
       services.openssh.enable = enableSSH;
 
+      services.tailscale.enable = true;
+
 
       hanstolpo = {
 
