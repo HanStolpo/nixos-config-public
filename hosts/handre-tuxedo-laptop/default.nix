@@ -45,6 +45,7 @@ in
 
 
       nixpkgs.config.permittedInsecurePackages = [
+        "python-2.7.18.6"
       ];
 
       # Set your time zone.
@@ -91,6 +92,7 @@ in
         wdisplays
         wf-recorder
         slurp
+        pkgs-unstable.davinci-resolve
       ];
 
 
