@@ -99,13 +99,23 @@ in
       boot.kernelPackages = kernel;
       boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       boot.initrd.kernelModules = [  ];
-      boot.kernelModules = [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard" "uinput"];
+      boot.kernelModules = 
+        [ "kvm-amd" "lm92" "k10temp" "zenpower" "tuxedo_keyboard" "uinput"
+          "amdgpu"
+        ];
       boot.extraModulePackages = with kernel; [zenpower tuxedo-keyboard];
       boot.kernelParams = [
       # https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
       "i8042.reset" "i8042.nomux" "i8042.nopnp" "i8042.noloop"
+      # https://nixos.wiki/wiki/AMD_GPU
+      "radeon.cik_support=0" "amdgpu.cik_support=1"
       ];
       hardware.tuxedo-keyboard.enable = true;
+
+      # https://nixos.wiki/wiki/AMD_GPU
+      systemd.tmpfiles.rules = [
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+      ];
 
       # Use the systemd-boot EFI boot loader.
       boot.loader.generationsDir.copyKernels = true;
@@ -168,7 +178,13 @@ in
           driSupport = true;
           driSupport32Bit = true;
           # I guess for video acceleration support
-          extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+          extraPackages32 = with pkgs.pkgsi686Linux; [ libva amdvlk];
+          extraPackages = with pkgs;
+            [   libva
+                rocm-opencl-icd
+                rocm-opencl-runtime
+                amdvlk
+            ];
       };
 
       security.rtkit.enable = true;
