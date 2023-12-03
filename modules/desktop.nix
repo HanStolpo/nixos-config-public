@@ -24,8 +24,8 @@ in
       shutter # take screen shots annotate images
       gv # postscript viewer
       ghostscript # 
-      zoom-us # video chat client
-      teams
+      #zoom-us # video chat client
+      #teams
       inkscape # Vector graphics editor
       obs-studio # Free and open source software for video recording and live streaming
       projectlibre # Project-Management Software similar to MS-Project
