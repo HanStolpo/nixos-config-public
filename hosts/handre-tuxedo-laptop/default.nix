@@ -112,7 +112,7 @@ in
 
       # https://nixos.wiki/wiki/AMD_GPU
       systemd.tmpfiles.rules = [
-        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
       ];
 
       # Use the systemd-boot EFI boot loader.

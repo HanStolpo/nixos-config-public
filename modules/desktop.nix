@@ -97,7 +97,7 @@ in
 
       enableGhostscriptFonts = true;
 
-      fonts = with pkgs; [
+      packages = with pkgs; [
         corefonts          # Micrsoft free fonts
         inconsolata        # monospaced
         ubuntu_font_family # Ubuntu fonts
@@ -112,7 +112,7 @@ in
         noto-fonts-emoji
       ];
 
-      enableDefaultFonts = true;
+      enableDefaultPackages = true;
 
       fontconfig = {
         enable = true;
