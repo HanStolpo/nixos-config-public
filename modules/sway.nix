@@ -86,7 +86,6 @@ in
         way-displays # autorandr like management of display outputs connected to wayland compositor
         waybar                     #
         zathura # document viewer
-        cinnamon.nemo    # file manager
         nomacs # image viewer
         mpv # video player
         xdg-desktop-portal-wlr
