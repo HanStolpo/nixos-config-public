@@ -36,18 +36,13 @@ set $cyan              #2aa198
 set $green             #859900
 
 
-set $menu bemenu-run \
-          --fn "SourceCodePro Regular 11" \
-          --line-height=25 \
-          --tb=$base02 \
-          --tf=$base1 \
-          --fb=$base02 \
-          --ff=$base1 \
-          --nb=$base02 \
-          --nf=$base1 \
-          --hb=$blue \
-          --hf=$base2 \
-          --sb=$blue
+set $menu fuzzel \
+          --icon-theme=Adwaita \
+          --fields='filename,name,generic,exec,keywords,categories' \
+          --terminal='alacritty --command' \
+          --show-actions \
+          --no-exit-on-keyboard-focus-loss \
+          --font='SourceCodePro:weight=regular:size=11'
 
 
 output * bg $base02 solid_color

@@ -80,7 +80,8 @@ in
         grim                       # screenshot functionality
         slurp                      # screenshot functionality
         wl-clipboard               # wl-copy and wl-paste for copy/paste from stdin / stdout
-        bemenu                     # wayland clone of dmenu
+        #bemenu                    # wayland clone of dmenu
+        fuzzel                     # fuzzy application launcher for sway
         mako                       # notification system developed by swaywm maintainer
         way-displays # autorandr like management of display outputs connected to wayland compositor
         waybar                     #
