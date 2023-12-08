@@ -49,12 +49,13 @@ in
       ];
 
       # Set your time zone.
-      time.timeZone = "Europe/Amsterdam";
+      #time.timeZone = "Europe/Amsterdam";
       #time.timeZone = "Europe/London";
       #time.timeZone = "America/Barbados";
       #time.timeZone = "Africa/Johannesburg";
       #time.timeZone = "America/Los_Angeles";
       #time.timeZone = "America/Mexico_City";
+      services.automatic-timezoned.enable = true;
 
 
       nix.settings.max-jobs = lib.mkDefault 12;
