@@ -11,40 +11,69 @@ let
 
   cfg = config.hanstolpo.sway;
 
-  # bash script to let dbus know about important env variables and
-  # propogate them to relevent services run at the end of sway config
-  # see
-  # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
-  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts  
-  # some user services to make sure they have the correct environment variables
-  dbus-sway-environment = pkgs.writeTextFile {
-    name = "dbus-sway-environment";
-    destination = "/bin/dbus-sway-environment";
-    executable = true;
-
-    text = ''
-  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-      '';
-  };
-
-  # currently, there is some friction between sway and gtk:
-  # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
-  # the suggested way to set gtk settings is with gsettings
-  # for gsettings to work, we need to tell it where the schemas are
-  # using the XDG_DATA_DIR environment variable
-  # run at the end of sway config
-  configure-gtk = pkgs.writeTextFile {
-      name = "configure-gtk";
-      destination = "/bin/configure-gtk";
-      executable = true;
-      text = let
+  # The overlays provide a sway instance wrapped to log to journald
+  # we further customize the settings the same way that 'programs.sway'
+  # would have done, that is we customize it here instead of there.
+  swayCustom = pkgs.swayJournald.override {
+    withBaseWrapper = true;
+    withGtkWrapper = true;
+    isNixOS = true;
+    enableXWayland = true;
+    dbusSupport = true;
+    extraSessionCommands = 
+      let
         schema = pkgs.gsettings-desktop-schemas;
-        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-      in ''
-        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-        gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Colloid-Dark'
-        '';
+        schema_datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+      in
+    ''
+      # GTK:
+      # to get gsettings to work (needs pkgs.glib in systemPackages)
+      # currently, there is some friction between sway and gtk:
+      # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+      # the suggested way to set gtk settings is with gsettings
+      # for gsettings to work, we need to tell it where the schemas are
+      # using the XDG_DATA_DIR environment variable
+      export XDG_DATA_DIRS="${schema_datadir}:$XDG_DATA_DIRS"
+
+      # what the deprecated option xdg.portal.gtkUsePortal did
+      # Sets environment variable GTK_USE_PORTAL to 1. This is
+      # needed for packages ran outside Flatpak to respect and
+      # use XDG Desktop Portals. For example, you'd need to set
+      # this for non-flatpak Firefox to use native filechoosers.
+      export GTK_USE_PORTAL=1
+
+      # SDL:
+      export SDL_VIDEODRIVER=wayland
+
+      # QT (needs qt5.qtwayland in systemPackages):
+      export QT_QPA_PLATFORM=wayland-egl
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+
+      # Fix for some Java AWT applications (e.g. Android Studio),
+      # use this if they aren't displayed properly:
+      export _JAVA_AWT_WM_NONREPARENTING=1
+
+      # https://wiki.archlinux.org/title/firefox#Wayland
+      export MOZ_ENABLE_WAYLAND=1
+
+      # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
+      # If you are using Wayland you can choose to use the Ozone Wayland support
+      # in Chrome and several Electron apps by setting the environment variable
+      # NIXOS_OZONE_WL=1 (for example via environment.sessionVariables.NIXOS_OZONE_WL = "1").
+      # This is not enabled by default because Ozone Wayland is still under heavy development
+      # and behavior is not always flawless. Furthermore, not all Electron apps use the latest
+      # Electron versions. #
+      export NIXOS_OZONE_WL=1
+
+      # these are from here https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
+      export XDG_SESSION_TYPE=wayland
+      export XDG_SESSION_DESKTOP=sway
+      export XDG_CURRENT_DESKTOP=sway
+      export CLUTTER_BACKEND=wayland
+      export ECORE_EVAS_ENGINE=wayland-egl
+      export ELM_ENGINE=wayland_egl
+      export NO_AT_BRIDGE=1
+    '';
   };
 in
 {
@@ -67,29 +96,29 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-        alacritty                  # gpu accelerated terminal
-        sway
-        dbus-sway-environment
-        configure-gtk
-        wayland
-        glib                       # gsettings
-        dracula-theme              # gtk theme
-        colloid-gtk-theme
-        gnome3.adwaita-icon-theme  # default gnome cursors
-        swaylock
-        swayidle
-        grim                       # screenshot functionality
-        slurp                      # screenshot functionality
-        wl-clipboard               # wl-copy and wl-paste for copy/paste from stdin / stdout
-        #bemenu                    # wayland clone of dmenu
-        fuzzel                     # fuzzy application launcher for sway
-        mako                       # notification system developed by swaywm maintainer
-        way-displays # autorandr like management of display outputs connected to wayland compositor
-        waybar                     #
-        zathura # document viewer
-        nomacs # image viewer
-        mpv # video player
-        xdg-desktop-portal-wlr
+      alacritty # gpu accelerated terminal
+      swayCustom
+      wayland
+      glib # gsettings
+      gsettings-desktop-schemas
+      dracula-theme # gtk theme
+      colloid-gtk-theme
+      gnome3.adwaita-icon-theme # default gnome cursors
+      swaylock
+      swayidle
+      grim # screenshot functionality
+      slurp # screenshot functionality
+      wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+      #bemenu                    # wayland clone of dmenu
+      fuzzel # fuzzy application launcher for sway
+      mako # notification system developed by swaywm maintainer
+      way-displays # autorandr like management of display outputs connected to wayland compositor
+      waybar #
+      zathura # document viewer
+      nomacs # image viewer
+      mpv # video player
+      xdg-desktop-portal-wlr
+      qt5.qtwayland
     ];
 
     programs.light.enable = true;
@@ -120,38 +149,8 @@ in
     # enable sway window manager
     programs.sway = {
       enable = true;
-      wrapperFeatures.gtk = true;
-      wrapperFeatures.base = true;
-    };
-
-    environment.variables = {
-        # what the deprecated option xdg.portal.gtkUsePortal did
-        # Sets environment variable GTK_USE_PORTAL to 1. This is
-        # needed for packages ran outside Flatpak to respect and
-        # use XDG Desktop Portals. For example, you'd need to set
-        # this for non-flatpak Firefox to use native filechoosers.
-        "GTK_USE_PORTAL" = "1";
-        # https://wiki.archlinux.org/title/firefox#Wayland
-        "MOZ_ENABLE_WAYLAND" = "1";
-        # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
-        # If you are using Wayland you can choose to use the Ozone Wayland support
-        # in Chrome and several Electron apps by setting the environment variable
-        # NIXOS_OZONE_WL=1 (for example via environment.sessionVariables.NIXOS_OZONE_WL = "1").
-        # This is not enabled by default because Ozone Wayland is still under heavy development
-        # and behavior is not always flawless. Furthermore, not all Electron apps use the latest
-        # Electron versions. #
-        "NIXOS_OZONE_WL" = "1";
-        # these are from here https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
-        "XDG_SESSION_TYPE"            = "wayland";
-        "XDG_SESSION_DESKTOP"         = "sway";
-        "XDG_CURRENT_DESKTOP"         = "sway";
-        "CLUTTER_BACKEND"             = "wayland";
-        "QT_QPA_PLATFORM"             = "wayland-egl";
-        "ECORE_EVAS_ENGINE"           = "wayland-egl";
-        "ELM_ENGINE"                  = "wayland_egl";
-        "SDL_VIDEODRIVER"             = "wayland";
-        "_JAVA_AWT_WM_NONREPARENTING" = "1";
-        "NO_AT_BRIDGE"                = "1";
+      # all customizations is done via the custom package
+      package = swayCustom;
     };
 
     environment.etc = {
@@ -160,12 +159,51 @@ in
       "xdg/waybar/config".source = "${cfg.pathToWaybarConfigFile}";
     };
 
-    services.greetd = {
-        enable = true;
-        settings = {
-          default_session = {
-            command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
+    programs.regreet = {
+      enable = true;
+      settings = {
+        GTK = {
+          # Whether to use the dark theme
+          application_prefer_dark_theme = true;
+
+          # Cursor theme name
+          cursor_theme_name = "Adwaita";
+
+          # Font name and size
+          font_name = "SourceCodePro Regular 11";
+
+          # Icon theme name
+          icon_theme_name = "Papirus";
+
+          # GTK theme name
+          theme_name = "Colloid-Dark";
         };
+      };
+    };
+
+    services.greetd = {
+      enable = true;
+      settings = {
+        terminal = {
+          vt = "7";
+        };
+        default_session =
+          let
+            sway_greeter_config = pkgs.writeTextFile {
+              name = "sway_greeter_config";
+              text = ''
+                include /etc/sway/config.d/*
+                exec "way-displays 2>&1 | logger -t way-displays"
+                exec gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
+                exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
+                exec swayidle -w timeout 120 'systemctl suspend'
+              '';
+            };
+          in
+          {
+            # https://github.com/rharish101/ReGreet/issues/34#issue-1808828810
+            command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway --config ${sway_greeter_config}";
+          };
       };
     };
   };

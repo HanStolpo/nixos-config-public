@@ -2,6 +2,11 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+
+# inlude the default system dependant configuration segments 
+# see https://wiki.archlinux.org/title/Sway#Configuration
+include /etc/sway/config.d/*
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -241,10 +246,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # manage outputs automatically using way-displays
-exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
-
-# Import the WAYLAND_DISPLAY env var from sway into the systemd user session.
-exec dbus-sway-environment
+exec "way-displays 2>&1 | logger -t way-displays"
 
 # some settings here for black screen issues from here
 # https://www.reddit.com/r/swaywm/comments/v3ssha/comment/ib0w5ph/?utm_source=share&utm_medium=web2x&context=3
@@ -255,8 +257,9 @@ exec swayidle -w \
                resume 'swaymsg "output * dpms on"' \
                before-sleep 'swaylock -f -c 000055' \
                after-resume 'swaymsg "output * dpms on"'
+
 # set gtk settings
-exec configure-gtk
+exec gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
 
 bar swaybar_command waybar
 
