@@ -37,7 +37,7 @@ set $green             #859900
 
 
 set $menu fuzzel \
-          --icon-theme=Adwaita \
+          --icon-theme=Papirus \
           --fields='filename,name,generic,exec,keywords,categories' \
           --terminal='alacritty --command' \
           --show-actions \

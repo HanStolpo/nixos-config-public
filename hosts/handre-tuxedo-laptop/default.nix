@@ -72,6 +72,7 @@ in
         gtk_engines
         hicolor-icon-theme
         gnome3.adwaita-icon-theme
+        papirus-icon-theme
         gnome3.gnome-boxes
         spice
         breeze-icons
