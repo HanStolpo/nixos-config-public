@@ -55,13 +55,13 @@ in
       nmap #  A free and open source utility for network discovery and security auditing
       tcpdump # Network sniffer
       bc # GNU software calculator
-      vifm # vi like terminal file manager
+      #vifm # vi like terminal file manager
       openssl # A cryptographic library that implements the SSL and TLS protocols
       netcat-openbsd # TCP/IP swiss army knife, OpenBSD variant
       kpcli # command line interface to keepass
       easyrsa
       mkpasswd # generate password hashes
-      autojump # used in ohmyzsh to quickly jump between directories
+      #autojump # used in ohmyzsh to quickly jump between directories
 
       # source control for configs etc
       gitAndTools.gitFull # git source control
@@ -75,7 +75,7 @@ in
       gnumake # A tool to control the generation of non-source files from sources
       cabal2nix # Convert Cabal files into Nix build instructions
       perl # The standard implementation of the Perl 5 programmming language
-      heroku # Everything you need to get started using Heroku
+      #heroku # Everything you need to get started using Heroku
       nodePackages.node2nix # generate nix from node packages
       direnv # automatically setup environment variables when entering a directory
       gdb # debugger
@@ -85,10 +85,10 @@ in
       (haskell.lib.justStaticExecutables haskellPackages.aeson-pretty) # pretty print json text
       # haskell
       # (haskell.lib.justStaticExecutables haskellPackages.haskell-language-server)
-      (haskell.lib.justStaticExecutables haskellPackages.hie-bios)
+      #(haskell.lib.justStaticExecutables haskellPackages.hie-bios)
       # rust
-      cargo
-      rustc
+      #cargo
+      #rustc
 
       # spelling
       aspell # Spell checker for many languages
@@ -113,7 +113,7 @@ in
 
       fzf
 
-      stgit # stacked git
+      #stgit # stacked git
 
       git-branchless # newer stacked git
 

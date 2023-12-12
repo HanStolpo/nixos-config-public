@@ -84,14 +84,14 @@ in
         qemu_kvm
         libvirt
         virt-manager
-        jitsi-meet-electron
+        #jitsi-meet-electron
         signal-desktop
         pavucontrol
         xournalpp # note taking software with PDF annotation support
         wdisplays
         wf-recorder
         slurp
-        pkgs-unstable.davinci-resolve
+        #pkgs-unstable.davinci-resolve
       ];
 
 

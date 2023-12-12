@@ -20,7 +20,7 @@ in
       # terminals
       alacritty # vi like terminal emulator which is OpenGL accelerated
 
-      flameshot # easy screenshot tool
+      #flameshot # easy screenshot tool
       shutter # take screen shots annotate images
       gv # postscript viewer
       ghostscript # 
@@ -28,7 +28,7 @@ in
       #teams
       inkscape # Vector graphics editor
       obs-studio # Free and open source software for video recording and live streaming
-      projectlibre # Project-Management Software similar to MS-Project
+      #projectlibre # Project-Management Software similar to MS-Project
       libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release)
       #adobe-reader # PDF viewer
       gimp # The GNU Image Manipulation Program
@@ -36,7 +36,7 @@ in
       mpv # A media player that supports many video formats (MPlayer and mplayer2 fork)
       ffmpeg-full # A complete, cross-platform solution to record, convert and stream audio and video
       remmina # remote desktop client
-      realvnc-viewer
+      #realvnc-viewer
       #gnome3.nautilus # the gnome file manager
       cinnamon.nemo-with-extensions    # file manager
       viewnior # light weight image viewer
@@ -61,19 +61,19 @@ in
       #EDA
       #kicad # Free Software EDA Suite
       #eagle # Eagle EDA tool
-      gerbv # A Gerber (RS-274X) viewer
+      #gerbv # A Gerber (RS-274X) viewer
 
-      glade # gtk layout tool
+      #glade # gtk layout tool
 
       sqlitebrowser
 
-      rhythmbox # music player
+      #rhythmbox # music player
 
-      sweethome3d.application # floor plan interior design application
+      #sweethome3d.application # floor plan interior design application
 
       languagetool
 
-      fontforge-gtk
+      #fontforge-gtk
 
       pinentry-qt # qt based pinentry program to be used with gpg
 
