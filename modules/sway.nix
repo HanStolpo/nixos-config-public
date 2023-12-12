@@ -43,7 +43,7 @@ let
       in ''
         export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
         gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Dracula'
+        gsettings set $gnome_schema gtk-theme 'Colloid-Dark'
         '';
   };
 in
@@ -74,6 +74,7 @@ in
         wayland
         glib                       # gsettings
         dracula-theme              # gtk theme
+        colloid-gtk-theme
         gnome3.adwaita-icon-theme  # default gnome cursors
         swaylock
         swayidle
