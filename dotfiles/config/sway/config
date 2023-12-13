@@ -263,3 +263,4 @@ exec gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
 
 bar swaybar_command waybar
 
+exec dropbox
