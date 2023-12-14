@@ -73,6 +73,8 @@ let
       export ECORE_EVAS_ENGINE=wayland-egl
       export ELM_ENGINE=wayland_egl
       export NO_AT_BRIDGE=1
+
+      export XDG_SCREENSHOTS_DIR=$HOME/Screenshots
     '';
   };
 in
@@ -106,17 +108,15 @@ in
       gnome3.adwaita-icon-theme # default gnome cursors
       swaylock
       swayidle
-      grim # screenshot functionality
-      slurp # screenshot functionality
+      sway-contrib.grimshot # screenshot functionality
+      swayimg
       wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-      #bemenu                    # wayland clone of dmenu
       fuzzel # fuzzy application launcher for sway
       mako # notification system developed by swaywm maintainer
       way-displays # autorandr like management of display outputs connected to wayland compositor
       waybar #
       zathura # document viewer
       nomacs # image viewer
-      mpv # video player
       xdg-desktop-portal-wlr
       qt5.qtwayland
     ];

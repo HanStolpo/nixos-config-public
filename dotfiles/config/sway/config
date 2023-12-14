@@ -96,7 +96,7 @@ bindsym $mod+Space exec $menu
 # Start control panels
 bindsym $mod+Shift+d exec iwgtk; exec pavucontrol; exec blueman-manager
 
-bindsym $mod+c exec grim  -g "$(slurp)" /tmp/$(date +'%H:%M:%S.png')
+bindsym $mod+c exec grimshot --notify save area
 
 # Kill focused window
 bindsym $mod+Backspace kill
