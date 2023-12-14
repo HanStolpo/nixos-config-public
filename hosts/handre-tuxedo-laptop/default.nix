@@ -208,8 +208,10 @@ in
         HibernateDelaySec=1h
         SuspendMode=
         SuspendState=mem
-        HibernateMode=shutdown
-        HibernateState=
+        HibernateMode=platform
+        HibernateState=disk
+        AllowHybridSleep=no
+        AllowSuspendThenHibernate=no
       '';
 
 
