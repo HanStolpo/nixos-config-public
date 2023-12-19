@@ -41,6 +41,8 @@ in
         dev-services.enable = false;
       };
 
+      services.usbmuxd.enable = true;
+
       virtualisation.docker.enable = true;
 
 

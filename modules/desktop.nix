@@ -20,6 +20,8 @@ in
       # terminals
       alacritty # vi like terminal emulator which is OpenGL accelerated
 
+      shotwell # photo organizer tool for gnome
+
       #flameshot # easy screenshot tool
       shutter # take screen shots annotate images
       gv # postscript viewer
