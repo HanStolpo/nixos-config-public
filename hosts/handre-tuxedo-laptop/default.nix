@@ -42,6 +42,7 @@ in
       };
 
       services.usbmuxd.enable = true;
+      services.gvfs.enable = true;
 
       virtualisation.docker.enable = true;
 
