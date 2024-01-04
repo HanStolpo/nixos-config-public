@@ -44,6 +44,12 @@ in
       services.usbmuxd.enable = true;
       services.gvfs.enable = true;
 
+      # for logitech unified wireless receiver to allow managing devices
+      hardware.logitech.wireless = {
+        enable = true; # manage devices via cli tool ltunify
+        enableGraphical = true; # manage devices via graphical too solaar
+      };
+
       virtualisation.docker.enable = true;
 
 
