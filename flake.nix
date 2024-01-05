@@ -9,14 +9,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
-   
+
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    haswaynav = {
+      url = "github:hanstolpo/haswaynav";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, flake-utils, kmonad, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, hlissner-dotfiles, flake-utils, kmonad, haswaynav, ... }:
     let
       inherit (hlissner-dotfiles.lib) mapModules mapModulesRec';
       inherit (flake-utils.lib) eachSystem allSystems;
@@ -30,6 +36,10 @@
              system = final.system;
              config.allowUnfree = true;
          };
+        };
+        haswaynav =
+          final: prev: {
+            haswaynav = haswaynav.defaultPackage."${final.system}";
         };
       } // mapModules ./overlays import;
 

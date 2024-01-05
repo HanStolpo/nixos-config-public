@@ -124,15 +124,20 @@ bindsym $mod+q reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
 #
 # Moving around:
 #
-# Move your focus around
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
+# Move your focus around skipping over tabbed and stacked siblings
+bindsym $mod+$left exec haswaynav focus left
+bindsym $mod+$down exec haswaynav focus down
+bindsym $mod+$up exec haswaynav focus up
+bindsym $mod+$right exec haswaynav focus right
+# Move your focus around normally
+bindsym $mod+Ctrl+$left focus left
+bindsym $mod+Ctrl+$down focus down
+bindsym $mod+Ctrl+$up focus up
+bindsym $mod+Ctrl+$right focus right
 # Move the focused window with the same, but add Shift
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down

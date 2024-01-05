@@ -98,6 +98,8 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      haswaynav # customize navigation in sway
+
       alacritty # gpu accelerated terminal
       swayCustom
       wayland
