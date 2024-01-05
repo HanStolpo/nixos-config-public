@@ -6,11 +6,11 @@
 }:
 
 let
-    version = "0.2.11";
-    os = "linux";
-    platform = "amd64";
-    sha256 = "1811sz3y0s2g278d304g1js8rw3qf8fnl41bcv3a6myvkg2hdprd";
-    extractDir = "tala-v${version}";
+  version = "0.2.11";
+  os = "linux";
+  platform = "amd64";
+  sha256 = "1811sz3y0s2g278d304g1js8rw3qf8fnl41bcv3a6myvkg2hdprd";
+  extractDir = "tala-v${version}";
 in
 
 stdenv.mkDerivation {

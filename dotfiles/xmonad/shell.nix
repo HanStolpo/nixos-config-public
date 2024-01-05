@@ -87,24 +87,24 @@ let
       ]
     );
 in
-  with pkgs;
-  # Fake build command for the nix packages if you ever want to make it installable by let say Hydra
-  runCommand "adhoc-haskell-env"
-    (
-      with haskellPackages;
-      rec
-      {
-        # this shell hook sets everything up so that the wrapped ghc finds its packages
-        shellHook = "eval $(egrep ^export ${ghcWithHoogle}/bin/ghc)";
-        # these are all the build time dependencies so they will all be available in the shell
-        buildInputs = [
-          ghcWithHoogle # our compiler GHC
-          haskellPackages.ghcid
-          #hindent # a tool for auto formatting Haskell code
-          cabal-install # the Haskell "Package" manager only needed for ghc-mod
-        ];
-      }
-    )
-    # the result of the packages is a file with success in it but we are just using the package's
-    # build dependencies to get a build environment
-    "echo success > $out"
+with pkgs;
+# Fake build command for the nix packages if you ever want to make it installable by let say Hydra
+runCommand "adhoc-haskell-env"
+  (
+    with haskellPackages;
+    rec
+    {
+      # this shell hook sets everything up so that the wrapped ghc finds its packages
+      shellHook = "eval $(egrep ^export ${ghcWithHoogle}/bin/ghc)";
+      # these are all the build time dependencies so they will all be available in the shell
+      buildInputs = [
+        ghcWithHoogle # our compiler GHC
+        haskellPackages.ghcid
+        #hindent # a tool for auto formatting Haskell code
+        cabal-install # the Haskell "Package" manager only needed for ghc-mod
+      ];
+    }
+  )
+  # the result of the packages is a file with success in it but we are just using the package's
+  # build dependencies to get a build environment
+  "echo success > $out"

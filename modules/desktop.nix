@@ -40,7 +40,7 @@ in
       remmina # remote desktop client
       #realvnc-viewer
       #gnome3.nautilus # the gnome file manager
-      cinnamon.nemo-with-extensions    # file manager
+      cinnamon.nemo-with-extensions # file manager
       viewnior # light weight image viewer
 
       # browsers
@@ -101,10 +101,10 @@ in
       enableGhostscriptFonts = true;
 
       packages = with pkgs; [
-        corefonts          # Micrsoft free fonts
-        inconsolata        # monospaced
+        corefonts # Micrsoft free fonts
+        inconsolata # monospaced
         ubuntu_font_family # Ubuntu fonts
-        unifont            # some international languages
+        unifont # some international languages
         powerline-fonts
         nerdfonts
         font-awesome_5
@@ -128,50 +128,52 @@ in
         # fallback fonts which nixos includes by default and fontconfig prefers
         # over user specified ones. To see this internal list, run fc-match -s
 
-        localConf = let
-          # function to generate patterns for fontconfig font banning
-          fontBanPattern = s: ''
-          <pattern>
-            <patelt name="family">
-              <string>${s}</string>
-            </patelt>
-          </pattern>
-          '';
+        localConf =
+          let
+            # function to generate patterns for fontconfig font banning
+            fontBanPattern = s: ''
+              <pattern>
+                <patelt name="family">
+                  <string>${s}</string>
+                </patelt>
+              </pattern>
+            '';
 
-          fontsToBan = [
-            "Noto Emoji"
-            "DejaVu Sans"
-            "FreeSans"
-            "FreeMono"
-            "FreeSerif"
-            "DejaVu Math TeX Gyre"
-            "DejaVu Sans Mono"
-            "DejaVu Serif"
-            "Liberation Mono"
-            "Liberation Serif"
-            "Liberation Sans"
-            "DejaVu Serif"
-            "DejaVu Serif"
-            "Liberation Serif"
-            "DejaVu Serif"
-          ]; in
+            fontsToBan = [
+              "Noto Emoji"
+              "DejaVu Sans"
+              "FreeSans"
+              "FreeMono"
+              "FreeSerif"
+              "DejaVu Math TeX Gyre"
+              "DejaVu Sans Mono"
+              "DejaVu Serif"
+              "Liberation Mono"
+              "Liberation Serif"
+              "Liberation Sans"
+              "DejaVu Serif"
+              "DejaVu Serif"
+              "Liberation Serif"
+              "DejaVu Serif"
+            ];
+          in
           ''
-          <?xml version="1.0"?>
-          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-          <fontconfig>
-            <selectfont>
-              <rejectfont>
-                ${lib.strings.concatStringsSep "\n" (map fontBanPattern fontsToBan)}
-              </rejectfont>
-            </selectfont>
-          </fontconfig>
-        '';
+            <?xml version="1.0"?>
+            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <fontconfig>
+              <selectfont>
+                <rejectfont>
+                  ${lib.strings.concatStringsSep "\n" (map fontBanPattern fontsToBan)}
+                </rejectfont>
+              </selectfont>
+            </fontconfig>
+          '';
 
         defaultFonts = {
           monospace = [ "Roboto Mono for Powerline" ];
           sansSerif = [ "Source Sans Pro" ];
-          serif     = [ "Source Serif Pro" ];
-          emoji     = [ "Noto Color Emoji" ];
+          serif = [ "Source Serif Pro" ];
+          emoji = [ "Noto Color Emoji" ];
         };
       };
     };

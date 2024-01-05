@@ -79,7 +79,8 @@ in
     ];
 
     users = mkMerge
-      [ (mkIf cfg.defaultZsh { defaultUserShell = "${pkgs.zsh}/bin/zsh"; })
+      [
+        (mkIf cfg.defaultZsh { defaultUserShell = "${pkgs.zsh}/bin/zsh"; })
         (mkIf cfg.defaultFish { defaultUserShell = "${pkgs.fish}/bin/fish"; })
       ];
     environment.shells = [ "${pkgs.fish}/bin/fish" "${pkgs.zsh}/bin/zsh" ];

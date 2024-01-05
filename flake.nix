@@ -32,25 +32,25 @@
       overlays = {
         pkgs-unstable =
           final: prev: {
-           pkgs-unstable = import nixpkgs-unstable {
-             system = final.system;
-             config.allowUnfree = true;
-         };
-        };
+            pkgs-unstable = import nixpkgs-unstable {
+              system = final.system;
+              config.allowUnfree = true;
+            };
+          };
         haswaynav =
           final: prev: {
             haswaynav = haswaynav.defaultPackage."${final.system}";
-        };
+          };
       } // mapModules ./overlays import;
 
 
 
       packages.x86_64-linux = {
         inherit (import nixpkgs {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
-                  overlays = builtins.attrValues self.overlays;
-                }) d2 tala realvnc-viewer tree-sitter mdsync swayJournald;
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = builtins.attrValues self.overlays;
+        }) d2 tala realvnc-viewer tree-sitter mdsync swayJournald;
       };
 
       nixosModules = mapModules ./modules import;
@@ -60,7 +60,8 @@
           system = "x86_64-linux";
           modules =
             builtins.attrValues self.nixosModules ++
-            [ kmonad.nixosModules.default
+            [
+              kmonad.nixosModules.default
 
               ({ pkgs, ... }: {
                 # Let 'nixos-version --json' know about the Git revision of this flake.
@@ -68,13 +69,13 @@
 
                 nixpkgs = {
                   config.allowUnfree = true;
-                  overlays = builtins.attrValues self.overlays ++ [kmonad.overlays.default];
+                  overlays = builtins.attrValues self.overlays ++ [ kmonad.overlays.default ];
                 };
 
                 nix = {
                   registry.nixpkgs.flake = nixpkgs;
                   settings = {
-                      sandbox = "relaxed";
+                    sandbox = "relaxed";
                   };
                   extraOptions = ''
                     experimental-features = nix-command flakes recursive-nix

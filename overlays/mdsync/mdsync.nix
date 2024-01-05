@@ -6,10 +6,10 @@
 }:
 
 let
-    version = "1.1.2";
-    os = "linux";
-    platform = "amd64";
-    sha256 = "04i31ajxi6ahkskxzq2ddrl2avwx971hrb2znbvskzwnz5v4djlk";
+  version = "1.1.2";
+  os = "linux";
+  platform = "amd64";
+  sha256 = "04i31ajxi6ahkskxzq2ddrl2avwx971hrb2znbvskzwnz5v4djlk";
 in
 
 stdenv.mkDerivation {

@@ -1,7 +1,23 @@
-{ mkDerivation, abstract-par, base, containers, deepseq, directory
-, dlist, fetchgit, filepath, lib, megaparsec, monad-par
-, monad-par-extras, monoidal-containers, mtl, nonempty-containers
-, optparse-applicative, process, text, transformers
+{ mkDerivation
+, abstract-par
+, base
+, containers
+, deepseq
+, directory
+, dlist
+, fetchgit
+, filepath
+, lib
+, megaparsec
+, monad-par
+, monad-par-extras
+, monoidal-containers
+, mtl
+, nonempty-containers
+, optparse-applicative
+, process
+, text
+, transformers
 }:
 mkDerivation {
   pname = "ch-hs-imports";
@@ -15,9 +31,23 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    abstract-par base containers deepseq directory dlist filepath
-    megaparsec monad-par monad-par-extras monoidal-containers mtl
-    nonempty-containers optparse-applicative process text transformers
+    abstract-par
+    base
+    containers
+    deepseq
+    directory
+    dlist
+    filepath
+    megaparsec
+    monad-par
+    monad-par-extras
+    monoidal-containers
+    mtl
+    nonempty-containers
+    optparse-applicative
+    process
+    text
+    transformers
   ];
   license = lib.licenses.mit;
 }

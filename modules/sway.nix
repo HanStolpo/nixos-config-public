@@ -20,62 +20,62 @@ let
     isNixOS = true;
     enableXWayland = true;
     dbusSupport = true;
-    extraSessionCommands = 
+    extraSessionCommands =
       let
         schema = pkgs.gsettings-desktop-schemas;
         schema_datadir = "${schema}/share/gsettings-schemas/${schema.name}";
       in
-    ''
-      # GTK:
-      # to get gsettings to work (needs pkgs.glib in systemPackages)
-      # currently, there is some friction between sway and gtk:
-      # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
-      # the suggested way to set gtk settings is with gsettings
-      # for gsettings to work, we need to tell it where the schemas are
-      # using the XDG_DATA_DIR environment variable
-      export XDG_DATA_DIRS="${schema_datadir}:$XDG_DATA_DIRS"
+      ''
+        # GTK:
+        # to get gsettings to work (needs pkgs.glib in systemPackages)
+        # currently, there is some friction between sway and gtk:
+        # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+        # the suggested way to set gtk settings is with gsettings
+        # for gsettings to work, we need to tell it where the schemas are
+        # using the XDG_DATA_DIR environment variable
+        export XDG_DATA_DIRS="${schema_datadir}:$XDG_DATA_DIRS"
 
-      # what the deprecated option xdg.portal.gtkUsePortal did
-      # Sets environment variable GTK_USE_PORTAL to 1. This is
-      # needed for packages ran outside Flatpak to respect and
-      # use XDG Desktop Portals. For example, you'd need to set
-      # this for non-flatpak Firefox to use native filechoosers.
-      export GTK_USE_PORTAL=1
+        # what the deprecated option xdg.portal.gtkUsePortal did
+        # Sets environment variable GTK_USE_PORTAL to 1. This is
+        # needed for packages ran outside Flatpak to respect and
+        # use XDG Desktop Portals. For example, you'd need to set
+        # this for non-flatpak Firefox to use native filechoosers.
+        export GTK_USE_PORTAL=1
 
-      # SDL:
-      export SDL_VIDEODRIVER=wayland
+        # SDL:
+        export SDL_VIDEODRIVER=wayland
 
-      # QT (needs qt5.qtwayland in systemPackages):
-      export QT_QPA_PLATFORM=wayland-egl
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        # QT (needs qt5.qtwayland in systemPackages):
+        export QT_QPA_PLATFORM=wayland-egl
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
-      # Fix for some Java AWT applications (e.g. Android Studio),
-      # use this if they aren't displayed properly:
-      export _JAVA_AWT_WM_NONREPARENTING=1
+        # Fix for some Java AWT applications (e.g. Android Studio),
+        # use this if they aren't displayed properly:
+        export _JAVA_AWT_WM_NONREPARENTING=1
 
-      # https://wiki.archlinux.org/title/firefox#Wayland
-      export MOZ_ENABLE_WAYLAND=1
+        # https://wiki.archlinux.org/title/firefox#Wayland
+        export MOZ_ENABLE_WAYLAND=1
 
-      # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
-      # If you are using Wayland you can choose to use the Ozone Wayland support
-      # in Chrome and several Electron apps by setting the environment variable
-      # NIXOS_OZONE_WL=1 (for example via environment.sessionVariables.NIXOS_OZONE_WL = "1").
-      # This is not enabled by default because Ozone Wayland is still under heavy development
-      # and behavior is not always flawless. Furthermore, not all Electron apps use the latest
-      # Electron versions. #
-      export NIXOS_OZONE_WL=1
+        # since 22.05 https://nixos.org/manual/nixos/unstable/release-notes.html
+        # If you are using Wayland you can choose to use the Ozone Wayland support
+        # in Chrome and several Electron apps by setting the environment variable
+        # NIXOS_OZONE_WL=1 (for example via environment.sessionVariables.NIXOS_OZONE_WL = "1").
+        # This is not enabled by default because Ozone Wayland is still under heavy development
+        # and behavior is not always flawless. Furthermore, not all Electron apps use the latest
+        # Electron versions. #
+        export NIXOS_OZONE_WL=1
 
-      # these are from here https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
-      export XDG_SESSION_TYPE=wayland
-      export XDG_SESSION_DESKTOP=sway
-      export XDG_CURRENT_DESKTOP=sway
-      export CLUTTER_BACKEND=wayland
-      export ECORE_EVAS_ENGINE=wayland-egl
-      export ELM_ENGINE=wayland_egl
-      export NO_AT_BRIDGE=1
+        # these are from here https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
+        export XDG_SESSION_TYPE=wayland
+        export XDG_SESSION_DESKTOP=sway
+        export XDG_CURRENT_DESKTOP=sway
+        export CLUTTER_BACKEND=wayland
+        export ECORE_EVAS_ENGINE=wayland-egl
+        export ELM_ENGINE=wayland_egl
+        export NO_AT_BRIDGE=1
 
-      export XDG_SCREENSHOTS_DIR=$HOME/Screenshots
-    '';
+        export XDG_SCREENSHOTS_DIR=$HOME/Screenshots
+      '';
   };
 in
 {

@@ -15,7 +15,7 @@ in
   #time.timeZone = "Africa/Johannesburg";
   #time.timeZone = "America/Los_Angeles";
   time.timeZone = "America/Mexico_City";
-	
+
   hanstolpo = {
     shell.enable = true;
     terminal.enable = true;
@@ -247,7 +247,7 @@ in
       "10.2.0.2" = [ "hydra.circuithub.com" "deploy.circuithub.com" ];
       "10.2.0.7" = [ "ucamco.circuithub" ];
       "192.168.1.1" = [ "router.asus.com" ];
-      "3.223.189.209" = ["ec2-3-223-189-209.compute-1.amazonaws.com"];
+      "3.223.189.209" = [ "ec2-3-223-189-209.compute-1.amazonaws.com" ];
     };
 
     enableIPv6 = true;
@@ -256,7 +256,8 @@ in
   services.dnsmasq = {
     enable = true;
     settings.server =
-      [ "8.8.8.8"
+      [
+        "8.8.8.8"
         "8.8.8.4"
         "192.168.1.1"
       ];

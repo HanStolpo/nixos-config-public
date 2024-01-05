@@ -6,11 +6,11 @@
 }:
 
 let
-    version = "0.1.4";
-    os = "linux";
-    platform = "amd64";
-    sha256 = "06n8l2xlfpfyl1fbkza0njymcfahq5q86wdr285jd7md6dbizysc";
-    extractDir = "d2-v${version}";
+  version = "0.1.4";
+  os = "linux";
+  platform = "amd64";
+  sha256 = "06n8l2xlfpfyl1fbkza0njymcfahq5q86wdr285jd7md6dbizysc";
+  extractDir = "d2-v${version}";
 in
 
 stdenv.mkDerivation {
