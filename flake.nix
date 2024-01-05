@@ -37,10 +37,6 @@
               config.allowUnfree = true;
             };
           };
-        haswaynav =
-          final: prev: {
-            haswaynav = haswaynav.defaultPackage."${final.system}";
-          };
       } // mapModules ./overlays import;
 
 
@@ -69,7 +65,7 @@
 
                 nixpkgs = {
                   config.allowUnfree = true;
-                  overlays = builtins.attrValues self.overlays ++ [ kmonad.overlays.default ];
+                  overlays = builtins.attrValues self.overlays ++ [haswaynav.overlays.default kmonad.overlays.default ];
                 };
 
                 nix = {

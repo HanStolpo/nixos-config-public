@@ -24,7 +24,7 @@
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1663325995,
@@ -81,11 +81,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704459918,
-        "narHash": "sha256-sk/6/KuhRUDbmAL2G6y3kFQGS2fNloHu4OKMotpo2QY=",
+        "lastModified": 1704470969,
+        "narHash": "sha256-udW7UYVBN9ThC0kCMN9Kv33USzkt6zIdIxhhe7lPaMU=",
         "owner": "hanstolpo",
         "repo": "haswaynav",
-        "rev": "230454b82df6a2255b0242b877b6853e27ebb74b",
+        "rev": "f7e5e932441922b662675991fdbb11fa58b70483",
         "type": "github"
       },
       "original": {
@@ -166,7 +166,10 @@
     },
     "naersk": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "haswaynav",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1698420672,
@@ -200,10 +203,9 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1695559356,
-        "narHash": "sha256-kXZ1pUoImD9OEbPCwpTz4tHsNTr4CIyIfXb3ocuR8sI=",
-        "path": "/nix/store/dn5wzc9a8hrpml66i6kz5f3q6dr3jjmk-source",
-        "rev": "261abe8a44a7e8392598d038d2e01f7b33cf26d0",
+        "lastModified": 0,
+        "narHash": "sha256-GGMupfk/lGzPBQ/dRrcQEhiFZ0F5KPg0j5Q4Fb5coxc=",
+        "path": "/nix/store/r2bbhmlfvfpir9hp8fjs31kj13kwgwyl-source",
         "type": "path"
       },
       "original": {
@@ -244,18 +246,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-GGMupfk/lGzPBQ/dRrcQEhiFZ0F5KPg0j5Q4Fb5coxc=",
-        "path": "/nix/store/r2bbhmlfvfpir9hp8fjs31kj13kwgwyl-source",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1704295289,
         "narHash": "sha256-9WZDRfpMqCYL6g/HNWVvXF0hxdaAgwgIGeLYiOhmes8=",
         "owner": "NixOS",
@@ -276,7 +266,7 @@
         "haswaynav": "haswaynav",
         "hlissner-dotfiles": "hlissner-dotfiles",
         "kmonad": "kmonad",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable_2"
       }
     },
