@@ -247,7 +247,6 @@ in
           [ "8.8.8.8"
             "8.8.8.4"
             "192.168.1.1"
-            "/barking-ulmer.ts.net/100.100.100.100"
           ];
       };
 
@@ -471,7 +470,6 @@ in
 
     (lib.mkIf config.hanstolpo.xmonad.enable {
       services.xserver.exportConfiguration = true;
-      services.xserver.useGlamor = true;
 
       services.autorandr.enable = true;
       services.autorandr.profiles.home_desk = {

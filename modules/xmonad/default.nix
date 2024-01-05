@@ -45,7 +45,6 @@ in
       enable = true;
     };
     services.xserver = {
-      useGlamor = true;
       xkbOptions = "ctrl:nocaps";
       enable = true;
       layout = "us";

@@ -34,7 +34,7 @@ in
   swapDevices =
     [{ device = "/dev/disk/by-uuid/c00dd2af-d284-4ada-87f5-12e97f5b1afe"; }];
 
-  nix.maxJobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkDefault 8;
 
   fileSystems = {
     "/" =
@@ -101,7 +101,7 @@ in
 
   environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
-  nix.buildCores = 6;
+  nix.settings.cores = 6;
 
   boot.extraModulePackages = [ ];
 
@@ -156,7 +156,6 @@ in
   # services.xserver.dpi = 122;
   #hardware.opengl.driSupport32Bit = false;
   services.xserver.exportConfiguration = true;
-  services.xserver.useGlamor = true;
   #services.xserver.deviceSection =
   #'' Option       "TearFree" "true"
   #'';
@@ -256,11 +255,11 @@ in
 
   services.dnsmasq = {
     enable = true;
-    servers = [ "8.8.8.8" "8.8.8.4" "192.168.1.1" "192.168.100.1" "100.100.100.100" ];
-    extraConfig = ''
-      server=/picofactory/192.168.100.1
-      server=/circuithub.com.beta.tailscale.net/100.100.100.100
-    '';
+    settings.server =
+      [ "8.8.8.8"
+        "8.8.8.4"
+        "192.168.1.1"
+      ];
   };
 
   #Select internationalisation properties.

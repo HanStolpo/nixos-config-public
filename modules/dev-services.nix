@@ -46,7 +46,7 @@ in
 
       postgresql = {
         enable = true;
-        package = pkgs.postgresql_11;
+        package = pkgs.postgresql_15;
         dataDir = "/var/lib/postgresql/11";
         enableTCPIP = true;
         # still need to add login to roles
@@ -54,14 +54,6 @@ in
         # pgcli -U postgres
         # alter role "circuithub" with login;
         # alter role "handre" with login;
-        ensureUsers = [
-          {
-            name = "handre";
-            ensurePermissions = {
-              "all tables in schema public" = "all privileges";
-            };
-          }
-        ];
         authentication = pkgs.lib.mkForce
           ''
             local   all             all                                     trust

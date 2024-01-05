@@ -50,7 +50,7 @@
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                   overlays = builtins.attrValues self.overlays;
-                }) d2 tala realvnc-viewer tree-sitter tree-sitter-grammars mdsync swayJournald;
+                }) d2 tala realvnc-viewer tree-sitter mdsync swayJournald;
       };
 
       nixosModules = mapModules ./modules import;
