@@ -55,13 +55,21 @@
 
       # expose any custom packages from our overlays to make developing on them easier
       # e.g. you can `nix build ./#<custom_package_name>` to build the derivation
-      packages.x86_64-linux = {
-        inherit (import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-          overlays = builtins.attrValues self.overlays;
-        }) d2 tala realvnc-viewer tree-sitter mdsync swayJournald;
-      };
+      packages.x86_64-linux =
+        let
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+            overlays = builtins.attrValues self.overlays;
+          };
+        in
+        {
+          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald;
+          inherit (pkgs.tree-sitter-grammars) tree-sitter-d2;
+        };
+
+      # check that our custom packages can still be built
+      checks.x86_64-linux = packages.x86_64-linux;
 
       # my configurations are broken up into modules which the different hosts enable / configure as desired.
       nixosModules = mapImports ./modules import;
