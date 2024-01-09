@@ -1,23 +1,27 @@
 ARRANGE: ROW
 ALIGN: TOP
 ORDER:
-  - DP-2
+  - '!^LG Display 0x04D4.*'
+  - '!^Dell Inc. DELL P2715Q.*'
   - eDP-1
 AUTO_SCALE: TRUE
 SCALE:
-  - NAME_DESC: Dell Inc. DELL P2715Q
+  - NAME_DESC: '!^Dell Inc. DELL P2715Q.*'
     SCALE: 1.5 # 1.31967211
+  - NAME_DESC: '!^LG Display 0x04D4.*'
+    SCALE: auto
   - NAME_DESC: eDP-1
     SCALE: 1.0 #SCALE: 1.17213118
   - NAME_DESC: ASUSTek COMPUTER INC
     SCALE: 1.0
 MODE:
-    - NAME_DESC: Dell Inc. DELL P2715Q
+    - NAME_DESC: '!^Dell Inc. DELL P2715Q.*'
       WIDTH: 3840
       HEIGHT: 2160
-      HZ: 60
+    - NAME_DESC: '!^LG Display 0x04D4.*'
+      WIDTH: 3840
+      HEIGHT: 2160
     - NAME_DESC: eDP-1
       WIDTH: 1920
       HEIGHT: 1080
-      HZ: 60
 LOG_THRESHOLD: INFO
