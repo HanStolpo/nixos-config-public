@@ -74,8 +74,9 @@
       # my configurations are broken up into modules which the different hosts enable / configure as desired.
       nixosModules = mapImports ./modules import;
 
-      # The configurations for each one of my hosts
-      nixosConfigurations =
+      # the nixos system configurations that can be extended
+      # from another flake
+      nixosSystems =
         let
           hostCommonSetup = { pkgs, ... }: {
             # Let 'nixos-version --json' know about the Git revision of this flake.
@@ -114,8 +115,7 @@
               '';
             };
           };
-          mkHost = host:
-            nixpkgs.lib.nixosSystem {
+          mkHost = host: {
               system = "x86_64-linux";
 
               modules =
@@ -129,6 +129,11 @@
             };
         in
         mapImports ./hosts mkHost;
+
+
+      # The configurations for each one of my hosts
+      nixosConfigurations =
+        nixpkgs.lib.mapAttrs (_: s: nixpkgs.lib.nixosSystem s) nixosSystems;
 
     };
 }
