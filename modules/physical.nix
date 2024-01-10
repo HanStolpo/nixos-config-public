@@ -141,6 +141,7 @@ in
 
     # allow udisks2 to work for no privileged
     # mount using `udisksctl mount --block-device /dev/sda1`
+    services.udisks2.enable = true;
     security.polkit.enable = true;
     security.polkit.extraConfig =
       ''
