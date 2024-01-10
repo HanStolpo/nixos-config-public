@@ -1,0 +1,6 @@
+[user]
+	email = HanStolpo@gmail.com
+	name = Handré Stolp
+	signingKey = 1814F5E3689A67C0!
+[commit]
+	gpgsign = true
