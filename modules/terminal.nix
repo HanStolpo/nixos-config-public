@@ -126,6 +126,8 @@ in
       sops # Mozilla secret OPerationS
       kubernetes-helm
       fluxcd
+
+      trashy # use trash command instead of rm to avoid accidental deletions
     ];
 
     security.pki = {
