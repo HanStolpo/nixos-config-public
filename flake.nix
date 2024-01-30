@@ -116,17 +116,17 @@
             };
           };
           mkHost = host: {
-              system = "x86_64-linux";
+            system = "x86_64-linux";
 
-              modules =
-                builtins.attrValues self.nixosModules ++
-                [
-                  kmonad.nixosModules.default
+            modules =
+              builtins.attrValues self.nixosModules ++
+              [
+                kmonad.nixosModules.default
 
-                  hostCommonSetup
-                  (import host)
-                ];
-            };
+                hostCommonSetup
+                (import host)
+              ];
+          };
         in
         mapImports ./hosts mkHost;
 
