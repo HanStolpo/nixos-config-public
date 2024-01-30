@@ -94,6 +94,10 @@ in
       pathToWaybarConfigFile = mkOption {
         type = types.str;
       };
+      autoLoginUser = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
     };
   };
   config = mkIf cfg.enable {
@@ -185,9 +189,16 @@ in
 
     services.greetd = {
       enable = true;
+      restart = !(builtins.isNull cfg.autoLoginUser);
       settings = {
         terminal = {
           vt = "7";
+        };
+
+        initial_session = lib.mkIf (!(builtins.isNull cfg.autoLoginUser)) {
+          user = cfg.autoLoginUser;
+          command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway";
+
         };
         default_session =
           let
@@ -202,10 +213,11 @@ in
               '';
             };
           in
-          {
-            # https://github.com/rharish101/ReGreet/issues/34#issue-1808828810
-            command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway --config ${sway_greeter_config}";
-          };
+          lib.mkIf (builtins.isNull cfg.autoLoginUser)
+            {
+              # https://github.com/rharish101/ReGreet/issues/34#issue-1808828810
+              command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway --config ${sway_greeter_config}";
+            };
       };
     };
   };
