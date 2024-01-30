@@ -41,6 +41,14 @@ in
           desktop.enable = true;
           physical.enable = true;
           dev-services.enable = false;
+
+          kmonad = {
+            enable = true;
+            keyboards = {
+              laptop-keyboard = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+              ms-ergonomic-keyboard = "/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";
+            };
+          };
         };
 
         services.usbmuxd.enable = true;
@@ -75,7 +83,6 @@ in
         environment.variables."SSL_CERT_FILE" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
         environment.systemPackages = with pkgs; [
-          kmonad
           wpa_supplicant_gui
           blueman
           arc-theme
@@ -351,138 +358,6 @@ in
 
         ];
 
-        services.kmonad = {
-          enable = true;
-
-          # extraArgs = ["--log-level" "debug"];
-
-          keyboards =
-            let
-              commonKeyboard = {
-                defcfg = {
-                  enable = true;
-                  compose.key = null;
-                  fallthrough = true;
-                  allowCommands = false;
-                };
-
-                config = ''
-
-                (defsrc
-                  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-                  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-                  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-                  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-                  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-                  lctl lmet lalt           spc            ralt cmp rctl
-                )
-
-                (defalias
-                  inSymL (layer-toggle symbols_l)   ;; perform next key press in symbol layer
-                  syl (tap-hold-next-release 250 ; @inSymL)  ;; semi colon on tap, hold for symbol layer
-
-                  inSymR (layer-toggle symbols_r)   ;; perform next key press in symbol layer
-                  syr (tap-hold-next-release 250 a @inSymR)  ;; semi colon on tap, hold for symbol layer
-
-                  fctl (tap-hold-next-release 250 f lctl)  ;; f on tap ctrl on hold
-
-                  jctl (tap-hold-next-release 250 j rctl)  ;; j on tap ctrl on hold
-
-                  dsft (tap-hold-next-release 250 d lsft)  ;; d on tap shift on hold
-
-                  ksft (tap-hold-next-release 250 k rsft)  ;; k on tap shift on hold
-
-                  uscr (around sft -) ;; underscore
-                )
-
-                (deflayer qwerty
-                  _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-                bspc @syr   _  @dsft @fctl _    _  @jctl @ksft _  @syl   _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _              _             ret  lmet  _
-                )
-
-                (deflayer symbols_l
-                  _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    2    3    4    5    _    _    _    _    _    _    _    _
-                  _    !    @    {    }    |    _    _    _    _    _    _    _    _
-                  _    #    $   \(   \)    `    _    _    _    _    _    _    _
-                  _    %    ^    [    ]    ~    _    _    _    _    _    _
-                  _    _    _             esc             _    _    _
-                )
-
-                (deflayer symbols_r
-                  _    _    _    _    _    _   _    _    _    _    _    _    _
-                  _    _    _    _    _    _   _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _   _    =    -   @uscr +    _    _    _
-                  _    _    _    _    _    _ left  down  up  rght  _    _    _
-                  _    _    _    _    _    _   _    _    _    _    _    _
-                  _    _    _             esc            _    _    _
-                )
-
-                '';
-              };
-              commonKeyboard2 = {
-                defcfg = {
-                  enable = true;
-                  compose.key = null;
-                  fallthrough = true;
-                  allowCommands = false;
-                };
-
-                config = ''
-
-                (defsrc
-                  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-                  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-                  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-                  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-                  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-                  lctl lmet lalt           spc            ralt cmp rctl
-                )
-
-                (defalias
-                  inSym (layer-toggle symbols)   ;; perform next key press in symbol layer
-
-                  uscr (around sft -) ;; underscore
-                )
-
-                (deflayer qwerty
-                  _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-                bspc   _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _  @inSym                _          @inSym  ralt  _
-                )
-
-                (deflayer symbols
-                  _    _    _    _    _    _   _    _    _    _    _    _    _
-                  _    _    2    3    4    5   _    _    _    _    _    _    _    _
-                  _    !    @    {    }    |   _    =    -   @uscr +    _    _    _
-                  _    #    $   \(   \)    ` left  down  up  rght  _    _    _
-                  _    %    ^    [    ]    ~   _    _    _    _    _    _
-                  _    _    _             esc            _    _    _
-                )
-
-                '';
-              };
-
-            in
-            {
-              laptop-keyboard = {
-                device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-              } // commonKeyboard2;
-              ms-ergonomic-keyboard = {
-                device = "/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";
-              } // commonKeyboard2;
-              # zsa_keyboard = {
-              #    device = "/dev/input/by-id/usb-ZSA_Technology_Labs_Moonlander_Mark_I-event-kbd";
-              # } // commonKeyboard;
-            };
-        };
 
         # The NixOS release to be compatible with for stateful data such as databases.
         system.stateVersion = "22.05";
