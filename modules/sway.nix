@@ -87,12 +87,15 @@ in
       };
       pathToSwayConfigFile = mkOption {
         type = types.str;
+        default = "${../dotfiles/config/sway/config}";
       };
       pathToWayDisplaysConfigFile = mkOption {
         type = types.str;
+        default = "${../dotfiles/config/way-displays/cfg.yaml}";
       };
       pathToWaybarConfigFile = mkOption {
         type = types.str;
+        default = "${../dotfiles/config/waybar/config}";
       };
       autoLoginUser = mkOption {
         type = types.nullOr types.str;
