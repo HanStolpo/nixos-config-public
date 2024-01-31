@@ -55,6 +55,7 @@ in
                 "docker"
                 "pipewire"
                 "usbmux"
+                "disk"
               ];
               #shell = "${pkgs.zsh}/bin/fish";
             };
