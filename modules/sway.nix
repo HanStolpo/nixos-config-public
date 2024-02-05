@@ -125,9 +125,17 @@ in
       qt5.qtwayland # support for qt applications on wayland
 
       # theming
-      source-code-pro # font used by fuzzel
       papirus-icon-theme # icon package to use with fuzzel
       colloid-gtk-theme # the GTK desktop theme used
+    ];
+
+    # make the fonts accessbile in /run/current/sw/share/X11/fonts
+    # so that dependant applications can find it easier
+    fonts.fontDir.enable = true;
+
+    fonts.packages = with pkgs;[
+      source-code-pro # font used by fuzzel
+      nerdfonts # font used for icons in waybar
     ];
 
     programs.light.enable = true;
