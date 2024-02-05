@@ -106,28 +106,28 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       haswaynav # customize navigation in sway
-
       alacritty # gpu accelerated terminal
       swayCustom
       wayland
       glib # gsettings
       gsettings-desktop-schemas
-      dracula-theme # gtk theme
-      colloid-gtk-theme
-      gnome3.adwaita-icon-theme # default gnome cursors
-      swaylock
-      swayidle
+      swaylock # lock screen
+      swayidle # take actions like locking the screen when idle
       sway-contrib.grimshot # screenshot functionality
-      swayimg
+      grim # for screenshots
+      swayimg # light weight image viewer that integrates with sway
       wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
       fuzzel # fuzzy application launcher for sway
       mako # notification system developed by swaywm maintainer
       way-displays # autorandr like management of display outputs connected to wayland compositor
-      waybar #
-      zathura # document viewer
-      nomacs # image viewer
-      xdg-desktop-portal-wlr
-      qt5.qtwayland
+      waybar # toolbar
+      xdg-desktop-portal-wlr # desktop portal functionality for wlroots based systems
+      qt5.qtwayland # support for qt applications on wayland
+
+      # theming
+      source-code-pro # font used by fuzzel
+      papirus-icon-theme # icon package to use with fuzzel
+      colloid-gtk-theme # the GTK desktop theme used
     ];
 
     programs.light.enable = true;
@@ -144,10 +144,7 @@ in
       enable = true;
       wlr.enable = true;
       wlr.settings.screencast = {
-        #output_name = "HDMI-A-1";
         max_fps = 30;
-        #exec_before = "disable_notifications.sh";
-        #exec_after = "enable_notifications.sh";
         chooser_type = "simple";
         chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
       };
@@ -169,7 +166,7 @@ in
     };
 
     programs.regreet = {
-      enable = true;
+      enable = true; # configures default session in greetd
       settings = {
         GTK = {
           # Whether to use the dark theme
@@ -203,24 +200,6 @@ in
           command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway";
 
         };
-        default_session =
-          let
-            sway_greeter_config = pkgs.writeTextFile {
-              name = "sway_greeter_config";
-              text = ''
-                include /etc/sway/config.d/*
-                exec "way-displays 2>&1 | logger -t way-displays"
-                exec gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
-                exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
-                exec swayidle -w timeout 120 'systemctl suspend'
-              '';
-            };
-          in
-          lib.mkIf (builtins.isNull cfg.autoLoginUser)
-            {
-              # https://github.com/rharish101/ReGreet/issues/34#issue-1808828810
-              command = "${pkgs.dbus}/bin/dbus-run-session ${swayCustom}/bin/sway --config ${sway_greeter_config}";
-            };
       };
     };
   };

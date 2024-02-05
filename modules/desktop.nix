@@ -81,6 +81,9 @@ in
 
       gnvim # minimal gui front end for nvim
 
+
+      nomacs # image viewer
+
       d2 # text based diagram drawing program
       tala # layout engine for D2
       mdsync # render and live reload markdown
