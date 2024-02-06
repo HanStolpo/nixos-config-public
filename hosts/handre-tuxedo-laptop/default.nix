@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 let
-  kernel = pkgs.linuxPackages;
+  kernel = config.boot.zfs.package.latestCompatibleLinuxPackages; #pkgs.linuxPackages;
   enableSSH = false;
   dpi = 122;
   laptopDpi = 96;
