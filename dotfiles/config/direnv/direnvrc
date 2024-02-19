@@ -1,0 +1,10 @@
+
+# enabling default nix-direnv support writes a config file to /etc/direnv/direnvrc
+# which does the required direnv setup and loads the user supplied ~/.config/direnv/direnvc
+# but direnv never loads /etc/direnv/direnvrc so we hack around it
+if [[ "$source_etc_direnvrc" != "skip" ]]; then
+  source_etc_direnvrc="skip"
+  source /etc/direnv/direnvrc
+  unset source_etc_direnvrc
+fi;
+
