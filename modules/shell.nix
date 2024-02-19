@@ -108,8 +108,6 @@ in
         alias level="echo $SHLVL"
 
 
-        # setup direnv
-        eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
 
 
         ${base16ShellInit}
@@ -169,9 +167,6 @@ in
       interactiveShellInit = ''
         ${chShellInit}
 
-        # setup direnv
-        eval "$(${pkgs.direnv}/bin/direnv hook bash)"
-
         ${base16ShellInit}
       '';
     };
@@ -206,8 +201,6 @@ in
             fish_vi_key_bindings --no-erase insert
         end
 
-        # setup direnv
-        eval "$(${pkgs.direnv}/bin/direnv hook fish)"
       '';
     };
   };
