@@ -47,7 +47,7 @@ in
       postgresql = {
         enable = true;
         package = pkgs.postgresql_15;
-        dataDir = "/var/lib/postgresql/11";
+        dataDir = "/var/lib/postgresql/15";
         enableTCPIP = true;
         # still need to add login to roles
         # https://stackoverflow.com/questions/35254786/postgresql-role-is-not-permitted-to-log-in
