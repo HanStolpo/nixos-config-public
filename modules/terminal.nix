@@ -77,7 +77,6 @@ in
       perl # The standard implementation of the Perl 5 programmming language
       #heroku # Everything you need to get started using Heroku
       nodePackages.node2nix # generate nix from node packages
-      direnv # automatically setup environment variables when entering a directory
       gdb # debugger
       # json
       jq

@@ -63,10 +63,12 @@ in
       powerline-go # custom shell prompt shared by bash and zsh
       termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
-      direnv # automatically setup environment variables when entering a directory
-      nix-direnv
       starship
     ];
+
+    # nix-direnv usage is supported by default now
+    # https://github.com/nix-community/nix-direnv?tab=readme-ov-file#via-system-configuration-on-nixos
+    programs.direnv.enable = true;
 
     # nix direnv config https://github.com/nix-community/nix-direnv
     # nix options for derivations to persist garbage collection
@@ -74,9 +76,6 @@ in
       keep-outputs = true
       keep-derivations = true
     '';
-    environment.pathsToLink = [
-      "/share/nix-direnv"
-    ];
 
     users = mkMerge
       [
