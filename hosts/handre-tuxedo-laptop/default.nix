@@ -161,33 +161,7 @@ in
               device = "/dev/disk/by-uuid/C7A9-3E53";
               fsType = "vfat";
             };
-        } //
-        builtins.mapAttrs
-          (
-            k: _: {
-              mountPoint = "/mnt/network/${k}";
-              device = "//ucamco-server/${k}";
-              fsType = "cifs";
-              noCheck = true;
-              neededForBoot = false;
-              options = [
-                "noauto"
-                "rw"
-                "user"
-                "users"
-                "credentials=/home/handre/dev/ch-stuff/ucam-credentials-2"
-                "setuids"
-                "uid=1000"
-                "gid=100"
-              ];
-            }
-          )
-          {
-            "I8export" = { };
-            "I8hotfolder" = { };
-            "ch-i8-uploaded" = { };
-            "ch-temp" = { };
-          };
+        };
 
         boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/920eb5ec-e62f-415c-aefd-26a9cc7f3762";
 
