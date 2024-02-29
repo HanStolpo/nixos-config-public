@@ -24,14 +24,14 @@ in
                 # https://github.com/NixOS/nixpkgs/blob/e0a42267f73ea52adc061a64650fddc59906fc99/nixos/modules/programs/neovim.nix#L161
               in
               [{
-                name = "etc/parser/${l}.so";
+                name = "parser/${l}.so";
                 value = {
                   source = "${grammar}/parser";
                 };
               }
                 # https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
                 {
-                  name = "etc/queries/${l}";
+                  name = "queries/${l}";
                   value = {
                     source = "${grammar}/queries";
                   };
