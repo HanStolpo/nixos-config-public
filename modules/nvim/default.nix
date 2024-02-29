@@ -58,7 +58,7 @@ in
             nerdcommenter
             lualine-nvim
             barbar-nvim
-            base16-nvim
+            # base16-nvim  # this seems to be broken at the moment, no highlighting, so disabling it.
             nvim-web-devicons
             auto-session
             mini-nvim

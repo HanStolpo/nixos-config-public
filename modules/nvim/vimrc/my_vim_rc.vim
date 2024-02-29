@@ -206,6 +206,7 @@ vim.filetype.add({
   },
 })
 
+
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.d2 = {
   install_info = {
@@ -248,8 +249,10 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = { enable = true },
   textobjects = { enable = true },
 }
+--]]
 
-vim.cmd[[colorscheme base16-gruvbox-light-hard]]
+
+-- vim.cmd[[colorscheme base16-gruvbox-light-hard]]
 
 require('telescope').setup{
 defaults = {
