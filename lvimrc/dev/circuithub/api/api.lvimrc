@@ -1,7 +1,0 @@
-let g:ghcmod_hlint_options = [ '-h .hlint.yaml' ]
-let g:ale_haskell_hlint_options = '-h .hlint.yaml'
-"colorscheme base16-gruvbox-dark-pale
-colorscheme base16-gruvbox-light-soft
-"au BufWritePre *.hs :Autoformat
-
-
