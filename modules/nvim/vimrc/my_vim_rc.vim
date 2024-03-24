@@ -251,8 +251,8 @@ require'nvim-treesitter.configs'.setup {
 }
 --]]
 
-
--- vim.cmd[[colorscheme base16-gruvbox-light-hard]]
+vim.opt.termguicolors = true
+vim.cmd[[colorscheme base16-gruvbox-dark-hard]]
 
 require('telescope').setup{
 defaults = {
