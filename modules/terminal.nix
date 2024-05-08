@@ -50,7 +50,7 @@ in
       inotify-tools # inotifywait to block awaiting changes on files in shell scripts
       tree # print directory trees
       testdisk # rescue the disk or undelete files
-      vault
+      pkgs-unstable.vault
       graphviz # draw graphs for networks of nodes
       nmap #  A free and open source utility for network discovery and security auditing
       tcpdump # Network sniffer
