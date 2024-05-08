@@ -40,7 +40,7 @@ in
           terminal.enable = true;
           desktop.enable = true;
           physical.enable = true;
-          dev-services.enable = true;
+          dev-services.enable = false;
 
           kmonad = {
             enable = true;
