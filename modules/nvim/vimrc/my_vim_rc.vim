@@ -461,7 +461,13 @@ local servers = {
   clangd = {
   },
   hls = {
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
     cmd = { "haskell-language-server", "--lsp" },
+    haskell = {
+      cabalFormattingProvider = "cabalfmt",
+      formattingProvider = "fourmolu",
+      sessionLoading = "multiComponent",
+    }
     -- root_dir = require('lspconfig.util').root_pattern('cabal.project'),
   },
   elmls = {
