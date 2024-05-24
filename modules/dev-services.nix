@@ -62,23 +62,6 @@ in
           '';
       };
 
-      samba = {
-        enable = true;
-        configText = ''
-          [global]
-          map to guest = Bad User
-          guest ok = true
-          guest only = true
-          [vagrant]
-          path = /home/handre/temp
-          force user = root
-
-          read only = false
-          create mask = 0644
-          directory mask = 0755
-          hosts allow = 192.168.122.30
-        '';
-      };
     };
 
   };
