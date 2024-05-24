@@ -92,7 +92,7 @@ bindsym $mod+Space exec $menu
 # Start control panels
 bindsym $mod+Shift+d exec iwgtk; exec pavucontrol; exec blueman-manager
 
-bindsym $mod+c exec grimshot --notify save area
+bindsym $mod+c exec grimshot --notify save area $HOME/screenshots/$(date +'%Y-%M-%d_%H:%M:%S.png')
 
 # Kill focused window
 bindsym $mod+Backspace kill
