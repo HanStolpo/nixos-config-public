@@ -6,10 +6,10 @@
 }:
 
 let
-  version = "0.1.4";
+  version = "0.6.5";
   os = "linux";
   platform = "amd64";
-  sha256 = "06n8l2xlfpfyl1fbkza0njymcfahq5q86wdr285jd7md6dbizysc";
+  sha256 = "0d57h4r06q5jsl8mwb02zpjkdwdj12gfrivqafv3fcr6mwcjjw0p";
   extractDir = "d2-v${version}";
 in
 
