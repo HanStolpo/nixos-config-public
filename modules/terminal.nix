@@ -146,7 +146,7 @@ in
 
     programs.gnupg.agent = {
       enable = true;
-      pinentryPackage = "qt";
+      pinentryPackage = pkgs.pinentry-qt;
       enableSSHSupport = true;
       enableExtraSocket = true;
       enableBrowserSocket = true;
