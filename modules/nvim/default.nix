@@ -9,36 +9,36 @@ in
     viAlias = true;
     withPython3 = true;
 
-    runtime = with builtins;
-      listToAttrs (
-        concatMap
-          (tsName:
-            if tsName == "tree-sitter-nix" || tsName == "tree-sitter-bash"
-            then
-              [ ]
-            else
-              let
-                l = lib.strings.removePrefix "tree-sitter-" tsName;
-                grammar = neovimPkgs.tree-sitter-grammars."${tsName}";
-                # Only directories under 'etc' are added to the runtime path this is probably a mistake but oh well
-                # https://github.com/NixOS/nixpkgs/blob/e0a42267f73ea52adc061a64650fddc59906fc99/nixos/modules/programs/neovim.nix#L161
-              in
-              [{
-                name = "parser/${l}.so";
-                value = {
-                  source = "${grammar}/parser";
-                };
-              }
-                # https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
-                {
-                  name = "queries/${l}";
-                  value = {
-                    source = "${grammar}/queries";
-                  };
-                }]
-          )
-          (filter (lib.strings.hasPrefix "tree-sitter-") (attrNames neovimPkgs.tree-sitter-grammars))
-      );
+    # runtime = with builtins;
+    #   listToAttrs (
+    #     concatMap
+    #       (tsName:
+    #         if tsName == "tree-sitter-nix" || tsName == "tree-sitter-bash"
+    #         then
+    #           [ ]
+    #         else
+    #           let
+    #             l = lib.strings.removePrefix "tree-sitter-" tsName;
+    #             grammar = neovimPkgs.tree-sitter-grammars."${tsName}";
+    #             # Only directories under 'etc' are added to the runtime path this is probably a mistake but oh well
+    #             # https://github.com/NixOS/nixpkgs/blob/e0a42267f73ea52adc061a64650fddc59906fc99/nixos/modules/programs/neovim.nix#L161
+    #           in
+    #           [{
+    #             name = "parser/${l}.so";
+    #             value = {
+    #               source = "${grammar}/parser";
+    #             };
+    #           }
+    #             # https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
+    #             {
+    #               name = "queries/${l}";
+    #               value = {
+    #                 source = "${grammar}/queries";
+    #               };
+    #             }]
+    #       )
+    #       (filter (lib.strings.hasPrefix "tree-sitter-") (attrNames neovimPkgs.tree-sitter-grammars))
+    #   );
 
     configure =
       let knownPlugins = neovimPkgs.vimPlugins // pkgs.callPackage ./plugins.nix { };
