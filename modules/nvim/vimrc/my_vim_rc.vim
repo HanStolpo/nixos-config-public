@@ -466,8 +466,10 @@ local servers = {
     haskell = {
       cabalFormattingProvider = "cabalfmt",
       formattingProvider = "fourmolu",
+      checkParents = "CheckOnSave",
+      maxCompletions = 40,
       -- this seems to work less well
-      -- sessionLoading = "multiComponent",
+      sessionLoading = "multiComponent",
     }
     -- root_dir = require('lspconfig.util').root_pattern('cabal.project'),
   },
