@@ -484,6 +484,8 @@ local servers = {
   },
   rust_analyzer = {
   },
+  tsserver = {
+  },
 }
 
 for lsp, cfg in pairs(servers) do
