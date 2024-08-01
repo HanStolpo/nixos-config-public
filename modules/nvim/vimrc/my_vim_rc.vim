@@ -462,7 +462,7 @@ local servers = {
   },
   hls = {
     filetypes = { 'haskell', 'lhaskell', 'cabal' },
-    cmd = { "haskell-language-server", "--lsp" },
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
     haskell = {
       cabalFormattingProvider = "cabalfmt",
       formattingProvider = "fourmolu",
