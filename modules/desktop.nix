@@ -57,8 +57,8 @@ in
       # # use 'drop-cli' instead of 'dropbox'. Both have an executable called 'dropbox' so if you have both
       # # its unclear which one will end up in '/run/current-system/sw/bin'. 'dropbox-cli' seems to work better
       # # and is more up to date, 'dropbox' failed to log in. Start the daemon by doing 'dropbox start'.
-      # pkgs-unstable.dropbox-cli
-      pkgs-unstable.dropbox
+      pkgs-unstable.dropbox-cli
+      #pkgs-unstable.dropbox
 
       #EDA
       #kicad # Free Software EDA Suite
