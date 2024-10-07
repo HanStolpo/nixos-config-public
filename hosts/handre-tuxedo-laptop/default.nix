@@ -104,7 +104,7 @@ in
           libvirt
           virt-manager
           #jitsi-meet-electron
-          signal-desktop
+          pkgs-unstable.signal-desktop
           pavucontrol
           xournalpp # note taking software with PDF annotation support
           wdisplays
