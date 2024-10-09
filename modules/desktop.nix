@@ -45,7 +45,7 @@ in
 
       # browsers
       firefox
-      pkgs-unstable.google-chrome
+      google-chrome
       firefox-devedition-bin
 
       # chat clients
@@ -93,7 +93,7 @@ in
     nixpkgs.config = {
       packageOverrides = super:
         {
-          google-chrome = super.google-chrome.override { channel = "stable"; };
+          #google-chrome = super.google-chrome.override { channel = "stable"; };
         };
     };
 
