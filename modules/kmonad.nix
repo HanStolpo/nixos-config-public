@@ -37,7 +37,7 @@ in
       keyboards =
         let
           keyboardLayout = swapLMetFn: 
-            let fn = if swapLMetFn then "cmp" else "fn";
+            let fn = if swapLMetFn then "lmet" else "fn";
                 lmet = if swapLMetFn then "fn" else "lmet";
             in
             {
@@ -57,7 +57,7 @@ in
                   caps a    s    d    f    g    h    j    k    l    ;    '    ret
                   lsft z    x    c    v    b    n    m    ,    .    /    rsft
                   lctl lmet lalt           spc            ralt cmp rctl
-                  cmp
+                  fn
                 )
 
                 (defalias
