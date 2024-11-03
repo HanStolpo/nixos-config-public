@@ -12,7 +12,14 @@ in
       };
 
       keyboards = mkOption {
-        type = types.attrsOf types.str;
+        type =
+          types.attrsOf
+            (types.either types.str (types.submodule {
+              options = {
+                device = mkOption { type = types.str; };
+                swapLMetFn = mkOption { type = types.bool; default = false; };
+              };
+            }));
       };
     };
   };
@@ -29,7 +36,11 @@ in
 
       keyboards =
         let
-          keyboardLayout = {
+          keyboardLayout = swapLMetFn: 
+            let fn = if swapLMetFn then "lmet" else "fn";
+                lmet = if swapLMetFn then "fn" else "lmet";
+            in
+            {
             defcfg = {
               enable = true;
               compose.key = null;
@@ -46,6 +57,7 @@ in
                   caps a    s    d    f    g    h    j    k    l    ;    '    ret
                   lsft z    x    c    v    b    n    m    ,    .    /    rsft
                   lctl lmet lalt           spc            ralt cmp rctl
+                  fn
                 )
 
                 (defalias
@@ -60,7 +72,8 @@ in
                   _    _    _    _    _    _    _    _    _    _    _    _    _    _
                 bspc   _    _    _    _    _    _    _    _    _    _    _    _
                   _    _    _    _    _    _    _    _    _    _    _    _
-                  _    _  @inSym                _          @inSym  ralt  _
+                  _ ${lmet} @inSym              _          @inSym  ralt  _
+                  ${fn}
                 )
 
                 (deflayer symbols
@@ -70,12 +83,18 @@ in
                   _    #    $   \(   \)    ` left  down  up  rght  _    _    _
                   _    %    ^    [    ]    ~   _    _    _    _    _    _
                   _    _    _             esc            _    _    _
+                  _
                 )
 
                 '';
           };
 
-          mkService = k: device: { inherit device; } // keyboardLayout;
+          mkService = k: cfg:
+            if builtins.typeOf cfg == "string"
+              then
+                { device = cfg; } // (keyboardLayout false)
+              else
+                { inherit (cfg) device; } // (keyboardLayout cfg.swapLMetFn);
 
         in
         mapAttrs mkService cfg.keyboards;

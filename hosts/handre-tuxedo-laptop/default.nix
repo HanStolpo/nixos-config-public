@@ -47,7 +47,10 @@ in
             keyboards = {
               laptop-keyboard = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
               ms-ergonomic-keyboard = "/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";
-              perrix = "/dev/input/by-id/usb-MOSART_Semi._PERIDUO-606-event-kbd";
+              perrix = {
+                device = "/dev/input/by-id/usb-MOSART_Semi._PERIDUO-606-event-kbd";
+                swapLMetFn = true;
+              };
 
             };
           };
