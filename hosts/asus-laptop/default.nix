@@ -69,9 +69,9 @@ in
           gtk-engine-murrine
           gtk_engines
           hicolor-icon-theme
-          gnome3.adwaita-icon-theme
+          adwaita-icon-theme
           papirus-icon-theme
-          gnome3.gnome-boxes
+          gnome-boxes
           spice
           breeze-icons
           wally-cli
@@ -187,10 +187,10 @@ in
         services.blueman.enable = true;
 
 
-        hardware.opengl = {
+        hardware.graphics = {
           enable = true;
-          driSupport = true;
-          driSupport32Bit = true;
+          #driSupport = true;
+          enable32Bit = true;
           # I guess for video acceleration support
           extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
           extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
@@ -700,8 +700,8 @@ in
 #     gtk-engine-murrine
 #     gtk_engines
 #     hicolor-icon-theme
-#     gnome3.adwaita-icon-theme
-#     gnome3.gnome-boxes
+#     gnome.adwaita-icon-theme
+#     gnome.gnome-boxes
 #     spice
 #     #win-spice
 #     breeze-icons

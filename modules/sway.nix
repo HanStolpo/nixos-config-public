@@ -178,19 +178,19 @@ in
       settings = {
         GTK = {
           # Whether to use the dark theme
-          application_prefer_dark_theme = true;
+          #application_prefer_dark_theme = true;
 
           # Cursor theme name
-          cursor_theme_name = "Adwaita";
+          #cursor_theme_name = "Adwaita";
 
           # Font name and size
-          font_name = "SourceCodePro Regular 11";
+          # font_name = "SourceCodePro Regular 11";
 
           # Icon theme name
-          icon_theme_name = "Papirus";
+          #icon_theme_name = "Papirus";
 
           # GTK theme name
-          theme_name = "Colloid-Dark";
+          #theme_name = "Colloid-Dark";
         };
       };
     };

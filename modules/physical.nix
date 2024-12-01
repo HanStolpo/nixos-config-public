@@ -41,7 +41,7 @@ in
       nfs-utils # This package contains various Linux user-space Network File System (NFS) utilities, including RPC `mount' and `nfs' daemons.
 
       mesa # An open source implementation of OpenGL
-      mesa_drivers # An open source implementation of OpenGL
+      mesa.drivers # An open source implementation of OpenGL
       # glmark2 # OpenGL (ES) 2.0 benchmark
       glxinfo # info about opengl implementation
       libinput # Handles input devices in Wayland compositors and provides a generic X.Org input drivelibinputr

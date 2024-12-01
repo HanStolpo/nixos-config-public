@@ -152,7 +152,7 @@ in
       };
     };
     programs.bash = {
-      enableCompletion = true;
+      completion.enable = true;
       promptInit = ''
         function _update_ps1() {
             PS1="$(${pkgs.powerline-go}/bin/powerline-go -error $? \

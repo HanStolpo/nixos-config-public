@@ -39,8 +39,8 @@ in
       ffmpeg-full # A complete, cross-platform solution to record, convert and stream audio and video
       remmina # remote desktop client
       #realvnc-viewer
-      #gnome3.nautilus # the gnome file manager
-      cinnamon.nemo-with-extensions # file manager
+      #gnome.nautilus # the gnome file manager
+      nemo-with-extensions # file manager
       viewnior # light weight image viewer
 
       # browsers

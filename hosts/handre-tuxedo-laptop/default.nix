@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 let
-  kernel = config.boot.zfs.package.latestCompatibleLinuxPackages; #pkgs.linuxPackages;
+  kernel = pkgs.linuxPackages;
   enableSSH = false;
   dpi = 122;
   laptopDpi = 96;
@@ -94,9 +94,9 @@ in
           gtk-engine-murrine
           gtk_engines
           hicolor-icon-theme
-          gnome3.adwaita-icon-theme
+          pkgs.adwaita-icon-theme
           papirus-icon-theme
-          gnome3.gnome-boxes
+          gnome-boxes
           spice
           breeze-icons
           wally-cli
@@ -143,7 +143,7 @@ in
           "radeon.cik_support=0"
           "amdgpu.cik_support=1"
         ];
-        hardware.tuxedo-keyboard.enable = true;
+        hardware.tuxedo-drivers.enable = true;
 
         # https://nixos.wiki/wiki/AMD_GPU
         systemd.tmpfiles.rules = [
@@ -181,17 +181,16 @@ in
         services.blueman.enable = true;
 
 
-        hardware.opengl = {
+        hardware.graphics = {
           enable = true;
-          driSupport = true;
-          driSupport32Bit = true;
+          enable32Bit = true;
           # I guess for video acceleration support
           extraPackages32 = with pkgs.pkgsi686Linux; [ libva amdvlk ];
           extraPackages = with pkgs;
             [
               libva
-              rocm-opencl-icd
-              rocm-opencl-runtime
+              #rocmPackages.rpp-opencl
+              #rocm-opencl-runtime
               amdvlk
             ];
         };
@@ -274,7 +273,6 @@ in
         fonts.fontconfig.antialias = true;
         fonts.fontconfig.hinting.enable = true;
 
-        sound.enable = true;
 
         services.pipewire = {
           enable = true;
