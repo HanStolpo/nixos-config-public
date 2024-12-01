@@ -64,13 +64,15 @@ focus_follows_mouse yes
 focus_wrapping no
 
 input type:pointer {
+    accel_profile flat
+    pointer_accel  -0.15
 }
 
 input type:touchpad {
     tap enabled
-    accel_profile flat
+    accel_profile adaptive
     # set mouse sensitivity (between -1 and 1)
-    pointer_accel 0.25
+    pointer_accel 0.0
     natural_scroll disable
 }
 
@@ -177,6 +179,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
 bindsym $mod+b splith
+bindsym $mod+u splith
 bindsym $mod+v splitv
 
 # Switch the current container between different layout styles

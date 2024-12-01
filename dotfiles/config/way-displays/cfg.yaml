@@ -1,5 +1,5 @@
-ARRANGE: ROW
-ALIGN: TOP
+ARRANGE: MIDDLE
+ALIGN: COLUMN
 ORDER:
   - '!^LG Display 0x04D4.*'
   - '!^Dell Inc. DELL P2715Q.*'
