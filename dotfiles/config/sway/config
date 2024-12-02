@@ -65,7 +65,7 @@ focus_wrapping no
 
 input type:pointer {
     accel_profile flat
-    pointer_accel  -0.15
+    pointer_accel  0
 }
 
 input type:touchpad {

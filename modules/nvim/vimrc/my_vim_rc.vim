@@ -310,7 +310,7 @@ require('auto-session').setup {
   bypass_session_save_file_types = nil
   }
 
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require("mini.completion").setup {
   -- Delay (debounce type, in ms) between certain Neovim event and action.
@@ -484,7 +484,7 @@ local servers = {
   },
   rust_analyzer = {
   },
-  tsserver = {
+  ts_ls = {
   },
 }
 
