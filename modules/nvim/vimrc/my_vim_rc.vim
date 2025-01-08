@@ -298,19 +298,20 @@ require('lualine').setup {
   extensions = {}
   }
 
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 require('auto-session').setup {
+  auto_restore = true,
+  auto_restore_last_session = false,
+  auto_save = true,
+  enabled = true,
   log_level = 'info',
-  auto_session_enable_last_session = false,
-  auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
-  auto_session_enabled = true,
-  auto_save_enabled = true,
-  auto_restore_enabled = true,
-  auto_session_suppress_dirs = nil,
-  -- the configs below are lua only
-  bypass_session_save_file_types = nil
+  root_dir = vim.fn.stdpath('data').."/sessions/",
+  --  auto_session_suppress_dirs = nil,
+  --  -- the configs below are lua only
+  --  bypass_session_save_file_types = nil
   }
 
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require("mini.completion").setup {
   -- Delay (debounce type, in ms) between certain Neovim event and action.
