@@ -16,7 +16,15 @@ in
   };
   config = mkIf cfg.enable {
 
+    programs._1password.enable = true;
+    programs._1password-gui.enable = true;
+
+
     environment.systemPackages = with pkgs; [
+      _1password
+      _1password-gui
+      keepassxc
+
       # terminals
       alacritty # vi like terminal emulator which is OpenGL accelerated
 
