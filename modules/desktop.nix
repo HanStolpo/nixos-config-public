@@ -21,7 +21,7 @@ in
     services.passSecretService.enable = true;
 
     environment.systemPackages = with pkgs; [
-      _1password
+      _1passwords
       _1password-gui
       keepassxc
 
