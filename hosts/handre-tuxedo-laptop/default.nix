@@ -98,7 +98,7 @@ in
           papirus-icon-theme
           gnome-boxes
           spice
-          breeze-icons
+          kdePackages.breeze-icons
           wally-cli
           xloadimage
           v4l-utils

@@ -135,7 +135,9 @@ in
 
     fonts.packages = with pkgs;[
       source-code-pro # font used by fuzzel
-      nerdfonts # font used for icons in waybar
+      # font used for icons in waybar
+      nerd-fonts.symbols-only
+      nerd-fonts.roboto-mono
     ];
 
     programs.light.enable = true;

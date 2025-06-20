@@ -53,7 +53,7 @@ in
       # browsers
       firefox
       google-chrome
-      firefox-devedition-bin
+      firefox-devedition
 
       # chat clients
       pkgs-unstable.slack
@@ -118,7 +118,10 @@ in
         ubuntu_font_family # Ubuntu fonts
         unifont # some international languages
         powerline-fonts
-        nerdfonts
+        nerd-fonts.symbols-only
+        nerd-fonts.roboto-mono
+        nerd-fonts.monoid
+        nerd-fonts.dejavu-sans-mono
         font-awesome_5
 
         source-code-pro
