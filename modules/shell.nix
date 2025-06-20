@@ -69,6 +69,10 @@ in
     # nix-direnv usage is supported by default now
     # https://github.com/nix-community/nix-direnv?tab=readme-ov-file#via-system-configuration-on-nixos
     programs.direnv.enable = true;
+    environment.etc."direnv/direnv.toml".text = ''
+      [global]
+      hide_env_diff = true
+    '';
 
     # nix direnv config https://github.com/nix-community/nix-direnv
     # nix options for derivations to persist garbage collection
