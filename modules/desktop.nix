@@ -68,9 +68,9 @@ in
       pkgs-unstable.dropbox
 
       #EDA
-      #kicad # Free Software EDA Suite
-      #eagle # Eagle EDA tool
-      #gerbv # A Gerber (RS-274X) viewer
+      pkgs-unstable.kicad # Free Software EDA Suite
+      eagle # Eagle EDA tool
+      gerbv # A Gerber (RS-274X) viewer
 
       #glade # gtk layout tool
 
