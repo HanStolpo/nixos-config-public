@@ -18,10 +18,9 @@ in
 
     programs._1password.enable = true;
     programs._1password-gui.enable = true;
-    services.passSecretService.enable = true;
 
     environment.systemPackages = with pkgs; [
-      _1passwords
+      _1password-cli
       _1password-gui
       keepassxc
 
