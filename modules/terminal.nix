@@ -128,6 +128,8 @@ in
       pkgs-unstable.nomad
 
       trashy # use trash command instead of rm to avoid accidental deletions
+
+      pkgs-unstable.claude-code
     ];
 
     security.pki = {

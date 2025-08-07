@@ -96,6 +96,8 @@ in
       mdsync # render and live reload markdown
 
       anki # spaced repition flash card program
+
+      pkgs-unstable.code-cursor-fhs
     ];
 
 
