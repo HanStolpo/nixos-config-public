@@ -649,6 +649,30 @@ require"octo".setup({
   }
 })
 
+-- Claude Code configuration
+require('claudecode').setup({
+  -- Optional: Configure Claude Code settings
+  -- api_key = vim.env.ANTHROPIC_API_KEY, -- API key will be read from environment variable
+  model = "claude-3-5-sonnet-20241022", -- Model to use
+  max_tokens = 4000, -- Maximum tokens for responses
+  temperature = 0.0, -- Temperature for sampling (0.0 = deterministic)
+  
+  -- Keybindings (avoiding conflicts with existing mappings)
+  keys = {
+    chat = "<leader>ai", -- Open chat interface (ai for AI, avoiding conflict with ac/ad/ah)
+    accept = "<C-g>", -- Accept suggestion (avoiding C-y which is used for copy url)
+    reject = "<C-e>", -- Reject suggestion (avoiding Esc which is used for terminal)
+    next = "<M-n>", -- Next suggestion (avoiding M-j/M-k used for diagnostics)
+    prev = "<M-p>", -- Previous suggestion
+  },
+  
+  -- Optional: UI settings
+  ui = {
+    width = 0.4, -- Width of the chat window (0-1 as percentage of screen)
+    position = "right", -- Position of the chat window: "left", "right", "top", "bottom"
+  }
+})
+
 EOF
 
 "tree sitter for fold

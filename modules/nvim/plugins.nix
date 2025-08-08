@@ -23,4 +23,13 @@ in
     };
   };
 
+  "claudecode-nvim" = buildVimPlugin {
+    name = "claudecode-nvim";
+    src = fetchgit {
+      url = "https://github.com/coder/claudecode.nvim";
+      rev = "9c74ead26b73b627368d57e7c4032e465911b514";
+      sha256 = "1l51slqg1yzfr55xp5n6p6hbs9mikga0rsbdzbx3i39qra3mkf4p";
+    };
+  };
+
 }
