@@ -14,9 +14,14 @@
       url = "github:hanstolpo/haswaynav";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, lix-module, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -122,6 +127,8 @@
               builtins.attrValues self.nixosModules ++
               [
                 kmonad.nixosModules.default
+
+                lix-module.nixosModules.default
 
                 hostCommonSetup
                 (import host)
