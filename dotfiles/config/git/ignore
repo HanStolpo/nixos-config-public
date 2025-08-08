@@ -11,4 +11,9 @@ ch-stuff
 Outputs/
 .direnv/
 ch-eda-kicad.yaml
-import/
+.MyNeoVimSetup.md
+CLAUDE.local.md
+git-hooks
+client/js/generated
+.cursor
+.vscode
