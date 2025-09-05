@@ -125,7 +125,7 @@ in
       sops # Mozilla secret OPerationS
       kubernetes-helm
       fluxcd
-      pkgs-unstable.nomad
+      nomad
 
       trashy # use trash command instead of rm to avoid accidental deletions
 

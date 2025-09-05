@@ -53,7 +53,7 @@ in
       # browsers
       firefox
       google-chrome
-      firefox-devedition
+      pkgs-unstable.firefox-devedition
 
       # chat clients
       pkgs-unstable.slack
