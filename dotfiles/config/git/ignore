@@ -14,6 +14,6 @@ ch-eda-kicad.yaml
 .MyNeoVimSetup.md
 CLAUDE.local.md
 git-hooks
-client/js/generated
 .cursor
 .vscode
+.claude
