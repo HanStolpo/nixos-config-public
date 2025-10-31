@@ -244,8 +244,15 @@ in
           enable = true;
           settings.server =
             [
-              "8.8.8.8"
-              "8.8.8.4"
+              # https://quad9.net/asus/safe/
+              "9.9.9.9"
+              "149.112.112.112"
+
+              # # google dns
+              # "8.8.8.8"
+              # "8.8.8.4"
+
+              # local lan DNS
               "192.168.1.1"
             ];
         };
