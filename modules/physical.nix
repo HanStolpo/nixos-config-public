@@ -42,7 +42,7 @@ in
 
       mesa # An open source implementation of OpenGL
       # glmark2 # OpenGL (ES) 2.0 benchmark
-      glxinfo # info about opengl implementation
+      mesa-demos # info about opengl implementation
       libinput # Handles input devices in Wayland compositors and provides a generic X.Org input drivelibinputr
 
       powerstat # Laptop power measuring tool
@@ -61,11 +61,10 @@ in
 
     # suspend after idel seconds
     # https://bbs.archlinux.org/viewtopic.php?id=208091
-    services.logind.extraConfig =
-      ''
-        IdleAction=suspend
-        IdleActionSec=1200
-      '';
+    services.logind.settings.Login = {
+      IdleAction = "suspend";
+      IdleActionSec = "1200";
+    };
 
     services = {
       printing = {

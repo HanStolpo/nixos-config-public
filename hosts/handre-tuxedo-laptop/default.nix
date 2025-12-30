@@ -98,7 +98,7 @@ in
           papirus-icon-theme
           gnome-boxes
           spice
-          kdePackages.breeze-icons
+          #kdePackages.breeze-icons # depends on qtwebengine-5.15.19
           wally-cli
           xloadimage
           v4l-utils
@@ -185,29 +185,27 @@ in
           enable = true;
           enable32Bit = true;
           # I guess for video acceleration support
-          extraPackages32 = with pkgs.pkgsi686Linux; [ libva amdvlk ];
+          extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
           extraPackages = with pkgs;
             [
               libva
               #rocmPackages.rpp-opencl
               #rocm-opencl-runtime
-              amdvlk
             ];
         };
 
         security.rtkit.enable = true;
 
         # hybrid sleep on power off button
-        services.logind.extraConfig = ''
-          HandlePowerKey=hibernate
-          HandleLidSwitchDocked=ignore
-          HandleLidSwitch=suspend
-          LidSwitchIgnoreInhibited=yes
-          PowerKeyIgnoreInhibited=yes
-          SuspendKeyIgnoreInhibited=yes
-          HibernateKeyIgnoreInhibited=yes
-
-        '';
+        services.logind.settings.Login = {
+          HandlePowerKey = "hibernate";
+          HandleLidSwitchDocked = "ignore";
+          HandleLidSwitch = "suspend";
+          LidSwitchIgnoreInhibited = "yes";
+          PowerKeyIgnoreInhibited = "yes";
+          SuspendKeyIgnoreInhibited = "yes";
+          HibernateKeyIgnoreInhibited = "yes";
+        };
         # some info about sleep conf here 
         # https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
         # https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html

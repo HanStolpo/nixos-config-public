@@ -39,8 +39,8 @@ in
       rsync # A fast incremental file transfer utility
       unzip # An extraction utility for archives compressed in .zip format
       gnupg # Modern (2.1) release of the GNU Privacy Guard, a GPL OpenPGP implementation
-      pinentry # pinentry program to be used by gnupg by default
-      utillinux # for dmesg, kill,...
+      pinentry-curses # pinentry program to be used by gnupg by default
+      util-linux # for dmesg, kill,...
       htop # An interactive process viewer for Linux
       traceroute # Tracks the route taken by packets over an IP network
       which # get location of executable
@@ -64,8 +64,8 @@ in
       #autojump # used in ohmyzsh to quickly jump between directories
 
       # source control for configs etc
-      gitAndTools.gitFull # git source control
-      gitAndTools.gitRemoteGcrypt # encrypted git remotes
+      gitFull # git source control
+      git-remote-gcrypt # encrypted git remotes
       git-crypt
 
       # development
@@ -149,7 +149,7 @@ in
 
     programs.gnupg.agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
+      pinentryPackage = pkgs.pinentry-gnome3;
       enableSSHSupport = true;
       enableExtraSocket = true;
       enableBrowserSocket = true;

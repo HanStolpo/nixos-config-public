@@ -45,7 +45,7 @@ let
         # SDL:
         export SDL_VIDEODRIVER=wayland
 
-        # QT (needs qt5.qtwayland in systemPackages):
+        # QT (needs qt6.qtwayland in systemPackages):
         export QT_QPA_PLATFORM=wayland-egl
         export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
@@ -122,7 +122,7 @@ in
       way-displays # autorandr like management of display outputs connected to wayland compositor
       waybar # toolbar
       xdg-desktop-portal-wlr # desktop portal functionality for wlroots based systems
-      qt5.qtwayland # support for qt applications on wayland
+      qt6.qtwayland # support for qt applications on wayland
 
       # theming
       papirus-icon-theme # icon package to use with fuzzel
@@ -202,7 +202,7 @@ in
       restart = !(builtins.isNull cfg.autoLoginUser);
       settings = {
         terminal = {
-          vt = "7";
+          #vt = "7";
         };
 
         initial_session = lib.mkIf (!(builtins.isNull cfg.autoLoginUser)) {

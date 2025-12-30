@@ -29,8 +29,8 @@ in
 
       shotwell # photo organizer tool for gnome
 
-      #flameshot # easy screenshot tool
-      shutter # take screen shots annotate images
+      flameshot # easy screenshot tool
+      #kdePackages.spectacle # take screen shots annotate images
       gv # postscript viewer
       ghostscript # 
       #zoom-us # video chat client
@@ -38,10 +38,10 @@ in
       inkscape # Vector graphics editor
       obs-studio # Free and open source software for video recording and live streaming
       #projectlibre # Project-Management Software similar to MS-Project
-      libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release)
+      #libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release) - depends on qtwebengine-5.15.19
       #adobe-reader # PDF viewer
       gimp # The GNU Image Manipulation Program
-      vlc # Cross-platform media player and streaming server
+      #vlc # Cross-platform media player and streaming server - may depend on qtwebengine-5.15.19
       mpv # A media player that supports many video formats (MPlayer and mplayer2 fork)
       ffmpeg-full # A complete, cross-platform solution to record, convert and stream audio and video
       remmina # remote desktop client
@@ -68,13 +68,13 @@ in
       pkgs-unstable.dropbox
 
       #EDA
-      kicad # Free Software EDA Suite
-      eagle # Eagle EDA tool
+      #kicad # Free Software EDA Suite - depends on qtwebengine-5.15.19
+      #eagle # Eagle EDA tool # depends on qtwebengine-5.15.19
       gerbv # A Gerber (RS-274X) viewer
 
       #glade # gtk layout tool
 
-      sqlitebrowser
+      #sqlitebrowser # depends on qtwebengine-5.15.19
 
       #rhythmbox # music player
 
@@ -84,18 +84,18 @@ in
 
       #fontforge-gtk
 
-      pinentry-qt # qt based pinentry program to be used with gpg
+      pinentry-gnome3 # gnome based pinentry program to be used with gpg
 
-      gnvim # minimal gui front end for nvim
+      #gnvim # minimal gui front end for nvim - depends on qtwebengine-5.15.19
 
 
-      nomacs # image viewer
+      #nomacs # image viewer - depends on qtwebengine-5.15.19
 
       d2 # text based diagram drawing program
       tala # layout engine for D2
       mdsync # render and live reload markdown
 
-      anki # spaced repition flash card program
+      #anki # spaced repition flash card program - may depend on qtwebengine-5.15.19
 
       pkgs-unstable.code-cursor-fhs
     ];
@@ -117,7 +117,7 @@ in
       packages = with pkgs; [
         corefonts # Micrsoft free fonts
         inconsolata # monospaced
-        ubuntu_font_family # Ubuntu fonts
+        ubuntu-classic # Ubuntu fonts
         unifont # some international languages
         powerline-fonts
         nerd-fonts.symbols-only
@@ -129,7 +129,7 @@ in
         source-code-pro
         source-sans-pro
         source-serif-pro
-        noto-fonts-emoji
+        noto-fonts-color-emoji
       ];
 
       enableDefaultPackages = true;
