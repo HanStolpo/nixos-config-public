@@ -123,10 +123,13 @@ in
       waybar # toolbar
       xdg-desktop-portal-wlr # desktop portal functionality for wlroots based systems
       qt6.qtwayland # support for qt applications on wayland
+      nemo-with-extensions # file manager
 
       # theming
       papirus-icon-theme # icon package to use with fuzzel
       colloid-gtk-theme # the GTK desktop theme used
+
+
     ];
 
     # make the fonts accessbile in /run/current/sw/share/X11/fonts

@@ -14,9 +14,29 @@
       url = "github:hanstolpo/haswaynav";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, home-manager, stylix, noctalia, niri, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -84,7 +104,12 @@
 
             nixpkgs = {
               config.allowUnfree = true;
-              overlays = builtins.attrValues self.overlays ++ [ haswaynav.overlays.default kmonad.overlays.default ];
+              overlays = builtins.attrValues self.overlays ++ [
+                haswaynav.overlays.default
+                kmonad.overlays.default
+                noctalia.overlays.default
+                niri.overlays.niri
+              ];
             };
 
             nix = {
@@ -114,6 +139,14 @@
 
               '';
             };
+
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              inputs = {
+                inherit noctalia niri;
+              };
+            };
           };
           mkHost = host: {
             system = "x86_64-linux";
@@ -124,6 +157,15 @@
                 kmonad.nixosModules.default
 
                 hostCommonSetup
+
+                home-manager.nixosModules.home-manager
+
+                stylix.nixosModules.stylix
+
+                noctalia.nixosModules.default
+
+                niri.nixosModules.niri
+
                 (import host)
               ];
           };

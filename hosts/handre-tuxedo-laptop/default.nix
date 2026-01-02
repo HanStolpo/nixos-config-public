@@ -29,10 +29,15 @@ in
 
 
           sway = {
-            enable = true;
+            enable = false;
             pathToSwayConfigFile = "/home/handre/nixos-config-public/dotfiles/config/sway/config";
             pathToWayDisplaysConfigFile = "/home/handre/nixos-config-public/dotfiles/config/way-displays/cfg.yaml";
             pathToWaybarConfigFile = "/home/handre/nixos-config-public/dotfiles/config/waybar/config";
+            autoLoginUser = "handre";
+          };
+
+          niri = {
+            enable = true;
             autoLoginUser = "handre";
           };
 
@@ -41,6 +46,12 @@ in
           desktop.enable = true;
           physical.enable = true;
           dev-services.enable = true;
+          battery-management.enable = true;
+          noctalia.enable = true;
+          home-manager = {
+            enable = true;
+            users = [ "handre" ];
+          };
 
           kmonad = {
             enable = true;
@@ -173,7 +184,7 @@ in
         swapDevices =
           [{ device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }];
 
-        networking.useDHCP = true;
+        networking.useDHCP = !config.hanstolpo.noctalia.enable;
 
         hardware.enableRedistributableFirmware = true; # for wifi driver
         hardware.cpu.amd.updateMicrocode = true;
@@ -220,12 +231,11 @@ in
           AllowSuspendThenHibernate=no
         '';
 
-
         networking = {
           hostName = "handre-tuxedo-laptop"; # Define your hostname.
           wireless = {
             #interfaces = [ "wlp3s0" ];
-            enable = true; # Enables wireless support via wpa_supplicant.
+            enable = !config.hanstolpo.noctalia.enable; # Enables wireless support via wpa_supplicant.
             userControlled.enable = true;
             # networkd seems to give some errors and useNetworkd has this warning 'Whether we should use networkd as the network configuration backend or the legacy script based system. Note that this option is experimental, enable at your own risk.'
             # useNetworkd = true;

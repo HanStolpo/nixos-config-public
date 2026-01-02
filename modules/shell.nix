@@ -54,16 +54,26 @@ in
     environment.systemPackages = with pkgs; [
 
       zsh # The Z shell
+
       fish
+      # fish plugins
+      fishPlugins.done
+      fishPlugins.fzf-fish
+      fishPlugins.forgit
       fzf # fuzzy finder used by fish plugin patrickf1/fzf.fish
       fd # used by fish plugin patrickf1/fzf.fish when doing directory search (faster, colorized alternative to find)
       bat # used by fish plugin patrickf1/fzf.fish when doing directory search (smarter cat with syntac highlighting)
+
+      atuin   # for a powerful, searchable shell history
+
       babelfish
       bashInteractive # GNU Bourne-Again Shell, the de facto standard shell on Linux (for interactive use)
       powerline-go # custom shell prompt shared by bash and zsh
       termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
       starship
+
+      nix-your-shell # support other shells in nix-shell
     ];
 
     # nix-direnv usage is supported by default now

@@ -130,6 +130,10 @@ in
       trashy # use trash command instead of rm to avoid accidental deletions
 
       pkgs-unstable.claude-code
+
+      httpie #  a cli http tool like wget/curl, but optimized for api calls
+      tealdeer # a shortened version of man pages, focused around example usage
+
     ];
 
     security.pki = {
