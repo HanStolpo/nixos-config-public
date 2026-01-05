@@ -192,5 +192,16 @@ in
         };
       };
     };
+
+    # Early OOM killer - prevents system freezes from memory-hungry applications
+    services.earlyoom = {
+      enable = true;
+      freeMemThreshold = 5;
+      enableNotifications = true;
+      extraArgs = [
+        "--prefer" "^(firefox|chromium|chrome|electron|slack|discord|code-cursor|cabal|ghc|claude)$"
+        "--avoid" "^(sshd|systemd|niri|noctalia)$"
+      ];
+    };
   };
 }
