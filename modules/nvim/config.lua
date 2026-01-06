@@ -510,6 +510,17 @@ end, { desc = "Copy Claude Code reference" })
 
 --------------------------------------------------------------------------------
 -- Colorscheme
+-- Use base16_theme environment variable if set, otherwise fall back to default
 --------------------------------------------------------------------------------
 
-vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+local base16_theme = vim.env.base16_theme
+if base16_theme and base16_theme ~= "" then
+  local ok, _ = pcall(vim.cmd, "colorscheme base16-" .. base16_theme)
+  if not ok then
+    vim.notify("Colorscheme base16-" .. base16_theme .. " not found, using default", vim.log.levels.WARN)
+    vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+  end
+else
+  vim.notify("$base16_theme no set using default", vim.log.levels.INFO)
+  vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+end

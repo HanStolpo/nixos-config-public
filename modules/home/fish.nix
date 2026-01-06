@@ -60,7 +60,10 @@
       end
 
       # Load base16 theme if set
-      if test -n "$base16_theme"
+      # Export base16_theme so child processes (like neovim) can see it
+      # Universal variables are not automatically exported to child processes
+      if set -q base16_theme
+        set -gx base16_theme $base16_theme
         base16-$base16_theme
       end
 
