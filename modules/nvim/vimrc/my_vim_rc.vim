@@ -445,60 +445,44 @@ vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ac', '<cmd>lua vim.lsp.buf.code
 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local function assign(t1)
-return function (t2)
-for k,v in pairs(t2) do
-  t1[k] = v
-end
-return t1
-  end
-end
-
 local servers = {
-  cmake = {
-  },
-  clangd = {
-  },
+  cmake = {},
+  clangd = {},
   hls = {
     filetypes = { 'haskell', 'lhaskell', 'cabal' },
     cmd = { "haskell-language-server", "--lsp" },
-    haskell = {
-      cabalFormattingProvider = "cabalfmt",
-      formattingProvider = "fourmolu",
-      checkParents = "CheckOnSave",
-      maxCompletions = 40,
-      -- this seems to work less well
-      sessionLoading = "multiComponent",
-    }
-    -- root_dir = require('lspconfig.util').root_pattern('cabal.project'),
+    settings = {
+      haskell = {
+        cabalFormattingProvider = "cabalfmt",
+        formattingProvider = "fourmolu",
+        checkParents = "CheckOnSave",
+        maxCompletions = 40,
+        -- this seems to work less well
+        sessionLoading = "multiComponent",
+      }
+    },
+    -- root_dir = vim.fs.root(0, {'cabal.project'}),
   },
   elmls = {
     settings = {
       elmLS = {
         trace = {
           server = true
-          },
-     }
+        },
+      }
     },
   },
-  rust_analyzer = {
-  },
-  ts_ls = {
-  },
+  rust_analyzer = {},
+  ts_ls = {},
 }
 
+-- Configure and enable LSP servers using vim.lsp.config (Nvim 0.11+)
 for lsp, cfg in pairs(servers) do
-  require('lspconfig')[lsp].setup ( assign(cfg) {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-      }
-    })
+  cfg.on_attach = on_attach
+  cfg.capabilities = capabilities
+  vim.lsp.config(lsp, cfg)
 end
+vim.lsp.enable(vim.tbl_keys(servers))
 
 -- -- do github pull requests from inside neovim https://github.com/pwntester/octo.nvim
 -- require"octo".setup({
