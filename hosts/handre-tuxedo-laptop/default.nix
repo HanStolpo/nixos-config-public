@@ -48,6 +48,7 @@ in
           dev-services.enable = true;
           battery-management.enable = true;
           noctalia.enable = true;
+          nvim.enable = true;
           home-manager = {
             enable = true;
             users = [ "handre" ];
