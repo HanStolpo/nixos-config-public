@@ -17,6 +17,11 @@ in
 
         services.tailscale.enable = true;
 
+        services.nordvpn = {
+          enable = true;
+          users = [ "handre" ];  # Users to add to nordvpn group
+        };
+
 
         hanstolpo = {
 

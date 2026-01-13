@@ -34,9 +34,14 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nordvpn-flake = {
+      url = "github:connerohnesorge/nordvpn-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, home-manager, stylix, noctalia, niri, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, home-manager, stylix, noctalia, niri, nordvpn-flake, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -109,6 +114,7 @@
                 kmonad.overlays.default
                 noctalia.overlays.default
                 niri.overlays.niri
+                nordvpn-flake.overlays.default
               ];
             };
 
@@ -165,6 +171,8 @@
                 noctalia.nixosModules.default
 
                 niri.nixosModules.niri
+
+                nordvpn-flake.nixosModules.default
 
                 (import host)
               ];

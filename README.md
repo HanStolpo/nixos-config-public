@@ -29,3 +29,23 @@ and not
 ```
 
 copy the images over to the parent directory fixed it
+
+## nordvpn
+
+### mesh net
+
+To enable nordvpn mesh net one would
+
+```
+nordvpn set mesh on
+```
+
+but this fails because it attempts to edit the `/etc/hosts` file which is a symlink
+to the read only filesystem in the nix store
+
+to get around it copy the actual file from the nix store to `/etc/hosts` so that
+nordvpn can modify it
+
+```
+sudo cp /etc/hosts /etc/hosts-s && sudo mv /etc/hosts-s /etc/hosts
+```
