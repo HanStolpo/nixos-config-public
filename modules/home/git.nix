@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   services.gpg-agent = {
     enable = true;
-    pinentry.package = pkgs.pinentry-tty;
+    pinentry.package = pkgs.pinentry-gnome3;
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableSshSupport = true;
