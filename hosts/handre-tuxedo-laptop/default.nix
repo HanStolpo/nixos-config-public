@@ -51,7 +51,7 @@ in
           desktop.enable = true;
           physical.enable = true;
           dev-services.enable = true;
-          battery-management.enable = true;
+          battery-management.enable = false;
           noctalia.enable = true;
           nvim.enable = true;
           home-manager = {
