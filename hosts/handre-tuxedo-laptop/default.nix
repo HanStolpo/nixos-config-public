@@ -68,7 +68,7 @@ in
                 device = "/dev/input/by-id/usb-MOSART_Semi._PERIDUO-606-event-kbd";
                 swapLMetFn = false;
               };
-
+              ergonomic-bt-keyboard = "/dev/input/by-id/bluetooth-ergonomic-keyboard-event-kbd";
             };
           };
         };
@@ -316,6 +316,18 @@ in
               '';
               executable = false;
               destination = "/etc/udev/rules.d/99-avoid-i2c-wakeup.rules";
+            }
+          )
+
+          (
+            # Create stable symlink for Bluetooth Ergonomic Keyboard
+            pkgs.writeTextFile {
+              name = "bluetooth-ergonomic-keyboard";
+              text = ''
+                SUBSYSTEM=="input", ATTRS{uniq}=="45:28:60:00:01:8f", KERNEL=="event*", SYMLINK+="input/by-id/bluetooth-ergonomic-keyboard-event-kbd"
+              '';
+              executable = false;
+              destination = "/etc/udev/rules.d/99-bluetooth-ergonomic-keyboard.rules";
             }
           )
 

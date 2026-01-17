@@ -43,7 +43,6 @@ in
             {
             defcfg = {
               enable = true;
-              compose.key = null;
               fallthrough = true;
               allowCommands = false;
             };
