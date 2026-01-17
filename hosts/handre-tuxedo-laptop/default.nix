@@ -66,9 +66,11 @@ in
               ms-ergonomic-keyboard = "/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd";
               perrix = {
                 device = "/dev/input/by-id/usb-MOSART_Semi._PERIDUO-606-event-kbd";
-                swapLMetFn = false;
               };
-              ergonomic-bt-keyboard = "/dev/input/by-id/bluetooth-ergonomic-keyboard-event-kbd";
+              ergonomic-bt-keyboard = {
+                device = "/dev/input/by-id/bluetooth-ergonomic-keyboard-event-kbd";
+                noComposeKeyRCtrlAsRAlt = true;
+              };
             };
           };
         };
@@ -320,11 +322,16 @@ in
           )
 
           (
-            # Create stable symlink for Bluetooth Ergonomic Keyboard
+            # Create stable symlink for Bluetooth Ergonomic Keyboard and manage kmonad service
             pkgs.writeTextFile {
               name = "bluetooth-ergonomic-keyboard";
               text = ''
+                # Create stable symlink for the keyboard
                 SUBSYSTEM=="input", ATTRS{uniq}=="45:28:60:00:01:8f", KERNEL=="event*", SYMLINK+="input/by-id/bluetooth-ergonomic-keyboard-event-kbd"
+                # Restart kmonad service when keyboard connects
+                SUBSYSTEM=="input", ATTRS{uniq}=="45:28:60:00:01:8f", KERNEL=="event*", ACTION=="add", RUN+="${pkgs.systemd}/bin/systemctl restart kmonad-ergonomic-bt-keyboard.service"
+                # Stop kmonad service when keyboard disconnects
+                SUBSYSTEM=="input", ATTRS{uniq}=="45:28:60:00:01:8f", KERNEL=="event*", ACTION=="remove", RUN+="${pkgs.systemd}/bin/systemctl stop kmonad-ergonomic-bt-keyboard.service"
               '';
               executable = false;
               destination = "/etc/udev/rules.d/99-bluetooth-ergonomic-keyboard.rules";
