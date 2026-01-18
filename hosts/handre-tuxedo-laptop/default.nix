@@ -163,6 +163,8 @@ in
           "amdgpu.cik_support=1"
         ];
         hardware.tuxedo-drivers.enable = true;
+        hardware.tuxedo-rs.enable = true;
+        hardware.tuxedo-rs.tailor-gui.enable = true;
 
         # https://nixos.wiki/wiki/AMD_GPU
         systemd.tmpfiles.rules = [
