@@ -191,7 +191,10 @@
         "Mod+T".action.spawn = "alacritty";
 
         # Spawn application launcher
-        "Mod+D".action.spawn = "fuzzel";
+        "Mod+D" = {
+          action.spawn-sh = "qs -c noctalia-shell ipc call launcher toggle";
+          hotkey-overlay.title = "launcher";
+        };
 
         # File manager
         "Mod+E".action.spawn = "nautilus";
@@ -203,6 +206,18 @@
         "Mod+Alt+L" = {
           action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
           hotkey-overlay.title = "lock screen";
+        };
+
+        # session menu
+        "Mod+S" = {
+          action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu toggle";
+          hotkey-overlay.title = "session menu";
+        };
+
+        # session menu
+        "Mod+Alt+S" = {
+          action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend";
+          hotkey-overlay.title = "session menu";
         };
 
         # Session exit

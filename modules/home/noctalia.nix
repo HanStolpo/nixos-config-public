@@ -55,8 +55,6 @@
             }
           ];
           right = [
-            { id = "ScreenRecorder";
-            }
             { id = "SystemMonitor";
             }
             {
@@ -81,7 +79,21 @@
           ];
         };
       };
-      colorSchemes.predefinedScheme = "Monochrome";
+
+      #colorSchemes.predefinedScheme = "Monochrome";
+
+      sessionMenu = {
+        enableCountDown = false;
+        # powerOptions = [
+        #   {action = "lock"; enable = true;}
+        #   {action = "suspend"; enable = true;}
+        #   {action = "reboot"; enable = true;}
+        #   {action = "shutdown"; enable = true;}
+        #   {action = "hibernate"; enable = false;}
+        #   {action = "logout"; enable = false;}
+        # ];
+      };
+
       general = {
         #avatarImage = "/home/drfoobar/.face";
         radiusRatio = 0.2;
