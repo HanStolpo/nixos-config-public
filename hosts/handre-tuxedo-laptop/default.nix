@@ -70,6 +70,7 @@ in
               ergonomic-bt-keyboard = {
                 device = "/dev/input/by-id/bluetooth-ergonomic-keyboard-event-kbd";
                 noComposeKeyRCtrlAsRAlt = true;
+                leftArrowAsCtrl = true;
               };
             };
           };

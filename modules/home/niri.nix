@@ -16,7 +16,10 @@
     settings = {
       # Input configuration
       input = {
+        workspace-auto-back-and-forth = true;
+
         warp-mouse-to-focus.enable = true;
+
         focus-follows-mouse = {
             enable = true;
             # never scroll the screen to have mouse follow focus
@@ -44,6 +47,15 @@
 
         trackpoint = { };
       };
+
+      layer-rules = [
+        {
+          matches = [
+            {namespace = "^noctalia-wallpaper*";}
+          ];
+          place-within-backdrop = true;
+        }
+      ];
 
       outputs = {
           "Dell Inc. DELL P2715Q V7WP955MA1XS" = {
@@ -78,16 +90,18 @@
           enable = false;
         };
 
-        shadow = {
-          enable = true;
-          softness = 30;
-          spread = 5;
-          offset = {
-            x = 0;
-            y = 5;
-          };
-          #color = "#0007";
-        };
+        background-color = "transparent";
+
+        #shadow = {
+        #  enable = false;
+        #  softness = 30;
+        #  spread = 5;
+        #  offset = {
+        #    x = 0;
+        #    y = 5;
+        #  };
+        #  #color = "#0007";
+        #};
       };
 
       # Spawn at startup
@@ -158,6 +172,10 @@
       debug = {
         # Allows notification actions and window activation from Noctalia.
         honor-xdg-activation-with-invalid-serial = {};
+      };
+
+      overview = {
+        workspace-shadow.enable = false;
       };
 
       prefer-no-csd = true;

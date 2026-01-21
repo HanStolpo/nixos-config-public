@@ -19,6 +19,7 @@ in
                 device = mkOption { type = types.str; };
                 # the fold up bluetooth keyboard has no cmp button so we map right control to right alt
                 noComposeKeyRCtrlAsRAlt = mkOption { type = types.bool; default = false; };
+                leftArrowAsCtrl = mkOption { type = types.bool; default = false; };
               };
             }));
       };
@@ -37,7 +38,7 @@ in
 
       keyboards =
         let
-          keyboardLayout = { noComposeKeyRCtrlAsRAlt ? false }:
+          keyboardLayout = { noComposeKeyRCtrlAsRAlt ? false, leftArrowAsCtrl ? false }:
             let
                 # Bottom row key definitions for defsrc
                 # When noComposeKeyRCtrlAsRAlt, leave out cmp
@@ -52,6 +53,7 @@ in
                 bottomRowSymbols = if noComposeKeyRCtrlAsRAlt
                   then "  _   _   _           esc          _  _"
                   else "  _   _   _           esc          _  _  _";
+
             in
             {
             defcfg = {
@@ -69,6 +71,7 @@ in
                   caps a    s    d    f    g    h    j    k    l    ;    '    ret
                   lsft z    x    c    v    b    n    m    ,    .    /    rsft
                   ${bottomRowSrc}
+                  left
                 )
 
                 (defalias
@@ -84,6 +87,7 @@ in
                 bspc   _    _    _    _    _    _    _    _    _    _    _    _
                   _    _    _    _    _    _    _    _    _    _    _    _
                   ${bottomRowMap}
+                  ${if leftArrowAsCtrl then "rctl" else "_"}
                 )
 
                 (deflayer symbols
@@ -93,6 +97,7 @@ in
                   _    #    $   \(   \)    ` left  down  up  rght  _    _    _
                   _    %    ^    [    ]    ~  \\    /    &    _    _    _
                   ${bottomRowSymbols}
+                  _
                 )
 
                 '';
@@ -103,7 +108,7 @@ in
               then
                 { device = cfg; } // (keyboardLayout {})
               else
-                { inherit (cfg) device;} // (keyboardLayout { inherit (cfg) noComposeKeyRCtrlAsRAlt; });
+                { inherit (cfg) device;} // (keyboardLayout { inherit (cfg) noComposeKeyRCtrlAsRAlt leftArrowAsCtrl; });
 
         in
         mapAttrs mkService cfg.keyboards;
