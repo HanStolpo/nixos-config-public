@@ -103,7 +103,7 @@
       # from another flake
       nixosSystems =
         let
-          hostCommonSetup = { pkgs, ... }: {
+          hostCommonSetup = { pkgs, config, ... }: {
             # Let 'nixos-version --json' know about the Git revision of this flake.
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
 
@@ -152,6 +152,7 @@
               inputs = {
                 inherit noctalia niri;
               };
+              inherit (config) hanstolpo;
             };
           };
           mkHost = host: {

@@ -13,6 +13,18 @@ in
         default = false;
         description = "Enable noctalia shell configuration";
       };
+
+      wallpaperDirectory = mkOption {
+          type = types.str;
+          default = "";
+          description = "Set the wallpaper.directory value for noctalia home manager config";
+      };
+      avatarImage = mkOption {
+          type = types.str;
+          default = "";
+          description = "Set the general.avatarImage value for noctalia home manager config";
+      };
+
     };
   };
 

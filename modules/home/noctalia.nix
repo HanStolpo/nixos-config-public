@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, hanstolpo, ... }:
 {
   imports = [
     inputs.noctalia.homeModules.default
@@ -18,11 +18,25 @@
       noctalia-shell = "${pkgs.noctalia-shell}/share/noctalia-shell";
     };
   };
-  # configure options
+
   programs.noctalia-shell = {
     enable = true;
     settings = {
-      # configure noctalia here
+
+      wallpaper = {
+        enable = true;
+        overviewEnable = true;
+        directory = hanstolpo.noctalia.wallpaperDirectory;
+        fillMode = "fit";
+        automationEnabled = true;
+        randomEnable = true;
+        randomIntervalSec = 1800;
+      };
+
+      appLauncher = {
+        useApp2Unit = true;
+      };
+
       bar = {
         density = "default";
         position = "top";
@@ -30,11 +44,11 @@
         widgets = {
           left = [
             {
-              id = "Launcher";
+              id = "ControlCenter";
+              useDistroLogo = false;
             }
             {
-              id = "ControlCenter";
-              useDistroLogo = true;
+              id = "Launcher";
             }
             {
               id = "WiFi";
@@ -48,8 +62,18 @@
           ];
           center = [
             {
-              hideUnoccupied = true;
               id = "Workspace";
+              characterCount = 10;
+              colorizeIcons = false;
+              enableScrollWheel = true;
+              followFocusedScreen = true;
+              groupedBorderOpacity = 1;
+              hideUnoccupied = true;
+              iconScale = 0.8;
+              labelMode = "name";
+              showApplications = false;
+              showLabelsOnlyWhenOccupied = true;
+              unfocusedIconsOpacity = 1;
             }
             { id = "ActiveWindow";
             }
@@ -72,6 +96,7 @@
             {
               id = "Tray";
               drawerEnabled = false;
+              hidePassive = true;
             }
             {
               id = "NotificationHistory";
@@ -83,19 +108,28 @@
       #colorSchemes.predefinedScheme = "Monochrome";
 
       sessionMenu = {
-        enableCountDown = false;
-        # powerOptions = [
-        #   {action = "lock"; enable = true;}
-        #   {action = "suspend"; enable = true;}
-        #   {action = "reboot"; enable = true;}
-        #   {action = "shutdown"; enable = true;}
-        #   {action = "hibernate"; enable = false;}
-        #   {action = "logout"; enable = false;}
-        # ];
+        enableCountdown = false;
+        powerOptions = [
+          {action = "lock"; enabled = true;}
+          {action = "suspend"; enabled = true;}
+          {action = "reboot"; enabled = true;}
+          {action = "shutdown"; enabled = true;}
+          {action = "hibernate"; enabled = false;}
+          {action = "logout"; enabled = false;}
+        ];
+      };
+
+      notifications = {
+        enableMediaToast = true;
+        saveToHistory = {
+          low = false;
+          normal = true;
+          critical = true;
+        };
       };
 
       general = {
-        #avatarImage = "/home/drfoobar/.face";
+        avatarImage = hanstolpo.noctalia.avatarImage;
         radiusRatio = 0.2;
       };
       location = {

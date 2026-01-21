@@ -52,7 +52,11 @@ in
           physical.enable = true;
           dev-services.enable = true;
           battery-management.enable = false;
-          noctalia.enable = true;
+          noctalia = {
+              enable = true;
+              wallpaperDirectory = "/home/handre/nixos-config-public/wallpapers";
+              avatarImage = "/home/handre/nixos-config-public/profile-pics/robot-hare-Gemini_Generated_Image_a98ub6a98ub6a98u.png";
+          };
           nvim.enable = true;
           home-manager = {
             enable = true;
