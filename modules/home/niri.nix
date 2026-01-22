@@ -221,9 +221,6 @@
         # File manager
         "Mod+E".action.spawn = "nautilus";
 
-        # Browser
-        "Mod+W".action.spawn = "firefox";
-
         # Screen locking
         "Mod+Alt+L" = {
           action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
