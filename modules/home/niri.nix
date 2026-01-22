@@ -190,12 +190,16 @@
 
       workspaces = {
         chat = {
+          open-on-output = "eDP-1";
         };
         dev1 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
         };
         browser = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
         };
         dev2 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
         };
       };
 
@@ -224,6 +228,8 @@
         "Mod+Alt+L" = {
           action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
           hotkey-overlay.title = "lock screen";
+          # allow locking again if the lock screen crashes
+          allow-when-locked = true;
         };
 
         # session menu
@@ -232,14 +238,23 @@
           hotkey-overlay.title = "session menu";
         };
 
-        # session menu
-        "Mod+Alt+S" = {
-          action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend";
-          hotkey-overlay.title = "session menu";
-        };
+        # currently when doing this the noctalia lock screen will crash when resuming
+        # # so it is better to call up the session menu and then suspend from there.
+        # # lock and then suspend
+        # "Mod+Alt+S" = {
+        #   action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend";
+        #   hotkey-overlay.title = "session menu";
+        # };
 
-        # Session exit
-        "Mod+Shift+E".action.quit = { };
+        # actually with my current setup exiting niri is never a good idea, better just to reboot.
+        # # Session exit
+        # "Ctrl+Alt+Delete" = {
+        #     # instead of `action.quit = {}`
+        #     # otherwise we can exit when in the lock screen which
+        #     # automatically logs back in circumventing the lock screen
+        #     action.spawn-sh = "niri msg action quit";
+        #     allow-when-locked = false;
+        # };
 
         # Power off monitors
         "Mod+Shift+P".action.power-off-monitors = { };
@@ -391,8 +406,6 @@
           allow-inhibiting = false;
         };
 
-        # Alternative quit binding
-        "Ctrl+Alt+Delete".action.quit = { };
 
         # Media controls (allow-when-locked for use while screen is locked)
         "XF86AudioRaiseVolume" = {
