@@ -59,10 +59,10 @@
 
       outputs = {
           "Dell Inc. DELL P2715Q V7WP955MA1XS" = {
-            position = {x = 0; y = 0;};
           };
 
           "eDP-1" = {
+            position = {x = 0; y = 0;};
           };
       };
 
