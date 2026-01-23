@@ -381,6 +381,41 @@ in
             }
           )
 
+          (
+            # Enable USB keyboard to wake system from suspend
+            #
+            # References:
+            # - https://wiki.archlinux.org/title/Power_management/Wakeup_triggers
+            # - https://www.makeuseof.com/wake-your-linux-pc-from-suspend-using-usb-devices/
+            #
+            # Debug commands:
+            # - List USB devices: 
+            #     lsusb
+            # - Check wakeup status:
+            #     for f in /sys/bus/usb/devices/*/power/wakeup; do echo "$f: $(cat $f)"; done
+            # - Find device path by vendor: 
+            #     grep -l "29ea" /sys/bus/usb/devices/*/idVendor
+            # - Manually enable device for wakeup replacing X-X.X.X.X from the find device command above:
+            #     echo enabled | sudo tee /sys/bus/usb/devices/X-X.X.X/power/wakeup
+            # - Check ACPI wakeup sources: 
+            #     cat /proc/acpi/wakeup
+            # - Manually enable wakeup for testing:
+            #     for dev in /sys/bus/usb/devices/*/idVendor; do
+            #       if [ "$(cat $dev)" = "29ea" ]; then
+            #         echo enabled | sudo tee "$(dirname $dev)/power/wakeup"
+            #       fi
+            #     done
+            pkgs.writeTextFile {
+              name = "usb-keyboard-wakeup";
+              text = ''
+                # Kinesis mWave keyboard (29ea:1001)
+                ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="29ea", ATTR{idProduct}=="1001", ATTR{power/wakeup}="enabled"
+              '';
+              executable = false;
+              destination = "/etc/udev/rules.d/90-usb-keyboard-wakeup.rules";
+            }
+          )
+
         ];
 
 
