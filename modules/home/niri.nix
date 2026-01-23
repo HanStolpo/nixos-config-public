@@ -331,6 +331,11 @@
         "Mod+2".action.focus-workspace = "dev1";
         "Mod+3".action.focus-workspace = "browser";
         "Mod+4".action.focus-workspace = "dev2";
+        # Same for other hand
+        "Mod+7".action.focus-workspace = "chat";
+        "Mod+8".action.focus-workspace = "dev1";
+        "Mod+9".action.focus-workspace = "browser";
+        "Mod+0".action.focus-workspace = "dev2";
 
         # # Move column to specific workspace
         # "Mod+Ctrl+1".action.move-column-to-workspace = 1;
@@ -376,8 +381,12 @@
 
         # Screenshots
         "Print".action.screenshot = { };
-        "Ctrl+Print".action.screenshot-screen = { };
-        "Alt+Print".action.screenshot-window = { };
+        "Ctrl+Print".action.screenshot-window = { };
+        "Alt+Print".action.screenshot-screen = { };
+        # for when we don't have a print screen button kinesis mwave
+        "Mod+Y".action.screenshot = { };
+        "Mod+Ctrl+Y".action.screenshot-window = { };
+        "Mod+Alt+Y".action.screenshot-screen = { };
 
         # Mouse wheel workspace navigation (with cooldown to prevent fast scrolling)
         "Mod+WheelScrollDown" = { action.focus-workspace-down = { }; cooldown-ms = 150; };
