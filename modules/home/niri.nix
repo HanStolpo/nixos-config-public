@@ -336,6 +336,9 @@
         "Mod+8".action.focus-workspace = "dev1";
         "Mod+9".action.focus-workspace = "browser";
         "Mod+0".action.focus-workspace = "dev2";
+        # Focus the previously focussed workspace
+        "Mod+B".action.focus-workspace-previous = {};
+
 
         # # Move column to specific workspace
         # "Mod+Ctrl+1".action.move-column-to-workspace = 1;
