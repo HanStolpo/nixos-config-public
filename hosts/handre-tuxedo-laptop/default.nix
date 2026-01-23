@@ -389,15 +389,15 @@ in
             # - https://www.makeuseof.com/wake-your-linux-pc-from-suspend-using-usb-devices/
             #
             # Debug commands:
-            # - List USB devices: 
+            # - List USB devices:
             #     lsusb
             # - Check wakeup status:
             #     for f in /sys/bus/usb/devices/*/power/wakeup; do echo "$f: $(cat $f)"; done
-            # - Find device path by vendor: 
+            # - Find device path by vendor:
             #     grep -l "29ea" /sys/bus/usb/devices/*/idVendor
             # - Manually enable device for wakeup replacing X-X.X.X.X from the find device command above:
             #     echo enabled | sudo tee /sys/bus/usb/devices/X-X.X.X/power/wakeup
-            # - Check ACPI wakeup sources: 
+            # - Check ACPI wakeup sources:
             #     cat /proc/acpi/wakeup
             # - Manually enable wakeup for testing:
             #     for dev in /sys/bus/usb/devices/*/idVendor; do
