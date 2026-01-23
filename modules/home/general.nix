@@ -99,4 +99,18 @@
         "image/svg+xml" = ["google-chrome.desktop" "gimp.desktop"];
       };
     };
+
+    # Custom desktop entries
+    # Creates .desktop files in ~/.local/share/applications/
+    xdg.desktopEntries = {
+      firefox-profile-selector = {
+        name = "Firefox Profile Selector";
+        genericName = "Web Browser";
+        exec = "firefox --ProfileManager";
+        icon = "firefox";
+        terminal = false;
+        categories = [ "Network" "WebBrowser" ];
+        comment = "Launch Firefox with profile selector";
+      };
+    };
 }
