@@ -140,13 +140,13 @@
       enable = true;
       events = [
         # Lock screen before sleep/suspend
-        { event = "before-sleep"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+        { event = "before-sleep"; command = "${pkgs.quickshell}/bin/qs -c noctalia-shell ipc call lockScreen lock"; }
         # Lock when systemd requests lock
-        { event = "lock"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+        { event = "lock"; command = "${pkgs.quickshell}/bin/qs -c noctalia-shell ipc call lockScreen lock"; }
       ];
       timeouts = [
         # Lock screen after 30 minutes of idle (1800 seconds)
-        { timeout = 1800; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+        { timeout = 1800; command = "${pkgs.quickshell}/bin/qs -c noctalia-shell ipc call lockScreen lock"; }
       ];
     };
 }

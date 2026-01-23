@@ -186,7 +186,7 @@
 
       switch-events = {
         # Lock screen when lid closes (swayidle handles lock-before-suspend)
-        lid-close.action.spawn = ["swaylock" "-fF"];
+        lid-close.action.spawn = ["qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"];
       };
 
       workspaces = {
@@ -222,10 +222,10 @@
         # File manager
         "Mod+E".action.spawn = "nautilus";
 
-        # Screen locking (using swaylock-effects)
-        # See: https://github.com/mortie/swaylock-effects
+        # Screen locking (using noctalia-shell)
+        # swaylock-effects is configured as fallback in general.nix
         "Mod+Alt+L" = {
-          action.spawn = ["swaylock" "-fF"];
+          action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
           hotkey-overlay.title = "lock screen";
           # allow locking again if the lock screen crashes
           allow-when-locked = true;
