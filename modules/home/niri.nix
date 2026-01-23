@@ -185,7 +185,8 @@
       };
 
       switch-events = {
-        lid-close.action.spawn = ["qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"];
+        # Lock screen when lid closes (swayidle handles lock-before-suspend)
+        lid-close.action.spawn = ["swaylock" "-fF"];
       };
 
       workspaces = {
@@ -221,11 +222,25 @@
         # File manager
         "Mod+E".action.spawn = "nautilus";
 
-        # Screen locking
+        # Screen locking (using swaylock-effects)
+        # See: https://github.com/mortie/swaylock-effects
         "Mod+Alt+L" = {
-          action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
+          action.spawn = ["swaylock" "-fF"];
           hotkey-overlay.title = "lock screen";
           # allow locking again if the lock screen crashes
+          allow-when-locked = true;
+        };
+
+        # Suspend system (swayidle will lock before suspend via before-sleep event)
+        # See: https://wiki.archlinux.org/title/Power_management#Suspend_and_hibernate
+        "Mod+Alt+S" = {
+          action.spawn = ["systemctl" "suspend"];
+          hotkey-overlay.title = "suspend";
+        };
+
+        # Allow suspend from lock screen
+        "XF86Sleep" = {
+          action.spawn = ["systemctl" "suspend"];
           allow-when-locked = true;
         };
 
@@ -234,14 +249,6 @@
           action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu toggle";
           hotkey-overlay.title = "session menu";
         };
-
-        # currently when doing this the noctalia lock screen will crash when resuming
-        # # so it is better to call up the session menu and then suspend from there.
-        # # lock and then suspend
-        # "Mod+Alt+S" = {
-        #   action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend";
-        #   hotkey-overlay.title = "session menu";
-        # };
 
         # actually with my current setup exiting niri is never a good idea, better just to reboot.
         # # Session exit

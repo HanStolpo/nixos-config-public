@@ -113,4 +113,40 @@
         comment = "Launch Firefox with profile selector";
       };
     };
+
+    # Screen locker
+    # See: https://wiki.nixos.org/wiki/Swaylock
+    # See: https://github.com/mortie/swaylock-effects
+    # See: https://mynixos.com/home-manager/options/programs.swaylock
+    programs.swaylock = {
+      enable = true;
+      package = pkgs.swaylock-effects;
+      settings = {
+        screenshots = true;
+        clock = true;
+        indicator = true;
+        indicator-radius = 100;
+        indicator-thickness = 7;
+        effect-blur = "7x5";
+        effect-vignette = "0.5:0.5";
+      };
+    };
+
+    # Idle management daemon
+    # See: https://wiki.archlinux.org/title/Swayidle
+    # See: https://mynixos.com/home-manager/options/services.swayidle
+    # See: https://github.com/swaywm/swayidle
+    services.swayidle = {
+      enable = true;
+      events = [
+        # Lock screen before sleep/suspend
+        { event = "before-sleep"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+        # Lock when systemd requests lock
+        { event = "lock"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      ];
+      timeouts = [
+        # Lock screen after 30 minutes of idle (1800 seconds)
+        { timeout = 1800; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      ];
+    };
 }
