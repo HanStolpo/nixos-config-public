@@ -134,6 +134,8 @@ in
       httpie #  a cli http tool like wget/curl, but optimized for api calls
       tealdeer # a shortened version of man pages, focused around example usage
 
+      btop # terminal process monitor like top or htop but prettier and more features
+
     ];
 
     security.pki = {

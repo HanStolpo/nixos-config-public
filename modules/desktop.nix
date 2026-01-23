@@ -95,7 +95,10 @@ in
 
       #anki # spaced repition flash card program - may depend on qtwebengine-5.15.19
 
-      pkgs-unstable.code-cursor-fhs
+      #pkgs-unstable.code-cursor-fhs
+
+      neovide # gui for nvim
+      imv # light weight wayland native image viewer good for svgs
     ];
 
 
