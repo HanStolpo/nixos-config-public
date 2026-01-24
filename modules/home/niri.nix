@@ -59,6 +59,7 @@
 
       outputs = {
           "Dell Inc. DELL P2715Q V7WP955MA1XS" = {
+           scale = 1.25;
           };
 
           "eDP-1" = {
