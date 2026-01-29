@@ -165,8 +165,8 @@
               { app-id = "^firefox$"; }
               { app-id = "^google-chrome$"; }
             ];
-            open-on-workspace = "browser";
-            open-maximized = true;
+            #open-on-workspace = "browser";
+            #open-maximized = true;
         }
       ];
 
