@@ -129,7 +129,8 @@ in
 
       trashy # use trash command instead of rm to avoid accidental deletions
 
-      pkgs-unstable.claude-code
+      pkgs-unstable.claude-code    # for claude code my ai overlord
+      pkgs-unstable.playwright-mcp # to allow claude code to test my web apps
 
       httpie #  a cli http tool like wget/curl, but optimized for api calls
       tealdeer # a shortened version of man pages, focused around example usage
