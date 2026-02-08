@@ -17,3 +17,4 @@ git-hooks
 .cursor
 .vscode
 .claude
+.playwright-mcp
