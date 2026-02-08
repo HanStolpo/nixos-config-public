@@ -489,8 +489,11 @@ keymap({ "n", "v" }, "<leader>cr", function()
   local mode = vim.fn.mode()
 
   if mode == "v" or mode == "V" or mode == "\22" then
-    start_line = vim.fn.line("'<")
-    end_line = vim.fn.line("'>")
+    -- Use getpos to get current visual selection (marks aren't set until exit)
+    local visual_start = vim.fn.getpos("v")[2]
+    local cursor_pos = vim.fn.getpos(".")[2]
+    start_line = math.min(visual_start, cursor_pos)
+    end_line = math.max(visual_start, cursor_pos)
   else
     start_line = vim.fn.line(".")
     end_line = start_line
