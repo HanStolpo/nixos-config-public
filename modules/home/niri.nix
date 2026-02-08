@@ -187,7 +187,7 @@
 
       switch-events = {
         # Lock screen when lid closes (swayidle handles lock-before-suspend)
-        lid-close.action.spawn = ["qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"];
+        #lid-close.action.spawn = ["qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"];
       };
 
       workspaces = {
