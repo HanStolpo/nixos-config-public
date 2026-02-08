@@ -416,6 +416,21 @@ in
             }
           )
 
+          (
+            # Restart kmonad service when Kinesis mWave keyboard connects/disconnects
+            pkgs.writeTextFile {
+              name = "kinesis-mwave-kmonad";
+              text = ''
+                # Restart kmonad service when Kinesis keyboard connects
+                SUBSYSTEM=="input", ATTRS{idVendor}=="29ea", ATTRS{idProduct}=="1001", KERNEL=="event*", ACTION=="add", RUN+="${pkgs.systemd}/bin/systemctl restart kmonad-knesis-mwave.service"
+                # Stop kmonad service when Kinesis keyboard disconnects
+                SUBSYSTEM=="input", ATTRS{idVendor}=="29ea", ATTRS{idProduct}=="1001", KERNEL=="event*", ACTION=="remove", RUN+="${pkgs.systemd}/bin/systemctl stop kmonad-knesis-mwave.service"
+              '';
+              executable = false;
+              destination = "/etc/udev/rules.d/99-kinesis-mwave-kmonad.rules";
+            }
+          )
+
         ];
 
 

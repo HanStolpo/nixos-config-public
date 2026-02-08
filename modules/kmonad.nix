@@ -31,6 +31,16 @@ in
       kmonad
     ];
 
+    # Configure all kmonad services to restart on failure
+    systemd.services = mapAttrs' (name: _:
+      nameValuePair "kmonad-${name}" {
+        serviceConfig = {
+          # Restart = "on-failure"; # this is already "always"
+          RestartSec = "1s";
+        };
+      }
+    ) cfg.keyboards;
+
     services.kmonad = {
       enable = true;
 
