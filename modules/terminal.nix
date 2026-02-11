@@ -137,6 +137,10 @@ in
 
       btop # terminal process monitor like top or htop but prettier and more features
 
+      watchexec # execute commands when files change
+
+      unixtools.net-tools # for netstat
+
     ];
 
     security.pki = {
