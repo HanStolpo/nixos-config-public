@@ -37,6 +37,7 @@ in
 
     environment.systemPackages = with pkgs; [
       noctalia-shell
+      gpu-screen-recorder
     ];
 
     # Enable services required by noctalia to function properly

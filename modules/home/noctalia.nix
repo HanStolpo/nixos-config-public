@@ -21,6 +21,40 @@
 
   programs.noctalia-shell = {
     enable = true;
+
+    plugins = {
+      sources = [
+        {
+          enabled = true;
+          name = "Official Noctalia Plugins";
+          url = "https://github.com/noctalia-dev/noctalia-plugins";
+        }
+      ];
+      states = {
+        screen-recorder = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        screenshot = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        tailscale = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        unicode-picker = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        simple-notes = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+      };
+      version = 2;
+    };
+
     settings = {
 
       wallpaper = {
@@ -79,6 +113,14 @@
             }
           ];
           right = [
+            { id = "simple-notes";
+            }
+            { id = "unicode-picker";
+            }
+            { id = "screen-shot";
+            }
+            { id = "screen-recorder";
+            }
             { id = "SystemMonitor";
             }
             {
@@ -92,6 +134,8 @@
               id = "Clock";
               useMonospacedFont = true;
               usePrimaryColor = true;
+            }
+            { id = "tailscale";
             }
             {
               id = "Tray";
