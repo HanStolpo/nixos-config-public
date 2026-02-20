@@ -22,6 +22,12 @@ in
           users = [ "handre" ];  # Users to add to nordvpn group
         };
 
+        # allow cross compiling aarch64
+        boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+        # nixpkgs.crossSystem = {
+        #   system = "aarch64-linux";
+        # };
+
 
         hanstolpo = {
 
