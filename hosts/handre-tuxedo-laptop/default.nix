@@ -146,6 +146,7 @@ in
           wdisplays
           wf-recorder
           slurp
+          wtp
           #pkgs-unstable.davinci-resolve
         ];
 

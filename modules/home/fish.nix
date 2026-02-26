@@ -59,6 +59,11 @@
         atuin init fish | source
       end
 
+      # wtp (git worktree management) shell integration
+      if command -q wtp
+        wtp shell-init fish | source
+      end
+
       # Load base16 theme if set
       # Export base16_theme so child processes (like neovim) can see it
       # Universal variables are not automatically exported to child processes
