@@ -142,7 +142,7 @@ in
           #jitsi-meet-electron
           signal-desktop
           pavucontrol
-          xournalpp # note taking software with PDF annotation support
+          # xournalpp # note taking software with PDF annotation support
           wdisplays
           wf-recorder
           slurp
