@@ -18,3 +18,4 @@ git-hooks
 .vscode
 .claude
 .playwright-mcp
+.wtp.yml
