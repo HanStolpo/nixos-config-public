@@ -29,7 +29,8 @@ in
 
       shotwell # photo organizer tool for gnome
 
-      flameshot # easy screenshot tool
+      annotator # annotate images
+      #flameshot # easy screenshot tool
       #kdePackages.spectacle # take screen shots annotate images
       gv # postscript viewer
       ghostscript # 
