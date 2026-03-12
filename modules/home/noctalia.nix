@@ -85,7 +85,7 @@
               id = "Launcher";
             }
             {
-              id = "WiFi";
+              id = "Network";
             }
             {
               id = "Bluetooth";
@@ -113,29 +113,24 @@
             }
           ];
           right = [
-            { id = "simple-notes";
+            { id = "plugin:screenshot";
             }
-            { id = "unicode-picker";
+            { id = "plugin:screen-recorder";
             }
-            { id = "screen-shot";
-            }
-            { id = "screen-recorder";
+            { id = "plugin:simple-notes";
             }
             { id = "SystemMonitor";
             }
             {
-              alwaysShowPercentage = false;
               id = "Battery";
-              warningThreshold = 30;
+              hideIfNotDetected = true;
             }
             {
               formatHorizontal = "HH:mm";
               formatVertical = "HH mm";
               id = "Clock";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
             }
-            { id = "tailscale";
+            { id = "plugin:tailscale";
             }
             {
               id = "Tray";
