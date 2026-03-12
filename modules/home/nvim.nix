@@ -60,6 +60,8 @@ in
       vim-localvimrc
       vim-leader-guide
 
+      vim-hoogle
+
       coffee-script
 
       ack-vim        # search with ag
