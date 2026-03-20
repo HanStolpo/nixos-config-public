@@ -16,7 +16,7 @@
     settings = {
       # Input configuration
       input = {
-        workspace-auto-back-and-forth = true;
+        workspace-auto-back-and-forth = false;
 
         warp-mouse-to-focus.enable = true;
 
@@ -194,13 +194,31 @@
         chat = {
           open-on-output = "eDP-1";
         };
-        dev1 = {
-          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
-        };
         browser = {
           open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
         };
+        arb1 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        arb2 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        arb3 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        arb4 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        dev1 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
         dev2 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        dev3 = {
+          open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
+        };
+        dev4 = {
           open-on-output = "Dell Inc. DELL P2715Q V7WP955MA1XS";
         };
       };
@@ -336,28 +354,30 @@
 
         # Focus specific workspace
         "Mod+1".action.focus-workspace = "chat";
-        "Mod+2".action.focus-workspace = "dev1";
-        "Mod+3".action.focus-workspace = "browser";
-        "Mod+4".action.focus-workspace = "dev2";
-        # Same for other hand
-        "Mod+7".action.focus-workspace = "chat";
-        "Mod+8".action.focus-workspace = "dev1";
-        "Mod+9".action.focus-workspace = "browser";
-        "Mod+0".action.focus-workspace = "dev2";
+        "Mod+2".action.focus-workspace = "browser";
+        "Mod+3".action.focus-workspace = "arb1";
+        "Mod+4".action.focus-workspace = "arb2";
+        "Mod+5".action.focus-workspace = "arb3";
+        "Mod+6".action.focus-workspace = "arb4";
+        "Mod+7".action.focus-workspace = "dev1";
+        "Mod+8".action.focus-workspace = "dev2";
+        "Mod+9".action.focus-workspace = "dev3";
+        "Mod+0".action.focus-workspace = "dev4";
         # Focus the previously focussed workspace
         "Mod+B".action.focus-workspace-previous = {};
 
 
-        # # Move column to specific workspace
-        # "Mod+Ctrl+1".action.move-column-to-workspace = 1;
-        # "Mod+Ctrl+2".action.move-column-to-workspace = 2;
-        # "Mod+Ctrl+3".action.move-column-to-workspace = 3;
-        # "Mod+Ctrl+4".action.move-column-to-workspace = 4;
-        # "Mod+Ctrl+5".action.move-column-to-workspace = 5;
-        # "Mod+Ctrl+6".action.move-column-to-workspace = 6;
-        # "Mod+Ctrl+7".action.move-column-to-workspace = 7;
-        # "Mod+Ctrl+8".action.move-column-to-workspace = 8;
-        # "Mod+Ctrl+9".action.move-column-to-workspace = 9;
+        # Move column to specific workspace
+        "Mod+Ctrl+1".action.move-column-to-workspace = "chat";
+        "Mod+Ctrl+2".action.move-column-to-workspace = "browser";
+        "Mod+Ctrl+3".action.move-column-to-workspace = "arb1";
+        "Mod+Ctrl+4".action.move-column-to-workspace = "arb2";
+        "Mod+Ctrl+5".action.move-column-to-workspace = "arb3";
+        "Mod+Ctrl+6".action.move-column-to-workspace = "arb4";
+        "Mod+Ctrl+7".action.move-column-to-workspace = "dev1";
+        "Mod+Ctrl+8".action.move-column-to-workspace = "dev2";
+        "Mod+Ctrl+9".action.move-column-to-workspace = "dev3";
+        "Mod+Ctrl+0".action.move-column-to-workspace = "dev4";
 
         # Consume/expel window from column
         "Mod+BracketLeft".action.consume-or-expel-window-left = { };
@@ -384,8 +404,8 @@
         "Mod+Shift+Equal".action.set-window-height = "+10%";
 
         # Floating windows
-        "Mod+V".action.toggle-window-floating = { };
-        "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = { };
+        "Mod+Shift+V".action.toggle-window-floating = { };
+        "Mod+V".action.switch-focus-between-floating-and-tiling = { };
 
         # Tab display mode
         "Mod+Shift+W".action.toggle-column-tabbed-display = { };
