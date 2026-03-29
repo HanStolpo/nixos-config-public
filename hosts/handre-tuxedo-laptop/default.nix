@@ -258,20 +258,11 @@ in
           fsType = "zfs";
         };
 
-        "/home/handre/code/circuithub/master/client" = {
-          device = "tank/home/handre/code/circuithub/master/client";
+        "/home/handre/code/circuithub/master/.git" = {
+          device = "tank/home/handre/code/circuithub/master/.git";
           fsType = "zfs";
         };
 
-        "/home/handre/code/circuithub/master/dist-newstyle" = {
-          device = "tank/home/handre/code/circuithub/master/dist-newstyle";
-          fsType = "zfs";
-        };
-
-        "/home/handre/code/circuithub/master/client/node_modules" = {
-          device = "tank/home/handre/code/circuithub/master/client/node_modules";
-          fsType = "zfs";
-        };
       };
 
         # Snapshots and maintenance
