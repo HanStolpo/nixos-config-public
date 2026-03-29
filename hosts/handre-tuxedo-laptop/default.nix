@@ -174,7 +174,12 @@ in
           # https://nixos.wiki/wiki/AMD_GPU
           "radeon.cik_support=0"
           "amdgpu.cik_support=1"
+          # ZFS tuning for 64GB RAM + heavy compilation
+          "zfs.zfs_arc_max=17179869184"
         ];
+        boot.extraModprobeConfig = ''
+          options zfs zfs_arc_meta_limit=8589934592
+        '';
         hardware.tuxedo-drivers.enable = true;
         hardware.tuxedo-rs.enable = true;
         hardware.tuxedo-rs.tailor-gui.enable = true;
@@ -188,24 +193,121 @@ in
         boot.loader.generationsDir.copyKernels = true;
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
-
-        fileSystems = {
-          "/" =
-            {
-              device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
-              fsType = "ext4";
-            };
-          "/boot" =
-            {
-              device = "/dev/disk/by-uuid/C7A9-3E53";
-              fsType = "vfat";
-            };
+        boot.supportedFilesystems = ["zfs"];
+        boot.zfs = {
+          devNodes = "/dev/disk/by-partlabel";
+          forceImportRoot = false;
+          requestEncryptionCredentials = true;
         };
 
-        boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/920eb5ec-e62f-415c-aefd-26a9cc7f3762";
 
-        swapDevices =
-          [{ device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }];
+      fileSystems = {
+        "/" = {
+          device = "tank/system/root";
+          fsType = "zfs";
+        };
+
+        "/boot" = {
+          device = "/dev/disk/by-partlabel/BOOT";
+          fsType = "vfat";
+          options = [ "X-mount.mkdir" "iocharset=iso8859-1" ];
+        };
+
+        "/nix" = {
+          device = "tank/system/nix";
+          fsType = "zfs";
+        };
+
+        "/var" = {
+          device = "tank/system/var";
+          fsType = "zfs";
+        };
+
+        "/var/lib" = {
+          device = "tank/system/var/lib";
+          fsType = "zfs";
+        };
+
+        "/var/lib/restic" = {
+          device = "tank/system/var/lib/restic";
+          fsType = "zfs";
+        };
+
+        "/home" = {
+          device = "tank/home";
+          fsType = "zfs";
+        };
+
+        "/home/handre" = {
+          device = "tank/home/handre";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code" = {
+          device = "tank/home/handre/code";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code/circuithub" = {
+          device = "tank/home/handre/code/circuithub";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code/circuithub/master" = {
+          device = "tank/home/handre/code/circuithub/master";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code/circuithub/master/client" = {
+          device = "tank/home/handre/code/circuithub/master/client";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code/circuithub/master/dist-newstyle" = {
+          device = "tank/home/handre/code/circuithub/master/dist-newstyle";
+          fsType = "zfs";
+        };
+
+        "/home/handre/code/circuithub/master/client/node_modules" = {
+          device = "tank/home/handre/code/circuithub/master/client/node_modules";
+          fsType = "zfs";
+        };
+      };
+
+        # Snapshots and maintenance
+        services.zfs.autoSnapshot = {
+          enable = true;
+          frequent = 4;
+          hourly = 24;
+          daily = 7;
+          weekly = 4;
+          monthly = 12;
+        };
+        services.zfs.autoScrub = {
+          enable = true;
+          interval = "weekly";
+        };
+
+        # Allow user to manage ZFS
+        security.sudo.enable = true;
+
+        # fileSystems = {
+        #   "/" =
+        #     {
+        #       device = "/dev/disk/by-uuid/1aff7ddd-37c1-4379-8487-eb2de56465fa";
+        #       fsType = "ext4";
+        #     };
+        #   "/boot" =
+        #     {
+        #       device = "/dev/disk/by-uuid/C7A9-3E53";
+        #       fsType = "vfat";
+        #     };
+        # };
+
+        # boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/920eb5ec-e62f-415c-aefd-26a9cc7f3762";
+
+        # swapDevices =
+        #   [{ device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }];
 
         networking.useDHCP = !config.hanstolpo.noctalia.enable;
 
@@ -255,6 +357,7 @@ in
         '';
 
         networking = {
+          hostId = "ce1223f3";
           hostName = "handre-tuxedo-laptop"; # Define your hostname.
           wireless = {
             #interfaces = [ "wlp3s0" ];
