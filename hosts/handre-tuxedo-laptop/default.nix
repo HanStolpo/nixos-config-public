@@ -1,6 +1,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 let
-  kernel = pkgs.linuxPackages;
+  # Using latest kernel (6.19.7) to avoid scheduler spinlock bugs in 6.12.x
+  # See README/crash-report/hard-lockup-31-03-2026.md
+  kernel = pkgs.linuxPackages_latest;
   enableSSH = false;
   dpi = 122;
   laptopDpi = 96;
@@ -176,6 +178,9 @@ in
           "amdgpu.cik_support=1"
           # ZFS tuning for 64GB RAM + heavy compilation
           "zfs.zfs_arc_max=17179869184"
+          # Disable scheduler autogroup to avoid spinlock deadlock
+          # See README/crash-report/hard-lockup-31-03-2026.md
+          "noautogroup"
         ];
         boot.extraModprobeConfig = ''
           options zfs zfs_arc_meta_limit=8589934592
