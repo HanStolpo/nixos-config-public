@@ -234,7 +234,7 @@
 
         # Spawn application launcher
         "Mod+D" = {
-          action.spawn-sh = "qs -c noctalia-shell ipc call launcher toggle";
+          action.spawn-sh = "noctalia-shell ipc call launcher toggle";
           hotkey-overlay.title = "launcher";
         };
 
@@ -244,7 +244,7 @@
         # Screen locking (using noctalia-shell)
         # swaylock-effects is configured as fallback in general.nix
         "Mod+Alt+L" = {
-          action.spawn-sh = "qs -c noctalia-shell ipc call lockScreen lock";
+          action.spawn-sh = "noctalia-shell ipc call lockScreen lock";
           hotkey-overlay.title = "lock screen";
           # allow locking again if the lock screen crashes
           allow-when-locked = true;
@@ -265,7 +265,7 @@
 
         # session menu
         "Mod+S" = {
-          action.spawn-sh = "qs -c noctalia-shell ipc call sessionMenu toggle";
+          action.spawn-sh = "noctalia-shell ipc call sessionMenu toggle";
           hotkey-overlay.title = "session menu";
         };
 
