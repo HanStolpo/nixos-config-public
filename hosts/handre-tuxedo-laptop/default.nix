@@ -181,6 +181,12 @@ in
           # Disable scheduler autogroup to avoid spinlock deadlock
           # See README/crash-report/hard-lockup-31-03-2026.md
           "noautogroup"
+          # Workarounds for s2idle resume black screen (amdgpu)
+          # See README/crash-report/s2idle-resume-failure-01-04-2026.md
+          "amdgpu.dcdebugmask=0x10" # disable PSR (Panel Self Refresh)
+          "amdgpu.runpm=0" # disable amdgpu runtime power management
+          "pm_debug_messages" # verbose PM logging for diagnosing suspend/resume
+          "no_console_suspend" # keep console alive during suspend/resume
         ];
         boot.extraModprobeConfig = ''
           options zfs zfs_arc_meta_limit=8589934592
@@ -342,12 +348,12 @@ in
         # https://www.reddit.com/r/systemd/comments/mlwouv/comment/gto2dmt/?utm_source=share&utm_medium=web2x&context=3
         # https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html
         # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#System_does_not_power_off_when_hibernating
+        # SuspendMode= and HibernateState= removed — no longer supported by systemd
+        # See README/crash-report/s2idle-resume-failure-01-04-2026.md
         systemd.sleep.extraConfig = ''
           HibernateDelaySec=1h
-          SuspendMode=
           SuspendState=mem
           HibernateMode=platform
-          HibernateState=disk
           AllowHybridSleep=no
           AllowSuspendThenHibernate=no
         '';
