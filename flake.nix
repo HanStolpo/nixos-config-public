@@ -89,7 +89,7 @@
           };
         in
         {
-          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp;
+          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp coderabbit;
           inherit (pkgs.tree-sitter-grammars) tree-sitter-d2;
         };
 
