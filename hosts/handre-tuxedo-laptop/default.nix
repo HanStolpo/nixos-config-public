@@ -183,8 +183,8 @@ in
           "noautogroup"
           # Workarounds for s2idle resume black screen (amdgpu)
           # See README/crash-report/s2idle-resume-failure-01-04-2026.md
-          "amdgpu.dcdebugmask=0x10" # disable PSR (Panel Self Refresh)
-          "amdgpu.runpm=0" # disable amdgpu runtime power management
+          #"amdgpu.dcdebugmask=0x10" # disable PSR (Panel Self Refresh)
+          #"amdgpu.runpm=0" # disable amdgpu runtime power management
           "pm_debug_messages" # verbose PM logging for diagnosing suspend/resume
           "no_console_suspend" # keep console alive during suspend/resume
         ];
