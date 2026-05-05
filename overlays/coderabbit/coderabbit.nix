@@ -22,13 +22,14 @@ stdenv.mkDerivation {
   };
   buildInputs = [ patchelf unzip ];
   dontUnpack = true;
+  dontInstall = true;
+  dontFixup = true;
   buildPhase = ''
     export INTERPRETER=$(cat $NIX_CC/nix-support/dynamic-linker)
     echo "INTERPRETER=$INTERPRETER"
 
     mkdir -p $out/bin
     unzip $src -d $out/bin
-    chmod +wx $out/bin/coderabbit
 
     echo "patching interpreter"
     patchelf --set-interpreter \
