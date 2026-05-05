@@ -2,7 +2,8 @@
 let
   # Using latest kernel (6.19.7) to avoid scheduler spinlock bugs in 6.12.x
   # See README/crash-report/hard-lockup-31-03-2026.md
-  kernel = pkgs.linuxPackages_latest;
+  # switching from 6.19 latest to earlier 6.18 for better compatibility with niri and the display etc.
+  kernel = pkgs.linuxPackages_6_18;
   enableSSH = false;
   dpi = 122;
   laptopDpi = 96;
@@ -150,6 +151,10 @@ in
           slurp
           wtp
           #pkgs-unstable.davinci-resolve
+
+          # opencl https://nixos.wiki/wiki/AMD_GPU#OpenCL
+          rocmPackages.clr.icd
+          clinfo
         ];
 
         boot.tmp.cleanOnBoot = true;
@@ -174,8 +179,13 @@ in
           "i8042.nopnp"
           "i8042.noloop"
           # https://nixos.wiki/wiki/AMD_GPU
-          "radeon.cik_support=0"
-          "amdgpu.cik_support=1"
+          # card is a Radeon Graphics 512SP so GCN 5.1 architecture
+          # GPU Generation     | Series                | Architecture | HIP Support          | Ray Tracing | AI Acceleration | Vulkan Support
+          # GCN 5th Gen (Vega) | Radeon RX Vega Series | GCN 5.0      | Yes (up to ROCm 5.6) | No          | No              | Vulkan 1.1
+          # so no need for the cik_support bits below
+          # "radeon.cik_support=0"
+          # "amdgpu.cik_support=1"
+
           # ZFS tuning for 64GB RAM + heavy compilation
           "zfs.zfs_arc_max=17179869184"
           # Disable scheduler autogroup to avoid spinlock deadlock
@@ -323,12 +333,12 @@ in
           enable = true;
           enable32Bit = true;
           # I guess for video acceleration support
-          extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+          extraPackages32 = with pkgs.pkgsi686Linux; [ 
+            libva
+          ];
           extraPackages = with pkgs;
             [
               libva
-              #rocmPackages.rpp-opencl
-              #rocm-opencl-runtime
             ];
         };
 
