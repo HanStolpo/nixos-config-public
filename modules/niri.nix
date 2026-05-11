@@ -26,6 +26,9 @@ in
       ];
     });
 
+    #programs.niri.package = pkgs.pkgs-unstable.niri;
+    programs.niri.package = pkgs.niri-unstable;
+
     environment.systemPackages = with pkgs; [
       alacritty # gpu accelerated terminal
       wayland

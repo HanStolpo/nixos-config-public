@@ -107,6 +107,8 @@
 
       # Spawn at startup
       spawn-at-startup = [
+        { command = ["noctalia-shell"]; }
+        #{ argv = ["qs" "-c" "noctalia-shell"]; }
         # { argv = ["slack"]; }
         # { argv = ["signal"]; }
         # { argv = ["dropbox"]; }
@@ -173,6 +175,8 @@
       debug = {
         # Allows notification actions and window activation from Noctalia.
         honor-xdg-activation-with-invalid-serial = {};
+        # monitors are misconfigured after resume
+        force-disable-connectors-on-resume = {};
       };
 
       overview = {
@@ -402,6 +406,10 @@
         "Mod+Equal".action.set-column-width = "+10%";
         "Mod+Shift+Minus".action.set-window-height = "-10%";
         "Mod+Shift+Equal".action.set-window-height = "+10%";
+
+
+        "Mod+M".action.power-on-monitors = { };
+        "Mod+Shift+M".action.power-off-monitors = { };
 
         # Floating windows
         "Mod+Shift+V".action.toggle-window-floating = { };
