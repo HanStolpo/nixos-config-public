@@ -394,11 +394,24 @@ in
           enableIPv6 = true;
         };
 
+        # We want to use networkd to manage container networking automatically but use networkmanager for laptop wifi / lan networking
+        networking.networkmanager.unmanaged = [ "interface-name:vz-*" "interface-name:ve-*" ];
+        systemd.network.enable = true;                    # turn networkd on
+        networking.useNetworkd = false;                   # but don't let it manage everything
+        systemd.network.wait-online.enable = false;      # networkd only manages container interfaces; NetworkManager handles real connectivity
         services.resolved = {
           enable = true;
           dnssec = "allow-downgrade";
           domains = [ "~." ];
         };
+        # enable NAT so that nspawn containers can access outside world with bridge networking managed by networkd
+        # NAT as before
+        networking.nat = {
+          enable = true;
+          internalInterfaces = [ "vz-dev" ];
+          externalInterface = "wlp0s20f3";
+        };
+
         services.dnsmasq.enable = false;
 
         #Select internationalisation properties.
