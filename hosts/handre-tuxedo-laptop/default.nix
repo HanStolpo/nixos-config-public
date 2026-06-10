@@ -378,18 +378,7 @@ in
             # networkd seems to give some errors and useNetworkd has this warning 'Whether we should use networkd as the network configuration backend or the legacy script based system. Note that this option is experimental, enable at your own risk.'
             # useNetworkd = true;
           };
-          nameservers = [ "127.0.0.1" "8.8.8.8" ];
-          hosts = {
-            "192.168.1.1" = [ "router.asus.com" ];
-          };
-
-          enableIPv6 = true;
-        };
-
-        services.dnsmasq = {
-          enable = true;
-          settings.server =
-            [
+          nameservers = [
               # https://quad9.net/asus/safe/
               "9.9.9.9"
               "149.112.112.112"
@@ -397,11 +386,20 @@ in
               # # google dns
               # "8.8.8.8"
               # "8.8.8.4"
+          ];
+          hosts = {
+            "192.168.1.1" = [ "router.asus.com" ];
+          };
 
-              # local lan DNS
-              "192.168.1.1"
-            ];
+          enableIPv6 = true;
         };
+
+        services.resolved = {
+          enable = true;
+          dnssec = "allow-downgrade";
+          domains = [ "~." ];
+        };
+        services.dnsmasq.enable = false;
 
         #Select internationalisation properties.
         i18n = {
