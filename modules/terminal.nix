@@ -76,7 +76,6 @@ in
       cabal2nix # Convert Cabal files into Nix build instructions
       perl # The standard implementation of the Perl 5 programmming language
       #heroku # Everything you need to get started using Heroku
-      nodePackages.node2nix # generate nix from node packages
       gdb # debugger
       # json
       jq

@@ -105,6 +105,7 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      brightnessctl # backlight control (replacement for programs.light)
       haswaynav # customize navigation in sway
       alacritty # gpu accelerated terminal
       swayCustom
@@ -142,9 +143,6 @@ in
       nerd-fonts.symbols-only
       nerd-fonts.roboto-mono
     ];
-
-    programs.light.enable = true;
-
 
     # xdg-desktop-portal works by exposing a series of D-Bus interfaces
     # known as portals under a well-known name

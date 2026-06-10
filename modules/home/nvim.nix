@@ -23,12 +23,13 @@ in
     vimAlias = true;
     viAlias = true;
     withPython3 = true;
+    withRuby = false;
 
     # Runtime dependencies available to neovim (automatically added to PATH)
     extraPackages = runtimeDeps;
 
     # Load consolidated lua config
-    extraLuaConfig = builtins.readFile ../nvim/config.lua;
+    initLua = builtins.readFile ../nvim/config.lua;
 
     # Vimscript config for things that need nix interpolation
     extraConfig = ''
@@ -53,16 +54,16 @@ in
       auto-session
       mini-nvim
 
-      Tabular        # Align text
-      extradite      # extends fugitive for git log commit browse
-      fugitive       # git integration
+      tabular        # Align text
+      vim-extradite  # extends fugitive for git log commit browse
+      vim-fugitive   # git integration
       vim-rhubarb    # Gbrowse support for fugitive
       vim-localvimrc
       vim-leader-guide
 
       vim-hoogle
 
-      coffee-script
+      vim-coffee-script
 
       ack-vim        # search with ag
 

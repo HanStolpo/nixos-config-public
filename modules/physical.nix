@@ -17,9 +17,9 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [
-      xorg.xinit # for startx when messing around with extra displays or playing with xmonad
-      xorg.xbacklight # control backlight of screen
-      xorg.xdpyinfo # display DPI info
+      xinit # for startx when messing around with extra displays or playing with xmonad
+      xbacklight # control backlight of screen
+      xdpyinfo # display DPI info
       simple-scan # Simple scanning utility
       physlock
       usbutils # Tools for working with USB devices, such as lsusb

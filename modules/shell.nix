@@ -69,7 +69,6 @@ in
       babelfish
       bashInteractive # GNU Bourne-Again Shell, the de facto standard shell on Linux (for interactive use)
       powerline-go # custom shell prompt shared by bash and zsh
-      termite # vi like terminal easy to customize
       alacritty # vi like terminal emulator which is OpenGL accelerated
       starship
 

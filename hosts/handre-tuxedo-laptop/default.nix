@@ -134,7 +134,6 @@ in
           spice
           #kdePackages.breeze-icons # depends on qtwebengine-5.15.19
           wally-cli
-          xloadimage
           v4l-utils
           guvcview
           proot
@@ -360,21 +359,21 @@ in
         # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#System_does_not_power_off_when_hibernating
         # SuspendMode= and HibernateState= removed — no longer supported by systemd
         # See README/crash-report/s2idle-resume-failure-01-04-2026.md
-        systemd.sleep.extraConfig = ''
-          HibernateDelaySec=1h
-          SuspendState=mem
-          HibernateMode=platform
-          AllowHybridSleep=no
-          AllowSuspendThenHibernate=no
-        '';
+        systemd.sleep.settings.Sleep = {
+          HibernateDelaySec = "1h";
+          SuspendState = "mem";
+          HibernateMode = "platform";
+          AllowHybridSleep = "no";
+          AllowSuspendThenHibernate = "no";
+        };
 
         networking = {
           hostId = "ce1223f3";
           hostName = "handre-tuxedo-laptop"; # Define your hostname.
           wireless = {
             #interfaces = [ "wlp3s0" ];
-            enable = !config.hanstolpo.noctalia.enable; # Enables wireless support via wpa_supplicant.
-            userControlled.enable = true;
+            enable = config.hanstolpo.noctalia.enable; # Enables wireless support via wpa_supplicant.
+            userControlled = true;
             # networkd seems to give some errors and useNetworkd has this warning 'Whether we should use networkd as the network configuration backend or the legacy script based system. Note that this option is experimental, enable at your own risk.'
             # useNetworkd = true;
           };
@@ -401,8 +400,10 @@ in
         systemd.network.wait-online.enable = false;      # networkd only manages container interfaces; NetworkManager handles real connectivity
         services.resolved = {
           enable = true;
-          dnssec = "allow-downgrade";
-          domains = [ "~." ];
+          settings.Resolve = {
+            DNSSEC = "allow-downgrade";
+            Domains = [ "~." ];
+          };
         };
         # enable NAT so that nspawn containers can access outside world with bridge networking managed by networkd
         # NAT as before

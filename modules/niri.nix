@@ -30,6 +30,7 @@ in
     programs.niri.package = pkgs.niri-unstable;
 
     environment.systemPackages = with pkgs; [
+      brightnessctl # backlight control (replacement for programs.light)
       alacritty # gpu accelerated terminal
       wayland
       glib # gsettings
@@ -63,9 +64,6 @@ in
       nerd-fonts.symbols-only
       nerd-fonts.roboto-mono
     ];
-
-    programs.light.enable = true;
-
 
     # xdg-desktop-portal works by exposing a series of D-Bus interfaces
     # known as portals under a well-known name

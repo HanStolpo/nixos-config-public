@@ -184,14 +184,13 @@
     # See: https://github.com/swaywm/swayidle
     services.swayidle = {
       enable = true;
-      events = [
+      events = {
         # Lock screen before sleep/suspend
-        { event = "before-sleep"; command = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock"; }
-        #{ event = "before-sleep"; command = "${pkgs.niri}/bin/niri msg action power-off-monitors"; }
-        { event = "after-resume"; command = "${pkgs.niri}/bin/niri msg action power-on-monitors"; }
+        before-sleep = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
+        after-resume = "${pkgs.niri}/bin/niri msg action power-on-monitors";
         # Lock when systemd requests lock
-        { event = "lock"; command = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock"; }
-      ];
+        lock = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
+      };
       timeouts = [
         # Lock screen after 30 minutes of idle (1800 seconds)
         { timeout = 1800; command = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock"; }

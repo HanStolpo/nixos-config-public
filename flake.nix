@@ -2,7 +2,7 @@
   description = "HanStolpo's NixOS systems flake";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-25.11;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-26.05;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixos-unstable;
 
     kmonad = {
@@ -16,12 +16,12 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.11";
+      url = "github:nix-community/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -70,7 +70,7 @@
         pkgs-unstable =
           final: prev: {
             pkgs-unstable = import nixpkgs-unstable {
-              system = final.system;
+              localSystem = final.stdenv.hostPlatform.system;
               config.allowUnfree = true;
             };
           };
@@ -109,6 +109,7 @@
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
 
             nixpkgs = {
+              hostPlatform = "x86_64-linux";
               config.allowUnfree = true;
               overlays = builtins.attrValues self.overlays ++ [
                 haswaynav.overlays.default
@@ -157,8 +158,6 @@
             };
           };
           mkHost = host: {
-            system = "x86_64-linux";
-
             modules =
               builtins.attrValues self.nixosModules ++
               [
@@ -169,8 +168,6 @@
                 home-manager.nixosModules.home-manager
 
                 stylix.nixosModules.stylix
-
-                noctalia.nixosModules.default
 
                 niri.nixosModules.niri
 

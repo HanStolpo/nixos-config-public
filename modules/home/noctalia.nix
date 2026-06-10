@@ -5,55 +5,55 @@
   ];
 
 
-  programs.quickshell = {
-    # we want to include configuration for quickshell
-    # so that the `qs` commands can work.
-    enable = true;
-    # noctalia runs as a service
-    systemd.enable = false;
-    # below is so that it can find the configurations for noctalia
-    activeConfig = "noctalia-shell";
-    configs = {
-      default = "${pkgs.noctalia-shell}/share/noctalia-shell";
-      noctalia-shell = "${pkgs.noctalia-shell}/share/noctalia-shell";
-    };
-  };
+  # programs.quickshell = {
+  #   # we want to include configuration for quickshell
+  #   # so that the `qs` commands can work.
+  #   enable = true;
+  #   # noctalia runs as a service
+  #   systemd.enable = false;
+  #   # below is so that it can find the configurations for noctalia
+  #   activeConfig = "noctalia-shell";
+  #   configs = {
+  #     default = "${pkgs.noctalia-shell}/share/noctalia-shell";
+  #     noctalia-shell = "${pkgs.noctalia-shell}/share/noctalia-shell";
+  #   };
+  # };
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
 
-    plugins = {
-      sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-      states = {
-        screen-recorder = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-        screenshot = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-        tailscale = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-        unicode-picker = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-        simple-notes = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-      version = 2;
-    };
+    # plugins = {
+    #   sources = [
+    #     {
+    #       enabled = true;
+    #       name = "Official Noctalia Plugins";
+    #       url = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     }
+    #   ];
+    #   states = {
+    #     screen-recorder = {
+    #       enabled = true;
+    #       sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     };
+    #     screenshot = {
+    #       enabled = true;
+    #       sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     };
+    #     tailscale = {
+    #       enabled = true;
+    #       sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     };
+    #     unicode-picker = {
+    #       enabled = true;
+    #       sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     };
+    #     simple-notes = {
+    #       enabled = true;
+    #       sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+    #     };
+    #   };
+    #   version = 2;
+    # };
 
     settings = {
 
