@@ -7,10 +7,10 @@
 }:
 
 let
-  version = "0.4.1";
+  version = "0.5.3";
   os = "linux";
   platform = "x64";
-  sha256 = "0g00h4isdwk3hj9mzsl5bbm4h1skdsx5v0sfnn0hmnmnq0ifdswg";
+  sha256 = "19a6sp6kkb4pkvv02mzvmmd1fnan64hvlwg70x430r2b5f6chisa";
 in
 
 stdenv.mkDerivation {
@@ -30,6 +30,7 @@ stdenv.mkDerivation {
 
     mkdir -p $out/bin
     unzip $src -d $out/bin
+    chmod +x $out/bin/coderabbit
 
     echo "patching interpreter"
     patchelf --set-interpreter \
