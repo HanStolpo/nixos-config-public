@@ -247,31 +247,31 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- Plugin: Tree-sitter
 --------------------------------------------------------------------------------
 
-local parser_install_dir = vim.fn.stdpath("state") .. "/treesitter/parsers"
-vim.opt.runtimepath:append(parser_install_dir)
+-- local parser_install_dir = vim.fn.stdpath("state") .. "/treesitter/parsers"
+-- vim.opt.runtimepath:append(parser_install_dir)
 
 -- Register d2 parser
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.d2 = {
-  install_info = {
-    url = "https://github.com/pleshevskiy/tree-sitter-d2",
-    revision = "main",
-    files = { "src/parser.c", "src/scanner.cc" },
-  },
-  filetype = "d2",
-}
+-- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+-- parser_config.d2 = {
+--   install_info = {
+--     url = "https://github.com/pleshevskiy/tree-sitter-d2",
+--     revision = "main",
+--     files = { "src/parser.c", "src/scanner.cc" },
+--   },
+--   filetype = "d2",
+-- }
 
-require("nvim-treesitter.configs").setup({
-  parser_install_dir = parser_install_dir,
-  auto_install = false,
-  highlight = {
-    enable = true,
-    disable = { "markdown" },
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = { enable = true },
-  textobjects = { enable = true },
-})
+-- require("nvim-treesitter.configs").setup({
+--   parser_install_dir = parser_install_dir,
+--   auto_install = false,
+--   highlight = {
+--     enable = true,
+--     disable = { "markdown" },
+--     additional_vim_regex_highlighting = false,
+--   },
+--   incremental_selection = { enable = true },
+--   textobjects = { enable = true },
+-- })
 
 --------------------------------------------------------------------------------
 -- Plugin: Telescope
