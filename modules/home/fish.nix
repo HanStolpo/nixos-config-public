@@ -36,16 +36,16 @@
 
     # Custom functions
     functions = {
-      ch-just-complete = {
-        description = "Load just completions when CH_ROOT is set";
-        onVariable = "CH_ROOT PATH";
-        body = ''
-          if test -n "$CH_ROOT" && which just 2>/dev/null 1>/dev/null
-            echo >&2 "loading just completions"
-            just --completions fish | source
-          end
-        '';
-      };
+      # ch-just-complete = {
+      #   description = "Load just completions when CH_ROOT is set";
+      #   onVariable = "CH_ROOT PATH";
+      #   body = ''
+      #     if test -n "$CH_ROOT" && which just 2>/dev/null 1>/dev/null
+      #       echo >&2 "loading just completions"
+      #       just --completions fish | source
+      #     end
+      #   '';
+      # };
     };
 
     interactiveShellInit = ''
