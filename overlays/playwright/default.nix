@@ -1,5 +1,5 @@
 final: prev: {
- playwright-test = final.pkgs-unstable.playwright-test;
- playwright-driver = final.pkgs-unstable.playwright-driver;
- playwright-mcp = final.pkgs-unstable.playwright-mcp;
+ playwright-test = final.pkgs-playwright-pin.playwright-test;
+ playwright-driver = final.pkgs-playwright-pin.playwright-driver;
+ playwright-mcp = final.pkgs-playwright-pin.playwright-mcp;
 }

@@ -5,6 +5,8 @@
     nixpkgs.url = github:NixOS/nixpkgs/nixos-26.05;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixos-unstable;
 
+    nixpkgs-playwright-pin.url = github:NixOS/nixpkgs/8110df5ad7abf5d4c0f6fb0f8f978390e77f9685;
+
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +43,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, kmonad, haswaynav, home-manager, stylix, noctalia, niri, nordvpn-flake, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-playwright-pin, kmonad, haswaynav, home-manager, stylix, noctalia, niri, nordvpn-flake, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -74,6 +76,14 @@
               config.allowUnfree = true;
             };
           };
+        # we make the nixpkgs-playwright-pin available to the other overlays / modules
+        pkgs-playwright-pin =
+          final: prev: {
+            pkgs-playwright-pin = import nixpkgs-playwright-pin {
+              localSystem = final.stdenv.hostPlatform.system;
+              config.allowUnfree = true;
+            };
+          };
       } // mapImports ./overlays import;
 
 
@@ -90,7 +100,7 @@
           };
         in
         {
-          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp coderabbit;
+          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp coderabbit playwright-mcp;
           inherit (pkgs.tree-sitter-grammars) tree-sitter-d2;
         };
 

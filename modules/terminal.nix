@@ -129,7 +129,7 @@ in
       trashy # use trash command instead of rm to avoid accidental deletions
 
       pkgs-unstable.claude-code    # for claude code my ai overlord
-      pkgs-unstable.playwright-mcp # to allow claude code to test my web apps
+      playwright-mcp # to allow claude code to test my web apps
       coderabbit # AI code review tool
 
       httpie #  a cli http tool like wget/curl, but optimized for api calls
