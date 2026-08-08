@@ -50,8 +50,15 @@ in
             autoLoginUser = "handre";
           };
 
+          # Enable to try out the COSMIC desktop environment;
+          # this automatically disables niri + noctalia below.
+          cosmic = {
+            enable = false;
+            autoLoginUser = "handre";
+          };
+
           niri = {
-            enable = true;
+            enable = !config.hanstolpo.cosmic.enable;
             autoLoginUser = "handre";
           };
 
@@ -62,7 +69,7 @@ in
           dev-services.enable = false;
           battery-management.enable = false;
           noctalia = {
-              enable = true;
+              enable = !config.hanstolpo.cosmic.enable;
               wallpaperDirectory = "/home/handre/nixos-config-public/wallpapers";
               avatarImage = "/home/handre/nixos-config-public/profile-pics/robot-hare-Gemini_Generated_Image_a98ub6a98ub6a98u.png";
           };
@@ -320,7 +327,10 @@ in
         # swapDevices =
         #   [{ device = "/dev/disk/by-uuid/9673d6ae-51cd-4da5-8883-99ffdf606f72"; }];
 
-        networking.useDHCP = !config.hanstolpo.noctalia.enable;
+        # noctalia and cosmic both use NetworkManager which manages DHCP and
+        # wpa_supplicant itself (the NetworkManager module forces useDHCP = false
+        # and wireless.enable = true, so these definitions have to agree with it)
+        networking.useDHCP = !(config.hanstolpo.noctalia.enable || config.hanstolpo.cosmic.enable);
 
         hardware.enableRedistributableFirmware = true; # for wifi driver
         hardware.cpu.amd.updateMicrocode = true;
@@ -372,7 +382,7 @@ in
           hostName = "handre-tuxedo-laptop"; # Define your hostname.
           wireless = {
             #interfaces = [ "wlp3s0" ];
-            enable = config.hanstolpo.noctalia.enable; # Enables wireless support via wpa_supplicant.
+            enable = config.hanstolpo.noctalia.enable || config.hanstolpo.cosmic.enable; # Enables wireless support via wpa_supplicant.
             userControlled = true;
             # networkd seems to give some errors and useNetworkd has this warning 'Whether we should use networkd as the network configuration backend or the legacy script based system. Note that this option is experimental, enable at your own risk.'
             # useNetworkd = true;
