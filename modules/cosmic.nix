@@ -3,6 +3,7 @@
 with lib;
 let
   cfg = config.hanstolpo.cosmic;
+  hmUsers = config.hanstolpo.home-manager.users;
 in
 {
   options = {
@@ -17,10 +18,21 @@ in
         default = null;
         description = "Automatically log in this user via the cosmic-greeter";
       };
+      wallpaperDirectory = mkOption {
+        type = types.str;
+        default = "";
+        description = "Directory with wallpapers for COSMIC to rotate through";
+      };
     };
   };
 
   config = mkIf cfg.enable {
+    home-manager.users = genAttrs hmUsers (user: { pkgs, ... }: {
+      imports = [
+        ./home/cosmic.nix
+      ];
+    });
+
     services.desktopManager.cosmic.enable = true;
     services.displayManager.cosmic-greeter.enable = true;
 

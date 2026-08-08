@@ -55,6 +55,7 @@ in
           cosmic = {
             enable = false;
             autoLoginUser = "handre";
+            wallpaperDirectory = "/home/handre/nixos-config-public/wallpapers";
           };
 
           niri = {

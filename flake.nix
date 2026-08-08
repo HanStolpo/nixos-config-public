@@ -37,13 +37,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # declarative configuration of the COSMIC desktop environment via home-manager
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     nordvpn-flake = {
       url = "github:connerohnesorge/nordvpn-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-playwright-pin, kmonad, haswaynav, home-manager, stylix, noctalia, niri, nordvpn-flake, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-playwright-pin, kmonad, haswaynav, home-manager, stylix, noctalia, niri, cosmic-manager, nordvpn-flake, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -162,7 +169,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
               inputs = {
-                inherit noctalia niri;
+                inherit noctalia niri cosmic-manager;
               };
               inherit (config) hanstolpo;
             };
