@@ -36,6 +36,10 @@ in
     services.desktopManager.cosmic.enable = true;
     services.displayManager.cosmic-greeter.enable = true;
 
+    # all applications are installed declaratively via NixOS, so the COSMIC
+    # app store (which installs Flatpaks) has no use here
+    environment.cosmic.excludePackages = [ pkgs.cosmic-store ];
+
     services.displayManager.autoLogin = mkIf (cfg.autoLoginUser != null) {
       enable = true;
       user = cfg.autoLoginUser;
@@ -49,5 +53,11 @@ in
     # Allow clipboard managers to access the wayland data control protocol
     # https://wiki.nixos.org/wiki/COSMIC
     environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = "1";
+
+
+    environment.systemPackages = with pkgs; [
+      wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+      qt6.qtwayland # support for qt applications on wayland
+    ];
   };
 }

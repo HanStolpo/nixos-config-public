@@ -53,7 +53,7 @@ in
           # Enable to try out the COSMIC desktop environment;
           # this automatically disables niri + noctalia below.
           cosmic = {
-            enable = false;
+            enable = true;
             autoLoginUser = "handre";
             wallpaperDirectory = "/home/handre/nixos-config-public/wallpapers";
           };
@@ -358,6 +358,11 @@ in
         services.logind.settings.Login = {
           HandlePowerKey = "hibernate";
           HandleLidSwitchDocked = "ignore";
+          # keep running with the lid closed whenever on external power, even
+          # with no external monitor: "docked" requires >1 connected display,
+          # and monitors that power off (DPMS / standby) can drop off the
+          # connector, which would otherwise re-trigger the suspend action
+          HandleLidSwitchExternalPower = "ignore";
           HandleLidSwitch = "suspend";
           LidSwitchIgnoreInhibited = "yes";
           PowerKeyIgnoreInhibited = "yes";

@@ -61,7 +61,11 @@ in
 
     # suspend after idel seconds
     # https://bbs.archlinux.org/viewtopic.php?id=208091
-    services.logind.settings.Login = {
+    # Disabled under COSMIC: greetd starts the session as Type=tty, so logind
+    # judges idleness by tty input and never sees Wayland activity — IdleAction
+    # then suspends every IdleActionSec even while actively using the desktop.
+    # cosmic-idle handles suspend-on-idle there instead (see home/cosmic.nix).
+    services.logind.settings.Login = mkIf (!config.hanstolpo.cosmic.enable) {
       IdleAction = "suspend";
       IdleActionSec = "1200";
     };

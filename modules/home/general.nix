@@ -1,5 +1,5 @@
 # general home-manager configuration not moved out into
-{ pkgs, ... }: {
+{ pkgs, hanstolpo, ... }: {
 
     programs.bash.enable = true;
     programs.bash.initExtra = ''
@@ -183,7 +183,10 @@
     # See: https://mynixos.com/home-manager/options/services.swayidle
     # See: https://github.com/swaywm/swayidle
     services.swayidle = {
-      enable = true;
+      # this idle setup is tied to noctalia + niri (the commands below call
+      # noctalia-shell and niri msg); COSMIC runs its own idle daemon
+      # (cosmic-idle), so running swayidle there would conflict with it
+      enable = hanstolpo.noctalia.enable;
       events = {
         # Lock screen before sleep/suspend
         before-sleep = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
