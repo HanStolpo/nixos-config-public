@@ -1,5 +1,26 @@
 { lib, pkgs, inputs, hanstolpo, ... }:
 let
+  # shows every COSMIC setting changed via the GUI since the last rebuild:
+  # activation snapshots ~/.config/cosmic (see home.activation below), so a
+  # diff of the live config against that snapshot is exactly the set of keys
+  # that still need to be ported into this file to stay declarative
+  cosmic-config-diff = pkgs.writeShellScriptBin "cosmic-config-diff" ''
+    baseline="''${XDG_STATE_HOME:-$HOME/.local/state}/cosmic-config-baseline"
+    current="''${XDG_CONFIG_HOME:-$HOME/.config}/cosmic"
+    if [ ! -d "$baseline" ]; then
+      echo "No baseline snapshot found at $baseline" >&2
+      echo "Run a nixos-rebuild switch first; activation creates the snapshot." >&2
+      exit 1
+    fi
+    if ${pkgs.diffutils}/bin/diff -r -u --color=auto "$baseline" "$current"; then
+      echo "No COSMIC settings changed via the GUI since the last rebuild."
+    else
+      echo
+      echo "^ settings changed since the last rebuild;"
+      echo "  port them into modules/home/cosmic.nix to keep the config declarative"
+    fi
+  '';
+
   # workaround for the broken "copy to clipboard" in xdg-desktop-portal-cosmic
   # (the portal destroys its overlay surfaces in the same command batch as the
   # clipboard write, so the write is dropped): save screenshots to Pictures via
@@ -19,6 +40,20 @@ in
   imports = [
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
   ];
+
+  home.packages = [ cosmic-config-diff ];
+
+  # snapshot the applied COSMIC config after every activation; this is the
+  # baseline `cosmic-config-diff` compares the live config against
+  home.activation.snapshotCosmicConfig = lib.hm.dag.entryAfter [ "configureCosmic" ] ''
+    baseline="''${XDG_STATE_HOME:-$HOME/.local/state}/cosmic-config-baseline"
+    cosmicdir="''${XDG_CONFIG_HOME:-$HOME/.config}/cosmic"
+    if [ -d "$cosmicdir" ]; then
+      run rm -rf "$baseline"
+      run mkdir -p "$baseline"
+      run cp -r "$cosmicdir/." "$baseline/"
+    fi
+  '';
 
   # Declarative COSMIC configuration via cosmic-manager
   # https://heitoraugustoln.github.io/cosmic-manager/
@@ -106,7 +141,7 @@ in
     panels = [
       {
         name = "Panel";
-        margin = 0;
+        margin = 4;
         # pin these: cosmic-initial-setup rewrites panel config on first login
         # and its layout preset auto-hides the top Panel; since cosmic-manager
         # only rewrites declared keys, undeclared ones keep the wizard's values
@@ -119,7 +154,7 @@ in
           __type = "enum";
           variant = "Top";
         };
-        anchor_gap = false;
+        anchor_gap = true;
         expand_to_edges = true;
         opacity = 1.0;
         background = {
@@ -146,6 +181,7 @@ in
               [
                 "com.system76.CosmicPanelWorkspacesButton"
                 "com.system76.CosmicPanelAppButton"
+                "com.system76.CosmicAppletWorkspaces"
               ]
               [
                 "com.system76.CosmicAppletInputSources"
@@ -224,11 +260,11 @@ in
     idle = {
       screen_off_time = {
         __type = "optional";
-        value = 900000; # screen off after 15 min idle
+        value = null; # None = never turn the screen off on idle
       };
       suspend_on_ac_time = {
         __type = "optional";
-        value = 1200000; # suspend after 20 min idle on AC
+        value = null; # None = never suspend on idle while on AC
       };
       suspend_on_battery_time = {
         __type = "optional";
@@ -251,8 +287,45 @@ in
     # spacing / corner_radii on disk are the stock cosmic-dark values so
     # they are deliberately not pinned here
     appearance.theme = {
-      mode = "dark";
+      mode = "light";
+      light = {
+        accent = {
+          __type = "optional";
+          value = {
+            red = 0.0013036728;
+            green = 0.99559927;
+            blue = 0.5647546;
+          };
+        };
+        bg_color = {
+          __type = "optional";
+          value = {
+            red = 0.84313726;
+            green = 0.84313726;
+            blue = 0.84313726;
+            alpha = 1.0;
+          };
+        };
+        neutral_tint = {
+          __type = "optional";
+          value = {
+            red = 0.35095882;
+            green = 0.6975831;
+            blue = 0.9451889;
+          };
+        };
+        active_hint = 4; # focused window outline width in px
+        gaps = {
+          __type = "tuple";
+          value = [ 0 10 ]; # outer and inner window gaps
+        };
+      };
       dark = {
+        active_hint = 4; # focused window outline width in px
+        gaps = {
+          __type = "tuple";
+          value = [ 0 10 ]; # outer and inner window gaps
+        };
         accent = {
           __type = "optional";
           value = {
@@ -313,6 +386,43 @@ in
       };
     };
 
+    # COSMIC toolkit settings from Settings > Appearance; header_size and
+    # interface_density on disk are "Standard" (the defaults) and are skipped
+    appearance.toolkit = {
+      apply_theme_global = true; # export the COSMIC theme to GTK apps etc.
+      icon_theme = "catppuccin-latte-sky-cursors";
+      interface_font = {
+        family = "Fira Sans";
+        weight = {
+          __type = "enum";
+          variant = "Normal";
+        };
+        stretch = {
+          __type = "enum";
+          variant = "Normal";
+        };
+        style = {
+          __type = "enum";
+          variant = "Normal";
+        };
+      };
+      monospace_font = {
+        family = "Noto Mono for Powerline";
+        weight = {
+          __type = "enum";
+          variant = "Normal";
+        };
+        stretch = {
+          __type = "enum";
+          variant = "Normal";
+        };
+        style = {
+          __type = "enum";
+          variant = "Normal";
+        };
+      };
+    };
+
     # escape hatch for keys cosmic-manager has no dedicated options for
     configFile = {
       # window rendering settings from COSMIC Settings > Desktop > Appearance
@@ -321,7 +431,7 @@ in
         entries.appearance_settings = {
           clip_floating_windows = true;
           clip_tiled_windows = true;
-          shadow_tiled_windows = false;
+          shadow_tiled_windows = true;
         };
       };
       # visual panel keys the panels submodule does not expose
@@ -330,7 +440,7 @@ in
         entries = {
           padding = 0;
           spacing = 0;
-          border_radius = 0;
+          border_radius = 8;
         };
       };
       "com.system76.CosmicPanel.Dock" = {
