@@ -43,14 +43,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    nordvpn-flake = {
-      url = "github:connerohnesorge/nordvpn-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-playwright-pin, kmonad, haswaynav, home-manager, stylix, noctalia, niri, cosmic-manager, nordvpn-flake, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-playwright-pin, kmonad, haswaynav, home-manager, stylix, noctalia, niri, cosmic-manager, ... }:
     let
       # helper to apply a function to all entries in a directory
       # loading `name/default.nix`, similar to what import would do,
@@ -107,7 +102,7 @@
           };
         in
         {
-          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp coderabbit playwright-mcp;
+          inherit (pkgs) d2 tala realvnc-viewer tree-sitter mdsync swayJournald wtp coderabbit playwright-mcp nordvpn;
           inherit (pkgs.tree-sitter-grammars) tree-sitter-d2;
         };
 
@@ -133,7 +128,6 @@
                 kmonad.overlays.default
                 noctalia.overlays.default
                 niri.overlays.niri
-                nordvpn-flake.overlays.default
               ];
             };
 
@@ -187,8 +181,6 @@
                 stylix.nixosModules.stylix
 
                 niri.nixosModules.niri
-
-                nordvpn-flake.nixosModules.default
 
                 (import host)
               ];
