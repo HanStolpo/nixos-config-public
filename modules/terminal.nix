@@ -117,13 +117,13 @@ in
 
       gh # github cli tool
 
-      kubectl # Kubernetes CLI
+      #kubectl # Kubernetes CLI
       awscli2 # AWS CLI
       aws-iam-authenticator # AWS IAM credentials for Kubernetes authentication
-      google-cloud-sdk # gcloud cli
+      #google-cloud-sdk # gcloud cli
       sops # Mozilla secret OPerationS
-      kubernetes-helm
-      fluxcd
+      #kubernetes-helm
+      #fluxcd
       nomad
 
       trashy # use trash command instead of rm to avoid accidental deletions
@@ -140,6 +140,8 @@ in
       watchexec # execute commands when files change
 
       unixtools.net-tools # for netstat
+
+      xan # a terminal CSV viewer and query / modification tool
 
     ];
 
