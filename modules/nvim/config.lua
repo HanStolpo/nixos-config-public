@@ -74,7 +74,7 @@ opt.smartindent = true
 -- Folding (using treesitter)
 opt.foldenable = false        -- Start with folding disabled (zi to toggle)
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Backspace behavior
 opt.backspace = "eol,start,indent"
@@ -247,31 +247,32 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- Plugin: Tree-sitter
 --------------------------------------------------------------------------------
 
--- local parser_install_dir = vim.fn.stdpath("state") .. "/treesitter/parsers"
--- vim.opt.runtimepath:append(parser_install_dir)
+-- Parsers and queries are installed via nix (nvim-treesitter.withPlugins in
+-- modules/home/nvim.nix). nvim-treesitter's main branch only ships queries;
+-- highlighting and folding are provided by Neovim itself and enabled per buffer.
 
--- Register d2 parser
--- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
--- parser_config.d2 = {
---   install_info = {
---     url = "https://github.com/pleshevskiy/tree-sitter-d2",
---     revision = "main",
---     files = { "src/parser.c", "src/scanner.cc" },
---   },
---   filetype = "d2",
--- }
+-- Filetypes to force back to legacy vim syntax highlighting, e.g. { markdown = true }.
+-- Note: Neovim itself enables treesitter for its bundled parsers (lua, vim, markdown, ...)
+-- from its own ftplugins, so disabling here calls vim.treesitter.stop() to override that.
+local treesitter_highlight_disabled = {}
 
--- require("nvim-treesitter.configs").setup({
---   parser_install_dir = parser_install_dir,
---   auto_install = false,
---   highlight = {
---     enable = true,
---     disable = { "markdown" },
---     additional_vim_regex_highlighting = false,
---   },
---   incremental_selection = { enable = true },
---   textobjects = { enable = true },
--- })
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("user_treesitter", { clear = true }),
+  callback = function(args)
+    if treesitter_highlight_disabled[args.match] then
+      pcall(vim.treesitter.stop, args.buf)
+      return
+    end
+    local lang = vim.treesitter.language.get_lang(args.match) or args.match
+    -- language.add returns nil (or errors on older Neovim) when no parser is installed
+    local ok, added = pcall(vim.treesitter.language.add, lang)
+    if not (ok and added) then
+      return
+    end
+    -- Highlighting (foldexpr is set globally via opt.foldexpr above)
+    pcall(vim.treesitter.start, args.buf, lang)
+  end,
+})
 
 --------------------------------------------------------------------------------
 -- Plugin: Telescope
@@ -475,6 +476,94 @@ vim.cmd([[
 
 vim.g.localvimrc_persistent = 2
 vim.g.localvimrc_whitelist = { ".*/code/(circuithub|circuithub-alt)/(client|projects|api)/.lvimrc" }
+
+--------------------------------------------------------------------------------
+-- Plugin: diffs.nvim
+-- Treesitter-powered diff highlighting for fugitive, neogit and plain diffs.
+-- Configured via vim.g.diffs; must be set before the plugin loads.
+--------------------------------------------------------------------------------
+
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+    neogit = true,
+    telescope = true,
+  },
+  -- Also highlight plain .diff / .patch files
+  extra_filetypes = { "diff" },
+}
+
+keymap("n", "<leader>gd", ":Gdiff<CR>", { noremap = true, silent = true, desc = "Diff current file against index" })
+keymap("n", "<leader>gr", ":Greview<CR>", { noremap = true, silent = true, desc = "Review repo against default branch" })
+
+-- Navigation inside diffs:// buffers. :Greview fills the quickfix list with
+-- files and the location list with hunks; plain :Gdiff fills neither, so hunk
+-- keys fall back to the plugin's own ]c / [c hunk-boundary mappings.
+local function list_nav(next_cmd, wrap_cmd)
+  return function()
+    if not pcall(vim.cmd, next_cmd) then
+      pcall(vim.cmd, wrap_cmd) -- wrap around at either end of the list
+    end
+  end
+end
+
+local function hunk_nav(next_cmd, wrap_cmd, fallback_keys)
+  local by_list = list_nav(next_cmd, wrap_cmd)
+  return function()
+    if #vim.fn.getloclist(0) > 0 then
+      by_list()
+    else
+      vim.cmd("normal " .. fallback_keys)
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("user_diffs_nav", { clear = true }),
+  pattern = "diffs://*",
+  callback = function(args)
+    local function bmap(lhs, rhs, desc)
+      keymap("n", lhs, rhs, { buffer = args.buf, silent = true, desc = desc })
+    end
+    bmap("]f", list_nav("cnext", "cfirst"), "Review: next file")
+    bmap("[f", list_nav("cprev", "clast"), "Review: previous file")
+    bmap("]h", hunk_nav("lnext", "lfirst", "]c"), "Review: next hunk")
+    bmap("[h", hunk_nav("lprev", "llast", "[c"), "Review: previous hunk")
+    bmap("<leader>gv", "<Plug>(diffs-greview-open-split)", "Review: open file in split view")
+  end,
+})
+
+--------------------------------------------------------------------------------
+-- Plugin: Neogit
+--------------------------------------------------------------------------------
+
+require("neogit").setup({
+  integrations = {
+    telescope = true,
+  },
+})
+
+keymap("n", "<leader>gs", ":Neogit<CR>", { noremap = true, silent = true, desc = "Neogit status" })
+keymap("n", "<leader>gc", ":Neogit commit<CR>", { noremap = true, silent = true, desc = "Neogit commit" })
+keymap("n", "<leader>gl", ":Neogit log<CR>", { noremap = true, silent = true, desc = "Neogit log" })
+keymap("n", "<leader>gp", ":Neogit push<CR>", { noremap = true, silent = true, desc = "Neogit push" })
+
+--------------------------------------------------------------------------------
+-- Plugin: difftastic.nvim
+-- Side-by-side structural diffs (difft). The Rust library is built by nix
+-- (modules/nvim/plugins.nix), so never download or cargo-build at runtime.
+-- Buffer-local keys in the diff view: ]f/[f files, ]c/[c hunks, <Tab> tree, gf, q.
+--------------------------------------------------------------------------------
+
+require("difftastic-nvim").setup({
+  download = false,
+  vcs = "git",
+  highlight_mode = "treesitter",
+})
+
+keymap("n", "<leader>gt", ":Difft<CR>", { noremap = true, silent = true, desc = "Difftastic: unstaged changes" })
+keymap("n", "<leader>gT", ":Difft --staged<CR>", { noremap = true, silent = true, desc = "Difftastic: staged changes" })
+keymap("n", "<leader>gh", ":Difft HEAD<CR>", { noremap = true, silent = true, desc = "Difftastic: last commit" })
 
 --------------------------------------------------------------------------------
 -- Custom: Claude Code Reference Generator

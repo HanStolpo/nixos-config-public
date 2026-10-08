@@ -91,6 +91,37 @@ This document summarizes all key bindings configured in the NixOS Neovim setup.
 | `,hc`         | Close Hoogle               |
 | `,hl`         | Hoogle search current line |
 
+## Git (Neogit, diffs.nvim, fugitive)
+
+| Key           | Action                                        |
+|---------------|-----------------------------------------------|
+| `,gs`         | Open Neogit status                            |
+| `,gc`         | Neogit commit popup                           |
+| `,gl`         | Neogit log popup                              |
+| `,gp`         | Neogit push popup                             |
+| `,gd`         | Diff current file against index (`:Gdiff`)    |
+| `,gr`         | Review repo against default branch (`:Greview`)|
+| `,gt`         | Difftastic side-by-side view of unstaged changes (`:Difft`) |
+| `,gT`         | Difftastic view of staged changes (`:Difft --staged`) |
+| `,gh`         | Difftastic view of last commit (`:Difft HEAD`) |
+
+Inside `diffs://` buffers (opened by `:Gdiff` / `:Greview`):
+
+| Key           | Action                                        |
+|---------------|-----------------------------------------------|
+| `]f` / `[f`   | Next / previous file in review (quickfix, wraps) |
+| `]h` / `[h`   | Next / previous hunk (location list in review, `]c`/`[c` in plain `:Gdiff`) |
+| `]c` / `[c`   | Next / previous hunk boundary (plugin default)  |
+| `,gv`         | Open file under cursor in split review view     |
+| `<CR>`        | Open real file at hunk                          |
+| `dp` / `do`   | Stage / unstage hunk                            |
+| `q`           | Close diff window                               |
+
+In fugitive status (`:Git`), `du` / `dU` open a diffs.nvim unified diff for the file under the cursor.
+diffs.nvim also highlights diffs inside Neogit, fugitive and Telescope previews.
+
+Inside the difftastic.nvim view: `]f` / `[f` files, `]c` / `[c` hunks, `<Tab>` toggle file tree, `<CR>` open file from tree, `gf` go to file at cursor, `q` close.
+
 ## Claude Code (AI Assistant)
 
 | Key           | Action                     |
@@ -201,11 +232,13 @@ This document summarizes all key bindings configured in the NixOS Neovim setup.
 ## Plugins Enabled
 
 - **nvim-lspconfig**: LSP support
-- **nvim-treesitter**: Advanced syntax highlighting and folding
+- **nvim-treesitter**: Treesitter highlighting and folding (parsers installed via nix, see `modules/home/nvim.nix`)
 - **telescope.nvim**: Fuzzy finder
 - **nvim-tree.lua**: File explorer
 - **hop.nvim**: Easy motion
-- **diffview.nvim**: Git diff viewer
+- **diffs.nvim**: Treesitter-powered diff highlighting, `:Gdiff` and `:Greview`
+- **neogit**: Magit-like git interface
+- **difftastic.nvim**: Side-by-side structural diffs via difft
 - **fugitive**: Git integration
 - **lualine.nvim**: Status line
 - **barbar.nvim**: Tab bar
@@ -218,7 +251,7 @@ This document summarizes all key bindings configured in the NixOS Neovim setup.
 
 ## Notes
 
-- The configuration uses Tree-sitter for code folding
+- Tree-sitter highlighting is enabled automatically for filetypes with an installed parser ; folding uses `vim.treesitter.foldexpr()` and starts disabled (`zi` to toggle)
 - System clipboard is the default clipboard
 - Cursor line highlighting is enabled (disabled in insert mode)
 - No backup/swap files are created
