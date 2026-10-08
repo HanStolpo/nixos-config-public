@@ -14,6 +14,7 @@ let
     languagetool
     tree-sitter
     clang
+    difftastic     # difft, used by difftastic-nvim
   ];
 in
 {
@@ -39,12 +40,21 @@ in
     # Plugins
     plugins = with knownPlugins; [
       nvim-lspconfig
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (p: with p; [
+        bash c cpp cmake css dockerfile elm fish
+        diff git_config git_rebase gitattributes gitcommit gitignore
+        haskell html javascript json lua make
+        markdown markdown_inline nix python query regex rust scss sql
+        toml tsx typescript vim vimdoc yaml
+      ]))
       telescope-nvim
       nvim-tree-lua
       nvim-snippy
       hop-nvim
       diffview-nvim
+      diffs-nvim     # treesitter-powered diff highlighting, :Gdiff / :Greview
+      neogit         # magit-like git UI
+      difftastic-nvim # side-by-side structural diffs (:Difft)
       plenary-nvim
       nerdcommenter
       lualine-nvim
