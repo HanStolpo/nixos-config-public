@@ -3,7 +3,7 @@ let
   # Using latest kernel (6.19.7) to avoid scheduler spinlock bugs in 6.12.x
   # See README/crash-report/hard-lockup-31-03-2026.md
   # switching from 6.19 latest to earlier 6.18 for better compatibility with niri and the display etc.
-  kernel = pkgs.linuxPackages_6_18;
+  kernel = pkgs.linuxPackages_7_2; # pkgs.linuxPackages_6_18;
   enableSSH = false;
   dpi = 122;
   laptopDpi = 96;
@@ -178,7 +178,7 @@ in
             "uinput"
             "amdgpu"
           ];
-        boot.extraModulePackages = with kernel; [ zenpower tuxedo-keyboard ];
+        boot.extraModulePackages = with kernel; [ pkgs.pkgs-unstable.linuxPackages_7_2.zenpower tuxedo-keyboard ];
         boot.kernelParams = [
           # https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
           "i8042.reset"
@@ -197,13 +197,13 @@ in
           "zfs.zfs_arc_max=17179869184"
           # Disable scheduler autogroup to avoid spinlock deadlock
           # See README/crash-report/hard-lockup-31-03-2026.md
-          "noautogroup"
+          #"noautogroup"
           # Workarounds for s2idle resume black screen (amdgpu)
           # See README/crash-report/s2idle-resume-failure-01-04-2026.md
           #"amdgpu.dcdebugmask=0x10" # disable PSR (Panel Self Refresh)
           #"amdgpu.runpm=0" # disable amdgpu runtime power management
-          "pm_debug_messages" # verbose PM logging for diagnosing suspend/resume
-          "no_console_suspend" # keep console alive during suspend/resume
+          #"pm_debug_messages" # verbose PM logging for diagnosing suspend/resume
+          #"no_console_suspend" # keep console alive during suspend/resume
         ];
         boot.extraModprobeConfig = ''
           options zfs zfs_arc_meta_limit=8589934592
