@@ -43,6 +43,15 @@ in
 
   home.packages = [ cosmic-config-diff ];
 
+  # With appearance.toolkit.apply_theme_global = true (below), cosmic-settings-daemon
+  # owns ~/.config/gtk-{3,4}.0/gtk.css: on login and on every theme change it renames
+  # any foreign gtk.css to gtk.css.bak and symlinks its own cosmic/{light,dark}.css in.
+  # Stylix's gtk target would install the same files via home-manager, and the
+  # collision makes home-manager activation fail, so hand the colour CSS to COSMIC
+  # and let stylix keep managing settings.ini (theme, font, icons, cursor).
+  xdg.configFile."gtk-3.0/gtk.css".enable = false;
+  xdg.configFile."gtk-4.0/gtk.css".enable = false;
+
   # snapshot the applied COSMIC config after every activation; this is the
   # baseline `cosmic-config-diff` compares the live config against
   home.activation.snapshotCosmicConfig = lib.hm.dag.entryAfter [ "configureCosmic" ] ''
