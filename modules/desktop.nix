@@ -36,7 +36,7 @@ in
       ghostscript # 
       #zoom-us # video chat client
       #teams
-      inkscape # Vector graphics editor
+      #inkscape # Vector graphics editor
       obs-studio # Free and open source software for video recording and live streaming
       #projectlibre # Project-Management Software similar to MS-Project
       #libreoffice # Comprehensive, professional-quality productivity suite (Still/stable release) - depends on qtwebengine-5.15.19
