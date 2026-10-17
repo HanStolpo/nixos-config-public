@@ -15,50 +15,9 @@
     };
     programs.starship = {
       enable = true;
-      settings = {
-        format = "$directory$git_branch$git_status$nix_shell$character";
-
-        directory = {
-          truncation_length = 5;
-          truncate_to_repo = false;
-        };
-
-        git_branch = {
-          format = "[$symbol$branch]($style) ";
-        };
-
-        git_status = {
-          format = "([$all_status$ahead_behind]($style) )";
-        };
-
-        nix_shell = {
-          format = "[$symbol$state( \\($name\\))]($style) ";
-        };
-
-        # Disable language version modules
-        nodejs.disabled = true;
-        python.disabled = true;
-        rust.disabled = true;
-        golang.disabled = true;
-        java.disabled = true;
-        ruby.disabled = true;
-        php.disabled = true;
-        dotnet.disabled = true;
-        elixir.disabled = true;
-        elm.disabled = true;
-        erlang.disabled = true;
-        haskell.disabled = true;
-        julia.disabled = true;
-        kotlin.disabled = true;
-        lua.disabled = true;
-        nim.disabled = true;
-        ocaml.disabled = true;
-        perl.disabled = true;
-        scala.disabled = true;
-        swift.disabled = true;
-        zig.disabled = true;
-        c.disabled = true;
-      };
+      # Same file modules/shell.nix points STARSHIP_CONFIG at on NixOS hosts,
+      # so standalone (remote) and NixOS hosts get the identical two-line prompt.
+      settings = builtins.fromTOML (builtins.readFile ../shell/starship.toml);
     };
 
     # Let Home Manager install and manage itself.
