@@ -143,6 +143,7 @@ in
 
       xan # a terminal CSV viewer and query / modification tool
 
+      moreutils # extra cli utils like `ts` to append time stamps to streams of logs
     ];
 
     security.pki = {
