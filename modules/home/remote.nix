@@ -58,7 +58,12 @@ in
     # cut the big plugins and runtime tools
     hanstolpo.nvim.minimal = lib.mkDefault true;
 
-    home.sessionVariables.EDITOR = "nvim";
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      # neovim probes the terminal for speed at startup and warns when the
+      # link is slow; the ssh round trip always trips it, so skip the probe
+      NVIM_NOTTYFAST = "1";
+    };
 
     # what modules/shell.nix does at the NixOS level
     programs.fish.interactiveShellInit = lib.mkAfter ''
