@@ -112,6 +112,51 @@
       # my configurations are broken up into modules which the different hosts enable / configure as desired.
       nixosModules = mapImports ./modules import;
 
+      # home-manager modules that can be imported standalone (e.g. on a
+      # non-NixOS remote dev machine). `remote` is the terminal-only profile.
+      homeManagerModules = {
+        terminal = ./modules/home/terminal.nix;
+        fish = ./modules/home/fish.nix;
+        nvim = ./modules/home/nvim.nix;
+        git-base = ./modules/home/git-base.nix;
+        remote = ./modules/home/remote.nix;
+      };
+
+      lib = {
+        # Build a standalone home-manager configuration from the remote
+        # profile for an arbitrary user / home directory on a non-NixOS box:
+        #
+        #   homeConfigurations.dev = nixos-config-public.lib.mkRemoteHome {
+        #     username = "dev";
+        #     modules = [ { hanstolpo.remote.manageNix = true; } ];
+        #   };
+        mkRemoteHome =
+          { username
+          , homeDirectory ? "/home/${username}"
+          , system ? "x86_64-linux"
+          , stateVersion ? "25.11"
+          , modules ? [ ]
+          }:
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = builtins.attrValues self.overlays;
+            };
+            modules = [
+              self.homeManagerModules.remote
+              { home = { inherit username homeDirectory stateVersion; }; }
+            ] ++ modules;
+          };
+      };
+
+      # ready-made standalone configurations, usable directly with
+      #   home-manager switch --flake github:hanstolpo/nixos-config-public#<name>
+      homeConfigurations = {
+        handre = self.lib.mkRemoteHome { username = "handre"; };
+        dev = self.lib.mkRemoteHome { username = "dev"; };
+      };
+
       # the nixos system configurations that can be extended
       # from another flake
       nixosSystems =

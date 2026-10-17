@@ -1,29 +1,44 @@
 # Home-manager neovim configuration
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.hanstolpo.nvim;
+
   # Custom plugins not in nixpkgs
   customPlugins = pkgs.callPackage ../nvim/plugins.nix { };
   knownPlugins = pkgs.vimPlugins // customPlugins;
 
-  # Runtime tools needed by neovim
+  # Runtime tools needed by neovim (put on neovim's PATH)
   runtimeDeps = with pkgs; [
-    nodejs
-    python3
     fd
     ripgrep
-    languagetool
-    tree-sitter
-    clang
     difftastic     # difft, used by difftastic-nvim
+  ] ++ lib.optionals (!cfg.minimal) [
+    python3        # nothing in the config needs it; kept for ad-hoc :!python use
+    languagetool   # vim-grammarous (pulls in a JVM)
+    tree-sitter    # tree-sitter CLI; grammars themselves come from nix
+    clang          # compiling grammars at runtime (:TSInstall), not needed with nix
   ];
 in
 {
-  programs.neovim = {
+  options.hanstolpo.nvim = {
+    minimal = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Trim the plugin set and runtime tools to what is useful on a headless
+        remote machine. Only plugins that config.lua does not hard-require
+        are dropped, so the lua config is shared unchanged.
+      '';
+    };
+  };
+
+  config.programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
     vimAlias = true;
     viAlias = true;
-    withPython3 = true;
+    # :python3 provider (bundles python + pynvim); no plugin needs it, so skip it remotely
+    withPython3 = !cfg.minimal;
     withRuby = false;
 
     # Runtime dependencies available to neovim (automatically added to PATH)
@@ -33,7 +48,7 @@ in
     initLua = builtins.readFile ../nvim/config.lua;
 
     # Vimscript config for things that need nix interpolation
-    extraConfig = ''
+    extraConfig = lib.optionalString (!cfg.minimal) ''
       let g:grammarous#languagetool_cmd = '${pkgs.languagetool}/bin/languagetool-commandline'
     '';
 
@@ -71,12 +86,11 @@ in
       vim-localvimrc
       vim-leader-guide
 
-      vim-hoogle
-
-      vim-coffee-script
-
       ack-vim        # search with ag
-
+    ] ++ lib.optionals (!cfg.minimal) [
+      # Not referenced by config.lua, so safe to leave out remotely
+      vim-hoogle
+      vim-coffee-script
       vim-grammarous
     ];
   };
