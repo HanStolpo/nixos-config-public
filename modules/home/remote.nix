@@ -65,6 +65,24 @@ in
       NVIM_NOTTYFAST = "1";
     };
 
+    # Don't load home manager profile for service logins running commands
+    # DEV_SHELL_LOGIN=service some service commands run every command in a
+    # fresh `bash -l`, so the guard must sit before hm-session-vars.sh,
+    # whose nix.sh puts ~/.nix-profile/bin first.
+    home.file.".profile".source = lib.mkForce (pkgs.writeText "profile" ''
+      if [ "''${DEV_SHELL_LOGIN:-}" = service ]; then
+        command -v dev-shell-service-path >/dev/null && PATH=$(dev-shell-service-path) && export PATH
+        return
+      fi
+
+      . "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"
+
+      ${config.programs.bash.profileExtra}
+    '');
+    programs.bash.bashrcExtra = lib.mkBefore ''
+      [ "''${DEV_SHELL_LOGIN:-}" = service ] && return
+    '';
+
     # what modules/shell.nix does at the NixOS level
     programs.fish.interactiveShellInit = lib.mkAfter ''
       function fish_user_key_bindings
