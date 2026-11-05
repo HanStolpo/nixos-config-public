@@ -86,6 +86,22 @@ opt.lazyredraw = true
 -- Clipboard - use system clipboard
 opt.clipboard = "unnamedplus"
 
+-- Over ssh there is no clipboard tool, and neovim never picks OSC 52 by itself
+-- while 'clipboard' is set. Copy through the local terminal with OSC 52, but
+-- paste from neovim's own register: alacritty refuses OSC 52 reads, so asking
+-- the terminal would stall every `p` until it times out.
+if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+  end
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+end
+
 -- Spelling
 opt.spelllang = "en_gb"
 
