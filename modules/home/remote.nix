@@ -83,6 +83,20 @@ in
       [ "''${DEV_SHELL_LOGIN:-}" = service ] && return
     '';
 
+    # Service logins still get ~/.local/bin, behind the dev box's git and gh
+    # wrappers, so link the profile's tools there; git and gh stay out so
+    # nothing can take precedence over those wrappers.
+    home.file.".local/bin" = {
+      recursive = true;
+      source = pkgs.runCommand "local-bin" { } ''
+        mkdir $out
+        for f in ${config.home.path}/bin/*; do
+          case ''${f##*/} in git | gh) continue ;; esac
+          ln -s "$f" $out/
+        done
+      '';
+    };
+
     # what modules/shell.nix does at the NixOS level
     programs.fish.interactiveShellInit = lib.mkAfter ''
       function fish_user_key_bindings
